@@ -1,4 +1,4 @@
-package ihm.Ecurie;
+package ihm.ecurie.gestionEquipe;
 
 import java.awt.EventQueue;
 

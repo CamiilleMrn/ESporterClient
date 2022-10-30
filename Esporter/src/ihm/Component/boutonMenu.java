@@ -1,5 +1,6 @@
 package ihm.Component;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import ihm.MasterFrame;
 import java.awt.Graphics;
@@ -18,15 +19,14 @@ public class boutonMenu extends JRadioButton{
 	 * 
 	 */
 	private static final long serialVersionUID = 8366959265584745626L;
-	private JFrame frame;
 	private JPanel panelToChange;
 	
-	public boutonMenu(boolean selected,String texte, JFrame frame, JPanel panelToChange) {
+	public boutonMenu(boolean selected,String texte, JPanel panelToChange) {
 		super(texte, new ImageIcon());
-		this.frame = frame;
 		setSelected(selected);
 		setFocusPainted(false);
 		setText(texte);
+		setHorizontalAlignment(CENTER);
 		
 		setPreferredSize(new Dimension(150,75));
 		
@@ -37,7 +37,7 @@ public class boutonMenu extends JRadioButton{
 					setSelected(true);
 					
 					MasterFrame.getInstance().setPanel(panelToChange);
-					frame.repaint();
+					MasterFrame.getInstance().getFrame().repaint();
 				}
 			}
 		});

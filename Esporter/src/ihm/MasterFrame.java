@@ -13,12 +13,13 @@ import javax.swing.JLabel;
 
 import javax.swing.ButtonGroup;
 import java.awt.FlowLayout;
-
+import java.awt.Menu;
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
 
+import Types.TypeMenu;
 import ihm.Component.boutonMenu;
 
 public class MasterFrame {
@@ -27,7 +28,6 @@ public class MasterFrame {
 	public static final Color COULEUR_MASTER = new Color(0,164,210);
 	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
 	public static final Color COULEUR_TEXTE = Color.WHITE;
-	private int tailleMenu;
 	private JPanel panelMenu;
 	private ButtonGroup boutonGroupMenu;
 	private static MasterFrame instance;
@@ -132,20 +132,11 @@ public class MasterFrame {
 		panelDummyTop.setBackground(COULEUR_MASTER_FOND);
 		panel.add(panelDummyTop, BorderLayout.NORTH);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.BLUE);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.RED);
-		frame.getContentPane().add(panel_2, BorderLayout.CENTER);
-		
-		tailleMenu=3;
-		boutonMenu[] menu = new boutonMenu[tailleMenu];
 		boutonGroupMenu = new ButtonGroup();
-		menu[0] = new boutonMenu(false, "page 1", frame, panel_1);
-		menu[1] = new boutonMenu(true, "page 2", frame, panel_2);
-		menu[2] = new boutonMenu(false, "page 3", frame, panel_1);
-		for (int i=0; i<tailleMenu;i++) {
+		TypeMenu m = TypeMenu.Visiteurs;
+		boutonMenu[] menu = m.getMenu();
+		for (int i=0; i<menu.length;i++) {
 			panelMenu.add(menu[i]);
 			boutonGroupMenu.add(menu[i]);
 		}
@@ -156,10 +147,10 @@ public class MasterFrame {
 		
 	}
 	
-	public void setMenu(int tailleMenu, boutonMenu[] menu) {
+	public void setMenu(TypeMenu m) {
 		panelMenu.removeAll();
-		this.tailleMenu = tailleMenu;
-		for (int i=0; i<tailleMenu;i++) {
+		boutonMenu[] menu = m.getMenu();
+		for (int i=0; i<menu.length;i++) {
 			panelMenu.add(menu[i]);
 			boutonGroupMenu.add(menu[i]);
 		}
@@ -167,9 +158,14 @@ public class MasterFrame {
 	
 	public void setPanel(JPanel p) {
 		BorderLayout layout = (BorderLayout)frame.getContentPane().getLayout();
-		frame.getContentPane().remove(layout.getLayoutComponent(BorderLayout.CENTER));
+		if (layout.getLayoutComponent(BorderLayout.CENTER)!=null)
+			frame.getContentPane().remove(layout.getLayoutComponent(BorderLayout.CENTER));
 		frame.getContentPane().add(p, BorderLayout.CENTER);
 		frame.revalidate();
+	}
+	
+	public JFrame getFrame() {
+		return frame;
 	}
 
 
