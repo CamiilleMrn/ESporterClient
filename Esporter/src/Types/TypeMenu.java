@@ -1,7 +1,6 @@
 package Types;
 
 
-import ihm.MasterFrame;
 import ihm.Component.boutonMenu;
 
 public enum TypeMenu {
