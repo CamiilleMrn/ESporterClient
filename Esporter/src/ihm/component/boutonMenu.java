@@ -1,17 +1,31 @@
 package ihm.component;
 
+import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GradientPaint;
+
 import ihm.MasterFrame;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.RadialGradientPaint;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.Ellipse2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.Timer;
 
 public class boutonMenu extends JRadioButton{
 	
@@ -20,13 +34,26 @@ public class boutonMenu extends JRadioButton{
 	 */
 	private static final long serialVersionUID = 8366959265584745626L;
 	private JPanel panelToChange;
+	private boolean mouseIn;
+	private int mouseX;
+	private boolean exited;
+	private float alphaFadeOut;
+	private Graphics2D g2;
+	private Timer timer;
 	
 	public boutonMenu(boolean selected,String texte, JPanel panelToChange) {
 		super(texte, new ImageIcon());
+		
+
+		mouseIn=false;
+		exited=false;
+		alphaFadeOut=1.0f;
 		setSelected(selected);
 		setFocusPainted(false);
 		setText(texte);
 		setHorizontalAlignment(CENTER);
+		setOpaque(true);
+		setBackground(new Color(0,0,0,0));
 		
 		setPreferredSize(new Dimension(150,75));
 		
@@ -40,21 +67,52 @@ public class boutonMenu extends JRadioButton{
 					MasterFrame.getInstance().getFrame().repaint();
 				}
 			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				mouseIn=false;
+				exited=true;
+				timer = new Timer(10, new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						repaint();
+						
+					}
+				});
+				timer.start();
+			}
+		});
+		
+		addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				if (!isSelected()) {
+					if (!mouseIn) 
+						mouseIn = true;
+					mouseX = e.getX();
+					repaint();
+				}				
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {}
+			
 		});
 		
 	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		Graphics g2 = g.create();
+		g2 = (Graphics2D)g.create();
 		int width = getBounds().width;
 		int height = getBounds().height;
-		g2.setClip(0, 0, width, height+16);
+		
 		setForeground(MasterFrame.COULEUR_TEXTE);
-		if (isSelected()) {		
-			setBackground(MasterFrame.COULEUR_MASTER);
-			g2.setColor(getBackground());
-
+		if (isSelected()) {	
+			g2.setClip(0, 0, width, height+16);
+			g2.setColor(MasterFrame.COULEUR_MASTER);
 			Polygon p = new Polygon();
 			p.addPoint(0, 0);
 			p.addPoint(0, height-1);
@@ -69,9 +127,9 @@ public class boutonMenu extends JRadioButton{
 			
 		    
 		} else {
-			setBackground(MasterFrame.COULEUR_MASTER_FOND);
-			g2.setColor(getBackground());
-
+			
+			g2.setClip(0, 0, width, height);
+			g2.setColor(MasterFrame.COULEUR_MASTER_FOND);
 			Polygon p = new Polygon();
 			p.addPoint(0, 0);
 			p.addPoint(0, height-1);
@@ -79,12 +137,59 @@ public class boutonMenu extends JRadioButton{
 			p.addPoint(width, 0);
 			g2.drawPolygon(p);
 			g2.fillPolygon(p);
+
 		}
 		g2.dispose();
-		super.paintComponent(g);
 		
+		if (mouseIn && !isSelected()) {
+			g2 = (Graphics2D)g.create();
+			//int brightness = (255 - (Math.abs(width/2-mouseX)*3));
+			g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+			GradientPaint gp = new GradientPaint(0, height, new Color(0,164,210,100), 0, height/4, MasterFrame.COULEUR_MASTER_FOND);
+			g2.setPaint(gp);
+			g2.fillRect(0, height/4, width, height*3/4);
+			
+			
+			/*int centerPoint = mouseX;
+			float radius = width/5;
+			float[] dist = {0f,1f};	
+			Color[] color = {new Color(0,164,210,brightness), new Color(0,0,0,0) };
+			RadialGradientPaint rgp = new RadialGradientPaint(new Point(mouseX, height), radius, dist, color);	
+			g2.setPaint(rgp);
+			g2.fill(new Ellipse2D.Double(centerPoint - radius, height - radius, radius * 2, radius * 2));*/
+			//GradientPaint gp2 = new GradientPaint(0, height, new Color(0,164,210,100), 0, height/4, MasterFrame.COULEUR_MASTER_FOND);
+			//g2.setPaint(gp2);
+			/*float[] dist2 = {0.75f,1f};	
+			Color[] color2 = {new Color(0,164,210,brightness+55), new Color(0,0,0,0) };
+			RadialGradientPaint rgp2 = new RadialGradientPaint(new Point(mouseX, height), radius, dist2, color2);	
+			g2.setPaint(rgp2);
+			g2.fillRect(mouseX-(int)radius, height-5, (int)radius*2, 5);*/
+
+		}
+		
+		
+		if(exited && !isSelected()) {
+			if(alphaFadeOut>0 && !mouseIn) {
+				g2 = (Graphics2D)g.create();
+
+				g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+				GradientPaint gp = new GradientPaint(0, height, new Color(0,164,210,(int)(100*alphaFadeOut)), 0, height/4, MasterFrame.COULEUR_MASTER_FOND);
+				g2.setPaint(gp);
+				
+				g2.fillRect(0, height/4, width, height*3/4);
+				alphaFadeOut-=0.07f;
+			} else {
+				g2.dispose();
+				alphaFadeOut=1.0f;
+				exited=false;
+				timer.stop();
+			}
+
+		}
+		if(mouseIn && !exited && !isSelected())
+			g2.dispose();
+		
+		super.paintComponent(g);
 	}
 	
-	
-
 }
