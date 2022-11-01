@@ -16,8 +16,8 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Font;
 
-import Types.Jeu;
-import ihm.Component.containerJoueur;
+import ihm.component.containerJoueur;
+import types.Jeu;
 
 
 public class AjouterEquipe {

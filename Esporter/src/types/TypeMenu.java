@@ -1,7 +1,7 @@
-package Types;
+package types;
 
 
-import ihm.Component.boutonMenu;
+import ihm.component.boutonMenu;
 
 public enum TypeMenu {
 	

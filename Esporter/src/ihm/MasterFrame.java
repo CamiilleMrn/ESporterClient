@@ -18,8 +18,8 @@ import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
 
-import Types.TypeMenu;
-import ihm.Component.boutonMenu;
+import ihm.component.boutonMenu;
+import types.TypeMenu;
 
 public class MasterFrame {
 
@@ -67,6 +67,7 @@ public class MasterFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setMinimumSize(new Dimension(1300, 500));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

@@ -1,4 +1,4 @@
-package ihm.Component;
+package ihm.component;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,13 +7,14 @@ import java.awt.Image;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import types.JoueurInfo;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import java.awt.SystemColor;
-import Types.Joueur;
 public class containerJoueur extends JPanel {
 
 	/**
@@ -21,7 +22,7 @@ public class containerJoueur extends JPanel {
 	 */
 	private static final long serialVersionUID = -6951669578094176958L;
 	private Image photo = null;
-	private Joueur joueur = new Joueur();
+	private JoueurInfo joueur = new JoueurInfo(0,"ok","pap",null);
 	private static final int WIDTH = 100;
 	private static final int HEIGHT = 150;
 	/**

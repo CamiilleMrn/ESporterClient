@@ -1,4 +1,4 @@
-package ihm.Component;
+package ihm.component;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
