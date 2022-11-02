@@ -1,6 +1,8 @@
 package utilisateur;
 
 
+import java.net.Socket;
+
 import types.EcurieInfo;
 import types.EquipeInfo;
 import types.JoueurInfo;
@@ -11,11 +13,8 @@ public class Ecurie extends User{
 
 	private EcurieInfo info;
 
-	public Ecurie(Permission permission, EcurieInfo info) throws InvalidPermission{
-		super(permission);
-		if (permission != Permission.ECURIE) {
-			throw new InvalidPermission("Vous ne possedez pas les permissions pour faire ceci");
-		}
+	public Ecurie(Permission permission, EcurieInfo info, CommunicationServer com){
+		super();
 		this.info = info;
 	}
 	
@@ -23,11 +22,6 @@ public class Ecurie extends User{
 		return info;
 	}
 
-	
-	@Override
-	public int makeConnection() {
-		return -1;
-	}
 	
 	public int AjouterEquipe(EquipeInfo equipe)  {
 		return -1;

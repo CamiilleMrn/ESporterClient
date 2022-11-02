@@ -2,8 +2,13 @@ package types;
 
 
 import java.awt.Image;
+import java.io.Serializable;
 
-public class JoueurInfo {
+public class JoueurInfo implements Infos, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5395040179600585232L;
 	private int id;
 	private String nom;
 	private String prenom;

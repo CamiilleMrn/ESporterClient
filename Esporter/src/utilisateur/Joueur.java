@@ -1,6 +1,8 @@
 package utilisateur;
 
 
+import java.net.Socket;
+
 import types.JoueurInfo;
 import types.Permission;
 import types.TournoiInfo;
@@ -10,11 +12,8 @@ public class Joueur extends User{
 
 	private JoueurInfo info;
 
-	public Joueur(Permission permission, JoueurInfo info) throws InvalidPermission{
-		super(permission);
-		if (permission != Permission.JOUEUR) {
-			throw new InvalidPermission("Vous ne possedez pas les permissions pour faire ceci");
-		}
+	public Joueur(Permission permission, JoueurInfo info, CommunicationServer com){
+		super();
 		this.info = info;
 	}
 	
@@ -22,11 +21,11 @@ public class Joueur extends User{
 		return info;
 	}
 
-	
+	/*
 	@Override
 	public int makeConnection() {
 		return -1;
-	}
+	}*/
 	
 	public int inscriptionTournoi(TournoiInfo tournoi)  {
 		return -1;

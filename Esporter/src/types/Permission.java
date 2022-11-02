@@ -1,6 +1,8 @@
 package types;
 
-public enum Permission {
+import java.io.Serializable;
 
-	ORGANISATEUR, JOUEUR, ECURIE, ARBITRE;
+public enum Permission implements Infos, Serializable{
+
+	ORGANISATEUR, JOUEUR, ECURIE, ARBITRE, VISITEUR;
 }

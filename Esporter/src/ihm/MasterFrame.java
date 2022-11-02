@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 
 import ihm.component.boutonMenu;
 import types.TypeMenu;
+import utilisateur.User;
 
 public class MasterFrame {
 
@@ -30,6 +31,7 @@ public class MasterFrame {
 	private JPanel panelMenu;
 	private ButtonGroup boutonGroupMenu;
 	private static MasterFrame instance;
+	private User user;
 
 	/**
 	 * Launch the application.
@@ -52,6 +54,7 @@ public class MasterFrame {
 	 * Create the application.
 	 */
 	private MasterFrame() {
+		this.user = new User();
 		initialize();
 	}
 	
@@ -166,6 +169,10 @@ public class MasterFrame {
 	
 	public JFrame getFrame() {
 		return frame;
+	}
+	
+	public User getUser() {
+		return user;
 	}
 
 

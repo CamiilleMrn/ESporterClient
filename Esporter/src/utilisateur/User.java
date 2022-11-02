@@ -1,17 +1,29 @@
 package utilisateur;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 
+import types.Infos;
 import types.Permission;
 
-public abstract class User {
+public class User {
 	
 	private Permission permission;
-	private Connection connexion;
-	//Maybe a changer ? Multi access database impossible.
+	private CommunicationServer com;
+	private Infos info;
+
+	public User() {
+		this.permission = Permission.VISITEUR;
+		this.com = new CommunicationServer(this);
+	}
 	
-	//Methode commune a tout les utilisateurs
-	public User(Permission permission) {
+	public CommunicationServer getCom() {
+		return com;
+	}
+	
+	public void setPermission(Permission permission) {
 		this.permission = permission;
 	}
 	
@@ -19,18 +31,18 @@ public abstract class User {
 		return permission;
 	}
 	
-	public Connection getConnexion() {
-		return connexion;
+	public void login(String username, String mdp) {
+		com.login(username, mdp);
 	}
 	
-	public void setConnexion(Connection connexion) {
-		this.connexion = connexion;
+	public Infos getInfo() {
+		return info;
 	}
 	
-	public abstract int makeConnection();
-	public void removeConnection() {
-		this.connexion = null;
+	public void setInfo(Infos info) {
+		this.info = info;
 	}
+	
 	
 	public int voirInfosEcurie() {
 		return -1;
