@@ -16,6 +16,9 @@ import javax.swing.JDialog;
 
 import java.awt.FlowLayout;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.awt.Color;
@@ -25,6 +28,8 @@ import javax.swing.SwingConstants;
 
 import ihm.component.boutonMenu;
 import ihm.erreur.Error;
+import types.EcurieInfo;
+import types.JoueurInfo;
 import types.exception.InvalidPermission;
 import utilisateur.User;
 
@@ -38,6 +43,8 @@ public class MasterFrame {
 	private ButtonGroup boutonGroupMenu;
 	private static MasterFrame instance;
 	private User user;
+	private JLabel nomCompte;
+	private JLabel logoCompte;
 
 	/**
 	 * Launch the application.
@@ -62,6 +69,7 @@ public class MasterFrame {
 	private MasterFrame() {
 		try {
 			this.user = new User();
+			
 		} catch (UnknownHostException e) {
 			error(e);
 		} catch (IOException e) {
@@ -98,12 +106,12 @@ public class MasterFrame {
 		connexion.setBackground(COULEUR_MASTER);
 		header.add(connexion, BorderLayout.EAST);
 		
-		JLabel nomCompte = new JLabel("compte");
+		nomCompte = new JLabel("compte");
 		nomCompte.setHorizontalAlignment(SwingConstants.CENTER);
 		nomCompte.setForeground(COULEUR_TEXTE);
 		connexion.add(nomCompte);
 		
-		JLabel logoCompte = new JLabel("logo");
+		logoCompte = new JLabel("logo");
 		logoCompte.setHorizontalAlignment(SwingConstants.CENTER);
 		logoCompte.setForeground(COULEUR_TEXTE);
 		connexion.add(logoCompte);
@@ -159,15 +167,54 @@ public class MasterFrame {
 		JPanel footer = new JPanel();
 		frame.getContentPane().add(footer, BorderLayout.SOUTH);
 		
+		setCompte();
 		
+		connexion.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				user.login("test", "mdpTest");
+			}
+		});
 	}
+	
+	
 	
 	public void setMenu(TypeMenu m) {
 		panelMenu.removeAll();
+		boutonGroupMenu = new ButtonGroup();
 		boutonMenu[] menu = m.getMenu();
 		for (int i=0; i<menu.length;i++) {
 			panelMenu.add(menu[i]);
 			boutonGroupMenu.add(menu[i]);
+		}
+		setCompte();
+	}
+	
+	public void setCompte() {
+		switch(user.getPermission()) {
+		case ARBITRE:
+			nomCompte.setText("Arbitre");
+			break;
+		case ECURIE:
+			EcurieInfo e = (EcurieInfo)user.getInfo();
+			nomCompte.setText(e.getNom());
+			//logoCompte.setIcon(e.getLogo());
+			break;
+		case JOUEUR:
+			JoueurInfo j = (JoueurInfo)user.getInfo();
+			nomCompte.setText(j.getNom());
+			//logoCompte.setIcon(j.getPhoto());
+			break;
+		case ORGANISATEUR:
+			nomCompte.setText("Esporter");
+			break;
+		case VISITEUR:
+			nomCompte.setText("Visiteur");
+			break;
+		default:
+			break;
+		
 		}
 	}
 	

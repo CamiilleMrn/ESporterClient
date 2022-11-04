@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 
+import ihm.MasterFrame;
+import ihm.TypeMenu;
 import socket.Response;
 import types.EquipeInfo;
 import types.Infos;
@@ -44,6 +46,27 @@ public class User {
 	public void login(String username, String mdp) {
 		com.sendLogin(username, mdp);
 		waiting.waitFor(Response.LOGIN);
+		switch(permission) {
+		case ARBITRE:
+			MasterFrame.getInstance().setMenu(TypeMenu.Arbitres);
+			break;
+		case ECURIE:
+			MasterFrame.getInstance().setMenu(TypeMenu.Ecuries);
+			break;
+		case JOUEUR:
+			MasterFrame.getInstance().setMenu(TypeMenu.Joueurs);
+			break;
+		case ORGANISATEUR:
+			MasterFrame.getInstance().setMenu(TypeMenu.Organisateurs);
+			break;
+		case VISITEUR:
+			MasterFrame.getInstance().setMenu(TypeMenu.Visiteurs);
+			break;
+		default:
+			break;
+		
+		}
+		
 		
 	}
 	

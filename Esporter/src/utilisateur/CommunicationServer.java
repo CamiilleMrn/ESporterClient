@@ -164,6 +164,7 @@ public class CommunicationServer implements Runnable{
 	public void traiterReponse(ResponseObject r) {
 		switch(r.getName()) {
 		case ERROR_LOGIN:
+			user.getWaiting().setActualState(Response.LOGIN);
 			break;
 		case ERROR_PERMISSION:
 			break;
