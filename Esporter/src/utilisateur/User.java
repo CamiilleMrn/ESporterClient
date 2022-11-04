@@ -5,18 +5,26 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 
+import socket.Response;
 import types.Infos;
 import types.Permission;
+import types.WaitingFor;
 
 public class User {
 	
-	private Permission permission;
+	private volatile Permission permission;
 	private CommunicationServer com;
+	private Thread t;
 	private Infos info;
+	private WaitingFor waiting;
 
-	public User() {
+	public User() throws UnknownHostException, IOException {
 		this.permission = Permission.VISITEUR;
 		this.com = new CommunicationServer(this);
+		this.waiting = new WaitingFor();
+		this.t = new Thread(com);
+		t.start();
+		
 	}
 	
 	public CommunicationServer getCom() {
@@ -32,7 +40,13 @@ public class User {
 	}
 	
 	public void login(String username, String mdp) {
-		com.login(username, mdp);
+		com.sendLogin(username, mdp);
+		waiting.waitFor(Response.LOGIN);
+		
+	}
+	
+	public WaitingFor getWaiting() {
+		return waiting;
 	}
 	
 	public Infos getInfo() {

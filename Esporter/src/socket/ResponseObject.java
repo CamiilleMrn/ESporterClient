@@ -48,4 +48,12 @@ public class ResponseObject implements Serializable{
 		return this.info.get(id);
 	}
 	
+	public String toString() {
+		String output = "[MAP";
+		for (InfoID key : info.keySet()) {
+	        output+=(key + "=" + info.get(key) + ", ");
+	    }
+		return output;
+	}
+	
 }

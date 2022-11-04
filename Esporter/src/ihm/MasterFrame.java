@@ -12,14 +12,20 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JDialog;
+
 import java.awt.FlowLayout;
+import java.awt.Point;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
 
 import ihm.component.boutonMenu;
-import types.TypeMenu;
+import ihm.erreur.Error;
+import types.exception.InvalidPermission;
 import utilisateur.User;
 
 public class MasterFrame {
@@ -54,7 +60,13 @@ public class MasterFrame {
 	 * Create the application.
 	 */
 	private MasterFrame() {
-		this.user = new User();
+		try {
+			this.user = new User();
+		} catch (UnknownHostException e) {
+			error(e);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		initialize();
 	}
 	
@@ -173,6 +185,16 @@ public class MasterFrame {
 	
 	public User getUser() {
 		return user;
+	}
+	
+	public Point getCentre() {
+		return new Point(frame.getLocation().x+(frame.getWidth()/2), frame.getLocation().y+(frame.getHeight()/2));
+	}
+	
+	public void error(Exception e) {
+		Error dialog = new Error(e);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
 	}
 
 
