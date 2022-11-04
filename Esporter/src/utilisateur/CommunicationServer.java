@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import socket.Command;
@@ -12,10 +13,14 @@ import socket.CommandName;
 import socket.Response;
 import socket.ResponseObject;
 import types.EcurieInfo;
+import types.Entier;
+import types.EquipeInfo;
 import types.InfoID;
 import types.Infos;
 import types.JoueurInfo;
+import types.Login;
 import types.Permission;
+import types.TournoiInfo;
 
 public class CommunicationServer implements Runnable{
 	
@@ -86,15 +91,28 @@ public class CommunicationServer implements Runnable{
 	
 	
 	public void sendLogin(String username, String mdp) {
-		Command c = new Command(CommandName.LOGIN, mdp, username);
-		try {
-			System.out.println("Send login");
-			out.writeObject(c);
-			System.out.println("Done");
-		} catch (IOException e) {
-			// TODO: handle exception
-		}
-
+		HashMap<InfoID, Infos> m = new HashMap<>();
+		m.put(InfoID.login, new Login(username, mdp));
+		Command c = new Command(CommandName.LOGIN, m);
+		System.out.println("Send login");
+		send(c);
+		System.out.println("Done");
+	}
+	
+	public void inscriptionTournoi(int idTournoi) {
+		HashMap<InfoID, Infos> m = new HashMap<>();
+		m.put(InfoID.Tournoi, new Entier(idTournoi));
+		m.put(InfoID.Joueur, new Entier(((JoueurInfo)user.getInfo()).getId()));
+		Command c = new Command(CommandName.INSCRIPTION_TOURNOI, m);
+		send(c);
+	}
+	
+	public void ajouterEquipe(EquipeInfo e) {
+		HashMap<InfoID, Infos> m = new HashMap<>();
+		m.put(InfoID.Ecurie, new Entier(((EcurieInfo)user.getInfo()).getId()));
+		m.put(InfoID.Equipe, e);
+		Command c = new Command(CommandName.AJOUTER_EQUIPE, m);
+		send(c);
 	}
 	
 	public void receiveLogin(ResponseObject r) {

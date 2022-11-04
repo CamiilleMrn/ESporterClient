@@ -6,9 +6,11 @@ import java.net.UnknownHostException;
 import java.sql.Connection;
 
 import socket.Response;
+import types.EquipeInfo;
 import types.Infos;
 import types.Permission;
 import types.WaitingFor;
+import types.exception.InvalidPermission;
 
 public class User {
 	
@@ -60,6 +62,20 @@ public class User {
 	
 	public int voirInfosEcurie() {
 		return -1;
+	}
+	
+	public void inscriptionTournoi(int id) throws InvalidPermission{
+		if (permission!=Permission.JOUEUR) {
+			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
+		}
+		com.inscriptionTournoi(id);
+	}
+	
+	public void ajouterEquipe(EquipeInfo e) throws InvalidPermission{
+		if (permission!=Permission.JOUEUR) {
+			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
+		}
+		com.ajouterEquipe(e);
 	}
 
 }

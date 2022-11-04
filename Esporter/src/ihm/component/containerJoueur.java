@@ -22,7 +22,7 @@ public class containerJoueur extends JPanel {
 	 */
 	private static final long serialVersionUID = -6951669578094176958L;
 	private Image photo = null;
-	private JoueurInfo joueur = new JoueurInfo(0,"ok","pap",null);
+	private JoueurInfo joueur = new JoueurInfo(0,"ok","pap",null, null, null, null, "Francais");
 	private static final int WIDTH = 100;
 	private static final int HEIGHT = 150;
 	/**
