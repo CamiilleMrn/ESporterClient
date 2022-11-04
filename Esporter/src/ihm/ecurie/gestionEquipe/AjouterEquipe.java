@@ -11,56 +11,46 @@ import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JComboBox;
 
 import javax.swing.JButton;
 import java.awt.Font;
 
+import ihm.MasterFrame;
 import ihm.component.containerJoueur;
 import types.Jeu;
 
 
-public class AjouterEquipe {
-
-	private JFrame frame;
+public class AjouterEquipe extends JPanel{
 
 	/**
-	 * Launch the application.
+	 * 
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AjouterEquipe window = new AjouterEquipe();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private static final long serialVersionUID = -5531842744073477854L;
+	private Jeu jeu;
 	/**
 	 * Create the application.
 	 */
-	public AjouterEquipe() {
+	public AjouterEquipe(Jeu jeu) {
+		this.jeu = jeu;
 		initialize();
+		this.setVisible(true);
+		this.repaint();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
 		
-		frame.getContentPane().setForeground(Color.DARK_GRAY);
-		frame.setForeground(Color.WHITE);
-		frame.setBounds(100, 100, 960, 439);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		//JPanel root = new JPanel();
+		//root.setLayout(new BorderLayout());
 		JPanel panelMain = new JPanel();
 		panelMain.setBackground(Color.DARK_GRAY);
-		frame.getContentPane().add(panelMain, BorderLayout.CENTER);
+		add(panelMain, BorderLayout.CENTER);
 		GridBagLayout gbl_panelMain = new GridBagLayout();
 		gbl_panelMain.columnWidths = new int[] {100, 600, 100};
 		gbl_panelMain.rowHeights = new int[] {100, 70, 130, 100, 60};
@@ -87,8 +77,18 @@ public class AjouterEquipe {
 		gbc_panelJeux.gridy = 1;
 		panelMain.add(panelJeux, gbc_panelJeux);
 		
-		JComboBox<Jeu> comboBox = new JComboBox<>();
+		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
+		comboBox.setSelectedItem(jeu);
 		panelJeux.add(comboBox);
+		comboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MasterFrame.getInstance().setPanel(new AjouterEquipe((Jeu)comboBox.getSelectedItem()));
+				
+			}
+		});
+		
 		
 		JPanel panelJoueur = new JPanel();
 		panelJoueur.setBorder(null);
@@ -100,7 +100,7 @@ public class AjouterEquipe {
 		gbc_panelJoueur.gridy = 2;
 		panelMain.add(panelJoueur, gbc_panelJoueur);
 		
-		int tailleEquipe = 3;
+		int tailleEquipe = jeu.getJoueurMax();
 		containerJoueur[] listeJoueur = new containerJoueur[tailleEquipe];
 		for (int i=0; i<tailleEquipe; i++) {
 			listeJoueur[i] = new containerJoueur();
@@ -118,6 +118,7 @@ public class AjouterEquipe {
 		
 		JButton btnValider = new JButton("Valider");
 		panelValider.add(btnValider);
+		
 	}
 
 }

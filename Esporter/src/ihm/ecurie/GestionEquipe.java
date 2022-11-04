@@ -11,6 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+
+import ihm.MasterFrame;
+import ihm.ecurie.gestionEquipe.AjouterEquipe;
+import types.Jeu;
+
 import javax.swing.JList;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -67,9 +72,8 @@ public class GestionEquipe extends JPanel{
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Rocket League", "League Of Legends", "Dota 2", "Overwatch 2", "Brawlala", "Super Smash Bros"}));
 		
 		panel_3.add(comboBox);
 	
@@ -81,6 +85,7 @@ public class GestionEquipe extends JPanel{
 		AjouterUneEquipe.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		AjouterUneEquipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MasterFrame.getInstance().setPanel(new AjouterEquipe((Jeu)comboBox.getSelectedItem()));
 			}
 		});
 

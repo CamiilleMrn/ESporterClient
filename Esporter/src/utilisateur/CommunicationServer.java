@@ -122,11 +122,13 @@ public class CommunicationServer implements Runnable{
 		}
 		setPermission(perm);
 		if (r.getInfo().containsKey(InfoID.Ecurie)) {
-			setInfo(perm, r.getInfoByID(InfoID.Ecurie));
+			user.setInfo(r.getInfoByID(InfoID.Ecurie));
+
 		}
 		if (r.getInfo().containsKey(InfoID.Joueur)) {
-			setInfo(perm, r.getInfoByID(InfoID.Joueur));
+			user.setInfo(r.getInfoByID(InfoID.Joueur));
 		}
+		System.out.println(user.getInfo());
 	}
 	
 	public void send (Command c) {
@@ -138,24 +140,6 @@ public class CommunicationServer implements Runnable{
 		}
 	}
 	
-	public void setInfo(Permission perms, Infos information) {
-		switch(perms) {
-		case VISITEUR: 
-			user.setInfo(null);
-			break;
-		case JOUEUR: 
-			user.setInfo((JoueurInfo)information);
-			break;
-		case ARBITRE:
-			user.setInfo(null);
-		case ECURIE: 
-			user.setInfo((EcurieInfo)information);
-		case ORGANISATEUR: 
-			user.setInfo(null);
-		default:
-			user.setInfo(null);
-		}
-	}
 	
 	public void setPermission(Permission perms) {
 		user.setPermission(perms);

@@ -45,6 +45,7 @@ public class MasterFrame {
 	private User user;
 	private JLabel nomCompte;
 	private JLabel logoCompte;
+	private JPanel header;
 
 	/**
 	 * Launch the application.
@@ -94,7 +95,7 @@ public class MasterFrame {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel header = new JPanel();
+		header = new JPanel();
 		header.setBackground(COULEUR_MASTER_FOND);
 		frame.getContentPane().add(header, BorderLayout.NORTH);
 		header.setLayout(new BorderLayout(0, 0));
@@ -189,6 +190,7 @@ public class MasterFrame {
 			boutonGroupMenu.add(menu[i]);
 		}
 		setCompte();
+		frame.getContentPane().repaint();
 	}
 	
 	public void setCompte() {
@@ -224,6 +226,7 @@ public class MasterFrame {
 			frame.getContentPane().remove(layout.getLayoutComponent(BorderLayout.CENTER));
 		frame.getContentPane().add(p, BorderLayout.CENTER);
 		frame.revalidate();
+		frame.getContentPane().repaint();
 	}
 	
 	public JFrame getFrame() {
