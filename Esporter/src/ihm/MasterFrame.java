@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
-
+import javax.swing.JLayeredPane;
 import javax.swing.ButtonGroup;
 import javax.swing.JDialog;
 
@@ -46,6 +46,7 @@ public class MasterFrame {
 	private JLabel nomCompte;
 	private JLabel logoCompte;
 	private JPanel header;
+	private JPanel main;
 
 	/**
 	 * Launch the application.
@@ -95,9 +96,22 @@ public class MasterFrame {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		JLayeredPane root = new JLayeredPane();
+		root.setLayout(new BorderLayout());
+		frame.setContentPane(root);
+		
+
+		main = new JPanel();
+		main.setLayout(new BorderLayout());
+		frame.getContentPane().add(main, BorderLayout.CENTER);
+		/*Maintenant que le JLayeredPane a été fait on va pouvoir y superposer le main et le panel de gestion des erreurs
+		 * Nous aurons ainsi le panel qui se mettra en visible quand il en aura besoin.
+		 * */
+		
+		
 		header = new JPanel();
 		header.setBackground(COULEUR_MASTER_FOND);
-		frame.getContentPane().add(header, BorderLayout.NORTH);
+		main.add(header, BorderLayout.NORTH);
 		header.setLayout(new BorderLayout(0, 0));
 		
 		
@@ -166,7 +180,7 @@ public class MasterFrame {
 		}
 		
 		JPanel footer = new JPanel();
-		frame.getContentPane().add(footer, BorderLayout.SOUTH);
+		main.add(footer, BorderLayout.SOUTH);
 		
 		setCompte();
 		
@@ -221,12 +235,12 @@ public class MasterFrame {
 	}
 	
 	public void setPanel(JPanel p) {
-		BorderLayout layout = (BorderLayout)frame.getContentPane().getLayout();
+		BorderLayout layout = (BorderLayout)main.getLayout();
 		if (layout.getLayoutComponent(BorderLayout.CENTER)!=null)
-			frame.getContentPane().remove(layout.getLayoutComponent(BorderLayout.CENTER));
-		frame.getContentPane().add(p, BorderLayout.CENTER);
-		frame.revalidate();
-		frame.getContentPane().repaint();
+			main.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+		main.add(p, BorderLayout.CENTER);
+		main.revalidate();
+		main.repaint();
 	}
 	
 	public JFrame getFrame() {
