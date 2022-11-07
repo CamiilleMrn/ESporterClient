@@ -1,4 +1,4 @@
-package ihm;
+ package ihm;
 
 
 import java.awt.EventQueue;
@@ -110,6 +110,7 @@ public class MasterFrame {
 		frame.setContentPane(root);
 		main = new JPanel();
 		main.setLayout(new BorderLayout());
+
 		frame.getContentPane().add(main,BorderLayout.CENTER, JLayeredPane.DEFAULT_LAYER);
 		main.setBounds(0,0,frame.getWidth(), frame.getHeight());
 		
@@ -137,6 +138,11 @@ public class MasterFrame {
 				frame.repaint();
 			}
 		});
+
+		frame.getContentPane().add(main, BorderLayout.CENTER);
+		/*Maintenant que le JLayeredPane a �t� fait on va pouvoir y superposer le main et le panel de gestion des erreurs
+		 * Nous aurons ainsi le panel qui se mettra en visible quand il en aura besoin.*/
+
 		
 		
 		header = new JPanel();

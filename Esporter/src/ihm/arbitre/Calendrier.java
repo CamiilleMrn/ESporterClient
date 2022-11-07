@@ -3,6 +3,8 @@ package ihm.arbitre;
 import javax.swing.JPanel;
 
 public class Calendrier extends JPanel{
+	public Calendrier() {
+	}
 
 	/**
 	 * 
