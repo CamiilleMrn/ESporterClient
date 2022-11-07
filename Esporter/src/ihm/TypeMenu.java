@@ -7,7 +7,7 @@ public enum TypeMenu {
 	
 	
 	Visiteurs(new boutonMenu[] {new boutonMenu(true, "Accueil",  new ihm.visiteur.Accueil()),
-								new boutonMenu(false, "Calendrier", new ihm.visiteur.Calendrier()),
+								new boutonMenu(false, "Calendrier", new ihm.joueur.Calendrier()),
 								new boutonMenu(false, "Classement",  new ihm.Classement()),
 								new boutonMenu(false, "Ecuries",  new ihm.Ecuries())}),
 	
