@@ -45,15 +45,19 @@ public class AjouterEquipe extends JPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		//JPanel root = new JPanel();
-		//root.setLayout(new BorderLayout());
+		setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		setPreferredSize(MasterFrame.getInstance().getCenterDimension());
+		JFrame frame = MasterFrame.getInstance().getFrame(); 
 		JPanel panelMain = new JPanel();
 		panelMain.setBackground(Color.DARK_GRAY);
 		add(panelMain, BorderLayout.CENTER);
 		GridBagLayout gbl_panelMain = new GridBagLayout();
-		gbl_panelMain.columnWidths = new int[] {100, 600, 100};
-		gbl_panelMain.rowHeights = new int[] {100, 70, 130, 100, 60};
+		int cote = (int) (frame.getWidth()*0.15);
+		int centre = (int) (frame.getWidth()*0.7);
+		
+
+		gbl_panelMain.columnWidths = new int[] {cote+1, centre, cote};
+		gbl_panelMain.rowHeights = new int[] {(int) (frame.getHeight()*0.06), (int) (frame.getHeight()*0.22), (int) (frame.getHeight()*0.28), (int) (frame.getHeight()*0.3), (int) (frame.getHeight()*0.14)};
 		gbl_panelMain.columnWeights = new double[]{0.0, 0.0, 0.0};
 		gbl_panelMain.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelMain.setLayout(gbl_panelMain);
@@ -118,6 +122,7 @@ public class AjouterEquipe extends JPanel{
 		
 		JButton btnValider = new JButton("Valider");
 		panelValider.add(btnValider);
+		System.out.println(this.getSize().width);
 		
 	}
 

@@ -16,9 +16,13 @@ import javax.swing.JDialog;
 
 import java.awt.FlowLayout;
 import java.awt.Point;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.awt.Color;
@@ -28,6 +32,7 @@ import javax.swing.SwingConstants;
 
 import ihm.component.boutonMenu;
 import ihm.erreur.Error;
+import ihm.erreur.ErrorPanel;
 import types.EcurieInfo;
 import types.JoueurInfo;
 import types.exception.InvalidPermission;
@@ -47,6 +52,7 @@ public class MasterFrame {
 	private JLabel logoCompte;
 	private JPanel header;
 	private JPanel main;
+	private ErrorPanel error;
 
 	/**
 	 * Launch the application.
@@ -78,6 +84,8 @@ public class MasterFrame {
 			e.printStackTrace();
 		}
 		initialize();
+		frame.pack();
+		
 	}
 	
 	public static synchronized MasterFrame getInstance() {
@@ -92,21 +100,43 @@ public class MasterFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frame.setMinimumSize(new Dimension(1300, 500));
-		frame.setBounds(100, 100, 450, 300);
+		frame.setMinimumSize(new Dimension(1450,700));
+		frame.setPreferredSize(new Dimension(1920,1080));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLayeredPane root = new JLayeredPane();
 		root.setLayout(new BorderLayout());
-		frame.setContentPane(root);
 		
-
+		frame.setContentPane(root);
 		main = new JPanel();
 		main.setLayout(new BorderLayout());
-		frame.getContentPane().add(main, BorderLayout.CENTER);
-		/*Maintenant que le JLayeredPane a été fait on va pouvoir y superposer le main et le panel de gestion des erreurs
-		 * Nous aurons ainsi le panel qui se mettra en visible quand il en aura besoin.
-		 * */
+		frame.getContentPane().add(main,BorderLayout.CENTER, JLayeredPane.DEFAULT_LAYER);
+		main.setBounds(0,0,frame.getWidth(), frame.getHeight());
+		
+		error = new ErrorPanel();
+		error.setBounds(0,0,frame.getWidth(), frame.getHeight());
+		frame.getContentPane().add(error, BorderLayout.CENTER, 2);
+		
+		frame.addComponentListener(new ComponentAdapter() {
+		
+			@Override
+			public void componentResized(ComponentEvent e) {
+				main.setBounds(0,0,frame.getWidth(), frame.getHeight());
+				error.setBounds(0,0,frame.getWidth(), frame.getHeight());
+				error.resize();
+				frame.repaint();
+			}
+		});
+		
+		frame.addWindowStateListener(new WindowAdapter() {
+			@Override
+			public void windowStateChanged(WindowEvent e) {
+				main.setBounds(0,0,frame.getWidth(), frame.getHeight());
+				error.setBounds(0,0,frame.getWidth(), frame.getHeight());
+				error.resize();
+				frame.repaint();
+			}
+		});
 		
 		
 		header = new JPanel();
@@ -191,6 +221,13 @@ public class MasterFrame {
 				user.login("test", "mdpTest");
 			}
 		});
+		
+		
+		/*Maintenant que le JLayeredPane a été fait on va pouvoir y superposer le main et le panel de gestion des erreurs
+		 * Nous aurons ainsi le panel qui se mettra en visible quand il en aura besoin.
+		 * */
+		
+		
 	}
 	
 	
@@ -259,6 +296,10 @@ public class MasterFrame {
 		Error dialog = new Error(e);
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
+	}
+	
+	public Dimension getCenterDimension() {
+		return this.frame.getContentPane().getSize();
 	}
 
 
