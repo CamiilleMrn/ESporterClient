@@ -35,6 +35,7 @@ import ihm.erreur.Error;
 import ihm.erreur.ErrorPanel;
 import types.EcurieInfo;
 import types.JoueurInfo;
+import types.exception.ErrorLogin;
 import types.exception.InvalidPermission;
 import utilisateur.User;
 
@@ -222,7 +223,11 @@ public class MasterFrame {
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				user.login("test", "mdpTest");
+				try {
+					user.login("test", "mdpTest");
+				} catch (ErrorLogin e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -233,6 +238,8 @@ public class MasterFrame {
 		
 		
 	}
+	
+	
 	
 	
 	

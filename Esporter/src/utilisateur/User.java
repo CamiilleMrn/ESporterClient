@@ -12,6 +12,7 @@ import types.EquipeInfo;
 import types.Infos;
 import types.Permission;
 import types.WaitingFor;
+import types.exception.ErrorLogin;
 import types.exception.InvalidPermission;
 
 public class User {
@@ -43,31 +44,38 @@ public class User {
 		return permission;
 	}
 	
-	public void login(String username, String mdp) {
+	public void login(String username, String mdp) throws ErrorLogin {
 		com.sendLogin(username, mdp);
-		waiting.waitFor(Response.LOGIN);
-		switch(permission) {
-		case ARBITRE:
-			MasterFrame.getInstance().setMenu(TypeMenu.Arbitres);
-			break;
-		case ECURIE:
-			MasterFrame.getInstance().setMenu(TypeMenu.Ecuries);
-			break;
-		case JOUEUR:
-			MasterFrame.getInstance().setMenu(TypeMenu.Joueurs);
-			break;
-		case ORGANISATEUR:
-			MasterFrame.getInstance().setMenu(TypeMenu.Organisateurs);
-			break;
-		case VISITEUR:
-			MasterFrame.getInstance().setMenu(TypeMenu.Visiteurs);
+		Response[] r = {Response.LOGIN, Response.ERROR_LOGIN};
+		waiting.waitFor(r);
+		switch (waiting.getActualState()) {
+		case ERROR_LOGIN:
+			throw new ErrorLogin("Erreur de login");
+		case LOGIN:
+			switch(permission) {
+			case ARBITRE:
+				MasterFrame.getInstance().setMenu(TypeMenu.Arbitres);
+				break;
+			case ECURIE:
+				MasterFrame.getInstance().setMenu(TypeMenu.Ecuries);
+				break;
+			case JOUEUR:
+				MasterFrame.getInstance().setMenu(TypeMenu.Joueurs);
+				break;
+			case ORGANISATEUR:
+				MasterFrame.getInstance().setMenu(TypeMenu.Organisateurs);
+				break;
+			case VISITEUR:
+				MasterFrame.getInstance().setMenu(TypeMenu.Visiteurs);
+				break;
+			default:
+				break;
+			
+			}
 			break;
 		default:
 			break;
-		
 		}
-		
-		
 	}
 	
 	public WaitingFor getWaiting() {
