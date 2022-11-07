@@ -116,7 +116,7 @@ public class MasterFrame {
 		
 		error = new ErrorPanel();
 		error.setBounds(0,0,frame.getWidth(), frame.getHeight());
-		frame.getContentPane().add(error, BorderLayout.CENTER, 2);
+		frame.getContentPane().add(error, BorderLayout.CENTER, 1);
 		
 		frame.addComponentListener(new ComponentAdapter() {
 		
@@ -138,8 +138,6 @@ public class MasterFrame {
 				frame.repaint();
 			}
 		});
-
-		frame.getContentPane().add(main, BorderLayout.CENTER);
 		/*Maintenant que le JLayeredPane a �t� fait on va pouvoir y superposer le main et le panel de gestion des erreurs
 		 * Nous aurons ainsi le panel qui se mettra en visible quand il en aura besoin.*/
 
