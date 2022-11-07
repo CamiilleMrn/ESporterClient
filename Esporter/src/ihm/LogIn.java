@@ -271,7 +271,7 @@ public class LogIn extends JPanel{
 				try {
 					String identifiant = txtSaisirIdentifiant.getText();
 					String psw = new String(txtSaisirPsw.getPassword());
-					System.out.println(identifiant+" "+psw);
+
 					MasterFrame.getInstance().getUser().login(identifiant, psw);
 					setVisible(false);
 				} catch (Exception e1) {
