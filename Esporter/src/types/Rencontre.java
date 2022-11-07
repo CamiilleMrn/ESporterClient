@@ -55,7 +55,7 @@ public class Rencontre implements Infos, Serializable {
 		return equipe2;
 	}
 	
-	public boolean matchJoué() {
+	public boolean matchJouÃ©() {
 		if (gagnant==null)
 			return false;
 		return true;
