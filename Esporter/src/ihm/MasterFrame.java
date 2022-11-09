@@ -35,6 +35,7 @@ import ihm.erreur.Error;
 import ihm.erreur.ErrorPanel;
 import types.EcurieInfo;
 import types.JoueurInfo;
+import types.exception.ErrorLogin;
 import types.exception.InvalidPermission;
 import utilisateur.User;
 
@@ -53,6 +54,7 @@ public class MasterFrame {
 	private JPanel header;
 	private JPanel main;
 	private ErrorPanel error;
+	private LogIn loginPage;
 
 	/**
 	 * Launch the application.
@@ -117,6 +119,9 @@ public class MasterFrame {
 		error = new ErrorPanel();
 		error.setBounds(0,0,frame.getWidth(), frame.getHeight());
 		frame.getContentPane().add(error, BorderLayout.CENTER, 1);
+		
+		loginPage = new LogIn();
+		frame.getContentPane().add(loginPage, BorderLayout.CENTER,2);
 		
 		frame.addComponentListener(new ComponentAdapter() {
 		
@@ -222,17 +227,19 @@ public class MasterFrame {
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				user.login("test", "mdpTest");
+				loginPage.setVisible(true);
 			}
 		});
 		
 		
-		/*Maintenant que le JLayeredPane a été fait on va pouvoir y superposer le main et le panel de gestion des erreurs
+		/*Maintenant que le JLayeredPane a ï¿½tï¿½ fait on va pouvoir y superposer le main et le panel de gestion des erreurs
 		 * Nous aurons ainsi le panel qui se mettra en visible quand il en aura besoin.
 		 * */
 		
 		
 	}
+	
+	
 	
 	
 	
