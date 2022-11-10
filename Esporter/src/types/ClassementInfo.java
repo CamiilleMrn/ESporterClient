@@ -34,27 +34,43 @@ public class ClassementInfo implements Infos{
 		return jeu;
 	}
 	
-	public HashMap<Integer, EcurieInfo> getEcuriesListTrie() {
+	public HashMap<Integer, ArrayList<EcurieInfo>> getClassement() {
 		LinkedList<EcurieInfo> liste = new LinkedList<>(ecuries.keySet());
 		Comparator<EcurieInfo> compareFromScore = new Comparator<EcurieInfo>() {
 
 			@Override
 			public int compare(EcurieInfo o1, EcurieInfo o2) {
 				if (ecuries.get(o1)-ecuries.get(o2)!=0) {
-					return ecuries.get(o1)-ecuries.get(o2);
+					if (ecuries.get(o1)>ecuries.get(o2)) {
+						return -1;
+					}
+					return 1;
 				} 
 				
 				return o1.getNom().compareTo(o2.getNom());
 			}
 			
 		};
+		HashMap<Integer, ArrayList<EcurieInfo>> classement = new HashMap<>();
 		Collections.sort(liste, compareFromScore);
 		int rang =1;
 		int rangAvant =0;
 		for (EcurieInfo e : liste) {
-			
+			if (classement.get(rangAvant) != null) {
+				if (ecuries.get(e) == ecuries.get(classement.get(rangAvant).get(0))) {
+					classement.get(rangAvant).add(e);
+				} else {
+					classement.put(rang, new ArrayList<>());
+					classement.get(rang).add(e);
+					rang++;rangAvant++;
+				}
+			} else {
+				classement.put(rang, new ArrayList<>());
+				classement.get(rang).add(e);
+				rang++;rangAvant++;
+			}
 		}
-		return null;
+		return classement;
 	}
 
 }

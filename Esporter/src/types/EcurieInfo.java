@@ -53,6 +53,14 @@ public class EcurieInfo implements Infos, Serializable {
 	public ArrayList<Titre> getPalmares() {
 		return palmares;
 	}
+
+	@Override
+	public String toString() {
+		return "Ecurie [nom=" + nom + ", diminutif=" + diminutif + ", nationalite=" + nationalite + ", id=" + id
+				+ "]";
+	}
+	
+	
 	
 	
 	
