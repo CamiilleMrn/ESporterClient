@@ -77,6 +77,7 @@ public class MasterFrame {
 	 * Create the application.
 	 */
 	private MasterFrame() {
+		
 		try {
 			this.user = new User();
 			
@@ -87,6 +88,7 @@ public class MasterFrame {
 		}
 		initialize();
 		frame.pack();
+		
 		
 	}
 	
@@ -113,7 +115,7 @@ public class MasterFrame {
 		main = new JPanel();
 		main.setLayout(new BorderLayout());
 
-		frame.getContentPane().add(main,BorderLayout.CENTER, JLayeredPane.DEFAULT_LAYER);
+		frame.getContentPane().add(main,BorderLayout.CENTER, 3);
 		main.setBounds(0,0,frame.getWidth(), frame.getHeight());
 		
 		error = new ErrorPanel();
@@ -227,6 +229,8 @@ public class MasterFrame {
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
+				main.setVisible(false);
+				error.setVisible(false);
 				loginPage.setVisible(true);
 			}
 		});
@@ -239,8 +243,13 @@ public class MasterFrame {
 		
 	}
 	
+	public ErrorPanel getError() {
+		return error;
+	}
 	
-	
+	public JPanel getMain() {
+		return main;
+	}
 	
 	
 	public void setMenu(TypeMenu m) {
@@ -304,9 +313,13 @@ public class MasterFrame {
 	}
 	
 	public void error(Exception e) {
-		Error dialog = new Error(e);
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
+		error.setState(e, false);
+		error.setVisible(true);
+		
+	}
+	
+	public LogIn getLoginPage() {
+		return loginPage;
 	}
 	
 	public Dimension getCenterDimension() {

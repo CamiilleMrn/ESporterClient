@@ -37,21 +37,6 @@ public class LogIn extends JPanel{
 	private JTextField txtSaisirIdentifiant;
 	private JPasswordField txtSaisirPsw;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LogIn window = new LogIn();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -265,17 +250,18 @@ public class LogIn extends JPanel{
 	
 	
 	public void constructeurBouttonConnexion(JButton boutonConnexion) {
-	
 		boutonConnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MasterFrame master = MasterFrame.getInstance();
 				try {
 					String identifiant = txtSaisirIdentifiant.getText();
 					String psw = new String(txtSaisirPsw.getPassword());
 
-					MasterFrame.getInstance().getUser().login(identifiant, psw);
+					master.getUser().login(identifiant, psw);
 					setVisible(false);
+					master.getMain().setVisible(true);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					master.error(e1);
 				}
 			}
 		});
