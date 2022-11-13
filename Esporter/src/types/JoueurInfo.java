@@ -1,10 +1,16 @@
 package types;
 
 
-import java.awt.Image;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Objects;
+
+import javax.imageio.ImageIO;
 
 public class JoueurInfo implements Infos, Serializable {
 	/**
@@ -14,24 +20,39 @@ public class JoueurInfo implements Infos, Serializable {
 	private int id;
 	private String nom;
 	private String prenom;
-	private Image photo;
+	private Blob photoBlob;
 	private Date dateNaissance;
 	private Date dateDebutContrat;
 	private Date dateFinContrat;
-	private String nationalite;
+	private int nationalite;
+	private int id_equipe;
+	private BufferedImage photo;
 	
 	
 
-	public JoueurInfo(int id, String nom, String prenom, Image photo, Date dateNaissance, Date dateDebutContrat,
-			Date dateFinContrat, String nationalite) {
+	public JoueurInfo(int id, String nom, String prenom, Blob photoBlob, Date dateNaissance, Date dateDebutContrat,
+			Date dateFinContrat, int nationalite, int id_equipe) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.photo = photo;
+		this.photoBlob = photoBlob;
 		this.dateNaissance = dateNaissance;
 		this.dateDebutContrat = dateDebutContrat;
 		this.dateFinContrat = dateFinContrat;
 		this.nationalite = nationalite;
+		this.id_equipe = id_equipe;
+		
+		try {
+			this.photo = ImageIO.read(photoBlob.getBinaryStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getId_equipe() {
+		return id_equipe;
 	}
 
 
@@ -54,7 +75,11 @@ public class JoueurInfo implements Infos, Serializable {
 
 
 
-	public Image getPhoto() {
+	public Blob getPhoto() {
+		return photoBlob;
+	}
+	
+	public BufferedImage getPhotoTraite() {
 		return photo;
 	}
 
@@ -78,7 +103,7 @@ public class JoueurInfo implements Infos, Serializable {
 
 
 
-	public String getNationalite() {
+	public int getNationalite() {
 		return nationalite;
 	}
 

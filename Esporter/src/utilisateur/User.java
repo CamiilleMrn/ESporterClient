@@ -78,6 +78,12 @@ public class User {
 		}
 	}
 	
+	public void logout() {
+		setInfo(null);
+		setPermission(Permission.VISITEUR);
+		com.logout();
+	}
+	
 	public WaitingFor getWaiting() {
 		return waiting;
 	}

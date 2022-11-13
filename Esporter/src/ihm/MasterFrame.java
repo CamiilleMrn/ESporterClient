@@ -35,9 +35,17 @@ import ihm.erreur.Error;
 import ihm.erreur.ErrorPanel;
 import types.EcurieInfo;
 import types.JoueurInfo;
+import types.Permission;
 import types.exception.ErrorLogin;
 import types.exception.InvalidPermission;
 import utilisateur.User;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MasterFrame {
 
@@ -49,12 +57,13 @@ public class MasterFrame {
 	private ButtonGroup boutonGroupMenu;
 	private static MasterFrame instance;
 	private User user;
-	private JLabel nomCompte;
-	private JLabel logoCompte;
 	private JPanel header;
 	private JPanel main;
 	private ErrorPanel error;
 	private LogIn loginPage;
+	private JLabel nomCompte;
+	private JLabel logoCompte;
+	private JButton boutonConnection;
 
 	/**
 	 * Launch the application.
@@ -161,16 +170,28 @@ public class MasterFrame {
 		connexion.setPreferredSize(new Dimension(250,50));
 		connexion.setBackground(COULEUR_MASTER);
 		header.add(connexion, BorderLayout.EAST);
+		connexion.setLayout(new BorderLayout(0, 0));
+		
+		JPanel nomComptePanel = new JPanel();
+		BorderLayout bl_nomComptePanel = new BorderLayout();
+		bl_nomComptePanel.setVgap(20);
+		nomComptePanel.setLayout(bl_nomComptePanel);
+		nomComptePanel.setBackground(COULEUR_MASTER);
+		connexion.add(nomComptePanel, BorderLayout.CENTER);
 		
 		nomCompte = new JLabel("compte");
 		nomCompte.setHorizontalAlignment(SwingConstants.CENTER);
-		nomCompte.setForeground(COULEUR_TEXTE);
-		connexion.add(nomCompte);
+		nomCompte.setForeground(Color.WHITE);
+		nomComptePanel.add(nomCompte, BorderLayout.SOUTH);
 		
 		logoCompte = new JLabel("logo");
 		logoCompte.setHorizontalAlignment(SwingConstants.CENTER);
-		logoCompte.setForeground(COULEUR_TEXTE);
-		connexion.add(logoCompte);
+		logoCompte.setForeground(Color.WHITE);
+		nomComptePanel.add(logoCompte, BorderLayout.CENTER);
+		
+		boutonConnection = new JButton("Se Connecter");
+		
+		connexion.add(boutonConnection, BorderLayout.SOUTH);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(COULEUR_MASTER_FOND);
@@ -225,13 +246,19 @@ public class MasterFrame {
 		
 		setCompte();
 		
-		connexion.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				main.setVisible(false);
-				error.setVisible(false);
-				loginPage.setVisible(true);
+		boutonConnection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(user.getPermission()!=Permission.VISITEUR) {
+					//LOGGED IN
+					user.logout();
+					setCompte();
+					setMenu(TypeMenu.Visiteurs);
+				} else {
+					//NOT LOG IN
+					main.setVisible(false);
+					error.setVisible(false);
+					loginPage.setVisible(true);
+				}
 			}
 		});
 		
@@ -267,22 +294,27 @@ public class MasterFrame {
 	public void setCompte() {
 		switch(user.getPermission()) {
 		case ARBITRE:
+			boutonConnection.setText("Se deconnecter");
 			nomCompte.setText("Arbitre");
 			break;
 		case ECURIE:
+			boutonConnection.setText("Se deconnecter");
 			EcurieInfo e = (EcurieInfo)user.getInfo();
 			nomCompte.setText(e.getNom());
 			//logoCompte.setIcon(e.getLogo());
 			break;
 		case JOUEUR:
+			boutonConnection.setText("Se deconnecter");
 			JoueurInfo j = (JoueurInfo)user.getInfo();
 			nomCompte.setText(j.getNom());
 			//logoCompte.setIcon(j.getPhoto());
 			break;
 		case ORGANISATEUR:
+			boutonConnection.setText("Se deconnecter");
 			nomCompte.setText("Esporter");
 			break;
 		case VISITEUR:
+			boutonConnection.setText("Se connecter");
 			nomCompte.setText("Visiteur");
 			break;
 		default:
