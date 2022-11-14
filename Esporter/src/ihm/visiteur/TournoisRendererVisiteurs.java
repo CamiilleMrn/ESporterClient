@@ -38,7 +38,7 @@ public class TournoisRendererVisiteurs extends JPanel implements ListCellRendere
 	@Override
 	public Component getListCellRendererComponent(JList<? extends TournoiInfo> list, TournoiInfo value, int index,
 			boolean isSelected, boolean cellHasFocus) {
-		lbTournamentName.setText(value.getNom());
+		lbTournamentName.setText(value.getNom()+" - "+value.getDateInscription());
 		lbArrowIcon.setIcon(new ImageIcon(getClass().getResource("../images/Chevron.png")));
 		return this;
 	}

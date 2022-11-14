@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
@@ -20,7 +22,12 @@ import javax.swing.SwingConstants;
 
 import ihm.MasterFrame;
 import ihm.component.DatePicker;
+import ihm.joueur.TournoisRendererJoueurs;
 import types.Jeu;
+import types.Renomme;
+import types.TournoiInfo;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
 
 public class Calendrier extends JPanel{
 
@@ -29,8 +36,20 @@ public class Calendrier extends JPanel{
 	 */
 	private static final long serialVersionUID = -3595177930626198886L;
 	private JTextField TexteDate;
-	private JList<String> listTournoi;
+	private JList<TournoiInfo> listTournoi;
 	private JTextField txtCalendrierDesTournois;
+	
+	private JList<TournoiInfo> createListTournament() {
+        // create List model
+        DefaultListModel<TournoiInfo> model = new DefaultListModel<>();
+        // add item to model
+        model.addElement(new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        model.addElement(new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        // create JList with model
+        JList<TournoiInfo> list = new JList<TournoiInfo>(model);
+        list.setCellRenderer(new TournoisRendererVisiteurs());
+        return list;
+    }
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +71,7 @@ public class Calendrier extends JPanel{
 		root.setLayout(new BorderLayout());
 		add(root, BorderLayout.CENTER);
 		JPanel dummy = new JPanel();
-		dummy.setPreferredSize(new Dimension(5, 50));
+		dummy.setPreferredSize(new Dimension(5, 70));
 		dummy.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		dummy.setBorder(null);
 		root.setBackground(MasterFrame.COULEUR_MASTER_FOND);
@@ -63,7 +82,7 @@ public class Calendrier extends JPanel{
 		txtCalendrierDesTournois.setPreferredSize(new Dimension(5, 50));
 		txtCalendrierDesTournois.setEditable(false);
 		txtCalendrierDesTournois.setForeground(MasterFrame.COULEUR_TEXTE);
-		txtCalendrierDesTournois.setBorder(null);
+		txtCalendrierDesTournois.setBorder(new EmptyBorder(20, 0, 0, 0));
 		txtCalendrierDesTournois.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		txtCalendrierDesTournois.setText("Calendrier des tournois");
 		txtCalendrierDesTournois.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -72,20 +91,12 @@ public class Calendrier extends JPanel{
 		
 		
 		JScrollPane scrollPaneCenter = new JScrollPane();
-		scrollPaneCenter.setBorder(null);
+		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		root.add(scrollPaneCenter, BorderLayout.CENTER);
 		DefaultListModel<String> model = new DefaultListModel<String>();
-		listTournoi = new JList<String>();
-		listTournoi.setBorder(null);
-		listTournoi.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Tournoi 1", "Tournoi 2", "Tournoi 3", ""};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		listTournoi = createListTournament();
+		
 		scrollPaneCenter.add(listTournoi);
 		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		listTournoi.setForeground(MasterFrame.COULEUR_TEXTE);
@@ -95,6 +106,7 @@ public class Calendrier extends JPanel{
 
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(100, 100, 0, 100));
 		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		root.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 3, 200, 0));
