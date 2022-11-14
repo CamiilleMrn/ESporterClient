@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
 import java.awt.FlowLayout;
@@ -205,13 +206,10 @@ public class MasterFrame {
 		
 		
 		
-		JLabel logo = new JLabel("logo");
-		logo.setForeground(COULEUR_TEXTE);
+		JLabel logo = new JLabel();
+		logo.setIcon(new ImageIcon(getClass().getResource("./images/ESporterLogo.png")));
 		panelEsporter.add(logo);
 		
-		JLabel nomComp = new JLabel("Esporter");
-		nomComp.setForeground(COULEUR_TEXTE);
-		panelEsporter.add(nomComp);
 		
 		panelMenu = new JPanel();
 
