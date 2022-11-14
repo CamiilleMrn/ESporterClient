@@ -54,6 +54,7 @@ public class MasterFrame {
 	public static final Color COULEUR_MASTER = new Color(0,164,210);
 	public static final Color COULEUR_MASTER_FOND = new Color(96, 96, 96);
 	public static final Color COULEUR_TEXTE = Color.WHITE;
+	public static final Color COULEUR_MENU_FOND = Color.BLACK;
 	private JPanel panelMenu;
 	private ButtonGroup boutonGroupMenu;
 	private static MasterFrame instance;
@@ -161,7 +162,7 @@ public class MasterFrame {
 		
 		
 		header = new JPanel();
-		header.setBackground(COULEUR_MASTER_FOND);
+		header.setBackground(COULEUR_MENU_FOND);
 		main.add(header, BorderLayout.NORTH);
 		header.setLayout(new BorderLayout(0, 0));
 		
@@ -195,12 +196,12 @@ public class MasterFrame {
 		connexion.add(boutonConnection, BorderLayout.SOUTH);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(COULEUR_MASTER_FOND);
+		panel.setBackground(COULEUR_MENU_FOND);
 		header.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelEsporter = new JPanel();
-		panelEsporter.setBackground(COULEUR_MASTER_FOND);
+		panelEsporter.setBackground(COULEUR_MENU_FOND);
 		panel.add(panelEsporter, BorderLayout.WEST);
 		panelEsporter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -213,7 +214,7 @@ public class MasterFrame {
 		
 		panelMenu = new JPanel();
 
-		panelMenu.setBackground(COULEUR_MASTER_FOND);
+		panelMenu.setBackground(COULEUR_MENU_FOND);
 		FlowLayout flowLayout_1 = (FlowLayout) panelMenu.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.RIGHT);
 		flowLayout_1.setVgap(0);
@@ -222,12 +223,12 @@ public class MasterFrame {
 		
 		JPanel panelDummyRight = new JPanel();
 		panelDummyRight.setPreferredSize(new Dimension(35, 10));
-		panelDummyRight.setBackground(COULEUR_MASTER_FOND);
+		panelDummyRight.setBackground(COULEUR_MENU_FOND);
 		panel.add(panelDummyRight, BorderLayout.EAST);
 		
 		JPanel panelDummyTop = new JPanel();
 		panelDummyTop.setPreferredSize(new Dimension(10, 35));
-		panelDummyTop.setBackground(COULEUR_MASTER_FOND);
+		panelDummyTop.setBackground(COULEUR_MENU_FOND);
 		panel.add(panelDummyTop, BorderLayout.NORTH);
 		
 		
