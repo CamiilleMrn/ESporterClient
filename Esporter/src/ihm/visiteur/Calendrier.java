@@ -49,9 +49,7 @@ public class Calendrier extends JPanel{
         
         JPanel pan = new JPanel();
         pan.setLayout(new GridLayout(0, 1));
-		
-        TournoiInfo h = new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0);
-		pan.add(new TournoisRendererVisiteurs(h));
+
 		
 		//HashMap<Integer, TournoiInfo> map = Data.getCalendrier();
 
