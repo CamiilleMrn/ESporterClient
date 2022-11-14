@@ -7,10 +7,12 @@ import java.sql.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileSystemView;
 
 import ihm.component.DatePicker;
 import ihm.component.containerJoueur;
@@ -31,6 +33,7 @@ import javax.swing.SwingConstants;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.awt.FlowLayout;
 
 
@@ -67,6 +70,7 @@ public class AjouterunJoueur extends JDialog
 		private JTextField TexteDuNom;
 		private JTextField textPrenom;
 		private JButton TroisPoint3;
+		private JFileChooser choose = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		public static final Color COULEUR_MASTER = new Color(0,164,210);
 		public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
 		public static final Color COULEUR_TEXTE = Color.WHITE;
@@ -329,6 +333,12 @@ public class AjouterunJoueur extends JDialog
 		PhotoJoueur.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
+				 int res = choose.showOpenDialog(null);
+				 if (res == JFileChooser.APPROVE_OPTION) {
+				      File file = choose.getSelectedFile();
+				      System.out.println(file.getAbsolutePath());
+				    }
 			}
 		});
 		PhotoJoueur.setIcon(null);
