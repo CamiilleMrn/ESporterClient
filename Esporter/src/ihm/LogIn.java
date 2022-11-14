@@ -31,6 +31,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Color;
+import javax.swing.Box;
 
 public class LogIn extends JPanel{
 
@@ -169,11 +170,10 @@ public class LogIn extends JPanel{
 		ContainerConn.add(panel_10, gbc_panel_10);
 		
 		JButton btnNewButton = new JButton("<html><body><u>Mot de passe oublié ? </u></body></html>");
-		btnNewButton.setHorizontalTextPosition(SwingConstants.RIGHT);
+		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewButton.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnNewButton.setVerticalTextPosition(SwingConstants.TOP);
 		btnNewButton.setVerticalAlignment(SwingConstants.TOP);
-		btnNewButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnNewButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		btnNewButton.setMargin(new Insets(2, 14, 20, 16));
 		btnNewButton.setBorder(null);
@@ -191,114 +191,88 @@ public class LogIn extends JPanel{
 		gbc_lblNewLabel.gridy = 0;
 		ContainerConn.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JPanel panel_7 = new JPanel();
-		panel_7.setPreferredSize(new Dimension(5, 10));
-		panel_7.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		panel_7.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panel_7.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		containerLogin.add(panel_7);
-		GridBagLayout gbl_panel_7 = new GridBagLayout();
-		gbl_panel_7.columnWidths = new int[] {0, 0};
-		gbl_panel_7.rowHeights = new int[] {250, 0};
-		gbl_panel_7.columnWeights = new double[]{0.0, 0.0};
-		gbl_panel_7.rowWeights = new double[]{0.0, 0.0};
-		panel_7.setLayout(gbl_panel_7);
-		
-		JButton boutonConnexion = new JButton("  Connexion  \r\n");
-		boutonConnexion.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		boutonConnexion.setHorizontalTextPosition(SwingConstants.LEFT);
-		boutonConnexion.setHorizontalAlignment(SwingConstants.LEFT);
-		boutonConnexion.setIconTextGap(10);
-		boutonConnexion.setMargin(new Insets(14, 0, 14, 14));
-		boutonConnexion.setFont(new Font("Cambria", Font.PLAIN, 12));
-		boutonConnexion.setForeground(MasterFrame.COULEUR_TEXTE);
-		boutonConnexion.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(0, 164, 210), null, new Color(0, 164, 210), null));
-		boutonConnexion.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		boutonConnexion.setVerticalTextPosition(SwingConstants.BOTTOM);
-		boutonConnexion.setVerticalAlignment(SwingConstants.BOTTOM);
-		GridBagConstraints gbc_boutonConnexion = new GridBagConstraints();
-		gbc_boutonConnexion.insets = new Insets(0, 0, 5, 0);
-		gbc_boutonConnexion.gridheight = 0;
-		gbc_boutonConnexion.anchor = GridBagConstraints.SOUTH;
-		gbc_boutonConnexion.gridx = 1;
-		gbc_boutonConnexion.gridy = 0;
-		panel_7.add(boutonConnexion, gbc_boutonConnexion);
+		JPanel ContainerButtonConAnn = new JPanel();
+		ContainerButtonConAnn.setPreferredSize(new Dimension(5, 10));
+		ContainerButtonConAnn.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		ContainerButtonConAnn.setAlignmentX(Component.LEFT_ALIGNMENT);
+		ContainerButtonConAnn.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		containerLogin.add(ContainerButtonConAnn);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_1.setPreferredSize(new Dimension(100, 250));
+		panel_1.setPreferredSize(new Dimension(80, 230));
 		add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_2.setPreferredSize(new Dimension(100, 250));
+		panel_2.setPreferredSize(new Dimension(100, 230));
 		add(panel_2, BorderLayout.SOUTH);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_3.setPreferredSize(new Dimension(550, 100));
+		panel_3.setPreferredSize(new Dimension(500, 100));
 		panel_3.setSize(new Dimension(100, 100));
 		panel_3.setMinimumSize(new Dimension(100, 100));
 		add(panel_3, BorderLayout.WEST);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_4.setPreferredSize(new Dimension(550, 100));
+		panel_4.setPreferredSize(new Dimension(500, 100));
 		add(panel_4, BorderLayout.EAST);
+		GridBagLayout gbl_ContainerButtonConAnn = new GridBagLayout();
+		gbl_ContainerButtonConAnn.columnWidths = new int[] {0};
+		gbl_ContainerButtonConAnn.rowHeights = new int[]{21, 0, 0};
+		gbl_ContainerButtonConAnn.columnWeights = new double[]{1.0};
+		gbl_ContainerButtonConAnn.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		ContainerButtonConAnn.setLayout(gbl_ContainerButtonConAnn);
 		
-		constructeurBouttonConnexion(boutonConnexion);
+		JPanel panel = new JPanel();
+		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.anchor = GridBagConstraints.SOUTH;
+		gbc_panel.insets = new Insets(0, 0, 0, 5);
+		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 1;
+		ContainerButtonConAnn.add(panel, gbc_panel);
 		
 		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btnAnnuler.setVerticalAlignment(SwingConstants.BOTTOM);
-		btnAnnuler.setPreferredSize(new Dimension(93, 21));
+		btnAnnuler.setVerticalTextPosition(SwingConstants.TOP);
+		btnAnnuler.setVerticalAlignment(SwingConstants.TOP);
+		btnAnnuler.setPreferredSize(new Dimension(63, 21));
 		btnAnnuler.setMinimumSize(new Dimension(93, 21));
 		btnAnnuler.setMaximumSize(new Dimension(93, 21));
 		btnAnnuler.setMargin(new Insets(10, 0, 14, 14));
 		btnAnnuler.setIconTextGap(10);
-		btnAnnuler.setHorizontalTextPosition(SwingConstants.LEFT);
-		btnAnnuler.setHorizontalAlignment(SwingConstants.LEFT);
-		btnAnnuler.setFont(new Font("Cambria", Font.PLAIN, 12));
-		btnAnnuler.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		btnAnnuler.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		btnAnnuler.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnAnnuler.setForeground(MasterFrame.COULEUR_TEXTE);
-		btnAnnuler.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		GridBagConstraints gbc_btnAnnuler = new GridBagConstraints();
-		gbc_btnAnnuler.insets = new Insets(0, 0, 0, 5);
-		gbc_btnAnnuler.gridx = 0;
-		gbc_btnAnnuler.gridy = 1;
-		panel_7.add(btnAnnuler, gbc_btnAnnuler);
+		btnAnnuler.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnAnnuler.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		btnAnnuler.setBackground(new Color(96, 96, 96));
+		btnAnnuler.setAlignmentY(0.0f);
+		btnAnnuler.setAlignmentX(1.0f);
+		panel.add(btnAnnuler);
 		
-		constructeurBouttonAnnuler(btnAnnuler);
+		JButton boutonConnexion = new JButton("  Connexion  \r\n");
+		boutonConnexion.setVerticalTextPosition(SwingConstants.BOTTOM);
+		boutonConnexion.setVerticalAlignment(SwingConstants.BOTTOM);
+		boutonConnexion.setMargin(new Insets(14, 0, 14, 14));
+		boutonConnexion.setIconTextGap(10);
+		boutonConnexion.setHorizontalTextPosition(SwingConstants.LEFT);
+		boutonConnexion.setHorizontalAlignment(SwingConstants.LEFT);
+		boutonConnexion.setForeground(MasterFrame.COULEUR_TEXTE);
+		boutonConnexion.setFont(new Font("Cambria", Font.PLAIN, 12));
+		boutonConnexion.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		boutonConnexion.setBackground(new Color(96, 96, 96));
+		boutonConnexion.setAlignmentY(1.0f);
+		panel.add(boutonConnexion);
 	}
 	
 	public void constructeurBouttonAnnuler(JButton boutonAnnuler) {
-		boutonAnnuler.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MasterFrame master = MasterFrame.getInstance();
-				setVisible(false);
-				master.getMain().setVisible(true);
-			}
-		});
 	}
 	
 	public void constructeurBouttonConnexion(JButton boutonConnexion) {
-		boutonConnexion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MasterFrame master = MasterFrame.getInstance();
-				try {
-					String identifiant = txtSaisirIdentifiant.getText();
-					String psw = new String(txtSaisirPsw.getPassword());
-
-					master.getUser().login(identifiant, psw);
-					setVisible(false);
-					master.getMain().setVisible(true);
-				} catch (Exception e1) {
-					master.error(e1);
-				}
-			}
-		});
 	}
 
 }
