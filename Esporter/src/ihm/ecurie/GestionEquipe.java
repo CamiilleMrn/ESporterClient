@@ -42,6 +42,9 @@ public class GestionEquipe extends JPanel{
 	 * Create the application.
 	 */
 	public GestionEquipe() {
+		FlowLayout flowLayout = (FlowLayout) getLayout();
+		flowLayout.setVgap(4);
+		flowLayout.setHgap(4);
 		initialize();
 	}
 
@@ -49,14 +52,7 @@ public class GestionEquipe extends JPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		JScrollPane scrollPaneCenter = new JScrollPane();
-		add(scrollPaneCenter, BorderLayout.CENTER);
 		DefaultListModel<String> model = new DefaultListModel<String>();
-		listTournoi = new JList<String>();
-		listTournoi.setModel(model);
-		scrollPaneCenter.add(listTournoi);
-		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPaneCenter.setViewportView(listTournoi);
 		
 
 		
@@ -91,6 +87,13 @@ public class GestionEquipe extends JPanel{
 
 		
 		panel_4.add(AjouterUneEquipe);
+		JScrollPane scrollPaneCenter = new JScrollPane();
+		add(scrollPaneCenter, BorderLayout.CENTER);
+		listTournoi = new JList<String>();
+		listTournoi.setModel(model);
+		scrollPaneCenter.add(listTournoi);
+		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		scrollPaneCenter.setViewportView(listTournoi);
 		
 	}
 

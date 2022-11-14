@@ -3,6 +3,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 
@@ -13,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import ihm.component.DatePicker;
+import types.Jeu;
 
 import javax.swing.JList;
 import javax.swing.JScrollBar;
@@ -32,7 +35,9 @@ public class Calendrier extends JPanel{
 	private JList<String> langages;
 	private JTextField TexteDate;
 	private JList<String> listTournoi;
-
+	public static final Color COULEUR_MASTER = new Color(0,164,210);
+	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
+	public static final Color COULEUR_TEXTE = Color.WHITE;
 	/**
 	 * Create the application.
 	 */
@@ -44,19 +49,17 @@ public class Calendrier extends JPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		setLayout(new GridLayout(0, 1, 0, 0));
 		JScrollPane scrollPaneCenter = new JScrollPane();
-		add(scrollPaneCenter, BorderLayout.CENTER);
+		add(scrollPaneCenter);
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		listTournoi = new JList<String>();
 		listTournoi.setModel(model);
 		scrollPaneCenter.add(listTournoi);
 		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPaneCenter.setViewportView(listTournoi);
-		
-
-		
 		JPanel panel = new JPanel();
-		add(panel, BorderLayout.NORTH);
+		scrollPaneCenter.setColumnHeaderView(panel);
 		panel.setLayout(new GridLayout(0, 3, 200, 0));
 		
 		JPanel panel_2 = new JPanel();
@@ -87,14 +90,16 @@ public class Calendrier extends JPanel{
 		
 		JComboBox FiltrerLesJeux = new JComboBox();
 		FiltrerLesJeux.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		FiltrerLesJeux.setModel(new DefaultComboBoxModel(new String[] {"Rocket League", "League Of Legends", "Dota 2", "Overwatch 2", "Brawlala", "Super Smash Bros"}));
 		
 		panel_3.add(FiltrerLesJeux);
 	
 		JPanel panel_4 = new JPanel();
 		panel.add(panel_4);
+		panel.setBackground(COULEUR_MASTER_FOND);
+		panel_2.setBackground(COULEUR_MASTER_FOND);
+		panel_3.setBackground(COULEUR_MASTER_FOND);
+		panel_4.setBackground(COULEUR_MASTER_FOND);
 
-		
 		JButton CreerUnTournoi = new JButton("Creer un tournois");
 		CreerUnTournoi.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		CreerUnTournoi.addActionListener(new ActionListener() {
