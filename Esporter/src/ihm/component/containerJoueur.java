@@ -22,7 +22,7 @@ public class containerJoueur extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -6951669578094176958L;
-	private JoueurInfo joueur = new JoueurInfo(0,"ok","pap",null, null, null, null, "Francais");
+	private JoueurInfo joueur = new JoueurInfo(0,"ok","pap",null, null, null, null, 0,0);
 	private static final int WIDTH = 100;
 	private static final int HEIGHT = 150;
 	/**
@@ -74,7 +74,7 @@ public class containerJoueur extends JPanel {
 	@Override
 	public void paintComponents(Graphics g) {
 		super.paintComponents(g);
-		g.drawImage(joueur.getPhoto(), 0, 0, null);
+		g.drawImage(joueur.getPhotoTraite(), 0, 0, null);
 	}
 	
 	

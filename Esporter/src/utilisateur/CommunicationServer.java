@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import ihm.MasterFrame;
 import socket.Command;
 import socket.CommandName;
 import socket.Response;
@@ -21,6 +22,7 @@ import types.JoueurInfo;
 import types.Login;
 import types.Permission;
 import types.TournoiInfo;
+import types.exception.InvalidPermission;
 
 public class CommunicationServer implements Runnable{
 	
@@ -67,6 +69,8 @@ public class CommunicationServer implements Runnable{
 		}
 		try {
 			connect();
+			reconnection=1;
+			reconnectionTime=1;
 		} catch (IOException e2) {
 			reconnect();
 			
@@ -115,6 +119,11 @@ public class CommunicationServer implements Runnable{
 		send(c);
 	}
 	
+	public void logout() {
+		Command c = new Command(CommandName.LOGOUT, null);
+		send(c);
+	}
+	
 	public void receiveLogin(ResponseObject r) {
 		Permission perm = Permission.VISITEUR;
 		if (r.getInfo().containsKey(InfoID.Permission)) {
@@ -151,6 +160,9 @@ public class CommunicationServer implements Runnable{
 			user.getWaiting().setActualState(Response.ERROR_LOGIN);
 			break;
 		case ERROR_PERMISSION:
+			MasterFrame.getInstance().getError().setState(new InvalidPermission(), false);
+			System.out.println("ERREUR PERMISSION");
+			user.getWaiting().setActualState(Response.ERROR_PERMISSION);
 			break;
 		case LOGIN:
 			System.out.println("Receive login auth\n"+r);

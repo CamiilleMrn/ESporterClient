@@ -13,7 +13,7 @@ public class WaitingFor {
 	
 	public void waitFor(Response[] goal) {
 		this.goal = goal;
-		
+		actualState=null;
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
