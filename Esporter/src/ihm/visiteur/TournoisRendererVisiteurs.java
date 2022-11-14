@@ -13,15 +13,17 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
+import ihm.component.RendererCustom;
 import types.TournoiInfo;
 
-public class TournoisRendererVisiteurs extends JPanel implements ListCellRenderer<TournoiInfo> {
+public class TournoisRendererVisiteurs extends JPanel{
 	
 	private JLabel lbTournamentName = new JLabel();
 	private JLabel lbArrowIcon = new JLabel();
+	private TournoiInfo tournoi;
 	
-	
-	public TournoisRendererVisiteurs() {
+	public TournoisRendererVisiteurs(TournoiInfo tournoi) {
+		this.tournoi = tournoi;
 		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
 		setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		setLayout(new BorderLayout(5,5));
@@ -32,16 +34,11 @@ public class TournoisRendererVisiteurs extends JPanel implements ListCellRendere
 		panelText.add(lbTournamentName);
 		add(panelText, BorderLayout.WEST);
 		add(lbArrowIcon, BorderLayout.EAST);
+		lbTournamentName.setText(this.tournoi.getNom()+" - "+this.tournoi.getDateInscription());
+		lbArrowIcon.setIcon(new ImageIcon(getClass().getResource("../images/Chevron.png")));
 		
 	}
 
-	@Override
-	public Component getListCellRendererComponent(JList<? extends TournoiInfo> list, TournoiInfo value, int index,
-			boolean isSelected, boolean cellHasFocus) {
-		lbTournamentName.setText(value.getNom()+" - "+value.getDateInscription());
-		lbArrowIcon.setIcon(new ImageIcon(getClass().getResource("../images/Chevron.png")));
-		return this;
-	}
 
 
 }

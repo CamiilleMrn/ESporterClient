@@ -6,8 +6,11 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
@@ -22,6 +25,7 @@ import javax.swing.SwingConstants;
 
 import ihm.MasterFrame;
 import ihm.component.DatePicker;
+import ihm.component.listeTournoiCalendrier;
 import ihm.joueur.TournoisRendererJoueurs;
 import types.Jeu;
 import types.Renomme;
@@ -36,20 +40,32 @@ public class Calendrier extends JPanel{
 	 */
 	private static final long serialVersionUID = -3595177930626198886L;
 	private JTextField TexteDate;
-	private JList<TournoiInfo> listTournoi;
 	private JTextField txtCalendrierDesTournois;
 	
-	private JList<TournoiInfo> createListTournament() {
-        // create List model
-        DefaultListModel<TournoiInfo> model = new DefaultListModel<>();
-        // add item to model
-        model.addElement(new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        model.addElement(new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        // create JList with model
-        JList<TournoiInfo> list = new JList<TournoiInfo>(model);
-        list.setCellRenderer(new TournoisRendererVisiteurs());
-        return list;
-    }
+	private JPanel createListTournament() {
+		HashMap<Integer, TournoiInfo> map = new HashMap<>();
+        map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        
+        JPanel pan = new JPanel();
+        pan.setLayout(new GridLayout(0, 1));
+		
+        TournoiInfo h = new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0);
+		pan.add(new TournoisRendererVisiteurs(h));
+		
+		//HashMap<Integer, TournoiInfo> map = Data.getCalendrier();
+
+		Iterator<TournoiInfo> ite = map.values().iterator();
+		while (ite.hasNext()) {
+			
+			TournoiInfo t = ite.next();
+			System.out.println(t);
+			pan.add(new TournoisRendererVisiteurs(t));
+			
+		}
+		return pan;
+	
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -94,16 +110,12 @@ public class Calendrier extends JPanel{
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		root.add(scrollPaneCenter, BorderLayout.CENTER);
-		DefaultListModel<String> model = new DefaultListModel<String>();
-		listTournoi = createListTournament();
+		JPanel panListe = createListTournament();
+		scrollPaneCenter.add(panListe);
 		
-		scrollPaneCenter.add(listTournoi);
-		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		listTournoi.setForeground(MasterFrame.COULEUR_TEXTE);
-		listTournoi.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		scrollPaneCenter.setViewportView(listTournoi);
+		TournoiInfo h = new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0);
+		scrollPaneCenter.add(new TournoisRendererVisiteurs(h));
 		
-
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(100, 100, 0, 100));
