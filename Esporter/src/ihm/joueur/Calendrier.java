@@ -16,8 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.UIManager;
 
+import ihm.MasterFrame;
 import ihm.component.DatePicker;
 import types.Jeu;
+import types.Renomme;
+import types.TournoiInfo;
 
 import javax.swing.JList;
 import javax.swing.JScrollBar;
@@ -30,9 +33,13 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.util.ArrayList;
+
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class Calendrier extends JPanel{
 	/**
@@ -40,11 +47,20 @@ public class Calendrier extends JPanel{
 	 */
 	private static final long serialVersionUID = -5755591667748928351L;
 	private JTextField TexteDate;
-	private JList<String> listTournoi;
-	public static final Color COULEUR_MASTER = new Color(0,164,210);
-	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
-	public static final Color COULEUR_TEXTE = Color.WHITE;
+	private JList<TournoiInfo> listTournoi;
 	private JTextField txtCalendrierDesTournois;
+	
+	private JList<TournoiInfo> createListTournament() {
+        // create List model
+        DefaultListModel<TournoiInfo> model = new DefaultListModel<>();
+        // add item to model
+        model.addElement(new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        model.addElement(new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        // create JList with model
+        JList<TournoiInfo> list = new JList<TournoiInfo>(model);
+        list.setCellRenderer(new TournoisRendererJoueurs());
+        return list;
+    }
 	/**
 	 * Launch the application.
 	 */
@@ -63,53 +79,47 @@ public class Calendrier extends JPanel{
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		JPanel root = new JPanel();
+		root.setBorder(new EmptyBorder(0, 100, 0, 100));
 		root.setLayout(new BorderLayout());
 		add(root, BorderLayout.CENTER);
-		JPanel dummy = new JPanel();
-		dummy.setPreferredSize(new Dimension(5, 50));
-		dummy.setBackground(COULEUR_MASTER_FOND);
-		dummy.setBorder(null);
-		root.setBackground(COULEUR_MASTER_FOND);
-		add(dummy, BorderLayout.NORTH);
+		JPanel titrepanel = new JPanel();
+		titrepanel.setPreferredSize(new Dimension(5, 50));
+		titrepanel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		titrepanel.setBorder(null);
+		root.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		add(titrepanel, BorderLayout.NORTH);
 		
 		txtCalendrierDesTournois = new JTextField();
 		txtCalendrierDesTournois.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCalendrierDesTournois.setPreferredSize(new Dimension(5, 50));
 		txtCalendrierDesTournois.setEditable(false);
-		txtCalendrierDesTournois.setForeground(COULEUR_TEXTE);
+		txtCalendrierDesTournois.setForeground(MasterFrame.COULEUR_TEXTE);
 		txtCalendrierDesTournois.setBorder(null);
-		txtCalendrierDesTournois.setBackground(COULEUR_MASTER_FOND);
+		txtCalendrierDesTournois.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		txtCalendrierDesTournois.setText("Calendrier des tournois");
 		txtCalendrierDesTournois.setFont(new Font("Tahoma", Font.BOLD, 20));
-		dummy.add(txtCalendrierDesTournois);
+		titrepanel.add(txtCalendrierDesTournois);
 		txtCalendrierDesTournois.setColumns(20);
 		
 		
 		JScrollPane scrollPaneCenter = new JScrollPane();
-		scrollPaneCenter.setBorder(null);
+		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		root.add(scrollPaneCenter, BorderLayout.CENTER);
 		DefaultListModel<String> model = new DefaultListModel<String>();
-		listTournoi = new JList<String>();
-		listTournoi.setBorder(null);
-		listTournoi.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Tournoi 1", "Tournoi 2", "Tournoi 3", ""};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		listTournoi = createListTournament();
+		
 		scrollPaneCenter.add(listTournoi);
 		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		listTournoi.setForeground(COULEUR_TEXTE);
-		listTournoi.setBackground(COULEUR_MASTER_FOND);
+		listTournoi.setForeground(MasterFrame.COULEUR_TEXTE);
+		listTournoi.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setViewportView(listTournoi);
 		
 
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(COULEUR_MASTER_FOND);
+		panel.setBorder(new EmptyBorder(100, 100, 0, 100));
+		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		root.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 3, 200, 0));
 		

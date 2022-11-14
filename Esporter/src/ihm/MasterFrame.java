@@ -51,7 +51,7 @@ public class MasterFrame {
 
 	private JFrame frame;
 	public static final Color COULEUR_MASTER = new Color(0,164,210);
-	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
+	public static final Color COULEUR_MASTER_FOND = new Color(96, 96, 96);
 	public static final Color COULEUR_TEXTE = Color.WHITE;
 	private JPanel panelMenu;
 	private ButtonGroup boutonGroupMenu;
