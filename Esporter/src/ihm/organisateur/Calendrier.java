@@ -30,6 +30,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingConstants;
 
 public class Calendrier extends JPanel{
 	private JList<String> langages;
@@ -38,6 +39,7 @@ public class Calendrier extends JPanel{
 	public static final Color COULEUR_MASTER = new Color(0,164,210);
 	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
 	public static final Color COULEUR_TEXTE = Color.WHITE;
+	private JTextField txtCalendrier;
 	/**
 	 * Create the application.
 	 */
@@ -49,9 +51,9 @@ public class Calendrier extends JPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setLayout(new GridLayout(0, 1, 0, 0));
+		setLayout(new BorderLayout(0, 0));
 		JScrollPane scrollPaneCenter = new JScrollPane();
-		add(scrollPaneCenter);
+		add(scrollPaneCenter, BorderLayout.CENTER);
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		listTournoi = new JList<String>();
 		listTournoi.setModel(model);
@@ -59,19 +61,23 @@ public class Calendrier extends JPanel{
 		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPaneCenter.setViewportView(listTournoi);
 		JPanel panel = new JPanel();
-		scrollPaneCenter.setColumnHeaderView(panel);
+		
 		panel.setLayout(new GridLayout(0, 3, 200, 0));
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(COULEUR_MASTER_FOND);
 		panel.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		TexteDate = new JTextField();
+		TexteDate.setText("Date du tournoi");
 		TexteDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_2.add(TexteDate, BorderLayout.CENTER);
 		TexteDate.setColumns(10);
 		
 		JButton TroisPoint = new JButton("...");
+		TroisPoint.setBackground(COULEUR_MASTER);
+		TroisPoint.setForeground(COULEUR_TEXTE);
 		TroisPoint.addActionListener(new ActionListener() {
 				//performed action
 				public void actionPerformed(ActionEvent arg0) 
@@ -101,7 +107,8 @@ public class Calendrier extends JPanel{
 		panel_4.setBackground(COULEUR_MASTER_FOND);
 
 		JButton CreerUnTournoi = new JButton("Creer un tournois");
-		CreerUnTournoi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		CreerUnTournoi.setBackground(COULEUR_MASTER);
+		CreerUnTournoi.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		CreerUnTournoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -110,6 +117,35 @@ public class Calendrier extends JPanel{
 		
 		panel_4.add(CreerUnTournoi);
 		
+		JPanel panel_1 = new JPanel();
+		add(panel_1, BorderLayout.NORTH);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		panel_1.add(panel, BorderLayout.SOUTH);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(null);
+		panel_5.setBackground(COULEUR_MASTER_FOND);
+		
+		panel_1.add(panel_5, BorderLayout.CENTER);
+		panel_5.setLayout(new BorderLayout(0, 0));
+		
+		txtCalendrier = new JTextField();
+		txtCalendrier.setBorder(null);
+		txtCalendrier.setBackground(COULEUR_MASTER_FOND);
+		txtCalendrier.setForeground(COULEUR_TEXTE);
+		txtCalendrier.setEditable(false);
+		txtCalendrier.setFont(new Font("Tahoma", Font.BOLD, 25));
+		txtCalendrier.setText("CALENDRIER");
+		txtCalendrier.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_5.add(txtCalendrier);
+		txtCalendrier.setColumns(10);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(null);
+		panel_6.setBackground(COULEUR_MASTER_FOND);
+		FlowLayout flowLayout = (FlowLayout) panel_6.getLayout();
+		flowLayout.setVgap(15);
+		panel_1.add(panel_6, BorderLayout.NORTH);
 	}
 
 }
