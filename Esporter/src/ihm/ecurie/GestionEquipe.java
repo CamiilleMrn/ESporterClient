@@ -76,7 +76,7 @@ public class GestionEquipe extends JPanel{
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JComboBox comboBox = new JComboBox(Jeu.values());
+		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		panel_3.add(comboBox);
@@ -94,6 +94,7 @@ public class GestionEquipe extends JPanel{
 		AjouterUneEquipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MasterFrame.getInstance().setPanel(new AjouterEquipe((Jeu)comboBox.getSelectedItem()));
+				MasterFrame.getInstance().getMain().setVisible(true);
 			}
 		});
 

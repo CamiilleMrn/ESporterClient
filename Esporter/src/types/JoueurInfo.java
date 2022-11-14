@@ -42,13 +42,8 @@ public class JoueurInfo implements Infos, Serializable {
 		this.nationalite = nationalite;
 		this.id_equipe = id_equipe;
 		
-		try {
-			this.photo = ImageIO.read(photoBlob.getBinaryStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		//this.photo = ImageIO.read(photoBlob.getBinaryStream());
+		this.photo=null;
 	}
 	
 	public int getId_equipe() {
