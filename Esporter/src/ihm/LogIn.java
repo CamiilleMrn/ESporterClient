@@ -254,6 +254,8 @@ public class LogIn extends JPanel{
 		btnAnnuler.setAlignmentX(1.0f);
 		panel.add(btnAnnuler);
 		
+		constructeurBouttonAnnuler(btnAnnuler);
+		
 		JButton boutonConnexion = new JButton("  Connexion  \r\n");
 		boutonConnexion.setVerticalTextPosition(SwingConstants.BOTTOM);
 		boutonConnexion.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -267,12 +269,37 @@ public class LogIn extends JPanel{
 		boutonConnexion.setBackground(new Color(96, 96, 96));
 		boutonConnexion.setAlignmentY(1.0f);
 		panel.add(boutonConnexion);
+		
+		constructeurBouttonConnexion(boutonConnexion);
+		
 	}
 	
 	public void constructeurBouttonAnnuler(JButton boutonAnnuler) {
+		boutonAnnuler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MasterFrame master = MasterFrame.getInstance();
+				setVisible(false);
+                master.getMain().setVisible(true);
+			}
+		});
 	}
 	
 	public void constructeurBouttonConnexion(JButton boutonConnexion) {
+		boutonConnexion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                MasterFrame master = MasterFrame.getInstance();
+                try {
+                    String identifiant = txtSaisirIdentifiant.getText();
+                    String psw = new String(txtSaisirPsw.getPassword());
+
+                    master.getUser().login(identifiant, psw);
+                    setVisible(false);
+                    master.getMain().setVisible(true);
+                } catch (Exception e1) {
+                    master.error(e1);
+                }
+            }
+        });
 	}
 
 }
