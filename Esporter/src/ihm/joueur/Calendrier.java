@@ -41,9 +41,6 @@ public class Calendrier extends JPanel{
 	private static final long serialVersionUID = -5755591667748928351L;
 	private JTextField TexteDate;
 	private JList<String> listTournoi;
-	public static final Color COULEUR_MASTER = new Color(0,164,210);
-	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
-	public static final Color COULEUR_TEXTE = Color.WHITE;
 	private JTextField txtCalendrierDesTournois;
 	/**
 	 * Launch the application.

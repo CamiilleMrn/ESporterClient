@@ -32,6 +32,7 @@ public class TournoiInfo implements Infos, Serializable {
 		this.id = id;
 	}
 
+
 	public Date getDateInscription() {
 		return dateInscription;
 	}
