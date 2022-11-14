@@ -30,6 +30,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
+import java.awt.Color;
 
 public class LogIn extends JPanel{
 
@@ -198,9 +199,9 @@ public class LogIn extends JPanel{
 		containerLogin.add(panel_7);
 		GridBagLayout gbl_panel_7 = new GridBagLayout();
 		gbl_panel_7.columnWidths = new int[] {0, 0};
-		gbl_panel_7.rowHeights = new int[] {250};
+		gbl_panel_7.rowHeights = new int[] {250, 0};
 		gbl_panel_7.columnWeights = new double[]{0.0, 0.0};
-		gbl_panel_7.rowWeights = new double[]{0.0};
+		gbl_panel_7.rowWeights = new double[]{0.0, 0.0};
 		panel_7.setLayout(gbl_panel_7);
 		
 		JButton boutonConnexion = new JButton("  Connexion  \r\n");
@@ -211,11 +212,12 @@ public class LogIn extends JPanel{
 		boutonConnexion.setMargin(new Insets(14, 0, 14, 14));
 		boutonConnexion.setFont(new Font("Cambria", Font.PLAIN, 12));
 		boutonConnexion.setForeground(MasterFrame.COULEUR_TEXTE);
-		boutonConnexion.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		boutonConnexion.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(0, 164, 210), null, new Color(0, 164, 210), null));
 		boutonConnexion.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		boutonConnexion.setVerticalTextPosition(SwingConstants.BOTTOM);
 		boutonConnexion.setVerticalAlignment(SwingConstants.BOTTOM);
 		GridBagConstraints gbc_boutonConnexion = new GridBagConstraints();
+		gbc_boutonConnexion.insets = new Insets(0, 0, 5, 0);
 		gbc_boutonConnexion.gridheight = 0;
 		gbc_boutonConnexion.anchor = GridBagConstraints.SOUTH;
 		gbc_boutonConnexion.gridx = 1;
@@ -246,8 +248,40 @@ public class LogIn extends JPanel{
 		add(panel_4, BorderLayout.EAST);
 		
 		constructeurBouttonConnexion(boutonConnexion);
+		
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnAnnuler.setVerticalAlignment(SwingConstants.BOTTOM);
+		btnAnnuler.setPreferredSize(new Dimension(93, 21));
+		btnAnnuler.setMinimumSize(new Dimension(93, 21));
+		btnAnnuler.setMaximumSize(new Dimension(93, 21));
+		btnAnnuler.setMargin(new Insets(10, 0, 14, 14));
+		btnAnnuler.setIconTextGap(10);
+		btnAnnuler.setHorizontalTextPosition(SwingConstants.LEFT);
+		btnAnnuler.setHorizontalAlignment(SwingConstants.LEFT);
+		btnAnnuler.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnAnnuler.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		btnAnnuler.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		btnAnnuler.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnAnnuler.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		GridBagConstraints gbc_btnAnnuler = new GridBagConstraints();
+		gbc_btnAnnuler.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAnnuler.gridx = 0;
+		gbc_btnAnnuler.gridy = 1;
+		panel_7.add(btnAnnuler, gbc_btnAnnuler);
+		
+		constructeurBouttonAnnuler(btnAnnuler);
 	}
 	
+	public void constructeurBouttonAnnuler(JButton boutonAnnuler) {
+		boutonAnnuler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MasterFrame master = MasterFrame.getInstance();
+				setVisible(false);
+				master.getMain().setVisible(true);
+			}
+		});
+	}
 	
 	public void constructeurBouttonConnexion(JButton boutonConnexion) {
 		boutonConnexion.addActionListener(new ActionListener() {
