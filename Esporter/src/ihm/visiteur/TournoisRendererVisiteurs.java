@@ -13,7 +13,6 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
-import ihm.component.RendererCustom;
 import types.TournoiInfo;
 
 public class TournoisRendererVisiteurs extends JPanel{

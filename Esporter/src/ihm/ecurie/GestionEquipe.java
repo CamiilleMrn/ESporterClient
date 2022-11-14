@@ -94,6 +94,7 @@ public class GestionEquipe extends JPanel{
 		AjouterUneEquipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MasterFrame.getInstance().setPanel(new AjouterEquipe((Jeu)comboBox.getSelectedItem()));
+				MasterFrame.getInstance().getMain().setVisible(true);
 			}
 		});
 
