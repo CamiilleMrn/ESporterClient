@@ -2,6 +2,7 @@ package types;
 
 import java.awt.Image;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.ArrayList;
 
 public class EcurieInfo implements Infos, Serializable {
@@ -11,18 +12,16 @@ public class EcurieInfo implements Infos, Serializable {
 	 */
 	private static final long serialVersionUID = 3925659840033195163L;
 	private String nom;
-	private Image logo;
+	private Blob logo;
 	private String diminutif;
-	private String nationalite;
 	private ArrayList<EquipeInfo> equipes;
 	private ArrayList<Titre> palmares;
 	private int id;
 	
-	public EcurieInfo(String nom, Image logo, String diminutif, String nationalite, int id) {
+	public EcurieInfo(String nom, Blob logo, String diminutif, int id) {
 		this.nom = nom;
 		this.logo = logo;
 		this.diminutif = diminutif;
-		this.nationalite = nationalite;
 		this.id = id;
 	}
 	
@@ -34,7 +33,7 @@ public class EcurieInfo implements Infos, Serializable {
 		return nom;
 	}
 
-	public Image getLogo() {
+	public Blob getLogo() {
 		return logo;
 	}
 
@@ -42,9 +41,6 @@ public class EcurieInfo implements Infos, Serializable {
 		return diminutif;
 	}
 
-	public String getNationalite() {
-		return nationalite;
-	}
 
 	public ArrayList<EquipeInfo> getEquipes() {
 		return equipes;

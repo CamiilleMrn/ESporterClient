@@ -21,57 +21,73 @@ public class ErrorPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 972390881488216598L;
 	private JFrame frame;
-	private Exception e;
+	private volatile Exception e;
 	private JLabel texte;
 	private JCircleProgressBar progressBar;
-	private JButton valider;
 	private Thread t;
 	private boolean persistent;
 	private JPanel panelDummy1;
 	private JPanel panelDummy2;
 	private JPanel panelDummy3;
 	private JPanel panelDummy4;
+	private ErrorPanel instance;
+	private JPanel panel_1;
+	private JButton btnContinuer;
+	private JPanel panel;
+	private JLabel Titre;
 	
 	public ErrorPanel() {
 		this.setVisible(false);
 		initalize();
-		
+		e = null;
+		this.instance = this;
 		t = new Thread(new Runnable() {
 			
 			
 
 			@Override
 			public void run() {
+				
 				while(true) {
-					if (e==null) {
-						try {
-							System.out.println("Thread error sleep");
-							wait();
-							System.out.println("Thread error Wake up");
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}
-					} else {
-						
-						if(persistent) {
+					synchronized (instance) {
+						if (e==null) {
+							try {
+								System.out.println("Thread error sleep");
+								instance.wait();
+								System.out.println("Thread error Wake up");
+							} catch (InterruptedException e1) {
+								e1.printStackTrace();
+							}
+						} else {
+							
+							if(persistent) {
+								
+							}
+							try {
+								Thread.sleep(10);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							
 						}
-						
 					}
 				}
 				
 			}
 		}); 
+		t.start();
 	}
 	
-	public void setException(Exception e) {
-		this.e = e;
-		System.out.println("Thread error notify");
-		this.t.notify();
-	}
-	
-	public void stop() {
-		e=null;
+	private void setException(Exception e) {
+		synchronized (this) {
+			this.e = e;
+			if (e!=null) {
+				System.out.println("Thread error notify");
+				this.notify();
+			}
+		}
+		
 	}
 	
 	public void setTexte(String s) {
@@ -82,11 +98,12 @@ public class ErrorPanel extends JPanel{
 		this.persistent = persistent;
 		if(persistent) {
 			progressBar.setVisible(true);
-			valider.setVisible(false);
+			btnContinuer.setVisible(false);
 		} else {
 			progressBar.setVisible(false);
-			valider.setVisible(true);
+			btnContinuer.setVisible(true);
 		}
+		setTexte(e.getMessage());
 		setException(e);
 	}
 	
@@ -95,18 +112,21 @@ public class ErrorPanel extends JPanel{
 		setPreferredSize(new Dimension(1920,1080));
 		setLayout(new BorderLayout(0, 0));
 		//setBounds(0, 0, frame.getWidth(), frame.getHeight());
-		Color c = new Color(0,164,210,150);
-		
+		Color dark = MasterFrame.COULEUR_MASTER_FOND.darker();
+		Color c = new Color(dark.getRed(),dark.getGreen(), dark.getBlue(),150);
+		setOpaque(true);
 		JPanel panel = new JPanel();
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel.setForeground(MasterFrame.COULEUR_TEXTE);
+		panel.setOpaque(false);
 		
 		panelDummy1 = new JPanel();
 		panelDummy1.setPreferredSize(new Dimension(1920, 400));
 		add(panelDummy1, BorderLayout.NORTH);
 		
-		
+		setBackground(c);
 		
 		panelDummy2 = new JPanel();
 		panelDummy2.setPreferredSize(new Dimension(1920, 400));
@@ -125,10 +145,13 @@ public class ErrorPanel extends JPanel{
 		panelDummy3.setBackground(c);
 		panelDummy4.setBackground(c);
 		
-		JLabel Titre = new JLabel("Erreur");
+		Titre = new JLabel("Erreur");
+		
+		Titre.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		Titre.setForeground(MasterFrame.COULEUR_TEXTE);
 		Titre.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		Titre.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(Titre);
+		panel.add(Titre, BorderLayout.NORTH);
 		
 		JPanel panelTexte = new JPanel();
 		panel.add(panelTexte);
@@ -137,18 +160,28 @@ public class ErrorPanel extends JPanel{
 		texte = new JLabel();
 		panelTexte.add(texte);
 		panelTexte.add(progressBar);
+		texte.setForeground(MasterFrame.COULEUR_TEXTE);
+		panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.SOUTH);
 		
-		valider = new JButton();
-		panel.add(valider);
-		ErrorPanel pan = this;
-		valider.addActionListener(new ActionListener() {
-			
-			@Override
+		btnContinuer = new JButton();
+		btnContinuer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pan.setVisible(false);
-				
+				MasterFrame f = MasterFrame.getInstance();
+				f.getError().setVisible(false);
+				setException(null);
 			}
 		});
+		btnContinuer.setText("Continuer");
+		panel_1.add(btnContinuer);
+		
+		panelTexte.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTexte.setForeground(MasterFrame.COULEUR_TEXTE);
+		
+		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_1.setForeground(MasterFrame.COULEUR_TEXTE);
+		
+		
 		
 		
 		
