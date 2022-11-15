@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.plaf.ComboBoxUI;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -20,6 +25,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 
 import ihm.MasterFrame;
+import ihm.component.MainComboBoxUI;
 import ihm.component.containerJoueur;
 import types.Jeu;
 
@@ -49,7 +55,7 @@ public class AjouterEquipe extends JPanel{
 		setPreferredSize(MasterFrame.getInstance().getCenterDimension());
 		JFrame frame = MasterFrame.getInstance().getFrame(); 
 		JPanel panelMain = new JPanel();
-		panelMain.setBackground(Color.DARK_GRAY);
+		panelMain.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		add(panelMain, BorderLayout.CENTER);
 		GridBagLayout gbl_panelMain = new GridBagLayout();
 		int cote = (int) (frame.getWidth()*0.15);
@@ -64,7 +70,7 @@ public class AjouterEquipe extends JPanel{
 		
 		JLabel TitrePage = new JLabel("Ajouter une \u00E9quipe");
 		TitrePage.setFont(new Font("Cambria", Font.PLAIN, 27));
-		TitrePage.setForeground(Color.WHITE);
+		TitrePage.setForeground(MasterFrame.COULEUR_TEXTE);
 		GridBagConstraints gbc_TitrePage = new GridBagConstraints();
 		gbc_TitrePage.anchor = GridBagConstraints.SOUTH;
 		gbc_TitrePage.insets = new Insets(0, 0, 5, 5);
@@ -73,7 +79,7 @@ public class AjouterEquipe extends JPanel{
 		panelMain.add(TitrePage, gbc_TitrePage);
 		
 		JPanel panelJeux = new JPanel();
-		panelJeux.setBackground(Color.DARK_GRAY);
+		panelJeux.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		GridBagConstraints gbc_panelJeux = new GridBagConstraints();
 		gbc_panelJeux.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_panelJeux.insets = new Insets(0, 0, 5, 5);
@@ -82,6 +88,11 @@ public class AjouterEquipe extends JPanel{
 		panelMain.add(panelJeux, gbc_panelJeux);
 		
 		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
+		comboBox.setUI((ComboBoxUI) MainComboBoxUI.createUI(comboBox));
+		comboBox.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+		comboBox.setFont(new Font("Cambria", Font.PLAIN, 15));
+		comboBox.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		comboBox.setForeground(MasterFrame.COULEUR_TEXTE);
 		comboBox.setSelectedItem(jeu);
 		panelJeux.add(comboBox);
 		comboBox.addActionListener(new ActionListener() {
@@ -96,7 +107,7 @@ public class AjouterEquipe extends JPanel{
 		
 		JPanel panelJoueur = new JPanel();
 		panelJoueur.setBorder(null);
-		panelJoueur.setBackground(Color.DARK_GRAY);
+		panelJoueur.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		GridBagConstraints gbc_panelJoueur = new GridBagConstraints();
 		gbc_panelJoueur.fill = GridBagConstraints.HORIZONTAL;
 		gbc_panelJoueur.insets = new Insets(0, 0, 5, 5);
@@ -112,7 +123,7 @@ public class AjouterEquipe extends JPanel{
 		}
 		
 		JPanel panelValider = new JPanel();
-		panelValider.setBackground(Color.DARK_GRAY);
+		panelValider.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		GridBagConstraints gbc_panelValider = new GridBagConstraints();
 		gbc_panelValider.insets = new Insets(0, 0, 0, 5);
 		gbc_panelValider.anchor = GridBagConstraints.NORTHEAST;
@@ -121,6 +132,17 @@ public class AjouterEquipe extends JPanel{
 		panelMain.add(panelValider, gbc_panelValider);
 		
 		JButton btnValider = new JButton("Valider");
+		btnValider.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnValider.setVerticalAlignment(SwingConstants.BOTTOM);
+		btnValider.setMargin(new Insets(14, 0, 14, 14));
+		btnValider.setIconTextGap(10);
+		btnValider.setHorizontalTextPosition(SwingConstants.LEFT);
+		btnValider.setHorizontalAlignment(SwingConstants.LEFT);
+		btnValider.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnValider.setFont(new Font("Cambria", Font.PLAIN, 22));
+		btnValider.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		btnValider.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		btnValider.setAlignmentY(1.0f);
 		panelValider.add(btnValider);
 		System.out.println(this.getSize().width);
 		

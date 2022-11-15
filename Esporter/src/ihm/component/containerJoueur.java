@@ -7,6 +7,7 @@ import java.awt.Image;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import ihm.MasterFrame;
 import ihm.ecurie.AjouterunJoueur;
 import types.JoueurInfo;
 
@@ -31,7 +32,7 @@ public class containerJoueur extends JPanel {
 	public containerJoueur() {
 		setBorder(new LineBorder(SystemColor.textHighlight, 2, true));
 		setSize(WIDTH, HEIGHT);
-		setBackground(Color.DARK_GRAY);
+		setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {WIDTH};
 		gridBagLayout.rowHeights = new int[] {HEIGHT-HEIGHT/4, HEIGHT/4};
