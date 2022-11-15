@@ -13,8 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.border.MatteBorder;
+import javax.swing.plaf.ComboBoxUI;
 
 import ihm.MasterFrame;
+import ihm.component.MainComboBoxUI;
 import ihm.ecurie.gestionEquipe.AjouterEquipe;
 import types.Jeu;
 
@@ -41,9 +44,7 @@ public class GestionEquipe extends JPanel{
 	private JList<String> langages;
 	private JList<String> listTournoi;
 	private JTextField txtGestionDesquipes;
-	public static final Color COULEUR_MASTER = new Color(0,164,210);
-	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
-	public static final Color COULEUR_TEXTE = Color.WHITE;
+	
 	/**
 	 * Create the application.
 	 */
@@ -64,10 +65,10 @@ public class GestionEquipe extends JPanel{
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(COULEUR_MASTER_FOND);
+		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(null);
-		panel_1.setBackground(COULEUR_MASTER_FOND);
+		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panel.add(panel_1);
 		panel_2.add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new GridLayout(0, 3, 200, 0));
@@ -77,18 +78,22 @@ public class GestionEquipe extends JPanel{
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBox.setUI((ComboBoxUI) MainComboBoxUI.createUI(comboBox));
+		comboBox.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+		comboBox.setFont(new Font("Cambria", Font.PLAIN, 15));
+		comboBox.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		comboBox.setForeground(MasterFrame.COULEUR_TEXTE);
 		
 		panel_3.add(comboBox);
 	
 		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(COULEUR_MASTER_FOND);
+		panel_4.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panel.add(panel_4);
 
 		
 		JButton AjouterUneEquipe = new JButton("Ajouter une \u00E9quipe");
-		AjouterUneEquipe.setBackground(COULEUR_MASTER);
-		AjouterUneEquipe.setForeground(COULEUR_TEXTE);
+		AjouterUneEquipe.setBackground(MasterFrame.COULEUR_MASTER);
+		AjouterUneEquipe.setForeground(MasterFrame.COULEUR_TEXTE);
 
 		AjouterUneEquipe.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		AjouterUneEquipe.addActionListener(new ActionListener() {
@@ -103,11 +108,11 @@ public class GestionEquipe extends JPanel{
 		
 		JPanel panel_5 = new JPanel();
 		panel_2.add(panel_5, BorderLayout.CENTER);
-		panel_5.setBackground(COULEUR_MASTER_FOND);
+		panel_5.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		txtGestionDesquipes = new JTextField();
 		txtGestionDesquipes.setBorder(null);
-		txtGestionDesquipes.setBackground(COULEUR_MASTER_FOND);
-		txtGestionDesquipes.setForeground(COULEUR_TEXTE);
+		txtGestionDesquipes.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		txtGestionDesquipes.setForeground(MasterFrame.COULEUR_TEXTE);
 		txtGestionDesquipes.setEditable(false);
 		txtGestionDesquipes.setHorizontalAlignment(SwingConstants.CENTER);
 		txtGestionDesquipes.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -118,7 +123,7 @@ public class GestionEquipe extends JPanel{
 		JPanel panel_6 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_6.getLayout();
 		flowLayout.setVgap(15);
-		panel_6.setBackground(COULEUR_MASTER_FOND);
+		panel_6.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panel_6.setBorder(null);
 		panel_2.add(panel_6, BorderLayout.NORTH);
 		
