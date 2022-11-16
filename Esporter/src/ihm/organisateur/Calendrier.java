@@ -94,7 +94,7 @@ public class Calendrier extends JPanel{
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JComboBox FiltrerLesJeux = new JComboBox();
+		JComboBox<Jeu> FiltrerLesJeux = new JComboBox<>(Jeu.values());
 		FiltrerLesJeux.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		panel_3.add(FiltrerLesJeux);

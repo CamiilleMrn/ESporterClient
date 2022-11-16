@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import ihm.component.DatePicker;
@@ -297,7 +298,6 @@ public class AjouterunJoueur extends JDialog
 		
 		TroisPoint3 = new JButton("...");
 		TroisPoint3.setBorder(null);
-		TroisPoint3.setForeground(Color.WHITE);
 		TroisPoint3.setBackground(Color.WHITE);
 		TroisPoint3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -333,14 +333,19 @@ public class AjouterunJoueur extends JDialog
 		PhotoJoueur.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				 int res = choose.showOpenDialog(null);
-				 if (res == JFileChooser.APPROVE_OPTION) {
-				      File file = choose.getSelectedFile();
-				      System.out.println(file.getAbsolutePath());
-				    }
-			}
-		});
+				JFileChooser file = new JFileChooser();
+		        file.setCurrentDirectory(new File(System.getProperty("user.home")));
+		        //filtrer les fichiers
+		        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images","jpg","png");
+		        file.addChoosableFileFilter(filter);
+		        int res = file.showSaveDialog(null);
+		        //si l'utilisateur clique sur enregistrer dans Jfilechooser
+		        if(res == JFileChooser.APPROVE_OPTION){
+		          File selFile = file.getSelectedFile();
+		          String path = selFile.getAbsolutePath();
+		        }
+		      }
+		    });
 		PhotoJoueur.setIcon(null);
 		panelphoto.add(PhotoJoueur);
 		
