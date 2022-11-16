@@ -67,7 +67,7 @@ public class Ecuries extends JPanel{
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JLabel PhotoKarmine = new JLabel("");
-		PhotoKarmine.setIcon(new ImageIcon(Ecuries.class.getResource("/ihm/images/1200-L-la-karmine-corp-se-fait-constamment-voler-son-logo-de-supporters (2) (2) (1).jpg")));
+		PhotoKarmine.setIcon(new ImageIcon(Ecuries.class.getResource("")));
 		PhotoKarmine.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panel_4.add(PhotoKarmine);
