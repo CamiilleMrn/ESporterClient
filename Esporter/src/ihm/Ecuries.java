@@ -67,7 +67,7 @@ public class Ecuries extends JPanel{
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JLabel PhotoKarmine = new JLabel("");
-		PhotoKarmine.setIcon(new ImageIcon(Ecuries.class.getResource("")));
+		PhotoKarmine.setIcon(new ImageIcon(Ecuries.class.getResource("./images/karmine-corp.jpg")));
 		PhotoKarmine.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panel_4.add(PhotoKarmine);
