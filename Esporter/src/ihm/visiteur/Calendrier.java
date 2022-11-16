@@ -46,6 +46,9 @@ public class Calendrier extends JPanel{
 		HashMap<Integer, TournoiInfo> map = new HashMap<>();
         map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
         map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(3,new TournoiInfo(Date.valueOf("2022-11-11"), "TestTournois 3", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(4,new TournoiInfo(Date.valueOf("2022-11-12"), "TestTournois 4", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(5,new TournoiInfo(Date.valueOf("2022-11-13"), "TestTournois 5", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
         
         JPanel pan = new JPanel();
         pan.setLayout(new GridLayout(0, 1));
@@ -104,15 +107,11 @@ public class Calendrier extends JPanel{
 		txtCalendrierDesTournois.setColumns(20);
 		
 		
-		JScrollPane scrollPaneCenter = new JScrollPane();
+		JScrollPane scrollPaneCenter = new JScrollPane(createListTournament());
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		root.add(scrollPaneCenter, BorderLayout.CENTER);
-		JPanel panListe = createListTournament();
-		scrollPaneCenter.add(panListe);
 		
-		TournoiInfo h = new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0);
-		scrollPaneCenter.add(new TournoisRendererVisiteurs(h));
 		
 		
 		JPanel panel = new JPanel();
