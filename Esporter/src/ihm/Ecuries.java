@@ -19,6 +19,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
+import javax.swing.border.EmptyBorder;
+import java.awt.Dimension;
 
 public class Ecuries extends JPanel{
 
@@ -31,10 +33,6 @@ public class Ecuries extends JPanel{
 	private JTextField DateTitre2;
 	private JTextField Titre3;
 	private JTextField DateTitre3;
-	private JLabel label_1;
-	private JLabel label_3;
-	private JLabel label_5;
-	private JLabel label_7;
 	private JPanel panel_8;
 	private JPanel panel_9;
 	private JPanel panel_10;
@@ -63,6 +61,7 @@ public class Ecuries extends JPanel{
 		
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new EmptyBorder(0, 50, 0, 0));
 		panel_2.add(panel_4, BorderLayout.WEST);
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
@@ -91,9 +90,10 @@ public class Ecuries extends JPanel{
 		
 		JPanel panel_7 = new JPanel();
 		panel_5.add(panel_7, BorderLayout.CENTER);
-		panel_7.setLayout(new GridLayout(0, 2, 0, -30));
+		panel_7.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		Titre1 = new JTextField();
+		Titre1.setPreferredSize(new Dimension(7, 10));
 		Titre1.setBorder(null);
 		Titre1.setEditable(false);
 		Titre1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,12 +110,6 @@ public class Ecuries extends JPanel{
 		DateTitre1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_7.add(DateTitre1);
 		DateTitre1.setColumns(10);
-		
-		label_1 = new JLabel("");
-		panel_7.add(label_1);
-		
-		label_3 = new JLabel("");
-		panel_7.add(label_3);
 		
 		Titre2 = new JTextField();
 		Titre2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -134,12 +128,6 @@ public class Ecuries extends JPanel{
 		DateTitre2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_7.add(DateTitre2);
 		DateTitre2.setColumns(10);
-		
-		label_5 = new JLabel("");
-		panel_7.add(label_5);
-		
-		label_7 = new JLabel("");
-		panel_7.add(label_7);
 		
 		Titre3 = new JTextField();
 		Titre3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -180,6 +168,7 @@ public class Ecuries extends JPanel{
 		panel_9.setLayout(new BorderLayout(0, 0));
 		
 		panel_10 = new JPanel();
+		panel_10.setBorder(new EmptyBorder(0, 20, 0, 0));
 		panel_9.add(panel_10, BorderLayout.WEST);
 		panel_10.setLayout(new BorderLayout(0, 0));
 		
