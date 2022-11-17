@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -13,9 +14,17 @@ import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.plaf.ComboBoxUI;
 
+import ihm.MasterFrame;
 import ihm.component.DatePicker;
+import ihm.component.MainComboBoxUI;
+import ihm.visiteur.TournoisRendererVisiteurs;
 import types.Jeu;
+import types.Renomme;
+import types.TournoiInfo;
 
 import javax.swing.JList;
 import javax.swing.JScrollBar;
@@ -28,18 +37,45 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
 
 public class Calendrier extends JPanel{
-	private JList<String> langages;
 	private JTextField TexteDate;
-	private JList<String> listTournoi;
-	public static final Color COULEUR_MASTER = new Color(0,164,210);
-	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
-	public static final Color COULEUR_TEXTE = Color.WHITE;
-	private JTextField txtCalendrier;
+	private JTextField txtCalendrierDesTournois;
+	
+	private JPanel createListTournament() {
+        // create List model
+		HashMap<Integer, TournoiInfo> map = new HashMap<>();
+        map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(3,new TournoiInfo(Date.valueOf("2022-11-11"), "TestTournois 3", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(4,new TournoiInfo(Date.valueOf("2022-11-12"), "TestTournois 4", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(5,new TournoiInfo(Date.valueOf("2022-11-13"), "TestTournois 5", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        
+        JPanel pan = new JPanel();
+        pan.setLayout(new GridLayout(0, 1));
+
+		
+		//HashMap<Integer, TournoiInfo> map = Data.getCalendrier();
+
+		Iterator<TournoiInfo> ite = map.values().iterator();
+		while (ite.hasNext()) {
+			
+			TournoiInfo t = ite.next();
+			System.out.println(t);
+			pan.add(new TournoisRendererOrga(t));
+			
+		}
+		return pan;
+	}	
 	/**
 	 * Create the application.
 	 */
@@ -52,33 +88,59 @@ public class Calendrier extends JPanel{
 	 */
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
-		JScrollPane scrollPaneCenter = new JScrollPane();
-		add(scrollPaneCenter, BorderLayout.CENTER);
-		DefaultListModel<String> model = new DefaultListModel<String>();
-		listTournoi = new JList<String>();
-		listTournoi.setModel(model);
-		scrollPaneCenter.add(listTournoi);
-		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPaneCenter.setViewportView(listTournoi);
-		JPanel panel = new JPanel();
+		JPanel root = new JPanel();
+		root.setLayout(new BorderLayout());
+		add(root, BorderLayout.CENTER);
+		JPanel dummy = new JPanel();
+		dummy.setPreferredSize(new Dimension(5, 70));
+		dummy.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		dummy.setBorder(null);
+		root.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		add(dummy, BorderLayout.NORTH);
 		
+		txtCalendrierDesTournois = new JTextField();
+		txtCalendrierDesTournois.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCalendrierDesTournois.setPreferredSize(new Dimension(5, 50));
+		txtCalendrierDesTournois.setEditable(false);
+		txtCalendrierDesTournois.setForeground(MasterFrame.COULEUR_TEXTE);
+		txtCalendrierDesTournois.setBorder(new EmptyBorder(20, 0, 0, 0));
+		txtCalendrierDesTournois.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		txtCalendrierDesTournois.setText("Calendrier des tournois");
+		txtCalendrierDesTournois.setFont(new Font("Tahoma", Font.BOLD, 20));
+		dummy.add(txtCalendrierDesTournois);
+		txtCalendrierDesTournois.setColumns(20);
+		
+		JScrollPane scrollPaneCenter = new JScrollPane(createListTournament());
+		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
+		root.add(scrollPaneCenter, BorderLayout.CENTER);
+		
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(100, 100, 0, 100));
+		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		root.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 3, 200, 0));
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(COULEUR_MASTER_FOND);
 		panel.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		TexteDate = new JTextField();
-		TexteDate.setText("Date du tournoi");
-		TexteDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		TexteDate = new JTextField("Selectionnez une date");
+		TexteDate.setEnabled(false);
+		TexteDate.setForeground(Color.WHITE);
+		TexteDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		TexteDate.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), new EmptyBorder(0, 10, 0, 0)));
+		TexteDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		panel_2.add(TexteDate, BorderLayout.CENTER);
 		TexteDate.setColumns(10);
 		
-		JButton TroisPoint = new JButton("...");
-		TroisPoint.setBackground(COULEUR_MASTER);
-		TroisPoint.setForeground(COULEUR_TEXTE);
-		TroisPoint.addActionListener(new ActionListener() {
+		JButton BtnDate = new JButton(" ... ");
+		BtnDate.setBackground(MasterFrame.COULEUR_MASTER);
+		BtnDate.setForeground(MasterFrame.COULEUR_TEXTE);
+		BtnDate.setFont(new Font("Cambria", Font.PLAIN, 15));
+		BtnDate.setBorder(null);
+		BtnDate.addActionListener(new ActionListener() {
 				//performed action
 				public void actionPerformed(ActionEvent arg0) 
 				{
@@ -88,64 +150,43 @@ public class Calendrier extends JPanel{
 					TexteDate.setText(new DatePicker(f).setPickedDate());
 				}
 			});
-		panel_2.add(TroisPoint, BorderLayout.EAST);
+		panel_2.add(BtnDate, BorderLayout.EAST);
+
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(null);
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JComboBox<Jeu> FiltrerLesJeux = new JComboBox<>(Jeu.values());
-		FiltrerLesJeux.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JComboBox<Jeu> FiltrerLesJeux = new JComboBox<>();
+		FiltrerLesJeux.setUI((ComboBoxUI) MainComboBoxUI.createUI(FiltrerLesJeux));
+		FiltrerLesJeux.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+		FiltrerLesJeux.setFont(new Font("Cambria", Font.PLAIN, 15));
+		FiltrerLesJeux.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		FiltrerLesJeux.setForeground(MasterFrame.COULEUR_TEXTE);
 		
 		panel_3.add(FiltrerLesJeux);
-	
+		
+		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(null);
 		panel.add(panel_4);
-		panel.setBackground(COULEUR_MASTER_FOND);
-		panel_2.setBackground(COULEUR_MASTER_FOND);
-		panel_3.setBackground(COULEUR_MASTER_FOND);
-		panel_4.setBackground(COULEUR_MASTER_FOND);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		panel_4.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 
+		
 		JButton CreerUnTournoi = new JButton("Creer un tournois");
-		CreerUnTournoi.setBackground(COULEUR_MASTER);
-		CreerUnTournoi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		CreerUnTournoi.setBackground(MasterFrame.COULEUR_MASTER);
+		CreerUnTournoi.setFont(new Font("Cambria", Font.PLAIN, 15));
+		CreerUnTournoi.setForeground(MasterFrame.COULEUR_TEXTE);
 		CreerUnTournoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-
-		
 		panel_4.add(CreerUnTournoi);
 		
-		JPanel panel_1 = new JPanel();
-		add(panel_1, BorderLayout.NORTH);
-		panel_1.setLayout(new BorderLayout(0, 0));
-		panel_1.add(panel, BorderLayout.SOUTH);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(null);
-		panel_5.setBackground(COULEUR_MASTER_FOND);
-		
-		panel_1.add(panel_5, BorderLayout.CENTER);
-		panel_5.setLayout(new BorderLayout(0, 0));
-		
-		txtCalendrier = new JTextField();
-		txtCalendrier.setBorder(null);
-		txtCalendrier.setBackground(COULEUR_MASTER_FOND);
-		txtCalendrier.setForeground(COULEUR_TEXTE);
-		txtCalendrier.setEditable(false);
-		txtCalendrier.setFont(new Font("Tahoma", Font.BOLD, 25));
-		txtCalendrier.setText("CALENDRIER");
-		txtCalendrier.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_5.add(txtCalendrier);
-		txtCalendrier.setColumns(10);
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBorder(null);
-		panel_6.setBackground(COULEUR_MASTER_FOND);
-		FlowLayout flowLayout = (FlowLayout) panel_6.getLayout();
-		flowLayout.setVgap(15);
-		panel_1.add(panel_6, BorderLayout.NORTH);
+
 	}
 
 }

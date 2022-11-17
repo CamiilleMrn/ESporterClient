@@ -25,13 +25,21 @@ import javax.swing.SwingConstants;
 
 import ihm.MasterFrame;
 import ihm.component.DatePicker;
+import ihm.component.MainComboBoxUI;
 import ihm.component.listeTournoiCalendrier;
-import ihm.joueur.TournoisRendererJoueurs;
+import ihm.joueur.TournoisRendererJoueur;
+import ihm.organisateur.TournoisRendererOrga;
 import types.Jeu;
 import types.Renomme;
 import types.TournoiInfo;
+
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.plaf.ComboBoxUI;
+
 import java.awt.Color;
+import java.awt.SystemColor;
 
 public class Calendrier extends JPanel{
 
@@ -111,9 +119,7 @@ public class Calendrier extends JPanel{
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		root.add(scrollPaneCenter, BorderLayout.CENTER);
-		
-		
-		
+			
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(100, 100, 0, 100));
 		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
@@ -124,14 +130,19 @@ public class Calendrier extends JPanel{
 		panel.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		TexteDate = new JTextField("Date du tournoi");
-		TexteDate.setBorder(null);
-		TexteDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		TexteDate = new JTextField("Selectionnez une date");
+		TexteDate.setEnabled(false);
+		TexteDate.setForeground(Color.WHITE);
+		TexteDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		TexteDate.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), new EmptyBorder(0, 10, 0, 0)));
+		TexteDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		panel_2.add(TexteDate, BorderLayout.CENTER);
 		TexteDate.setColumns(10);
 		
-		JButton BtnDate = new JButton("...");
-		BtnDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JButton BtnDate = new JButton(" ... ");
+		BtnDate.setBackground(MasterFrame.COULEUR_MASTER);
+		BtnDate.setForeground(MasterFrame.COULEUR_TEXTE);
+		BtnDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		BtnDate.setBorder(null);
 		BtnDate.addActionListener(new ActionListener() {
 				//performed action
@@ -151,8 +162,11 @@ public class Calendrier extends JPanel{
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JComboBox<Jeu> FiltrerLesJeux = new JComboBox<>();
-		FiltrerLesJeux.setBorder(null);
-		FiltrerLesJeux.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		FiltrerLesJeux.setUI((ComboBoxUI) MainComboBoxUI.createUI(FiltrerLesJeux));
+		FiltrerLesJeux.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+		FiltrerLesJeux.setFont(new Font("Cambria", Font.PLAIN, 15));
+		FiltrerLesJeux.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		FiltrerLesJeux.setForeground(MasterFrame.COULEUR_TEXTE);
 		
 		panel_3.add(FiltrerLesJeux);
 		

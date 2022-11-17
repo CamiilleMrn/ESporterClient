@@ -1,14 +1,19 @@
-package ihm.joueur;
+package ihm.organisateur;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -25,17 +30,19 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 
-public class TournoisRendererJoueurs extends JPanel implements ListCellRenderer<TournoiInfo> {
+public class TournoisRendererOrga extends JPanel{
 	
 	private JLabel lbTournamentName = new JLabel();
-	private JLabel lbArrowIcon = new JLabel();
+	private JButton lbArrowIcon = new JButton();
 	private final JPanel panel = new JPanel();
 	private final Component verticalGlue = Box.createVerticalGlue();
 	private final JLabel lbInscriptionButton = new JLabel();
 	private final Component verticalGlue_1 = Box.createVerticalGlue();
+	private TournoiInfo tournoi;
 	
 	
-	public TournoisRendererJoueurs () {
+	public TournoisRendererOrga (TournoiInfo tournoi) {
+		this.tournoi = tournoi;
 		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
 		setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		setLayout(new BorderLayout(5,5));
@@ -45,32 +52,24 @@ public class TournoisRendererJoueurs extends JPanel implements ListCellRenderer<
 		lbTournamentName.setForeground(MasterFrame.COULEUR_TEXTE);
 		panelText.add(lbTournamentName);
 		add(panelText, BorderLayout.WEST);
-		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panelText.add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		panel.add(verticalGlue);
-		Insets i = lbInscriptionButton.getInsets();
-		i.set(10,10,10,10);
-		lbInscriptionButton.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255)), new EmptyBorder(3, 11, 3, 10)));
-		lbInscriptionButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lbInscriptionButton.setHorizontalAlignment(SwingConstants.CENTER);
-		lbInscriptionButton.setForeground(MasterFrame.COULEUR_TEXTE);
+		lbArrowIcon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		
-		panel.add(lbInscriptionButton);
-		panel.add(verticalGlue_1);
+		lbArrowIcon.setBorder(null);
+		lbArrowIcon.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		add(lbArrowIcon, BorderLayout.EAST);
+		lbTournamentName.setText(this.tournoi.getNom()+" - "+this.tournoi.getDateInscription());
+		try {
+			lbArrowIcon.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("../images/Chevron.png"))));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
-
-	@Override
-	public Component getListCellRendererComponent(JList<? extends TournoiInfo> list, TournoiInfo value, int index,
-			boolean isSelected, boolean cellHasFocus) {
-		lbTournamentName.setText(value.getNom()+ " - " +value.getDateInscription());
-		lbInscriptionButton.setText("S'inscrire");
-		lbArrowIcon.setIcon(new ImageIcon(getClass().getResource("../images/Chevron.png")));
-		return this;
-	}
-
 	
 }

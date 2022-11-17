@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -14,11 +17,14 @@ import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
 import types.TournoiInfo;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TournoisRendererVisiteurs extends JPanel{
 	
 	private JLabel lbTournamentName = new JLabel();
-	private JLabel lbArrowIcon = new JLabel();
+	private JButton lbArrowIcon = new JButton();
 	private TournoiInfo tournoi;
 	
 	public TournoisRendererVisiteurs(TournoiInfo tournoi) {
@@ -32,9 +38,23 @@ public class TournoisRendererVisiteurs extends JPanel{
 		lbTournamentName.setForeground(MasterFrame.COULEUR_TEXTE);
 		panelText.add(lbTournamentName);
 		add(panelText, BorderLayout.WEST);
+		
+		lbArrowIcon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		lbArrowIcon.setBorder(null);
+		lbArrowIcon.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		add(lbArrowIcon, BorderLayout.EAST);
 		lbTournamentName.setText(this.tournoi.getNom()+" - "+this.tournoi.getDateInscription());
-		lbArrowIcon.setIcon(new ImageIcon(getClass().getResource("../images/Chevron.png")));
+		try {
+			lbArrowIcon.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("../images/Chevron.png"))));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
