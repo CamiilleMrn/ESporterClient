@@ -29,5 +29,17 @@ public static HashMap<Integer, ClassementInfo> getClassements() {
 public static HashMap<Integer, EcurieInfo> getEcuries() {
 	return ecuries;
 }
+
+public static void setCalendrier(HashMap<Integer, TournoiInfo> calendrier) {
+	Data.calendrier = calendrier;
+}
+
+public static void setClassements(HashMap<Integer, ClassementInfo> classements) {
+	Data.classements = classements;
+}
+
+public static void setEcuries(HashMap<Integer, EcurieInfo> ecuries) {
+	Data.ecuries = ecuries;
+}
 	
 }

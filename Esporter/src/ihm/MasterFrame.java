@@ -250,8 +250,9 @@ public class MasterFrame {
 				if(user.getPermission()!=Permission.VISITEUR) {
 					//LOGGED IN
 					user.logout();
-					setCompte();
 					setMenu(TypeMenu.Visiteurs);
+					setPanel(new ihm.visiteur.Accueil());
+					
 				} else {
 					//NOT LOG IN
 					main.setVisible(false);
@@ -283,9 +284,11 @@ public class MasterFrame {
 		boutonGroupMenu = new ButtonGroup();
 		boutonMenu[] menu = m.getMenu();
 		for (int i=0; i<menu.length;i++) {
+			
 			panelMenu.add(menu[i]);
 			boutonGroupMenu.add(menu[i]);
 		}
+		menu[0].setSelected(true);
 		setCompte();
 		frame.getContentPane().repaint();
 	}

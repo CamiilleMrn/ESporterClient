@@ -30,6 +30,13 @@ public enum Jeu implements Infos, Serializable {
 		return joueurMax;
 	}
 	
+	public static Jeu intToJeu(int i) throws IllegalArgumentException{
+		if (i>Jeu.values().length) {
+			throw new IllegalArgumentException();
+		}
+		return Jeu.values()[i];
+	}
+	
 	
 	
 	

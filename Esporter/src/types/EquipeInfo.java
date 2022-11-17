@@ -2,6 +2,7 @@ package types;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EquipeInfo implements Infos, Serializable  {
 
@@ -11,11 +12,11 @@ public class EquipeInfo implements Infos, Serializable  {
 	private static final long serialVersionUID = 1457773383457961641L;
 	private Jeu jeu;
 	private EcurieInfo ecurie;
-	private ArrayList<JoueurInfo> joueurs;
+	private HashMap<Integer,JoueurInfo> joueurs;
 	private int id;
 	
 	
-	public EquipeInfo(Jeu jeu, EcurieInfo ecurie, ArrayList<JoueurInfo> joueurs, int id) {
+	public EquipeInfo(Jeu jeu, EcurieInfo ecurie, HashMap<Integer,JoueurInfo> joueurs, int id) {
 		this.jeu = jeu;
 		this.ecurie = ecurie;
 		this.joueurs = joueurs;
@@ -28,15 +29,19 @@ public class EquipeInfo implements Infos, Serializable  {
 	public EcurieInfo getEcurie() {
 		return ecurie;
 	}
-	public ArrayList<JoueurInfo> getJoueurs() {
+	public HashMap<Integer,JoueurInfo> getJoueurs() {
 		return joueurs;
+	}
+	
+	public void ajouterJoueur(JoueurInfo joueur) {
+		this.joueurs.put(joueur.getId(), joueur);
 	}
 	
 	public void modifierJoueur(JoueurInfo joueur) {
 		int i = joueurExiste(joueur);
 		if (i>=0) {
 			joueurs.remove(i);
-			joueurs.add(joueur);
+			joueurs.put(joueur.getId(), joueur);
 		}
 	}
 	
