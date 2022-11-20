@@ -12,6 +12,7 @@ import socket.Response;
 import types.EquipeInfo;
 import types.Infos;
 import types.Permission;
+import types.TournoiInfo;
 import types.WaitingFor;
 import types.exception.ErrorLogin;
 import types.exception.InvalidPermission;
@@ -125,6 +126,13 @@ public class User {
 			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
 		com.ajouterEquipe(e);
+	}
+	
+	public void ajouterTournoi(TournoiInfo t) throws InvalidPermission {
+		if (permission!=Permission.ORGANISATEUR) {
+			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
+		}
+		com.ajouterTournoi(t);
 	}
 
 }

@@ -114,9 +114,15 @@ public class CommunicationServer implements Runnable{
 	
 	public void ajouterEquipe(EquipeInfo e) {
 		HashMap<InfoID, Infos> m = new HashMap<>();
-		m.put(InfoID.Ecurie, new Entier(((EcurieInfo)user.getInfo()).getId()));
 		m.put(InfoID.Equipe, e);
 		Command c = new Command(CommandName.AJOUTER_EQUIPE, m);
+		send(c);
+	}
+	
+	public void ajouterTournoi(TournoiInfo t) {
+		HashMap<InfoID, Infos> m = new HashMap<>();
+		m.put(InfoID.Tournoi, t);
+		Command c = new Command(CommandName.AJOUTER_TOURNOI, m);
 		send(c);
 	}
 	
@@ -161,6 +167,7 @@ public class CommunicationServer implements Runnable{
 	}
 	
 	public void traiterReponse(ResponseObject r) {
+		System.out.println(r.getName());
 		switch(r.getName()) {
 		case ERROR_LOGIN:
 			user.getWaiting().setActualState(Response.ERROR_LOGIN);
