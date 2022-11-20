@@ -23,6 +23,7 @@ public class EquipeInfo implements Infos, Serializable  {
 		this.id = id;
 	}
 	
+	
 	public Jeu getJeu() {
 		return jeu;
 	}

@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import ihm.MasterFrame;
-import types.exception.InvalidPermission;
-import types.exception.TournoiPlein;
 
 public class TournoiInfo implements Infos, Serializable {
 
@@ -19,19 +16,19 @@ public class TournoiInfo implements Infos, Serializable {
 	private Date dateInscription;
 	private String nom;
 	private Renomme renomme;
-	private List<Jeu> jeux;
+	// private List<Jeu> jeux;
+	private Jeu jeux;
 	private int id;
 	private ArrayList<Poule> poule;
 	private ArrayList<EquipeInfo> inscris;
 	
-	public TournoiInfo(Date dateInscription, String nom, Renomme renomme, ArrayList<Jeu> jeux, int id) {
+	public TournoiInfo(Date dateInscription, String nom, Renomme renomme, Jeu jeux, int id) {
 		this.dateInscription = dateInscription;
 		this.nom = nom;
 		this.renomme = renomme;
 		this.jeux = jeux;
 		this.id = id;
 	}
-
 
 	public Date getDateInscription() {
 		return dateInscription;
@@ -45,7 +42,7 @@ public class TournoiInfo implements Infos, Serializable {
 		return renomme;
 	}
 
-	public List<Jeu> getJeux() {
+	public Jeu getJeux() {
 		return jeux;
 	}
 	

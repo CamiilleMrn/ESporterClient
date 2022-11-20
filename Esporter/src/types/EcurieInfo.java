@@ -24,6 +24,8 @@ public class EcurieInfo implements Infos, Serializable {
 		this.logo = logo;
 		this.diminutif = diminutif;
 		this.id = id;
+		this.equipes = new HashMap<>();
+		this.palmares = new ArrayList<>();
 	}
 	
 	public int getId() {

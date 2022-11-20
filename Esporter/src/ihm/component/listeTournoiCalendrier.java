@@ -27,7 +27,7 @@ public class listeTournoiCalendrier<E extends JPanel> extends JPanel{
 	private ArrayList<JPanel> list = new ArrayList<>();
 	public listeTournoiCalendrier(Class<E> p, HashMap<Integer, TournoiInfo> map) {
 		setLayout(new GridLayout(map.size(), 1));
-		TournoiInfo h = new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0);
+		TournoiInfo h = new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, Jeu.COUNTER_STRIKE, 0);
 		add(new TournoisRendererVisiteurs(h));
 		
 		//HashMap<Integer, TournoiInfo> map = Data.getCalendrier();

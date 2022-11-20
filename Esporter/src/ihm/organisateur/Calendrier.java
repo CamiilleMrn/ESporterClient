@@ -54,11 +54,11 @@ public class Calendrier extends JPanel{
 	private JPanel createListTournament() {
         // create List model
 		HashMap<Integer, TournoiInfo> map = new HashMap<>();
-        map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        map.put(3,new TournoiInfo(Date.valueOf("2022-11-11"), "TestTournois 3", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        map.put(4,new TournoiInfo(Date.valueOf("2022-11-12"), "TestTournois 4", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        map.put(5,new TournoiInfo(Date.valueOf("2022-11-13"), "TestTournois 5", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+        map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
+        map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
+        map.put(3,new TournoiInfo(Date.valueOf("2022-11-11"), "TestTournois 3", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
+        map.put(4,new TournoiInfo(Date.valueOf("2022-11-12"), "TestTournois 4", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
+        map.put(5,new TournoiInfo(Date.valueOf("2022-11-13"), "TestTournois 5", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
         
         JPanel pan = new JPanel();
         pan.setLayout(new GridLayout(0, 1));
