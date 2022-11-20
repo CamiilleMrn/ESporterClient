@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import data.Data;
 import ihm.MasterFrame;
 import socket.Command;
 import socket.CommandName;
@@ -61,7 +62,7 @@ public class CommunicationServer implements Runnable{
 			throw new IOException("Impossible de joindre le serveur");
 		}
 		reconnectionTime*=2;
-		String s = "Reconnecting N°"+reconnection+" in "+reconnectionTime+"s....";
+		String s = "Reconnecting Nï¿½"+reconnection+" in "+reconnectionTime+"s....";
 		System.out.println(s);
 		try {
 			Thread.sleep(reconnectionTime*1000);
@@ -149,6 +150,11 @@ public class CommunicationServer implements Runnable{
 		}
 	}
 	
+	public void initializeApp() {
+		Command c = new Command(CommandName.INIT, null);
+		send(c);
+	}
+	
 	
 	public void setPermission(Permission perms) {
 		user.setPermission(perms);
@@ -175,12 +181,18 @@ public class CommunicationServer implements Runnable{
 		case UPDATE_ECURIE:
 			break;
 		case UPDATE_TOURNOI:
+			TournoiInfo tournoi = (TournoiInfo)r.getInfoByID(InfoID.Tournoi);
+			user.getData().getCalendrier().put(tournoi.getId(), tournoi);
 			break;
+		case UPDATE_ALL:
+			user.setData((Data)r.getInfo().get(InfoID.all));
+			
 		default:
 			break;
-
+		
 		
 		}
+		user.getWaiting().setActualState(r.getName());
 	}
 
 

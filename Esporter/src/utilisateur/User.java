@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 
+import data.Data;
 import ihm.MasterFrame;
 import ihm.TypeMenu;
 import socket.Response;
@@ -22,6 +23,7 @@ public class User {
 	private Thread t;
 	private Infos info;
 	private WaitingFor waiting;
+	private Data data;
 
 	public User() throws UnknownHostException, IOException {
 		this.permission = Permission.VISITEUR;
@@ -29,7 +31,17 @@ public class User {
 		this.waiting = new WaitingFor();
 		this.t = new Thread(com);
 		t.start();
+		com.initializeApp();
+		waiting.waitFor(Response.UPDATE_ALL);
 		
+	}
+	
+	public Data getData() {
+		return data;
+	}
+	
+	public void setData(Data data) {
+		this.data = data;
 	}
 	
 	public CommunicationServer getCom() {
