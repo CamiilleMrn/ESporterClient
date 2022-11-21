@@ -1,4 +1,4 @@
-package ihm;
+package ihm.ecurie.gestionEquipe;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-public class Ecuries extends JPanel {
+public class ListeEquipe extends JPanel {
 	/**
 	 * 
 	 */
@@ -22,7 +22,7 @@ public class Ecuries extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Ecuries() {
+	public ListeEquipe() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
