@@ -2,11 +2,14 @@ package ihm.component;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 import javax.swing.LookAndFeel;
+import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
@@ -14,13 +17,13 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 import ihm.MasterFrame;
 import types.Jeu;
 
-public class MainComboBoxUI {
+public class ComboBoxRendererArrow {
 	
 	public static class MyComboBoxUI extends BasicComboBoxUI {
         @Override
         protected void installDefaults() {
             super.installDefaults();
-            LookAndFeel.uninstallBorder(comboBox); //Uninstalls the LAF border for both button and label of combo box.
+            LookAndFeel.uninstallBorder(comboBox); //remove the LAF border for both button and label of combo box.
         }
 
         @Override

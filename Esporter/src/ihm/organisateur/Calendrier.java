@@ -20,7 +20,7 @@ import javax.swing.plaf.ComboBoxUI;
 
 import ihm.MasterFrame;
 import ihm.component.DatePicker;
-import ihm.component.MainComboBoxUI;
+import ihm.component.ComboBoxRendererArrow;
 import ihm.visiteur.TournoisRendererVisiteurs;
 import types.Jeu;
 import types.Renomme;
@@ -159,7 +159,7 @@ public class Calendrier extends JPanel{
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JComboBox<Jeu> FiltrerLesJeux = new JComboBox<>();
-		FiltrerLesJeux.setUI((ComboBoxUI) MainComboBoxUI.createUI(FiltrerLesJeux));
+		FiltrerLesJeux.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(FiltrerLesJeux));
 		FiltrerLesJeux.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		FiltrerLesJeux.setFont(new Font("Cambria", Font.PLAIN, 15));
 		FiltrerLesJeux.setBackground(MasterFrame.COULEUR_MASTER_FOND);

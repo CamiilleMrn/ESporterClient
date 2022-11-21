@@ -8,9 +8,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.EmptyBorder;
+
+import ihm.component.EcurieRenderer;
+import types.EcurieInfo;
+import types.TournoiInfo;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
@@ -20,10 +28,25 @@ public class Ecuries extends JPanel {
 	 */
 	private static final long serialVersionUID = 5774382066208287732L;
 	private JTextField nothing;
-	public static final Color COULEUR_MASTER = new Color(0,164,210);
-	public static final Color COULEUR_MASTER_FOND = new Color(96, 96, 96);
-	public static final Color COULEUR_TEXTE = Color.WHITE;
-	public static final Color COULEUR_MENU_FOND = Color.BLACK;
+	
+	private JPanel createEcurieInfo() {
+		HashMap<Integer, EcurieInfo> map = MasterFrame.getInstance().getUser().getData().getEcuries();
+        
+        JPanel pan = new JPanel();
+        pan.setLayout(new GridLayout(0, 1));
+        
+        Iterator<EcurieInfo> ite = map.values().iterator();
+		while (ite.hasNext()) {
+			
+			EcurieInfo t = ite.next();
+			System.out.println(t);
+			pan.add(new EcurieRenderer(t));
+		}
+		
+        return pan;
+       
+	}
+	
 	/**
 	 * Create the panel.
 	 */
@@ -38,20 +61,25 @@ public class Ecuries extends JPanel {
 		panel.add(ListEquipe);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(COULEUR_MASTER_FOND);
+		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
 		
 		nothing = new JTextField();
-		nothing.setBackground(COULEUR_MASTER_FOND);
-		nothing.setForeground(COULEUR_TEXTE);
+		nothing.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		nothing.setForeground(MasterFrame.COULEUR_TEXTE);
 		nothing.setEditable(false);
-		nothing.setText("Liste des équipes");
-		nothing.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		nothing.setText("Liste des écuries");
+		nothing.setFont(new Font("Cambria", Font.PLAIN, 20));
 		nothing.setBorder(null);
 		nothing.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(nothing);
 		nothing.setColumns(20);
+		
+		JScrollPane scrollPaneCenter = new JScrollPane(createEcurieInfo());
+		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
+		panel.add(scrollPaneCenter, BorderLayout.CENTER);
 
 	}
 

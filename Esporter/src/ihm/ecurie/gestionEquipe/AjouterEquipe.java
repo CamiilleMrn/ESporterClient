@@ -27,7 +27,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 
 import ihm.MasterFrame;
-import ihm.component.MainComboBoxUI;
+import ihm.component.ComboBoxRendererArrow;
 import ihm.component.containerJoueur;
 import types.Jeu;
 
@@ -101,10 +101,11 @@ public class AjouterEquipe extends JPanel{
                 boolean isSelected,
                 boolean cellHasFocus) { 
 			value = ((Jeu) value).getNom();
+			
         	return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         }
 	});
-		comboBox.setUI((ComboBoxUI) MainComboBoxUI.createUI(comboBox));
+		comboBox.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBox));
 		comboBox.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		comboBox.setFont(new Font("Cambria", Font.PLAIN, 15));
 		comboBox.setBackground(MasterFrame.COULEUR_MASTER_FOND);
