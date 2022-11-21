@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
+import javax.swing.AbstractListModel;
 
 public class InfoEcurie extends JPanel{
 
@@ -99,7 +101,10 @@ public class InfoEcurie extends JPanel{
 		ListPalma = new JScrollPane();
 		ListPalma.setBorder(null);
 		Palmares.add(ListPalma, BorderLayout.CENTER);
-		
+		JList listPalmares = new JList<String>();
+		listPalmares.setFont(new Font("Tahoma", Font.BOLD, 15));
+		ListPalma.add(listPalmares);
+		ListPalma.setViewportView(listPalmares);
 		North = new JPanel();
 		all.add(North, BorderLayout.NORTH);
 		North.setLayout(new BorderLayout(0, 0));
