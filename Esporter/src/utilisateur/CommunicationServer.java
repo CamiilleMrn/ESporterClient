@@ -190,9 +190,16 @@ public class CommunicationServer implements Runnable{
 		case UPDATE_TOURNOI:
 			TournoiInfo tournoi = (TournoiInfo)r.getInfoByID(InfoID.Tournoi);
 			user.getData().getCalendrier().put(tournoi.getId(), tournoi);
+			
 			break;
 		case UPDATE_ALL:
 			user.setData((Data)r.getInfo().get(InfoID.all));
+			user.getWaiting().setActualState(Response.UPDATE_ALL);
+			break;
+		case Error:
+			MasterFrame.getInstance().getError().setState(new Exception("Vous etes deja inscrit"), false);
+			System.out.println("ERREUR");
+			break;
 			
 		default:
 			break;
