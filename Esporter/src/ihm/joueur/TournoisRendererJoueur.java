@@ -2,6 +2,7 @@ package ihm.joueur;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
@@ -12,6 +13,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -56,6 +59,12 @@ public class TournoisRendererJoueur extends JPanel{
 		panel.add(verticalGlue);
 		Insets i = lbInscriptionButton.getInsets();
 		i.set(10,10,10,10);
+		lbInscriptionButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog confirmation = new InscriptionTournois();
+
+			}
+		});
 		lbInscriptionButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		lbInscriptionButton.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255)), new EmptyBorder(3, 11, 3, 10)));
 		lbInscriptionButton.setAlignmentX(Component.CENTER_ALIGNMENT);
