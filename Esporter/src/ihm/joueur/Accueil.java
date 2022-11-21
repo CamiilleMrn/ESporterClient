@@ -8,5 +8,9 @@ public class Accueil extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1097252498292292624L;
+	
+	public Accueil() {
+		// TODO Auto-generated constructor stub
+	}
 
 }

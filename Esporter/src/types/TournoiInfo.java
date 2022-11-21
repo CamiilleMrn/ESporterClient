@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class TournoiInfo implements Infos, Serializable,  Comparable<TournoiInfo> {
+public class TournoiInfo implements Infos, Serializable, Comparable<TournoiInfo> {
 
 	/**
 	 * 
@@ -20,7 +20,7 @@ public class TournoiInfo implements Infos, Serializable,  Comparable<TournoiInfo
 	private Jeu jeux;
 	private int id;
 	private ArrayList<Poule> poule;
-	private ArrayList<EquipeInfo> inscris;
+	private ArrayList<Integer> inscris;
 	
 	public TournoiInfo(Date dateInscription, String nom, Renomme renomme, Jeu jeux, int id) {
 		this.dateInscription = dateInscription;
@@ -31,6 +31,11 @@ public class TournoiInfo implements Infos, Serializable,  Comparable<TournoiInfo
 		this.inscris = new ArrayList<>();
 		this.poule = new ArrayList<>();
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 
 	public Date getDateInscription() {
 		return dateInscription;
@@ -69,21 +74,22 @@ public class TournoiInfo implements Infos, Serializable,  Comparable<TournoiInfo
 		return id == other.id;
 	}
 	
-	public ArrayList<EquipeInfo> getInscris() {
+	public ArrayList<Integer> getInscris() {
 		return inscris;
 	}
 	
 	public ArrayList<Poule> getPoule() {
 		return poule;
 	}
+	
+	public void setInscris(ArrayList<Integer> inscris) {
+		this.inscris = inscris;
+	}
 
 	@Override
 	public int compareTo(TournoiInfo o) {
 		return this.getDateInscription().compareTo(o.getDateInscription());
 	}
-	
-	
-	
 	
 	
 	

@@ -294,6 +294,8 @@ public class MasterFrame {
 		menu[0].setSelected(true);
 		setCompte();
 		frame.getContentPane().repaint();
+		System.out.println(menu[0].getPanelToChange());
+		
 	}
 	
 	public void setCompte() {
@@ -301,26 +303,31 @@ public class MasterFrame {
 		case ARBITRE:
 			boutonConnection.setText("Se deconnecter");
 			nomCompte.setText("Arbitre");
+			setPanel(ihm.arbitre.Accueil.class, null);
 			break;
 		case ECURIE:
 			boutonConnection.setText("Se deconnecter");
 			EcurieInfo e = (EcurieInfo)user.getInfo();
 			nomCompte.setText(e.getNom());
 			//logoCompte.setIcon(e.getLogo());
+			setPanel(ihm.ecurie.Accueil.class, null);
 			break;
 		case JOUEUR:
 			boutonConnection.setText("Se deconnecter");
 			JoueurInfo j = (JoueurInfo)user.getInfo();
 			nomCompte.setText(j.getNom());
 			//logoCompte.setIcon(j.getPhoto());
+			setPanel(ihm.joueur.Accueil.class, null);
 			break;
 		case ORGANISATEUR:
 			boutonConnection.setText("Se deconnecter");
 			nomCompte.setText("Esporter");
+			setPanel(ihm.organisateur.Accueil.class, null);
 			break;
 		case VISITEUR:
 			boutonConnection.setText("Se connecter");
 			nomCompte.setText("Visiteur");
+			setPanel(ihm.visiteur.Accueil.class, null);
 			break;
 		default:
 			break;
@@ -329,6 +336,7 @@ public class MasterFrame {
 	}
 	
 	public <T> void setPanel(Class<T> clazz, Object ob) {
+		System.out.println(clazz);
 		BorderLayout layout = (BorderLayout)main.getLayout();
 		Constructor<T> ctor;
 		Object o = null;

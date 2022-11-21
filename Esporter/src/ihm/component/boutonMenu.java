@@ -107,6 +107,14 @@ public class boutonMenu extends JRadioButton{
 		
 	}
 	
+	public Permission getPermission() {
+		return permission;
+	}
+	
+	public Class getPanelToChange() {
+		return panelToChange;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		if (!MasterFrame.getInstance().getLoginPage().isVisible() && !MasterFrame.getInstance().getError().isVisible()) {
