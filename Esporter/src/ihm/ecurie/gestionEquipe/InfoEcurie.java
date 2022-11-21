@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -28,15 +29,18 @@ public class InfoEcurie extends JPanel{
 	private JFrame frame;
 	private JTextField NomDelEcurie;
 	private JTextField txtPalmares;
-	private JPanel panel_8;
-	private JPanel panel_9;
-	private JPanel panel_10;
-	private JPanel panel_11;
-	private JPanel panel_12;
+	private JPanel North;
+	private JPanel BtnBack;
+	private JPanel BtnEcuAndInfo;
+	private JPanel Vide;
+	private JPanel Vide2;
 	private static final long serialVersionUID = 8722294344861036522L;
-	private JPanel panel;
-	private JScrollPane scrollPane;
-
+	private JPanel Center;
+	private JScrollPane ListPalma;
+	public static final Color COULEUR_MASTER = new Color(0,164,210);
+	public static final Color COULEUR_MASTER_FOND = new Color(96, 96, 96);
+	public static final Color COULEUR_TEXTE = Color.WHITE;
+	public static final Color COULEUR_MENU_FOND = Color.BLACK;
 	/**
 	 * Create the application.
 	 */
@@ -51,75 +55,86 @@ public class InfoEcurie extends JPanel{
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		JPanel all = new JPanel();
+		all.setBackground(COULEUR_MASTER_FOND);
+		add(all, BorderLayout.CENTER);
+		all.setLayout(new BorderLayout(0, 0));
 		
-		panel = new JPanel();
-		panel_2.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(15, 0));
+		Center = new JPanel();
+		Center.setBackground(COULEUR_MASTER_FOND);
+		all.add(Center, BorderLayout.CENTER);
+		Center.setLayout(new BorderLayout(15, 0));
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new EmptyBorder(0, 50, 0, 0));
-		panel.add(panel_4, BorderLayout.WEST);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		JPanel Photo = new JPanel();
+		Photo.setBackground(COULEUR_MASTER_FOND);
+		Photo.setBorder(new EmptyBorder(0, 50, 0, 0));
+		Center.add(Photo, BorderLayout.WEST);
+		Photo.setLayout(new BorderLayout(0, 0));
 		
-		JLabel PhotoKarmine = new JLabel("");
-		PhotoKarmine.setIcon(new ImageIcon(InfoEcurie.class.getResource("/ihm/images/karmine-corp.jpg")));
-		PhotoKarmine.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel Image = new JLabel("");
+		Image.setIcon(new ImageIcon(InfoEcurie.class.getResource("/ihm/images/karmine-corp.jpg")));
+		Image.setHorizontalAlignment(SwingConstants.CENTER);
 
-		panel_4.add(PhotoKarmine);
+		Photo.add(Image);
 		
-		JPanel panel_5 = new JPanel();
-		panel.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
+		JPanel Palmares = new JPanel();
+		Center.add(Palmares);
+		Palmares.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_6 = new JPanel();
-		panel_5.add(panel_6, BorderLayout.NORTH);
-		panel_6.setLayout(new BorderLayout(0, 0));
+		JPanel Title = new JPanel();
+		Palmares.add(Title, BorderLayout.NORTH);
+		Title.setLayout(new BorderLayout(0, 0));
 		
 		txtPalmares = new JTextField();
+		txtPalmares.setBackground(COULEUR_MASTER_FOND);
+		txtPalmares.setForeground(COULEUR_TEXTE);
 		txtPalmares.setBorder(null);
 		txtPalmares.setEditable(false);
 		txtPalmares.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		txtPalmares.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPalmares.setText("Palmarès");
-		panel_6.add(txtPalmares);
+		Title.add(txtPalmares);
 		txtPalmares.setColumns(10);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBorder(null);
-		panel_5.add(scrollPane, BorderLayout.CENTER);
+		ListPalma = new JScrollPane();
+		ListPalma.setBorder(null);
+		Palmares.add(ListPalma, BorderLayout.CENTER);
 		
-		panel_8 = new JPanel();
-		panel_2.add(panel_8, BorderLayout.NORTH);
-		panel_8.setLayout(new BorderLayout(0, 0));
-		JPanel panel_3 = new JPanel();
+		North = new JPanel();
+		all.add(North, BorderLayout.NORTH);
+		North.setLayout(new BorderLayout(0, 0));
+		JPanel TitleEquipe = new JPanel();
 		
-		panel_3.setLayout(new BorderLayout(0, 0));
-		panel_8.add(panel_3, BorderLayout.SOUTH);
+		TitleEquipe.setLayout(new BorderLayout(0, 0));
+		North.add(TitleEquipe, BorderLayout.SOUTH);
 		NomDelEcurie = new JTextField();
+		NomDelEcurie.setForeground(COULEUR_TEXTE);
+		NomDelEcurie.setBackground(COULEUR_MASTER_FOND);
 		NomDelEcurie.setEditable(false);
 		NomDelEcurie.setBorder(null);
 		NomDelEcurie.setHorizontalAlignment(SwingConstants.CENTER);
 		NomDelEcurie.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		NomDelEcurie.setText("Karmine Corp");
-		panel_3.add(NomDelEcurie, BorderLayout.CENTER);
+		TitleEquipe.add(NomDelEcurie, BorderLayout.CENTER);
 		NomDelEcurie.setColumns(10);
 		
-		panel_9 = new JPanel();
-		panel_8.add(panel_9, BorderLayout.CENTER);
-		panel_9.setLayout(new BorderLayout(0, 0));
+		BtnBack = new JPanel();
+		North.add(BtnBack, BorderLayout.CENTER);
+		BtnBack.setLayout(new BorderLayout(0, 0));
 		
-		panel_10 = new JPanel();
-		panel_10.setBorder(new EmptyBorder(0, 20, 0, 0));
-		panel_9.add(panel_10, BorderLayout.WEST);
-		panel_10.setLayout(new BorderLayout(0, 0));
+		BtnEcuAndInfo = new JPanel();
+		BtnEcuAndInfo.setBackground(COULEUR_MASTER_FOND);
+		BtnEcuAndInfo.setBorder(new EmptyBorder(0, 20, 0, 0));
+		BtnBack.add(BtnEcuAndInfo, BorderLayout.WEST);
+		BtnEcuAndInfo.setLayout(new BorderLayout(0, 0));
 		
-		panel_11 = new JPanel();
-		panel_9.add(panel_11, BorderLayout.CENTER);
-		panel_11.setLayout(new BorderLayout(0, 0));
+		Vide = new JPanel();
+		Vide.setBorder(null);
+		Vide.setBackground(COULEUR_MASTER_FOND);
+		BtnBack.add(Vide, BorderLayout.CENTER);
+		Vide.setLayout(new BorderLayout(0, 0));
 		JButton Ecuries = new JButton("Ecuries /");
+		Ecuries.setForeground(COULEUR_TEXTE);
 		Ecuries.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -128,9 +143,10 @@ public class InfoEcurie extends JPanel{
 		Ecuries.setContentAreaFilled(false);
 		Ecuries.setBorder(null);
 		Ecuries.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		panel_10.add(Ecuries, BorderLayout.WEST);
+		BtnEcuAndInfo.add(Ecuries, BorderLayout.WEST);
 		
 		JButton VoirInfo = new JButton(" Voir Info");
+		VoirInfo.setForeground(COULEUR_TEXTE);
 		VoirInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -139,12 +155,14 @@ public class InfoEcurie extends JPanel{
 		VoirInfo.setContentAreaFilled(false);
 		VoirInfo.setBorder(null);
 		VoirInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		panel_10.add(VoirInfo, BorderLayout.EAST);
+		BtnEcuAndInfo.add(VoirInfo, BorderLayout.EAST);
 		
-		panel_12 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_12.getLayout();
-		flowLayout.setVgap(10);
-		panel_9.add(panel_12, BorderLayout.NORTH);
+		Vide2 = new JPanel();
+		Vide2.setBorder(null);
+		Vide2.setBackground(COULEUR_MASTER_FOND);
+		FlowLayout fl_Vide2 = (FlowLayout) Vide2.getLayout();
+		fl_Vide2.setVgap(10);
+		BtnBack.add(Vide2, BorderLayout.NORTH);
 		
 		
 		
