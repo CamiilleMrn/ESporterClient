@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class TournoiInfo implements Infos, Serializable {
+public class TournoiInfo implements Infos, Serializable,  Comparable<TournoiInfo> {
 
 	/**
 	 * 
@@ -74,6 +74,13 @@ public class TournoiInfo implements Infos, Serializable {
 	public ArrayList<Poule> getPoule() {
 		return poule;
 	}
+
+	@Override
+	public int compareTo(TournoiInfo o) {
+		return this.getDateInscription().compareTo(o.getDateInscription());
+	}
+	
+	
 	
 	
 	
