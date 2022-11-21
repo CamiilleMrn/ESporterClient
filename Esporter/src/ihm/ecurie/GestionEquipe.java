@@ -98,7 +98,7 @@ public class GestionEquipe extends JPanel{
 		AjouterUneEquipe.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		AjouterUneEquipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MasterFrame.getInstance().setPanel(new AjouterEquipe((Jeu)comboBox.getSelectedItem()));
+				MasterFrame.getInstance().setPanel(AjouterEquipe.class, (Jeu)comboBox.getSelectedItem());
 				MasterFrame.getInstance().getMain().setVisible(true);
 			}
 		});

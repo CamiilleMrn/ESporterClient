@@ -25,8 +25,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.UnknownHostException;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
@@ -251,7 +254,7 @@ public class MasterFrame {
 					//LOGGED IN
 					user.logout();
 					setMenu(TypeMenu.Visiteurs);
-					setPanel(new ihm.visiteur.Accueil());
+					setPanel(ihm.visiteur.Accueil.class, null);
 					
 				} else {
 					//NOT LOG IN
@@ -325,11 +328,57 @@ public class MasterFrame {
 		}
 	}
 	
-	public void setPanel(JPanel p) {
+	public <T> void setPanel(Class<T> clazz, Object ob) {
 		BorderLayout layout = (BorderLayout)main.getLayout();
+		Constructor<T> ctor;
+		Object o = null;
+		try {
+			if (ob != null) {
+				ctor = clazz.getConstructor(ob.getClass());
+				o = ctor.newInstance(ob);
+			} else {
+				ctor = clazz.getConstructor((Class<?>[])null);
+				o = ctor.newInstance((Object[])null);
+			}
+			
+		} catch(NoSuchMethodException e) {
+			try {
+				ctor = clazz.getConstructor((Class<?>[])null);
+				o = ctor.newInstance((Object[])null);
+			} catch (NoSuchMethodException | SecurityException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (InstantiationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IllegalAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IllegalArgumentException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (InvocationTargetException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		T p = (T) o;
 		if (layout.getLayoutComponent(BorderLayout.CENTER)!=null)
 			main.remove(layout.getLayoutComponent(BorderLayout.CENTER));
-		main.add(p, BorderLayout.CENTER);
+		main.add((Component) p, BorderLayout.CENTER);
 		main.revalidate();
 		main.repaint();
 	}
