@@ -13,6 +13,8 @@ import java.awt.Insets;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,6 +40,7 @@ public class LogIn extends JPanel{
 	private JFrame frame;
 	private JTextField txtSaisirIdentifiant;
 	private JPasswordField txtSaisirPsw;
+	private JButton boutonConnexion;
 
 
 	/**
@@ -256,7 +259,7 @@ public class LogIn extends JPanel{
 		
 		constructeurBouttonAnnuler(btnAnnuler);
 		
-		JButton boutonConnexion = new JButton("  Connexion  \r\n");
+		boutonConnexion = new JButton("  Connexion  \r\n");
 		boutonConnexion.setVerticalTextPosition(SwingConstants.BOTTOM);
 		boutonConnexion.setVerticalAlignment(SwingConstants.BOTTOM);
 		boutonConnexion.setMargin(new Insets(14, 0, 14, 14));
@@ -272,6 +275,60 @@ public class LogIn extends JPanel{
 		
 		constructeurBouttonConnexion(boutonConnexion);
 		
+		constructeurBoutonEnter();
+		
+	}
+	
+	
+	public void constructeurBoutonEnter() {
+		txtSaisirIdentifiant.addKeyListener(new KeyListener() {
+					
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (isVisible()) {
+					if (e.getKeyCode()==KeyEvent.VK_ENTER){
+			            connection();
+			        }
+				}
+			}
+		});
+		
+		txtSaisirPsw.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (isVisible()) {
+					if (e.getKeyCode()==KeyEvent.VK_ENTER){
+						
+			            connection();
+			        }
+				}
+			}
+		});
 	}
 	
 	public void constructeurBouttonAnnuler(JButton boutonAnnuler) {
@@ -287,19 +344,27 @@ public class LogIn extends JPanel{
 	public void constructeurBouttonConnexion(JButton boutonConnexion) {
 		boutonConnexion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MasterFrame master = MasterFrame.getInstance();
-                try {
-                    String identifiant = txtSaisirIdentifiant.getText();
-                    String psw = new String(txtSaisirPsw.getPassword());
-
-                    master.getUser().login(identifiant, psw);
-                    setVisible(false);
-                    master.getMain().setVisible(true);
-                } catch (Exception e1) {
-                    master.error(e1);
-                }
+                connection();
             }
         });
+		
+	
+	}
+	
+	public void connection() {
+		requestFocus();
+		MasterFrame master = MasterFrame.getInstance();
+        try {
+            String identifiant = txtSaisirIdentifiant.getText();
+            String psw = new String(txtSaisirPsw.getPassword());
+
+            master.getUser().login(identifiant, psw);
+            setVisible(false);
+            master.getMain().setVisible(true);
+        } catch (Exception e1) {
+            master.error(e1);
+        }
+        txtSaisirPsw.setText(null);
 	}
 
 }

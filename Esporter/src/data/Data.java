@@ -1,8 +1,10 @@
 package data;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 import types.ClassementInfo;
@@ -48,7 +50,28 @@ public class Data implements Serializable, Infos {
 	public ArrayList<EcurieInfo> getListEcurie() {
 		Collection<EcurieInfo> values = this.ecuries.values();
 		ArrayList<EcurieInfo> listOfValues = new ArrayList<>(values);
+		Collections.sort(listOfValues);
 		return listOfValues;
+	}
+	
+	public ArrayList<TournoiInfo> listeTournoiTrie() {
+		Collection<TournoiInfo> values = this.calendrier.values();
+		ArrayList<TournoiInfo>  listOfVTournoiInfos = new ArrayList<>(values);
+		Collections.sort(listOfVTournoiInfos);
+		return listOfVTournoiInfos;
+	}
+	
+	public ArrayList<TournoiInfo> TournoiFiltreDate(Date date) {
+		Collection<TournoiInfo> values = this.calendrier.values();
+		ArrayList<TournoiInfo>  listOfVTournoiInfos = new ArrayList<>(values);
+		Collections.sort(listOfVTournoiInfos);
+		ArrayList<TournoiInfo> trieFiltre = new ArrayList<>();
+		for (TournoiInfo tournoi : listOfVTournoiInfos) {
+			if (tournoi.getDateInscription().compareTo(date)==0) {
+				trieFiltre.add(tournoi);
+			}
+		}
+		return trieFiltre;
 	}
 	
 }
