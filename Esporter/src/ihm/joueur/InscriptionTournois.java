@@ -26,6 +26,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.EmptyBorder;
 
 import ihm.MasterFrame;
+import types.exception.InvalidPermission;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import java.awt.SystemColor;
+import javax.swing.border.CompoundBorder;
 
 public class InscriptionTournois extends JDialog {
 
@@ -34,27 +39,13 @@ public class InscriptionTournois extends JDialog {
 	 */
 	private static final long serialVersionUID = -5369653307234398589L;
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InscriptionTournois window = new InscriptionTournois();
-					window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private int id;
 
 	/**
 	 * Create the application.
 	 */
-	public InscriptionTournois() {
+	public InscriptionTournois(int id) {
+		this.id= id;
 
 		initialize();
 		setModalityType(ModalityType.APPLICATION_MODAL);
@@ -69,39 +60,42 @@ public class InscriptionTournois extends JDialog {
 		getContentPane().setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		getContentPane().setLayout(new GridLayout(0, 3, 0, 0));
-		
-		JLabel label = new JLabel("");
-		getContentPane().add(label);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] {0};
+		gridBagLayout.rowHeights = new int[] {0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		getContentPane().setLayout(gridBagLayout);
 		
 		JPanel TextContainer = new JPanel();
 		TextContainer.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		getContentPane().add(TextContainer);
-		TextContainer.setLayout(new BoxLayout(TextContainer, BoxLayout.X_AXIS));
-		
-		Component horizontalGlue = Box.createHorizontalGlue();
-		TextContainer.add(horizontalGlue);
+		GridBagConstraints gbc_TextContainer = new GridBagConstraints();
+		gbc_TextContainer.insets = new Insets(0, 0, 5, 0);
+		gbc_TextContainer.gridx = 0;
+		gbc_TextContainer.gridy = 0;
+		getContentPane().add(TextContainer, gbc_TextContainer);
+		TextContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblNewLabel = new JLabel("Confirmer votre inscription");
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Cambria", Font.PLAIN, 10));
+		lblNewLabel.setFont(new Font("Cambria", Font.PLAIN, 16));
 		lblNewLabel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		lblNewLabel.setAlignmentX(0.5f);
 		TextContainer.add(lblNewLabel);
 		
-		Component horizontalGlue_1 = Box.createHorizontalGlue();
-		TextContainer.add(horizontalGlue_1);
-		
 		JPanel ButtonContainer = new JPanel();
 		ButtonContainer.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		getContentPane().add(ButtonContainer);
+		GridBagConstraints gbc_ButtonContainer = new GridBagConstraints();
+		gbc_ButtonContainer.gridx = 0;
+		gbc_ButtonContainer.gridy = 1;
+		getContentPane().add(ButtonContainer, gbc_ButtonContainer);
 		GridBagLayout gbl_ButtonContainer = new GridBagLayout();
 		gbl_ButtonContainer.columnWidths = new int[] {0};
-		gbl_ButtonContainer.rowHeights = new int[] {30, 0, 0};
-		gbl_ButtonContainer.columnWeights = new double[]{1.0};
-		gbl_ButtonContainer.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_ButtonContainer.rowHeights = new int[] {0};
+		gbl_ButtonContainer.columnWeights = new double[]{0.0};
+		gbl_ButtonContainer.rowWeights = new double[]{0.0, 1.0};
 		ButtonContainer.setLayout(gbl_ButtonContainer);
 		
 		JPanel panel = new JPanel();
@@ -110,21 +104,34 @@ public class InscriptionTournois extends JDialog {
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.anchor = GridBagConstraints.SOUTH;
 		gbc_panel.insets = new Insets(0, 0, 0, 5);
-		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		ButtonContainer.add(panel, gbc_panel);
 		
 		JButton btnNewButton = new JButton("Oui");
+		btnNewButton.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnNewButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		btnNewButton.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 164, 210), null, new Color(0, 164, 210), null), new EmptyBorder(5, 15, 5, 15)));
+		btnNewButton.setFont(new Font("Cambria", Font.PLAIN, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					MasterFrame.getInstance().getUser().inscriptionTournoi(id);
+					dispose();
+				} catch (InvalidPermission e1) {
+					
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEADING);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Non");
+		btnNewButton_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		btnNewButton_1.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnNewButton_1.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 164, 210), null, new Color(0, 164, 210), null), new EmptyBorder(5, 15, 5, 15)));
+		btnNewButton_1.setFont(new Font("Cambria", Font.PLAIN, 12));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

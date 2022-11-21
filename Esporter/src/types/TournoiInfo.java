@@ -28,6 +28,8 @@ public class TournoiInfo implements Infos, Serializable,  Comparable<TournoiInfo
 		this.renomme = renomme;
 		this.jeux = jeux;
 		this.id = id;
+		this.inscris = new ArrayList<>();
+		this.poule = new ArrayList<>();
 	}
 
 	public Date getDateInscription() {

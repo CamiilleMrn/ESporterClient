@@ -59,10 +59,14 @@ public class TournoisRendererJoueur extends JPanel{
 		panel.add(verticalGlue);
 		Insets i = lbInscriptionButton.getInsets();
 		i.set(10,10,10,10);
+		
+		if(tournoi.getInscris().contains(MasterFrame.getInstance().getUser().getInfo())) {
+			lbInscriptionButton.setVisible(false);
+		}
+		
 		lbInscriptionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JDialog confirmation = new InscriptionTournois();
-
+				JDialog confirmation = new InscriptionTournois(tournoi.getId());
 			}
 		});
 		lbInscriptionButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
