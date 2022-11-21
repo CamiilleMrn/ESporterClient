@@ -45,6 +45,7 @@ public class InfoEcurie extends JPanel{
         pan.setLayout(new GridLayout(0, 1));
         
         for(Titre t : liste) {
+        	System.out.println("titre");
 			System.out.println(t);
 			pan.add(new InfoEcuriePalmaRenderer(t));
 		}
@@ -77,7 +78,7 @@ public class InfoEcurie extends JPanel{
 		
 		JPanel Photo = new JPanel();
 		Photo.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		Photo.setBorder(new EmptyBorder(0, 50, 0, 0));
+		Photo.setBorder(new EmptyBorder(0, 100, 0, 0));
 		Center.add(Photo, BorderLayout.WEST);
 		Photo.setLayout(new BorderLayout(0, 0));
 		
@@ -108,7 +109,7 @@ public class InfoEcurie extends JPanel{
 		textField.setBackground(new Color(96, 96, 96));
 		Title.add(textField);
 		
-		JScrollPane scrollPaneCenter = new JScrollPane((Component) null);
+		JScrollPane scrollPaneCenter = new JScrollPane(createListPalma());
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		scrollPaneCenter.setBackground(new Color(96, 96, 96));
 		Palmares.add(scrollPaneCenter);

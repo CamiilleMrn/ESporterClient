@@ -20,9 +20,14 @@ import java.awt.Component;
 import javax.swing.Box;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 public class InfoEcuriePalmaRenderer extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private Titre titre;
 
@@ -34,6 +39,7 @@ public class InfoEcuriePalmaRenderer extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JPanel containerNamePalma = new JPanel();
+		containerNamePalma.setBackground(MasterFrame.COULEUR_MASTER_FOND );
 		add(containerNamePalma);
 		GridBagLayout gbl_containerNamePalma = new GridBagLayout();
 		gbl_containerNamePalma.columnWidths = new int[] {0};
@@ -49,7 +55,8 @@ public class InfoEcuriePalmaRenderer extends JPanel {
 		gbc_verticalGlue.gridy = 0;
 		containerNamePalma.add(verticalGlue, gbc_verticalGlue);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setForeground(MasterFrame.COULEUR_TEXTE);
 		lblNewLabel.setText(titre.getNom());
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
@@ -64,6 +71,7 @@ public class InfoEcuriePalmaRenderer extends JPanel {
 		containerNamePalma.add(verticalGlue_1, gbc_verticalGlue_1);
 		
 		JPanel containerYearPalma = new JPanel();
+		containerYearPalma.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		add(containerYearPalma);
 		GridBagLayout gbl_containerYearPalma = new GridBagLayout();
 		gbl_containerYearPalma.columnWidths = new int[] {0};
@@ -81,6 +89,7 @@ public class InfoEcuriePalmaRenderer extends JPanel {
 		containerYearPalma.add(verticalGlue_2, gbc_verticalGlue_2);
 		
 		JLabel lblNewLabel_1 = new JLabel();
+		lblNewLabel_1.setForeground(MasterFrame.COULEUR_TEXTE);
 		lblNewLabel_1.setText(titre.getObtention().toString());
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.NORTHWEST;
