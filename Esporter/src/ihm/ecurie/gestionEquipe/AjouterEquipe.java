@@ -97,7 +97,7 @@ public class AjouterEquipe extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MasterFrame.getInstance().setPanel(new AjouterEquipe((Jeu)comboBox.getSelectedItem()));
+				MasterFrame.getInstance().setPanel(AjouterEquipe.class, (Jeu)comboBox.getSelectedItem());
 				
 			}
 		});

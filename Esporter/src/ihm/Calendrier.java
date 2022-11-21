@@ -31,6 +31,7 @@ import ihm.ecurie.TournoisRendererEcurie;
 import ihm.joueur.TournoisRendererJoueur;
 import ihm.visiteur.TournoisRendererVisiteurs;
 import types.Jeu;
+import types.Permission;
 import types.Renomme;
 import types.TournoiInfo;
 
@@ -38,14 +39,10 @@ public class Calendrier extends JPanel{
 	
 	private JTextField TexteDate;
 	private JTextField txtCalendrierDesTournois;
+	private Permission permission;
 	
 	private JPanel createListTournament() {
-		HashMap<Integer, TournoiInfo> map = new HashMap<>();
-        map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        map.put(3,new TournoiInfo(Date.valueOf("2022-11-11"), "TestTournois 3", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        map.put(4,new TournoiInfo(Date.valueOf("2022-11-12"), "TestTournois 4", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
-        map.put(5,new TournoiInfo(Date.valueOf("2022-11-13"), "TestTournois 5", Renomme.LOCAL, new ArrayList<Jeu>() , 0));
+		HashMap<Integer, TournoiInfo> map = MasterFrame.getInstance().getUser().getData().getCalendrier();
         
         JPanel pan = new JPanel();
         pan.setLayout(new GridLayout(0, 1));
@@ -58,7 +55,7 @@ public class Calendrier extends JPanel{
 			
 			TournoiInfo t = ite.next();
 			System.out.println(t);
-			switch(MasterFrame.getInstance().getUser().getPermission()) {
+			switch(permission) {
 				case VISITEUR :
 					pan.add(new TournoisRendererVisiteurs(t));
 					break;
@@ -70,13 +67,17 @@ public class Calendrier extends JPanel{
 					break;
 				case ARBITRE :
 					pan.add(new TournoisRendererArbitre(t));
+					break;
+				case ORGANISATEUR :
+					break;
 			}
 			
 		}
 		return pan;
 	}
 	
-	public Calendrier() {
+	public Calendrier(Permission permission) {
+		this.permission = permission;
 		initialize();
 	}
 	

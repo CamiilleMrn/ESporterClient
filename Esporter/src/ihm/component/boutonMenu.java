@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.GradientPaint;
 
 import ihm.MasterFrame;
+import types.Permission;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -33,21 +35,23 @@ public class boutonMenu extends JRadioButton{
 	 * 
 	 */
 	private static final long serialVersionUID = 8366959265584745626L;
-	private JPanel panelToChange;
+	private Class panelToChange;
 	private boolean mouseIn;
 	private int mouseX;
 	private boolean exited;
 	private float alphaFadeOut;
 	private Graphics2D g2;
 	private Timer timer;
+	private Permission permission;
 	
-	public boutonMenu(boolean selected,String texte, JPanel panelToChange) {
+	public boutonMenu(boolean selected,String texte, Class panelToChange, Permission permission) {
 		super(texte, new ImageIcon());
 		
 
 		mouseIn=false;
 		exited=false;
 		alphaFadeOut=1.0f;
+		this.permission = permission;
 		setSelected(selected);
 		setFocusPainted(false);
 		setText(texte);
@@ -63,7 +67,7 @@ public class boutonMenu extends JRadioButton{
 				if (!isSelected()) {
 					setSelected(true);
 					
-					MasterFrame.getInstance().setPanel(panelToChange);
+					MasterFrame.getInstance().setPanel(panelToChange, permission);
 					MasterFrame.getInstance().getFrame().repaint();
 				}
 			}
