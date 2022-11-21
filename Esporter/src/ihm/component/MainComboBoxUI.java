@@ -1,15 +1,18 @@
 package ihm.component;
 
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JList;
 import javax.swing.LookAndFeel;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import ihm.MasterFrame;
+import types.Jeu;
 
 public class MainComboBoxUI {
 	
@@ -32,9 +35,6 @@ public class MainComboBoxUI {
             return button;
         }
         
-        public static ComponentUI createUI(JComponent c) {
-        	return new MyComboBoxUI();
-        }
     }
 	
 	public static ComponentUI createUI(JComponent c) {

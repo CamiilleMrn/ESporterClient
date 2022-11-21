@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -34,6 +35,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.SwingConstants;
 
 public class GestionEquipe extends JPanel{
@@ -78,6 +80,21 @@ public class GestionEquipe extends JPanel{
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
+		comboBox.setRenderer(new DefaultListCellRenderer() {;
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public Component getListCellRendererComponent(JList<?> list, Object value,
+	                int index,
+	                boolean isSelected,
+	                boolean cellHasFocus) { 
+				value = ((Jeu) value).getNom();
+	        	return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+	        }
+		});
+		
 		comboBox.setUI((ComboBoxUI) MainComboBoxUI.createUI(comboBox));
 		comboBox.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		comboBox.setFont(new Font("Cambria", Font.PLAIN, 15));

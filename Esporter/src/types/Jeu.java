@@ -38,7 +38,5 @@ public enum Jeu implements Infos, Serializable {
 	}
 	
 	
-	
-	
 
 }
