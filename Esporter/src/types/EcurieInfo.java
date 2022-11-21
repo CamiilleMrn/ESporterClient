@@ -6,7 +6,7 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class EcurieInfo implements Infos, Serializable, Comparable<EcurieInfo> {
+public class EcurieInfo implements Infos, Serializable,  Comparable<EcurieInfo> {
 
 	/**
 	 * 
@@ -36,6 +36,10 @@ public class EcurieInfo implements Infos, Serializable, Comparable<EcurieInfo> {
 		return nom;
 	}
 
+	public void setPalmares(ArrayList<Titre> palmares) {
+		this.palmares = palmares;
+	}
+	
 	public Blob getLogo() {
 		return logo;
 	}
@@ -63,13 +67,11 @@ public class EcurieInfo implements Infos, Serializable, Comparable<EcurieInfo> {
 		}
 		this.equipes.get(j.getId_equipe()).ajouterJoueur(j);
 	}
-
+	
 	@Override
 	public int compareTo(EcurieInfo o) {
 		return this.getNom().compareTo(o.getNom());
 	}
-	
-	
 	
 	
 	

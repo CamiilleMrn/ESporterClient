@@ -25,6 +25,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
+import types.JoueurInfo;
 import types.TournoiInfo;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -60,7 +61,7 @@ public class TournoisRendererJoueur extends JPanel{
 		Insets i = lbInscriptionButton.getInsets();
 		i.set(10,10,10,10);
 		
-		if(tournoi.getInscris().contains(MasterFrame.getInstance().getUser().getInfo())) {
+		if(tournoi.getInscris().contains(((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getId())) {
 			lbInscriptionButton.setVisible(false);
 		}
 		
