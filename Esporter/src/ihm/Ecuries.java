@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.EmptyBorder;
 
+import ihm.component.DataJPanel;
 import ihm.component.EcurieRenderer;
 import types.EcurieInfo;
 import types.TournoiInfo;
@@ -22,17 +23,18 @@ import types.TournoiInfo;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-public class Ecuries extends JPanel {
+public class Ecuries extends DataJPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5774382066208287732L;
 	private JTextField nothing;
+	private JPanel pan;
 	
-	private JPanel createEcurieInfo() {
+	private void createEcurieInfo() {
 		HashMap<Integer, EcurieInfo> map = MasterFrame.getInstance().getUser().getData().getEcuries();
         
-        JPanel pan = new JPanel();
+        
         pan.setLayout(new GridLayout(0, 1));
         
         Iterator<EcurieInfo> ite = map.values().iterator();
@@ -42,8 +44,6 @@ public class Ecuries extends JPanel {
 			System.out.println(t);
 			pan.add(new EcurieRenderer(t));
 		}
-		
-        return pan;
        
 	}
 	
@@ -75,12 +75,21 @@ public class Ecuries extends JPanel {
 		nothing.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(nothing);
 		nothing.setColumns(20);
-		
-		JScrollPane scrollPaneCenter = new JScrollPane(createEcurieInfo());
+		pan = new JPanel();
+		createEcurieInfo();
+		JScrollPane scrollPaneCenter = new JScrollPane(pan);
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panel.add(scrollPaneCenter, BorderLayout.CENTER);
 
+	}
+
+	@Override
+	public void dataUpdate() {
+		pan.removeAll();
+		createEcurieInfo();
+		revalidate();
+		validate();
 	}
 
 }
