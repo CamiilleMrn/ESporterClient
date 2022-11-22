@@ -20,7 +20,7 @@ public class WaitingFor {
 				System.out.println("Waiting for "+goal);
 				while (continueWaiting()) {
 					try {
-						Thread.sleep(500);
+						Thread.sleep(50);
 					} catch (InterruptedException e) {}
 				}
 				System.out.println("Not waiting anymore");

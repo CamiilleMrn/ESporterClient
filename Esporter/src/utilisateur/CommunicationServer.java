@@ -8,6 +8,8 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.SwingUtilities;
+
 import data.Data;
 import ihm.MasterFrame;
 import socket.Command;
@@ -83,7 +85,8 @@ public class CommunicationServer implements Runnable{
 		while (run) {
 			try {
 				traiterReponse((ResponseObject)in.readObject());
-			} catch (ClassNotFoundException e) {
+			} catch (ClassNotFoundException e2) {
+				e2.printStackTrace();
 			} catch (IOException e) {
 				try {
 					reconnect();
@@ -99,9 +102,7 @@ public class CommunicationServer implements Runnable{
 		HashMap<InfoID, Infos> m = new HashMap<>();
 		m.put(InfoID.login, new Login(username, mdp));
 		Command c = new Command(CommandName.LOGIN, m);
-		System.out.println("Send login");
 		send(c);
-		System.out.println("Done");
 	}
 	
 	public void inscriptionTournoi(int idTournoi) {
@@ -144,7 +145,6 @@ public class CommunicationServer implements Runnable{
 		if (r.getInfo().containsKey(InfoID.Joueur)) {
 			user.setInfo(r.getInfoByID(InfoID.Joueur));
 		}
-		System.out.println(user.getInfo());
 	}
 	
 	public void send (Command c) {
@@ -178,9 +178,7 @@ public class CommunicationServer implements Runnable{
 			user.getWaiting().setActualState(Response.ERROR_PERMISSION);
 			break;
 		case LOGIN:
-			System.out.println("Receive login auth\n"+r);
 			receiveLogin(r);
-			System.out.println("Done");
 			user.getWaiting().setActualState(r.getName());
 			break;
 		case UPDATE_CALENDRIER:
@@ -190,11 +188,13 @@ public class CommunicationServer implements Runnable{
 		case UPDATE_TOURNOI:
 			TournoiInfo tournoi = (TournoiInfo)r.getInfoByID(InfoID.Tournoi);
 			user.getData().getCalendrier().put(tournoi.getId(), tournoi);
-			
+			MasterFrame.getInstance().dataUpdate();
+			System.out.println("Data update...");
 			break;
 		case UPDATE_ALL:
 			user.setData((Data)r.getInfo().get(InfoID.all));
 			user.getWaiting().setActualState(Response.UPDATE_ALL);
+			
 			break;
 		case Error:
 			MasterFrame.getInstance().getError().setState(new Exception("Vous etes deja inscrit"), false);

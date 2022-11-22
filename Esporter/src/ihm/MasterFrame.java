@@ -34,6 +34,7 @@ import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
 
+import ihm.component.DataJPanel;
 import ihm.component.boutonMenu;
 import ihm.erreur.Error;
 import ihm.erreur.ErrorPanel;
@@ -69,6 +70,7 @@ public class MasterFrame {
 	private JLabel nomCompte;
 	private JLabel logoCompte;
 	private JButton boutonConnection;
+	private static volatile DataJPanel currentMainPanel = null;
 
 	/**
 	 * Launch the application.
@@ -281,6 +283,14 @@ public class MasterFrame {
 		return main;
 	}
 	
+	public DataJPanel getCurrentMainPanel() {
+		return currentMainPanel;
+	}
+	
+	public void setCurrentMainPanel(DataJPanel currentMainPanel) {
+		MasterFrame.currentMainPanel = currentMainPanel;
+	}
+	
 	
 	public void setMenu(TypeMenu m) {
 		panelMenu.removeAll();
@@ -335,8 +345,7 @@ public class MasterFrame {
 		}
 	}
 	
-	public <T> void setPanel(Class<T> clazz, Object ob) {
-		System.out.println(clazz);
+	public <T extends JPanel> void setPanel(Class<T> clazz, Object ob) {
 		BorderLayout layout = (BorderLayout)main.getLayout();
 		Constructor<T> ctor;
 		Object o = null;
@@ -389,6 +398,19 @@ public class MasterFrame {
 		main.add((Component) p, BorderLayout.CENTER);
 		main.revalidate();
 		main.repaint();
+		if (p instanceof DataJPanel) {
+			setCurrentMainPanel((DataJPanel)p);
+		} else {
+			setCurrentMainPanel(null);
+		}
+	}
+	
+	public void dataUpdate() {
+		if (currentMainPanel!=null) {
+			//setPanel(currentMainPanel.getClass(), user.getPermission());
+			
+			currentMainPanel.dataUpdate();
+		}
 	}
 	
 	public JFrame getFrame() {

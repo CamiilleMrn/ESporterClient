@@ -2,6 +2,7 @@ package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -25,6 +26,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ComboBoxUI;
 
 import ihm.arbitre.TournoisRendererArbitre;
+import ihm.component.DataJPanel;
 import ihm.component.DatePicker;
 import ihm.component.MainComboBoxUI;
 import ihm.ecurie.TournoisRendererEcurie;
@@ -35,16 +37,18 @@ import types.Permission;
 import types.Renomme;
 import types.TournoiInfo;
 
-public class Calendrier extends JPanel{
+public class Calendrier extends DataJPanel{
 	
 	private JTextField TexteDate;
 	private JTextField txtCalendrierDesTournois;
 	private Permission permission;
+	private JPanel root;
+	private JPanel pan;
 	
 	private JPanel createListTournament() {
 		HashMap<Integer, TournoiInfo> map = MasterFrame.getInstance().getUser().getData().getCalendrier();
         
-        JPanel pan = new JPanel();
+        
         pan.setLayout(new GridLayout(0, 1));
 
 		
@@ -83,7 +87,7 @@ public class Calendrier extends JPanel{
 	
 	public void initialize() {
 		setLayout(new BorderLayout(0, 0));
-		JPanel root = new JPanel();
+		root = new JPanel();
 		root.setLayout(new BorderLayout());
 		add(root, BorderLayout.CENTER);
 		JPanel dummy = new JPanel();
@@ -105,8 +109,9 @@ public class Calendrier extends JPanel{
 		dummy.add(txtCalendrierDesTournois);
 		txtCalendrierDesTournois.setColumns(20);
 		
-		
-		JScrollPane scrollPaneCenter = new JScrollPane(createListTournament());
+		pan = new JPanel();
+		createListTournament();
+		JScrollPane scrollPaneCenter = new JScrollPane(pan);
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		root.add(scrollPaneCenter, BorderLayout.CENTER);
@@ -161,6 +166,14 @@ public class Calendrier extends JPanel{
 		
 		panel_3.add(FiltrerLesJeux);
 		
+	}
+
+	@Override
+	public void dataUpdate() {
+		pan.removeAll();
+		createListTournament();
+		revalidate();
+		validate();
 	}
 
 }

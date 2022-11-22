@@ -25,13 +25,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
+import ihm.component.DataJPanel;
 import types.JoueurInfo;
 import types.TournoiInfo;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TournoisRendererJoueur extends JPanel{
+public class TournoisRendererJoueur extends DataJPanel{
 	
 	private JLabel lbTournamentName = new JLabel();
 	private JButton lbArrowIcon = new JButton();
@@ -61,7 +62,7 @@ public class TournoisRendererJoueur extends JPanel{
 		Insets i = lbInscriptionButton.getInsets();
 		i.set(10,10,10,10);
 		
-		if(tournoi.getInscris().contains(((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getId())) {
+		if(tournoi.getInscris().contains(((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getId_equipe())) {
 			lbInscriptionButton.setVisible(false);
 		}
 		
@@ -98,6 +99,14 @@ public class TournoisRendererJoueur extends JPanel{
 		}
 		
 	}
+	
+	public void dataUpdate() {
+		if(tournoi.getInscris().contains(((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getId_equipe())) {
+			lbInscriptionButton.setVisible(false);
+		}
+	}
+	
+	
 
 
 

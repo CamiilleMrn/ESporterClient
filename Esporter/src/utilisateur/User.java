@@ -24,13 +24,14 @@ public class User {
 	private Thread t;
 	private Infos info;
 	private WaitingFor waiting;
-	private Data data;
+	private static volatile Data data;
 
 	public User() throws UnknownHostException, IOException {
 		this.permission = Permission.VISITEUR;
 		this.com = new CommunicationServer(this);
 		this.waiting = new WaitingFor();
 		this.t = new Thread(com);
+		t.setDaemon(true);
 		t.start();
 		com.initializeApp();
 		waiting.waitFor(Response.UPDATE_ALL);
@@ -42,7 +43,7 @@ public class User {
 	}
 	
 	public void setData(Data data) {
-		this.data = data;
+		User.data = data;
 	}
 	
 	public CommunicationServer getCom() {
