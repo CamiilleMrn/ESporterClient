@@ -1,29 +1,21 @@
 package ihm.ecurie;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ComboBoxUI;
 
 import ihm.MasterFrame;
-import ihm.component.MainComboBoxUI;
+import ihm.component.ComboBoxRendererArrow;
+import ihm.component.ComboBoxRendererCell;
+import ihm.component.ComboBoxRendererEditor;
 import ihm.ecurie.gestionEquipe.AjouterEquipe;
 import types.Jeu;
 
 import javax.swing.JList;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import java.awt.FlowLayout;
@@ -31,11 +23,6 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.SwingConstants;
 
 public class GestionEquipe extends JPanel{
@@ -43,7 +30,6 @@ public class GestionEquipe extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = -2160024974466737852L;
-	private JList<String> langages;
 	private JList<String> listTournoi;
 	private JTextField txtGestionDesquipes;
 	
@@ -80,26 +66,9 @@ public class GestionEquipe extends JPanel{
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
-		comboBox.setRenderer(new DefaultListCellRenderer() {;
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			public Component getListCellRendererComponent(JList<?> list, Object value,
-	                int index,
-	                boolean isSelected,
-	                boolean cellHasFocus) { 
-				value = ((Jeu) value).getNom();
-	        	return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-	        }
-		});
-		
-		comboBox.setUI((ComboBoxUI) MainComboBoxUI.createUI(comboBox));
-		comboBox.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
-		comboBox.setFont(new Font("Cambria", Font.PLAIN, 15));
-		comboBox.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		comboBox.setForeground(MasterFrame.COULEUR_TEXTE);
+		comboBox.setRenderer(new ComboBoxRendererCell());
+		comboBox.setEditor(new ComboBoxRendererEditor());
+		comboBox.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBox));
 		
 		panel_3.add(comboBox);
 	
