@@ -10,22 +10,29 @@ import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 
+import ihm.component.DataJPanel;
 import ihm.component.InfoEcuriePalmaRenderer;
 import types.EcurieInfo;
 import types.Titre;
 
 import javax.swing.JScrollPane;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Color;
 import javax.swing.BoxLayout;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
-public class InfoEcurie extends JPanel{
+public class InfoEcurie extends DataJPanel{
 
 	private JTextField NomDelEcurie;
 	private JPanel North;
@@ -37,19 +44,20 @@ public class InfoEcurie extends JPanel{
 	private JPanel Center;
 	private EcurieInfo ecurie;
 	private JTextField textField;
+	private JScrollPane scrollPaneCenter;
+	private JPanel pan;
+	private JPanel containerImg;
+	private JLabel lblLogoEcurie = new JLabel();
 	
-	public JPanel createListPalma() {
+	public void createListPalma() {
+		pan.removeAll();
 		ArrayList<Titre> liste = ecurie.getPalmares();
-		
-		JPanel pan = new JPanel();
-        pan.setLayout(new GridLayout(0, 1));
         
         for(Titre t : liste) {
         	System.out.println("titre");
 			System.out.println(t);
 			pan.add(new InfoEcuriePalmaRenderer(t));
 		}
-		return pan;
 	}
 	
 	/**
@@ -64,6 +72,7 @@ public class InfoEcurie extends JPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		pan = new JPanel();
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel all = new JPanel();
@@ -74,32 +83,28 @@ public class InfoEcurie extends JPanel{
 		Center = new JPanel();
 		Center.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		all.add(Center, BorderLayout.CENTER);
-		Center.setLayout(new BorderLayout(15, 0));
+		Center.setLayout(new BoxLayout(Center, BoxLayout.X_AXIS));
 		
-		JPanel Photo = new JPanel();
-		Photo.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		Photo.setBorder(new EmptyBorder(0, 100, 0, 0));
-		Center.add(Photo, BorderLayout.WEST);
-		Photo.setLayout(new BorderLayout(0, 0));
+		containerImg = new JPanel();
+		Center.add(containerImg);
+		containerImg.setLayout(new BoxLayout(containerImg, BoxLayout.X_AXIS));
 		
-		JLabel Image = new JLabel("");
-		Image.setIcon(new ImageIcon(InfoEcurie.class.getResource("/ihm/images/karmine-corp.jpg")));
-		Image.setHorizontalAlignment(SwingConstants.CENTER);
-
-		Photo.add(Image);
+		containerImg.add(lblLogoEcurie);
+		try {
+			lblLogoEcurie.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("images/karmine-corp.jpg"))));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		lblLogoEcurie.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JPanel Palmares = new JPanel();
-		Center.add(Palmares);
-		Palmares.setLayout(new BoxLayout(Palmares, BoxLayout.Y_AXIS));
 		
 		JPanel Title = new JPanel();
-		Title.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		Palmares.add(Title);
+		Title.setBackground(new Color(96, 96, 96));
+		Center.add(Title);
 		Title.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		textField = new JTextField();
-		textField.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		textField.setAlignmentY(Component.TOP_ALIGNMENT);
 		textField.setText("Palmarès");
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setForeground(Color.WHITE);
@@ -107,12 +112,15 @@ public class InfoEcurie extends JPanel{
 		textField.setEditable(false);
 		textField.setBorder(null);
 		textField.setBackground(new Color(96, 96, 96));
+		textField.setAlignmentY(0.0f);
+		textField.setAlignmentX(1.0f);
 		Title.add(textField);
 		
-		JScrollPane scrollPaneCenter = new JScrollPane(createListPalma());
+		createListPalma();
+		scrollPaneCenter = new JScrollPane(pan);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		scrollPaneCenter.setBackground(new Color(96, 96, 96));
-		Palmares.add(scrollPaneCenter);
+		Title.add(scrollPaneCenter);
 		
 		North = new JPanel();
 		all.add(North, BorderLayout.NORTH);
@@ -178,6 +186,12 @@ public class InfoEcurie extends JPanel{
 		fl_Vide2.setVgap(10);
 		BtnBack.add(Vide2, BorderLayout.NORTH);
 				
+	}
+
+	@Override
+	public void dataUpdate() {
+		createListPalma();
+		
 	}
 
 }
