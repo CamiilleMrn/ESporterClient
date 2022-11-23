@@ -77,6 +77,12 @@ public class AjouterunJoueur extends JDialog
 		public static final Color COULEUR_TEXTE = Color.WHITE;
 		private JPanel PanelBtnValider;
 		private JButton BtnValider;
+		private JTextField titleidentifiant;
+		private JPanel panelIdentifiant;
+		private JTextField identifianttxt;
+		private JTextField txtMotDePasse;
+		private JPanel panel;
+		private JTextField textField_1;
 
 
 	/**
@@ -91,7 +97,7 @@ public class AjouterunJoueur extends JDialog
 		//set close operation on frame
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		//set bounds of frame
-		setBounds(100, 100, 563, 316);
+		setBounds(100, 100, 617, 341);
 		//create new JPanel in contentPane
 		contentPane = new JPanel();
 		contentPane.setBackground(COULEUR_MASTER_FOND);
@@ -214,9 +220,9 @@ public class AjouterunJoueur extends JDialog
 		contentPane.add(panelInfo, BorderLayout.EAST);
 		GridBagLayout gbl_panelInfo = new GridBagLayout();
 		gbl_panelInfo.columnWidths = new int[] {136, 136};
-		gbl_panelInfo.rowHeights = new int[] {53, 53, 52};
-		gbl_panelInfo.columnWeights = new double[]{0.0, 0.0};
-		gbl_panelInfo.rowWeights = new double[]{1.0, 0.0, 0.0};
+		gbl_panelInfo.rowHeights = new int[] {53, 53, 52, 0, 0};
+		gbl_panelInfo.columnWeights = new double[]{1.0, 1.0};
+		gbl_panelInfo.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0, 1.0};
 		panelInfo.setLayout(gbl_panelInfo);
 						
 						TexteNom = new JTextField();
@@ -228,18 +234,20 @@ public class AjouterunJoueur extends JDialog
 						TexteNom.setText("Nom   :");
 						TexteNom.setEditable(false);
 						GridBagConstraints gbc_TexteNom = new GridBagConstraints();
+						gbc_TexteNom.insets = new Insets(0, 0, 5, 5);
 						gbc_TexteNom.fill = GridBagConstraints.BOTH;
 						gbc_TexteNom.gridx = 0;
 						gbc_TexteNom.gridy = 0;
 						panelInfo.add(TexteNom, gbc_TexteNom);
 						
-						TexteNom.setColumns(9);
+						TexteNom.setColumns(10);
 						
 						PanelNomTxt = new JPanel();
 						FlowLayout flowLayout = (FlowLayout) PanelNomTxt.getLayout();
 						flowLayout.setVgap(0);
-						flowLayout.setHgap(0);
+						flowLayout.setHgap(3);
 						GridBagConstraints gbc_PanelNomTxt = new GridBagConstraints();
+						gbc_PanelNomTxt.insets = new Insets(0, 0, 5, 0);
 						gbc_PanelNomTxt.gridx = 1;
 						gbc_PanelNomTxt.gridy = 0;
 						panelInfo.add(PanelNomTxt, gbc_PanelNomTxt);
@@ -248,7 +256,7 @@ public class AjouterunJoueur extends JDialog
 						TexteDuNom.setBorder(null);
 						TexteDuNom.setFont(new Font("Tahoma", Font.PLAIN, 15));
 						TexteDuNom.setHorizontalAlignment(SwingConstants.CENTER);
-						TexteDuNom.setColumns(10);
+						TexteDuNom.setColumns(12);
 						PanelNomTxt.add(TexteDuNom);
 						
 
@@ -262,6 +270,7 @@ public class AjouterunJoueur extends JDialog
 						Prenom.setFont(new Font("Tahoma", Font.PLAIN, 15));
 						Prenom.setEditable(false);
 						GridBagConstraints gbc_Prenom = new GridBagConstraints();
+						gbc_Prenom.insets = new Insets(0, 0, 5, 5);
 						gbc_Prenom.fill = GridBagConstraints.BOTH;
 						gbc_Prenom.gridx = 0;
 						gbc_Prenom.gridy = 1;
@@ -270,31 +279,37 @@ public class AjouterunJoueur extends JDialog
 						
 						PanelPrenomTxt = new JPanel();
 						GridBagConstraints gbc_PanelPrenomTxt = new GridBagConstraints();
+						gbc_PanelPrenomTxt.insets = new Insets(0, 0, 5, 0);
 						gbc_PanelPrenomTxt.gridx = 1;
 						gbc_PanelPrenomTxt.gridy = 1;
 						panelInfo.add(PanelPrenomTxt, gbc_PanelPrenomTxt);
-						PanelPrenomTxt.setLayout(new BorderLayout(0, 0));
+						PanelPrenomTxt.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 0));
 						
 						textPrenom = new JTextField();
 						textPrenom.setBorder(null);
 						textPrenom.setHorizontalAlignment(SwingConstants.CENTER);
 						textPrenom.setFont(new Font("Tahoma", Font.PLAIN, 15));
-						textPrenom.setColumns(10);
-						PanelPrenomTxt.add(textPrenom, BorderLayout.CENTER);
+						textPrenom.setColumns(12);
+						PanelPrenomTxt.add(textPrenom);
 		
 		PanelNaisTxt = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) PanelNaisTxt.getLayout();
+		flowLayout_1.setVgap(10);
+		flowLayout_1.setHgap(3);
 		PanelNaisTxt.setBackground(COULEUR_MASTER_FOND);
+		PanelNaisTxt.setBorder(null);
 		GridBagConstraints gbc_PanelNaisTxt = new GridBagConstraints();
+		gbc_PanelNaisTxt.insets = new Insets(0, 0, 5, 0);
 		gbc_PanelNaisTxt.gridx = 1;
 		gbc_PanelNaisTxt.gridy = 2;
 		panelInfo.add(PanelNaisTxt, gbc_PanelNaisTxt);
 		
 		TextePrenom = new JTextField();
 		TextePrenom.setBorder(null);
-		TextePrenom.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		TextePrenom.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		PanelNaisTxt.add(TextePrenom);
 		TextePrenom.setHorizontalAlignment(SwingConstants.CENTER);
-		TextePrenom.setColumns(10);
+		TextePrenom.setColumns(11);
 		
 		TroisPoint3 = new JButton("...");
 		TroisPoint3.setBorder(null);
@@ -306,7 +321,7 @@ public class AjouterunJoueur extends JDialog
 				TextePrenom.setText(new DatePicker(f).setPickedDate());
 			}
 		});
-		TroisPoint3.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		TroisPoint3.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		TroisPoint3.setFocusPainted(false);
 		TroisPoint3.setContentAreaFilled(false);
 		PanelNaisTxt.add(TroisPoint3);
@@ -320,11 +335,77 @@ public class AjouterunJoueur extends JDialog
 						DateDeNaissance.setText("Date de naissance");
 						DateDeNaissance.setEditable(false);
 						GridBagConstraints gbc_DateDeNaissance = new GridBagConstraints();
+						gbc_DateDeNaissance.insets = new Insets(0, 0, 5, 5);
 						gbc_DateDeNaissance.fill = GridBagConstraints.BOTH;
 						gbc_DateDeNaissance.gridx = 0;
 						gbc_DateDeNaissance.gridy = 2;
 						panelInfo.add(DateDeNaissance, gbc_DateDeNaissance);
 						DateDeNaissance.setColumns(10);
+						
+						titleidentifiant = new JTextField();
+						titleidentifiant.setHorizontalAlignment(SwingConstants.CENTER);
+						titleidentifiant.setBackground(COULEUR_MASTER_FOND);
+						titleidentifiant.setForeground(COULEUR_TEXTE);
+						titleidentifiant.setBorder(null);
+						titleidentifiant.setText("Identifiant :");
+						titleidentifiant.setEditable(false);
+						titleidentifiant.setFont(new Font("Tahoma", Font.PLAIN, 15));
+						GridBagConstraints gbc_titleidentifiant = new GridBagConstraints();
+						gbc_titleidentifiant.insets = new Insets(0, 0, 5, 5);
+						gbc_titleidentifiant.fill = GridBagConstraints.HORIZONTAL;
+						gbc_titleidentifiant.gridx = 0;
+						gbc_titleidentifiant.gridy = 3;
+						panelInfo.add(titleidentifiant, gbc_titleidentifiant);
+						titleidentifiant.setColumns(10);
+						
+						panelIdentifiant = new JPanel();
+						panelIdentifiant.setBorder(null);
+						panelIdentifiant.setBackground(COULEUR_MASTER_FOND);
+						FlowLayout fl_panelIdentifiant = (FlowLayout) panelIdentifiant.getLayout();
+						fl_panelIdentifiant.setVgap(0);
+						fl_panelIdentifiant.setHgap(3);
+						GridBagConstraints gbc_panelIdentifiant = new GridBagConstraints();
+						gbc_panelIdentifiant.insets = new Insets(0, 0, 5, 0);
+						gbc_panelIdentifiant.gridx = 1;
+						gbc_panelIdentifiant.gridy = 3;
+						panelInfo.add(panelIdentifiant, gbc_panelIdentifiant);
+						
+						identifianttxt = new JTextField();
+						identifianttxt.setFont(new Font("Tahoma", Font.PLAIN, 12));
+						identifianttxt.setHorizontalAlignment(SwingConstants.CENTER);
+						panelIdentifiant.add(identifianttxt);
+						identifianttxt.setColumns(15);
+						
+						txtMotDePasse = new JTextField();
+						txtMotDePasse.setBackground(COULEUR_MASTER_FOND);
+						txtMotDePasse.setForeground(COULEUR_TEXTE);
+						txtMotDePasse.setBorder(null);
+						txtMotDePasse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+						txtMotDePasse.setText("Mot de passe :");
+						txtMotDePasse.setHorizontalAlignment(SwingConstants.CENTER);
+						GridBagConstraints gbc_txtMotDePasse = new GridBagConstraints();
+						gbc_txtMotDePasse.insets = new Insets(0, 0, 0, 5);
+						gbc_txtMotDePasse.fill = GridBagConstraints.HORIZONTAL;
+						gbc_txtMotDePasse.gridx = 0;
+						gbc_txtMotDePasse.gridy = 4;
+						panelInfo.add(txtMotDePasse, gbc_txtMotDePasse);
+						txtMotDePasse.setColumns(10);
+						
+						panel = new JPanel();
+						FlowLayout flowLayout_2 = (FlowLayout) panel.getLayout();
+						flowLayout_2.setHgap(3);
+						panel.setBorder(null);
+						panel.setBackground(COULEUR_MASTER_FOND);
+						GridBagConstraints gbc_panel = new GridBagConstraints();
+						gbc_panel.fill = GridBagConstraints.BOTH;
+						gbc_panel.gridx = 1;
+						gbc_panel.gridy = 4;
+						panelInfo.add(panel, gbc_panel);
+						
+						textField_1 = new JTextField();
+						textField_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+						panel.add(textField_1);
+						textField_1.setColumns(15);
 		panelphoto = new JPanel();
 		contentPane.add(panelphoto, BorderLayout.CENTER);
 		panelphoto.setLayout(new BorderLayout(0, 0));
@@ -336,7 +417,7 @@ public class AjouterunJoueur extends JDialog
 				JFileChooser file = new JFileChooser();
 		        file.setCurrentDirectory(new File(System.getProperty("user.home")));
 		        //filtrer les fichiers
-		        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images","jpg","png");
+		        FileNameExtensionFilter filter = new FileNameExtensionFilter(".jpg",".png");
 		        file.addChoosableFileFilter(filter);
 		        int res = file.showSaveDialog(null);
 		        //si l'utilisateur clique sur enregistrer dans Jfilechooser
@@ -358,5 +439,13 @@ public class AjouterunJoueur extends JDialog
 		panelphoto.add(TexteDemanderLaPhotoDuJoueur, BorderLayout.NORTH);
 		TexteDemanderLaPhotoDuJoueur.setColumns(10);
 		TexteDemanderLaPhotoDuJoueur.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		/*
+		String nom = TexteDuNom.getText();
+		String prenom = TexteDu
+		
+		//JoueurInfo joueur = new JoueurInfo(-1,nom, );
+		container.setJoueur(joueur);
+		*/
+		
 	}
 }
