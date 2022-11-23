@@ -90,21 +90,7 @@ public class AjouterEquipe extends JPanel{
 		panelMain.add(panelJeux, gbc_panelJeux);
 		
 		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
-		comboBox.setRenderer(new DefaultListCellRenderer() {;
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		public Component getListCellRendererComponent(JList<?> list, Object value,
-                int index,
-                boolean isSelected,
-                boolean cellHasFocus) { 
-			value = ((Jeu) value).getNom();
-			
-        	return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        }
-	});
+	
 		comboBox.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBox));
 		comboBox.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		comboBox.setFont(new Font("Cambria", Font.PLAIN, 15));

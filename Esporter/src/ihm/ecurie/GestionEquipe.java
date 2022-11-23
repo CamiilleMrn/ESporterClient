@@ -66,8 +66,6 @@ public class GestionEquipe extends JPanel{
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JComboBox<Jeu> comboBox = new JComboBox<>(Jeu.values());
-		comboBox.setRenderer(new ComboBoxRendererCell());
-		comboBox.setEditor(new ComboBoxRendererEditor());
 		comboBox.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBox));
 		
 		panel_3.add(comboBox);

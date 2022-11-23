@@ -43,14 +43,15 @@ public class InfoEcurie extends DataJPanel{
 	private static final long serialVersionUID = 8722294344861036522L;
 	private JPanel Center;
 	private EcurieInfo ecurie;
-	private JTextField textField;
-	private JScrollPane scrollPaneCenter;
+	private JPanel containerInfo;
+	private JPanel containerPalma;
 	private JPanel pan;
-	private JPanel containerImg;
-	private JLabel lblLogoEcurie = new JLabel();
+	private JLabel lblPalmares;
+	private JLabel lblLogoEcurie;
+	private JPanel panel;
+	private JPanel panel_1;
 	
 	public void createListPalma() {
-		pan.removeAll();
 		ArrayList<Titre> liste = ecurie.getPalmares();
         
         for(Titre t : liste) {
@@ -72,7 +73,6 @@ public class InfoEcurie extends DataJPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		pan = new JPanel();
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel all = new JPanel();
@@ -83,44 +83,62 @@ public class InfoEcurie extends DataJPanel{
 		Center = new JPanel();
 		Center.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		all.add(Center, BorderLayout.CENTER);
-		Center.setLayout(new BoxLayout(Center, BoxLayout.X_AXIS));
+		Center.setLayout(new BoxLayout(Center, BoxLayout.Y_AXIS));
 		
-		containerImg = new JPanel();
-		Center.add(containerImg);
-		containerImg.setLayout(new BoxLayout(containerImg, BoxLayout.X_AXIS));
+		panel = new JPanel();
+		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		Center.add(panel);
 		
-		containerImg.add(lblLogoEcurie);
+		containerInfo = new JPanel();
+		containerInfo.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		Center.add(containerInfo);
+		containerInfo.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblLogoEcurie = new JLabel();
+		lblLogoEcurie.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblLogoEcurie.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblLogoEcurie.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		containerInfo.add(lblLogoEcurie);
+		
 		try {
 			lblLogoEcurie.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("images/karmine-corp.jpg"))));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		lblLogoEcurie.setHorizontalAlignment(SwingConstants.CENTER);
+		};
+		
+		containerPalma = new JPanel();
+		containerPalma.setBorder(new EmptyBorder(0, 0, 0, 200));
+		containerPalma.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		containerPalma.setAlignmentX(Component.LEFT_ALIGNMENT);
+		containerInfo.add(containerPalma);
+		containerPalma.setLayout(new GridLayout(0, 1, 0, -30));
 		
 		
-		JPanel Title = new JPanel();
-		Title.setBackground(new Color(96, 96, 96));
-		Center.add(Title);
-		Title.setLayout(new GridLayout(0, 1, 0, 0));
+		lblPalmares = new JLabel("Palmarès");
+		lblPalmares.setForeground(Color.WHITE);
+		lblPalmares.setFont(new Font("Cambria", Font.PLAIN, 20));
+		lblPalmares.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPalmares.setAlignmentX(0.5f);
+		containerPalma.add(lblPalmares);
 		
-		textField = new JTextField();
-		textField.setText("Palmarès");
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setForeground(Color.WHITE);
-		textField.setFont(new Font("Cambria", Font.PLAIN, 25));
-		textField.setEditable(false);
-		textField.setBorder(null);
-		textField.setBackground(new Color(96, 96, 96));
-		textField.setAlignmentY(0.0f);
-		textField.setAlignmentX(1.0f);
-		Title.add(textField);
-		
+		pan = new JPanel();
+		pan.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		createListPalma();
-		scrollPaneCenter = new JScrollPane(pan);
+		JScrollPane scrollPaneCenter = new JScrollPane(pan);
+		scrollPaneCenter.setAlignmentY(Component.TOP_ALIGNMENT);
+		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
-		scrollPaneCenter.setBackground(new Color(96, 96, 96));
-		Title.add(scrollPaneCenter);
+		containerPalma.add(scrollPaneCenter);
+		
+		
+		
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		Center.add(panel_1);
+		
+		
 		
 		North = new JPanel();
 		all.add(North, BorderLayout.NORTH);
@@ -135,7 +153,7 @@ public class InfoEcurie extends DataJPanel{
 		NomDelEcurie.setEditable(false);
 		NomDelEcurie.setBorder(null);
 		NomDelEcurie.setHorizontalAlignment(SwingConstants.CENTER);
-		NomDelEcurie.setFont(new Font("Cambria", Font.PLAIN, 25));
+		NomDelEcurie.setFont(new Font("Cambria", Font.PLAIN, 40));
 		NomDelEcurie.setText(ecurie.getNom());
 		TitleEquipe.add(NomDelEcurie, BorderLayout.CENTER);
 		NomDelEcurie.setColumns(10);
