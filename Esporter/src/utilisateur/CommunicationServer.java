@@ -176,7 +176,7 @@ public class CommunicationServer implements Runnable{
 			user.getWaiting().setActualState(Response.ERROR_LOGIN);
 			break;
 		case ERROR_PERMISSION:
-			MasterFrame.getInstance().getError().setState(new InvalidPermission(), false);
+			MasterFrame.getInstance().error(new InvalidPermission("Vous n'avez pas la permission d'effectuer ceci"));
 			System.out.println("ERREUR PERMISSION");
 			user.getWaiting().setActualState(Response.ERROR_PERMISSION);
 			break;
