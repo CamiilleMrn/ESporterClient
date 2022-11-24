@@ -54,7 +54,7 @@ public class testAjouterEquipe {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 
-		frame.getContentPane().add(new AjouterEquipe(Jeu.LEAGUE_OF_LEGEND));
+		frame.getContentPane().add(new AjouterEquipe(Jeu.LEAGUE_OF_LEGENDS));
 		
 		
 	}

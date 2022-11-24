@@ -13,6 +13,10 @@ import javax.imageio.ImageIO;
 
 public class Image implements Infos, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1572748294734274384L;
 	private String image;
 	
 	public Image (BufferedImage img, String formatName) {
@@ -30,6 +34,10 @@ public class Image implements Infos, Serializable {
 			e.printStackTrace();
 		}
 		return bufferedimage;
+	}
+	
+	public String getBase64Image() {
+		return image;
 	}
 	
 	public static String imgToBase64String(final RenderedImage img, final String formatName)

@@ -89,6 +89,7 @@ public class CommunicationServer implements Runnable{
 			} catch (ClassNotFoundException e2) {
 				e2.printStackTrace();
 			} catch (IOException e) {
+				e.printStackTrace();
 				try {
 					reconnect();
 				} catch (IOException e1) {
@@ -186,6 +187,10 @@ public class CommunicationServer implements Runnable{
 			break;
 		case UPDATE_ECURIE:
 			break;
+		case UPDATE_EQUIPE:
+			EquipeInfo equipe = (EquipeInfo)r.getInfoByID(InfoID.Equipe);
+			user.getData().getEcuries().get(equipe.getEcurie().getId()).getEquipes().put(equipe.getId(), equipe);
+			MasterFrame.getInstance().dataUpdate();
 		case UPDATE_TOURNOI:
 			TournoiInfo tournoi = (TournoiInfo)r.getInfoByID(InfoID.Tournoi);
 			user.getData().getCalendrier().put(tournoi.getId(), tournoi);
