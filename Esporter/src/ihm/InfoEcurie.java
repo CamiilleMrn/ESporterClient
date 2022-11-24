@@ -35,6 +35,7 @@ import java.awt.Container;
 import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.Box;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -59,14 +60,21 @@ public class InfoEcurie extends DataJPanel{
 	private JLabel lblLogoEcurie;
 	private JPanel panel;
 	private JPanel panel_1;
+	private JLabel ifEmpty = new JLabel();
 	
 	public void createListPalma() {
 		ArrayList<Titre> liste = ecurie.getPalmares();
-        
-        for(Titre t : liste) {
-        	System.out.println("titre");
-			System.out.println(t);
-			pan.add(new InfoEcuriePalmaRenderer(t));
+		if(liste.isEmpty() || liste == null ) {
+			ifEmpty.setText("Cette écurie n'a pas encore obtenu de titre");
+			ifEmpty.setForeground(MasterFrame.COULEUR_TEXTE);
+			ifEmpty.setFont(new Font("Cambria", Font.PLAIN , 20));
+			pan.add(ifEmpty);
+		}else {
+	        for(Titre t : liste) {
+	        	System.out.println("titre");
+				System.out.println(t);
+				pan.add(new InfoEcuriePalmaRenderer(t));
+			}
 		}
 	}
 	
