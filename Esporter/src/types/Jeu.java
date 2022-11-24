@@ -36,6 +36,10 @@ public enum Jeu implements Infos, Serializable {
 		return Jeu.values()[i-1];
 	}
 	
+	public static int jeuToInt(Jeu j) throws IllegalArgumentException{
+		return j.ordinal()+1;
+	}
+	
 	@Override
 	public String toString() {
 		return this.getNom();

@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -24,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -46,6 +48,7 @@ import types.exception.InvalidPermission;
 import utilisateur.User;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -195,7 +198,7 @@ public class MasterFrame {
 		nomCompte.setForeground(Color.WHITE);
 		nomComptePanel.add(nomCompte, BorderLayout.SOUTH);
 		
-		logoCompte = new JLabel("logo");
+		logoCompte = new JLabel("");
 		logoCompte.setHorizontalAlignment(SwingConstants.CENTER);
 		logoCompte.setForeground(Color.WHITE);
 		nomComptePanel.add(logoCompte, BorderLayout.CENTER);
@@ -317,6 +320,7 @@ public class MasterFrame {
 		switch(user.getPermission()) {
 		case ARBITRE:
 			boutonConnection.setText("Se deconnecter");
+			logoCompte.setIcon(null);
 			nomCompte.setText("Arbitre");
 			setPanel(ihm.arbitre.Accueil.class, null);
 			break;
@@ -324,6 +328,9 @@ public class MasterFrame {
 			boutonConnection.setText("Se deconnecter");
 			EcurieInfo e = (EcurieInfo)user.getInfo();
 			nomCompte.setText(e.getNom());
+			BufferedImage logoEcurie = ((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getLogo().getImage();
+			logoEcurie = resize(logoEcurie, 100, 100);
+			logoCompte.setIcon(new ImageIcon(logoEcurie));
 			//logoCompte.setIcon(e.getLogo());
 			setPanel(ihm.ecurie.Accueil.class, null);
 			break;
@@ -331,15 +338,20 @@ public class MasterFrame {
 			boutonConnection.setText("Se deconnecter");
 			JoueurInfo j = (JoueurInfo)user.getInfo();
 			nomCompte.setText(j.getNom());
+			BufferedImage photo = ((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getPhoto().getImage();
+			photo = resize(photo, 80, 100);
+			logoCompte.setIcon(new ImageIcon(photo));
 			//logoCompte.setIcon(j.getPhoto());
 			setPanel(ihm.joueur.Accueil.class, null);
 			break;
 		case ORGANISATEUR:
+			logoCompte.setIcon(null);
 			boutonConnection.setText("Se deconnecter");
 			nomCompte.setText("Esporter");
 			setPanel(ihm.organisateur.Accueil.class, null);
 			break;
 		case VISITEUR:
+			logoCompte.setIcon(null);
 			boutonConnection.setText("Se connecter");
 			nomCompte.setText("Visiteur");
 			setPanel(ihm.visiteur.Accueil.class, null);
@@ -443,6 +455,17 @@ public class MasterFrame {
 	
 	public Dimension getCenterDimension() {
 		return this.frame.getContentPane().getSize();
+	}
+	
+	private static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(tmp, 0, 0, null);
+	    g2d.dispose();
+
+	    return dimg;
 	}
 
 

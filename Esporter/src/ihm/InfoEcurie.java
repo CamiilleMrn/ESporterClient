@@ -118,15 +118,11 @@ public class InfoEcurie extends DataJPanel{
 		containerInfo.add(lblLogoEcurie);
 		
 		
-		try {
-			//File file = new File("images/ESporterLogo.png");
-			BufferedImage logoEcurie = ImageIO.read(getClass().getResource("images/karmine-corp.jpg"));
-			logoEcurie = resize(logoEcurie, 400, 300);
-			lblLogoEcurie.setIcon(new ImageIcon(logoEcurie));
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+
+		//File file = new File("images/ESporterLogo.png");
+		BufferedImage logoEcurie = ecurie.getLogo().getImage();
+		logoEcurie = resize(logoEcurie, 400, 300);
+		lblLogoEcurie.setIcon(new ImageIcon(logoEcurie));
 		
 		
 		containerPalma = new JPanel();

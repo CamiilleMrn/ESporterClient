@@ -10,6 +10,7 @@ import ihm.InfoEcurie;
 import ihm.MasterFrame;
 import types.EcurieInfo;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,6 +18,7 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -26,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics2D;
 
 public class EcurieRenderer extends JPanel {
 	
@@ -50,12 +53,11 @@ public class EcurieRenderer extends JPanel {
 		panelText.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panelText.setPreferredSize(new Dimension(500,100));
 		panelText.add(lbEcurieLogo);
-		try {
-			lbEcurieLogo.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("../images/karmine-corp.jpg"))));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+			BufferedImage logoEcurie = ecurie.getLogo().getImage();
+			logoEcurie = resize(logoEcurie, 200, 200);
+			lbEcurieLogo.setIcon(new ImageIcon(logoEcurie));
+			
 		add(panelText, BorderLayout.WEST);
 		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panelText.add(panel);
@@ -88,6 +90,17 @@ public class EcurieRenderer extends JPanel {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(tmp, 0, 0, null);
+	    g2d.dispose();
+
+	    return dimg;
 	}
 
 }

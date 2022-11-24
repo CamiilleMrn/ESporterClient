@@ -64,12 +64,11 @@ public class boutonMenu extends JRadioButton{
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (!isSelected()) {
-					setSelected(true);
+
+				setSelected(true);
 					
-					MasterFrame.getInstance().setPanel(panelToChange, permission);
-					MasterFrame.getInstance().getFrame().repaint();
-				}
+				MasterFrame.getInstance().setPanel(panelToChange, permission);
+				MasterFrame.getInstance().getFrame().repaint();
 			}
 			
 			@Override
