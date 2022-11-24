@@ -2,6 +2,7 @@ package ihm.component;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 
 import javax.swing.JPanel;
@@ -13,10 +14,14 @@ import types.JoueurInfo;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.SystemColor;
+import java.awt.Insets;
 public class containerJoueur extends JPanel {
 
 	/**
@@ -24,6 +29,8 @@ public class containerJoueur extends JPanel {
 	 */
 	private static final long serialVersionUID = -6951669578094176958L;
 	private JoueurInfo joueur = new JoueurInfo(0,"ok","pap",null, null, null, null, 0,0, -1);
+	private JLabel photo;
+	private JLabel nomJoueur;
 	private static final int WIDTH = 100;
 	private static final int HEIGHT = 150;
 	/**
@@ -40,20 +47,19 @@ public class containerJoueur extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0};
 		setLayout(gridBagLayout);
 		
-		JPanel containerNom = new JPanel();
-		containerNom.setSize(WIDTH, HEIGHT/4);
-		containerNom.setBackground(new Color(255, 255, 255, 65));
-		GridBagConstraints gbc_containerNom = new GridBagConstraints();
-		gbc_containerNom.fill = GridBagConstraints.HORIZONTAL;
-		gbc_containerNom.anchor = GridBagConstraints.SOUTH;
-		gbc_containerNom.gridx = 0;
-		gbc_containerNom.gridy = 1;
-		add(containerNom, gbc_containerNom);
-		
-		JLabel nomJoueur = new JLabel(joueur.getNom()+" "+joueur.getPrenom());
-		containerNom.add(nomJoueur);
+		photo = new JLabel("");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		add(photo, gbc_lblNewLabel);
 		
 		containerJoueur self = this;
+		
+		nomJoueur = new JLabel("qzdqzd");
+		GridBagConstraints gbc_nomJoueur = new GridBagConstraints();
+		gbc_nomJoueur.gridx = 0;
+		gbc_nomJoueur.gridy = 1;
+		add(nomJoueur, gbc_nomJoueur);
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -68,7 +74,13 @@ public class containerJoueur extends JPanel {
 	
 	public void setJoueur(JoueurInfo joueur) {
 		this.joueur = joueur;
-		this.repaint();
+		nomJoueur.setText(joueur.getNom()+" "+joueur.getPrenom());
+		BufferedImage bf = joueur.getPhoto().getImage();
+		bf = resize(bf, getWidth(), HEIGHT-HEIGHT/4);
+		photo.setIcon(new ImageIcon(bf));
+		revalidate();
+		repaint();
+		repaint();
 	}
 	
 	
@@ -76,6 +88,17 @@ public class containerJoueur extends JPanel {
 	public void paintComponents(Graphics g) {
 		super.paintComponents(g);
 		g.drawImage(joueur.getPhotoTraite(), 0, 0, null);
+	}
+	
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(tmp, 0, 0, null);
+	    g2d.dispose();
+
+	    return dimg;
 	}
 	
 	

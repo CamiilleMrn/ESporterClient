@@ -37,6 +37,8 @@ import java.awt.GridBagConstraints;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Graphics2D;
+
 import javax.swing.SwingConstants;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
@@ -234,22 +236,30 @@ public class AjouterunJoueur extends JDialog {
 				}
 				InputStream is = new ByteArrayInputStream(blob.toByteArray());
 				if (nom == null) {
-					throw new IllegalArgumentException("Le champ nom n'est pas specifié");
+					MasterFrame.getInstance().error(new IllegalArgumentException("Le champ nom n'est pas specifié"));
 				}else if(prenom==null){
-					throw new IllegalArgumentException("Le champ prenom n'est pas specifié");
+					MasterFrame.getInstance().error( new IllegalArgumentException("Le champ prenom n'est pas specifié"));
 				}else if(dateDebutContrat==null){
-					throw new IllegalArgumentException("Le champ debut du contrat n'est pas specifié");
+					MasterFrame.getInstance().error( new IllegalArgumentException("Le champ debut du contrat n'est pas specifié"));
 				}else if(dateNaissance==null) {
-					throw new IllegalArgumentException("Le champ date de naissance n'est pas specifié");
+					MasterFrame.getInstance().error( new IllegalArgumentException("Le champ date de naissance n'est pas specifié"));
 				}else if(dateFinContrat== null) {
-					throw new IllegalArgumentException("Le champ date de fin du contrat n'est pas specifié");
-				}else if(is == null){
-					throw new IllegalArgumentException("La photo n'a pas été mise n'est pas specifié");
-				}else {						
-				JoueurInfo joueur = new JoueurInfo(-1,nom, prenom,is,dateNaissance,dateDebutContrat,dateFinContrat,-1,-1,((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId());
-				container.setJoueur(joueur);
-			}
-				dispose();
+					MasterFrame.getInstance().error( new IllegalArgumentException("Le champ date de fin du contrat n'est pas specifié"));
+				}else if(is == null) {
+					MasterFrame.getInstance().error( new IllegalArgumentException("Il y a une erreur avec la photo"));
+				}else {
+					try {
+						BufferedImage bf = ImageIO.read(is);
+						types.Image im = new types.Image(image, "png");
+						JoueurInfo joueur = new JoueurInfo(-1,nom, prenom,im,dateNaissance,dateDebutContrat,dateFinContrat,-1,-1,((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId());
+						container.setJoueur(joueur);
+						dispose();
+					} catch (IOException e1) {
+						MasterFrame.getInstance().error( new IllegalArgumentException("Il y a une erreur avec la photo"));
+					} 
+					
+				}
+				
 			}
 		});
 		
@@ -469,9 +479,18 @@ public class AjouterunJoueur extends JDialog {
 		        //si l'utilisateur clique sur enregistrer dans Jfilechooser
 		        if(res == JFileChooser.APPROVE_OPTION){
 		          File selFile = file.getSelectedFile();
-		          String path = selFile.getAbsolutePath();
-		          PhotoJoueur.setIcon(new ImageIcon(path));
-		          image = new BufferedImage(res, res, res);		        }
+
+		          try {
+			        String path = selFile.getCanonicalPath();
+			        PhotoJoueur.setIcon(new ImageIcon(path));
+					image = ImageIO.read(selFile);
+					image = resize(image, 200, 300);
+					
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+		          
+		          }
 		      }
 		    });
 		PhotoJoueur.setIcon(null);
@@ -490,5 +509,16 @@ public class AjouterunJoueur extends JDialog {
 		
 	
 		
+	}
+	
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(tmp, 0, 0, null);
+	    g2d.dispose();
+
+	    return dimg;
 	}
 }
