@@ -185,6 +185,7 @@ public class CommunicationServer implements Runnable{
 			user.getWaiting().setActualState(r.getName());
 			break;
 		case UPDATE_CALENDRIER:
+			//ok
 			break;
 		case UPDATE_ECURIE:
 			break;
