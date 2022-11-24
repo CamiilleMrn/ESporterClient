@@ -25,6 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 public class EcurieRenderer extends JPanel {
 	
@@ -63,6 +64,7 @@ public class EcurieRenderer extends JPanel {
 		panel.add(verticalGlue);
 		Insets i = lbEcurieName.getInsets();
 		i.set(10,10,10,10);
+		lbEcurieName.setFont(new Font("Cambria", Font.PLAIN, 15));
 		lbEcurieName.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		lbEcurieName.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lbEcurieName.setHorizontalAlignment(SwingConstants.CENTER);

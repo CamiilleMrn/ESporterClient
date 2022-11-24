@@ -3,14 +3,22 @@ package ihm;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -31,6 +39,7 @@ import javax.swing.Box;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.SystemColor;
 
 public class InfoEcurie extends DataJPanel{
 
@@ -100,15 +109,20 @@ public class InfoEcurie extends DataJPanel{
 		lblLogoEcurie.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		containerInfo.add(lblLogoEcurie);
 		
+		
 		try {
-			lblLogoEcurie.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("images/karmine-corp.jpg"))));
-		} catch (IOException e1) {
+			//File file = new File("images/ESporterLogo.png");
+			BufferedImage logoEcurie = ImageIO.read(getClass().getResource("images/karmine-corp.jpg"));
+			logoEcurie = resize(logoEcurie, 400, 300);
+			lblLogoEcurie.setIcon(new ImageIcon(logoEcurie));
+		} catch (IOException e2) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		};
+			e2.printStackTrace();
+		}
+		
 		
 		containerPalma = new JPanel();
-		containerPalma.setBorder(new EmptyBorder(0, 0, 0, 200));
+		containerPalma.setBorder(null);
 		containerPalma.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		containerPalma.setAlignmentX(Component.LEFT_ALIGNMENT);
 		containerInfo.add(containerPalma);
@@ -117,7 +131,7 @@ public class InfoEcurie extends DataJPanel{
 		
 		lblPalmares = new JLabel("Palmarès");
 		lblPalmares.setForeground(Color.WHITE);
-		lblPalmares.setFont(new Font("Cambria", Font.PLAIN, 20));
+		lblPalmares.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 30));
 		lblPalmares.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPalmares.setAlignmentX(0.5f);
 		containerPalma.add(lblPalmares);
@@ -153,7 +167,7 @@ public class InfoEcurie extends DataJPanel{
 		NomDelEcurie.setEditable(false);
 		NomDelEcurie.setBorder(null);
 		NomDelEcurie.setHorizontalAlignment(SwingConstants.CENTER);
-		NomDelEcurie.setFont(new Font("Cambria", Font.PLAIN, 40));
+		NomDelEcurie.setFont(new Font("Cambria", Font.BOLD, 50));
 		NomDelEcurie.setText(ecurie.getNom());
 		TitleEquipe.add(NomDelEcurie, BorderLayout.CENTER);
 		NomDelEcurie.setColumns(10);
@@ -174,9 +188,10 @@ public class InfoEcurie extends DataJPanel{
 		BtnBack.add(Vide, BorderLayout.CENTER);
 		Vide.setLayout(new BorderLayout(0, 0));
 		JButton Ecuries = new JButton("Ecuries /");
-		Ecuries.setForeground(MasterFrame.COULEUR_TEXTE);
+		Ecuries.setForeground(MasterFrame.COULEUR_MASTER);
 		Ecuries.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MasterFrame.getInstance().setPanel(ihm.Ecuries.class, ecurie);
 			}
 		});
 		Ecuries.setBackground(null);
@@ -210,6 +225,17 @@ public class InfoEcurie extends DataJPanel{
 	public void dataUpdate() {
 		createListPalma();
 		
+	}
+	
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(tmp, 0, 0, null);
+	    g2d.dispose();
+
+	    return dimg;
 	}
 
 }

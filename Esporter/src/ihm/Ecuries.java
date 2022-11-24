@@ -70,7 +70,7 @@ public class Ecuries extends DataJPanel {
 		nothing.setForeground(MasterFrame.COULEUR_TEXTE);
 		nothing.setEditable(false);
 		nothing.setText("Liste des écuries");
-		nothing.setFont(new Font("Cambria", Font.PLAIN, 20));
+		nothing.setFont(new Font("Cambria", Font.BOLD, 40));
 		nothing.setBorder(null);
 		nothing.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(nothing);

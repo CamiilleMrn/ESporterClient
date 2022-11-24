@@ -106,7 +106,7 @@ public class Calendrier extends JPanel{
 		txtCalendrierDesTournois.setBorder(new EmptyBorder(20, 0, 0, 0));
 		txtCalendrierDesTournois.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		txtCalendrierDesTournois.setText("Calendrier des tournois");
-		txtCalendrierDesTournois.setFont(new Font("Tahoma", Font.BOLD, 20));
+		txtCalendrierDesTournois.setFont(new Font("Cambria", Font.BOLD, 40));
 		dummy.add(txtCalendrierDesTournois);
 		txtCalendrierDesTournois.setColumns(20);
 		

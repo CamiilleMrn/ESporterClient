@@ -102,10 +102,10 @@ public class Calendrier extends DataJPanel{
 		txtCalendrierDesTournois.setPreferredSize(new Dimension(5, 50));
 		txtCalendrierDesTournois.setEditable(false);
 		txtCalendrierDesTournois.setForeground(MasterFrame.COULEUR_TEXTE);
-		txtCalendrierDesTournois.setBorder(new EmptyBorder(20, 0, 0, 0));
+		txtCalendrierDesTournois.setBorder(null);
 		txtCalendrierDesTournois.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		txtCalendrierDesTournois.setText("Calendrier des tournois");
-		txtCalendrierDesTournois.setFont(new Font("Tahoma", Font.BOLD, 20));
+		txtCalendrierDesTournois.setFont(new Font("Cambria", Font.BOLD, 40));
 		dummy.add(txtCalendrierDesTournois);
 		txtCalendrierDesTournois.setColumns(20);
 		
