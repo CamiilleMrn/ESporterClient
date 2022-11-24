@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.SystemColor;
 import java.awt.Insets;
+import java.awt.Font;
 public class containerJoueur extends JPanel {
 
 	/**
@@ -57,6 +58,7 @@ public class containerJoueur extends JPanel {
 		containerJoueur self = this;
 		
 		nomJoueur = new JLabel("");
+		nomJoueur.setFont(new Font("Cambria", Font.PLAIN, 11));
 		GridBagConstraints gbc_nomJoueur = new GridBagConstraints();
 		gbc_nomJoueur.gridx = 0;
 		gbc_nomJoueur.gridy = 1;

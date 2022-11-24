@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public enum Jeu implements Infos, Serializable {
 
-	LEAGUE_OF_LEGEND("League of legend", null, 5), COUNTER_STRIKE("Counter strike", null, 5), ROCKET_LEAGUE("Rocket League", null, 3);
+	LEAGUE_OF_LEGENDS("League Of Legends", null, 5), COUNTER_STRIKE("Counter Strike", null, 5), ROCKET_LEAGUE("Rocket League", null, 3);
 	
 	
 	private String nom;
@@ -34,6 +34,11 @@ public enum Jeu implements Infos, Serializable {
 			throw new IllegalArgumentException();
 		}
 		return Jeu.values()[i-1];
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNom();
 	}
 	
 	
