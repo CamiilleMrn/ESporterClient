@@ -42,6 +42,10 @@ public class LogIn extends JPanel{
 	private JPasswordField txtSaisirPsw;
 	private JButton boutonConnexion;
 
+	
+	public JTextField getTxtSaisirIdentifiant() {
+		return txtSaisirIdentifiant;
+	}
 
 	/**
 	 * Create the application.

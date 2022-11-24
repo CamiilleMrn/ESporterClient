@@ -263,6 +263,7 @@ public class MasterFrame {
 					main.setVisible(false);
 					error.setVisible(false);
 					loginPage.setVisible(true);
+					loginPage.getTxtSaisirIdentifiant().requestFocus();
 				}
 			}
 		});
