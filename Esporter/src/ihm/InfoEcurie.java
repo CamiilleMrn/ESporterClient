@@ -172,7 +172,7 @@ public class InfoEcurie extends DataJPanel{
 		NomDelEcurie.setBorder(null);
 		NomDelEcurie.setHorizontalAlignment(SwingConstants.CENTER);
 		NomDelEcurie.setFont(new Font("Cambria", Font.BOLD, 50));
-		NomDelEcurie.setText(ecurie.getNom());
+		NomDelEcurie.setText(ecurie.getNom()+"  ("+ecurie.getDiminutif()+")");
 		TitleEquipe.add(NomDelEcurie, BorderLayout.CENTER);
 		NomDelEcurie.setColumns(10);
 		
