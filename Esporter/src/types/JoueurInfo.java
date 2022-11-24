@@ -4,6 +4,7 @@ package types;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
@@ -20,7 +21,7 @@ public class JoueurInfo implements Infos, Serializable {
 	private int id;
 	private String nom;
 	private String prenom;
-	private Blob photoBlob;
+	private InputStream photoBlob;
 	private Date dateNaissance;
 	private Date dateDebutContrat;
 	private Date dateFinContrat;
@@ -31,12 +32,12 @@ public class JoueurInfo implements Infos, Serializable {
 	
 	
 
-	public JoueurInfo(int id, String nom, String prenom, Blob photoBlob, Date dateNaissance, Date dateDebutContrat,
+	public JoueurInfo(int id, String nom, String prenom, InputStream is, Date dateNaissance, Date dateDebutContrat,
 			Date dateFinContrat, int nationalite, int id_equipe, int id_ecurie) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.photoBlob = photoBlob;
+		this.photoBlob = is;
 		this.dateNaissance = dateNaissance;
 		this.dateDebutContrat = dateDebutContrat;
 		this.dateFinContrat = dateFinContrat;
@@ -84,7 +85,7 @@ public class JoueurInfo implements Infos, Serializable {
 
 
 
-	public Blob getPhoto() {
+	public InputStream getPhoto() {
 		return photoBlob;
 	}
 	
