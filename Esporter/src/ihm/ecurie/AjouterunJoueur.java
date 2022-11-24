@@ -23,6 +23,8 @@ import ihm.component.DatePicker;
 import ihm.component.containerJoueur;
 import types.EcurieInfo;
 import types.JoueurInfo;
+import types.Login;
+import types.registerJoueur;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -228,6 +230,7 @@ public class AjouterunJoueur extends JDialog {
 				Date dateNaissance= Date.valueOf(txtDateNaissance.getText());
 				Date dateFinContrat= Date.valueOf(TexteDateFinContrat.getText());
 				ByteArrayOutputStream blob = new ByteArrayOutputStream();
+				image = resize(image, 200, 300);
 				try {
 					ImageIO.write(image, "png", blob);
 				} catch (IOException e1) {
@@ -252,7 +255,8 @@ public class AjouterunJoueur extends JDialog {
 						BufferedImage bf = ImageIO.read(is);
 						types.Image im = new types.Image(image, "png");
 						JoueurInfo joueur = new JoueurInfo(-1,nom, prenom,im,dateNaissance,dateDebutContrat,dateFinContrat,-1,-1,((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId());
-						container.setJoueur(joueur);
+						Login l = new Login(identifianttxt.getText(), textField_1.getText());
+						container.setJoueur(new registerJoueur(joueur, l));
 						dispose();
 					} catch (IOException e1) {
 						MasterFrame.getInstance().error( new IllegalArgumentException("Il y a une erreur avec la photo"));
@@ -484,7 +488,7 @@ public class AjouterunJoueur extends JDialog {
 			        String path = selFile.getCanonicalPath();
 			        PhotoJoueur.setIcon(new ImageIcon(path));
 					image = ImageIO.read(selFile);
-					image = resize(image, 200, 300);
+					
 					
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -506,7 +510,18 @@ public class AjouterunJoueur extends JDialog {
 		TexteDemanderLaPhotoDuJoueur.setColumns(10);
 		TexteDemanderLaPhotoDuJoueur.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
-		
+		if (container.getJoueur() != null) {
+			JoueurInfo j = container.getJoueur().getJoueur();
+			TexteDuNom.setText(j.getNom());
+			TexteDateDebContrat.setText(j.getDateDebutContrat().toString());
+			TexteDateFinContrat.setText(j.getDateFinContrat().toString());
+			textPrenom.setText(j.getPrenom());
+			PhotoJoueur.setIcon(new ImageIcon(j.getPhoto().getImage()));
+			txtDateNaissance.setText(j.getDateNaissance().toString());
+			identifianttxt.setText(container.getJoueur().getLogin().getUsername());
+			textField_1.setText(container.getJoueur().getLogin().getPassword());
+			image = j.getPhoto().getImage();
+		}
 	
 		
 	}

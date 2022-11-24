@@ -117,7 +117,7 @@ public class boutonMenu extends JRadioButton{
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		if (!MasterFrame.getInstance().getLoginPage().isVisible() && !MasterFrame.getInstance().getError().isVisible()) {
+		if (!MasterFrame.getInstance().getLoginPage().isVisible() || !MasterFrame.getInstance().getError().isVisible()) {
 			g2 = (Graphics2D)g.create();
 			int width = getBounds().width;
 			int height = getBounds().height;

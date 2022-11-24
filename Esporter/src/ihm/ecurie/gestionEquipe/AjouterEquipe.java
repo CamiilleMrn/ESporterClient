@@ -20,6 +20,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultListCellRenderer;
@@ -29,7 +30,11 @@ import java.awt.Font;
 import ihm.MasterFrame;
 import ihm.component.ComboBoxRendererArrow;
 import ihm.component.containerJoueur;
+import types.EcurieInfo;
 import types.Jeu;
+import types.RegisterEquipe;
+import types.registerJoueur;
+import types.exception.EquipeNonComplete;
 
 
 public class AjouterEquipe extends JPanel{
@@ -39,6 +44,7 @@ public class AjouterEquipe extends JPanel{
 	 */
 	private static final long serialVersionUID = -5531842744073477854L;
 	private Jeu jeu;
+	private containerJoueur[] listeJoueur;
 	/**
 	 * Create the application.
 	 */
@@ -119,7 +125,7 @@ public class AjouterEquipe extends JPanel{
 		panelMain.add(panelJoueur, gbc_panelJoueur);
 		
 		int tailleEquipe = jeu.getJoueurMax();
-		containerJoueur[] listeJoueur = new containerJoueur[tailleEquipe];
+		listeJoueur = new containerJoueur[tailleEquipe];
 		for (int i=0; i<tailleEquipe; i++) {
 			listeJoueur[i] = new containerJoueur();
 			panelJoueur.add(listeJoueur[i]);
@@ -147,8 +153,28 @@ public class AjouterEquipe extends JPanel{
 		btnValider.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		btnValider.setAlignmentY(1.0f);
 		panelValider.add(btnValider);
-		System.out.println(this.getSize().width);
+		btnValider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e){
+				for (containerJoueur c : listeJoueur) {
+					if (c.getJoueur()==null) {
+						MasterFrame.getInstance().error(new EquipeNonComplete("Erreur de creation de l'équipe"));
+						return;
+					}
+				}
+				ArrayList<registerJoueur> joueurs = new ArrayList<>();
+				for (containerJoueur c : listeJoueur) {
+					joueurs.add(c.getJoueur());
+				}
+				RegisterEquipe equipe = new RegisterEquipe((Jeu)comboBox.getSelectedItem(), ((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId(), joueurs);
+				MasterFrame.getInstance().getUser().ajouterEquipe(equipe);
+				
+			}
+		});
 		
 	}
+	
+	
 
 }

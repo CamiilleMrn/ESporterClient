@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import ihm.MasterFrame;
 import ihm.ecurie.AjouterunJoueur;
 import types.JoueurInfo;
+import types.registerJoueur;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,7 +29,7 @@ public class containerJoueur extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -6951669578094176958L;
-	private JoueurInfo joueur = new JoueurInfo(0,"ok","pap",null, null, null, null, 0,0, -1);
+	private registerJoueur joueur = null;
 	private JLabel photo;
 	private JLabel nomJoueur;
 	private static final int WIDTH = 100;
@@ -55,7 +56,7 @@ public class containerJoueur extends JPanel {
 		
 		containerJoueur self = this;
 		
-		nomJoueur = new JLabel("qzdqzd");
+		nomJoueur = new JLabel("");
 		GridBagConstraints gbc_nomJoueur = new GridBagConstraints();
 		gbc_nomJoueur.gridx = 0;
 		gbc_nomJoueur.gridy = 1;
@@ -72,11 +73,11 @@ public class containerJoueur extends JPanel {
 		
 	}
 	
-	public void setJoueur(JoueurInfo joueur) {
+	public void setJoueur(registerJoueur joueur) {
 		this.joueur = joueur;
-		nomJoueur.setText(joueur.getNom()+" "+joueur.getPrenom());
-		BufferedImage bf = joueur.getPhoto().getImage();
-		bf = resize(bf, getWidth(), HEIGHT-HEIGHT/4);
+		nomJoueur.setText(joueur.getJoueur().getNom()+" "+joueur.getJoueur().getPrenom());
+		BufferedImage bf = joueur.getJoueur().getPhoto().getImage();
+		bf = resize(bf, WIDTH-1, HEIGHT-HEIGHT/4-1);
 		photo.setIcon(new ImageIcon(bf));
 		revalidate();
 		repaint();
@@ -87,7 +88,8 @@ public class containerJoueur extends JPanel {
 	@Override
 	public void paintComponents(Graphics g) {
 		super.paintComponents(g);
-		g.drawImage(joueur.getPhotoTraite(), 0, 0, null);
+		BufferedImage bf = joueur.getJoueur().getPhoto().getImage();
+		g.drawImage(bf, 0, 0, null);
 	}
 	
 	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
@@ -99,6 +101,10 @@ public class containerJoueur extends JPanel {
 	    g2d.dispose();
 
 	    return dimg;
+	}
+	
+	public registerJoueur getJoueur() {
+		return joueur;
 	}
 	
 	

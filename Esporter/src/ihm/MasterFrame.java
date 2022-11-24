@@ -131,12 +131,16 @@ public class MasterFrame {
 		main = new JPanel();
 		main.setLayout(new BorderLayout());
 
+		
+		error = new ErrorPanel();
+		root.setLayer(error, javax.swing.JLayeredPane.POPUP_LAYER);
+		error.setBounds(0,0,frame.getWidth(), frame.getHeight());
+		frame.getContentPane().add(error, BorderLayout.CENTER, 1);
+		
 		frame.getContentPane().add(main,BorderLayout.CENTER, 3);
 		main.setBounds(0,0,frame.getWidth(), frame.getHeight());
 		
-		error = new ErrorPanel();
-		error.setBounds(0,0,frame.getWidth(), frame.getHeight());
-		frame.getContentPane().add(error, BorderLayout.CENTER, 1);
+		
 		
 		loginPage = new LogIn();
 		frame.getContentPane().add(loginPage, BorderLayout.CENTER,2);
@@ -429,6 +433,7 @@ public class MasterFrame {
 	public void error(Exception e) {
 		error.setState(e, false);
 		error.setVisible(true);
+		frame.repaint();
 		
 	}
 	

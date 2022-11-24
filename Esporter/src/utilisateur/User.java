@@ -11,7 +11,9 @@ import ihm.TypeMenu;
 import socket.Response;
 import types.EquipeInfo;
 import types.Infos;
+import types.JoueurInfo;
 import types.Permission;
+import types.RegisterEquipe;
 import types.TournoiInfo;
 import types.WaitingFor;
 import types.exception.ErrorLogin;
@@ -122,11 +124,12 @@ public class User {
 		com.inscriptionTournoi(id);
 	}
 	
-	public void ajouterEquipe(EquipeInfo e) throws InvalidPermission{
-		if (permission!=Permission.JOUEUR) {
-			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
+	public void ajouterEquipe(RegisterEquipe equipe){
+		if (permission!=Permission.ECURIE) {
+			MasterFrame.getInstance().error(new InvalidPermission("Vous n'avez pas la permission de faire cette action"));
+		} else {
+			com.ajouterEquipe(equipe);
 		}
-		com.ajouterEquipe(e);
 	}
 	
 	public void ajouterTournoi(TournoiInfo t) throws InvalidPermission {

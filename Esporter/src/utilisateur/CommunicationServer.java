@@ -24,6 +24,7 @@ import types.Infos;
 import types.JoueurInfo;
 import types.Login;
 import types.Permission;
+import types.RegisterEquipe;
 import types.TournoiInfo;
 import types.exception.InvalidPermission;
 
@@ -113,9 +114,9 @@ public class CommunicationServer implements Runnable{
 		send(c);
 	}
 	
-	public void ajouterEquipe(EquipeInfo e) {
+	public void ajouterEquipe(RegisterEquipe equipe) {
 		HashMap<InfoID, Infos> m = new HashMap<>();
-		m.put(InfoID.Equipe, e);
+		m.put(InfoID.Equipe, equipe);
 		Command c = new Command(CommandName.AJOUTER_EQUIPE, m);
 		send(c);
 	}
