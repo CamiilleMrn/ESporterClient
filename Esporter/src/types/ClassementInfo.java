@@ -1,5 +1,6 @@
 package types;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,8 +8,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.SortedSet;
 
-public class ClassementInfo implements Infos{
+public class ClassementInfo implements Infos, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1122216096852324306L;
 	private Jeu jeu;
 	private HashMap<EcurieInfo, Integer> ecuries;
 	

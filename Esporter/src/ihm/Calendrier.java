@@ -72,46 +72,13 @@ public class Calendrier extends DataJPanel{
 	
 	private void createListTournament(Date date, Jeu jeu) {
 		pan.removeAll();
-		if (date==null && jeu == null) {
-			HashMap<Integer, TournoiInfo> map = MasterFrame.getInstance().getUser().getData().getCalendrier();
-			dateChoisi=null;
-			jeuChoisi = null;
-			/*
-	        map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
-	        map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
-	        map.put(3,new TournoiInfo(Date.valueOf("2022-11-11"), "TestTournois 3", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
-	        map.put(4,new TournoiInfo(Date.valueOf("2022-11-12"), "TestTournois 4", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
-	        map.put(5,new TournoiInfo(Date.valueOf("2022-11-13"), "TestTournois 5", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));*/
-			Iterator<TournoiInfo> ite = map.values().iterator();
-			while (ite.hasNext()) {
-				TournoiInfo t = ite.next();
-				System.out.println(t);
-				switchUser(t);
-			}	
-		} if (date != null) {
-			dateChoisi = date;
-			if (jeu != null) {
-				jeuChoisi = jeu;
-				ArrayList<TournoiInfo> tournoisfiltreJeu = MasterFrame.getInstance().getUser().getData().TournoiFiltreJeu(jeu);
-				
-				for (TournoiInfo t : tournoisfiltreJeu) {
-					switchUser(t);
-				}
-			}else {
-				ArrayList<TournoiInfo> tournoisfiltre = MasterFrame.getInstance().getUser().getData().TournoiFiltreDate(date);
-				for (TournoiInfo t : tournoisfiltre) {
-					switchUser(t);
-				
-				}
-			}
-		} if (jeu != null ) {
-			jeuChoisi = jeu;
-			ArrayList<TournoiInfo> tournoisfiltre = MasterFrame.getInstance().getUser().getData().TournoiFiltreJeu(jeu);
-			for (TournoiInfo t : tournoisfiltre) {
-				switchUser(t);
-			}
+		dateChoisi = date;
+		jeuChoisi = jeu;
+		ArrayList<TournoiInfo> tournoisfiltreJeu = MasterFrame.getInstance().getUser().getData().TournoiFiltre(date, jeu);
+		
+		for (TournoiInfo t : tournoisfiltreJeu) {
+			switchUser(t);
 		}
-        
         pan.setLayout(new GridLayout(0, 1));
         
 	}
@@ -188,9 +155,7 @@ public class Calendrier extends DataJPanel{
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-				createListTournament(Date.valueOf(TexteDate.getText()),null);
-				revalidate();
+
 			}
 
 		});

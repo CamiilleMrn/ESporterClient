@@ -21,7 +21,7 @@ public class JoueurInfo implements Infos, Serializable {
 	private int id;
 	private String nom;
 	private String prenom;
-	private InputStream photoBlob;
+	private Image image;
 	private Date dateNaissance;
 	private Date dateDebutContrat;
 	private Date dateFinContrat;
@@ -32,12 +32,12 @@ public class JoueurInfo implements Infos, Serializable {
 	
 	
 
-	public JoueurInfo(int id, String nom, String prenom, InputStream is, Date dateNaissance, Date dateDebutContrat,
+	public JoueurInfo(int id, String nom, String prenom, Image image, Date dateNaissance, Date dateDebutContrat,
 			Date dateFinContrat, int nationalite, int id_equipe, int id_ecurie) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.photoBlob = is;
+		this.image = image;
 		this.dateNaissance = dateNaissance;
 		this.dateDebutContrat = dateDebutContrat;
 		this.dateFinContrat = dateFinContrat;
@@ -85,8 +85,8 @@ public class JoueurInfo implements Infos, Serializable {
 
 
 
-	public InputStream getPhoto() {
-		return photoBlob;
+	public Image getPhoto() {
+		return image;
 	}
 	
 	public BufferedImage getPhotoTraite() {

@@ -61,33 +61,17 @@ public class Calendrier extends DataJPanel{
 	private JTextField txtCalendrierDesTournois;
 	private JPanel pan;
 	private Date dateChoisi =null;
+	private Jeu jeuChoisi = null;
 	
-	private void createListTournament(Date date) {
+	private void createListTournament(Date date, Jeu jeu) {
         // create List model
 		pan.removeAll();
-		if (date==null) {
-			HashMap<Integer, TournoiInfo> map = MasterFrame.getInstance().getUser().getData().getCalendrier();
-			dateChoisi=null;
-			/*
-	        map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
-	        map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
-	        map.put(3,new TournoiInfo(Date.valueOf("2022-11-11"), "TestTournois 3", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
-	        map.put(4,new TournoiInfo(Date.valueOf("2022-11-12"), "TestTournois 4", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
-	        map.put(5,new TournoiInfo(Date.valueOf("2022-11-13"), "TestTournois 5", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));*/
-			Iterator<TournoiInfo> ite = map.values().iterator();
-			while (ite.hasNext()) {
-				
-				TournoiInfo t = ite.next();
-				System.out.println(t);
-				pan.add(new TournoisRendererOrga(t));
-				
-			}
-		} else {
-			dateChoisi = date;
-			ArrayList<TournoiInfo> tournoisfiltre = MasterFrame.getInstance().getUser().getData().TournoiFiltreDate(date);
-			for (TournoiInfo t : tournoisfiltre) {
-				pan.add(new TournoisRendererOrga(t));
-			}
+		dateChoisi = date;
+		jeuChoisi = jeu;
+		ArrayList<TournoiInfo> tournoisfiltreJeu = MasterFrame.getInstance().getUser().getData().TournoiFiltre(date, jeu);
+		
+		for (TournoiInfo t : tournoisfiltreJeu) {
+			pan.add(new TournoisRendererOrga(t));
 		}
         
         pan.setLayout(new GridLayout(0, 1));
@@ -132,7 +116,7 @@ public class Calendrier extends DataJPanel{
 		dummy.add(txtCalendrierDesTournois);
 		txtCalendrierDesTournois.setColumns(20);
 		
-		createListTournament(null);
+		createListTournament(null, null);
 		JScrollPane scrollPaneCenter = new JScrollPane(pan);
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
@@ -165,7 +149,7 @@ public class Calendrier extends DataJPanel{
 			public void insertUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println("ok1");
-				createListTournament(Date.valueOf(TexteDate.getText()));
+				createListTournament(Date.valueOf(TexteDate.getText()), jeuChoisi);
 				revalidate();
 				validate();
 				repaint();
@@ -178,10 +162,6 @@ public class Calendrier extends DataJPanel{
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("ok33");
-				createListTournament(Date.valueOf(TexteDate.getText()));
-				revalidate();
 			}
 
 			});
@@ -242,7 +222,7 @@ public class Calendrier extends DataJPanel{
 	}
 	@Override
 	public void dataUpdate() {
-		createListTournament(dateChoisi);
+		createListTournament(dateChoisi, jeuChoisi);
 		
 	}
 

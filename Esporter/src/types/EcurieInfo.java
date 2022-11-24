@@ -13,13 +13,13 @@ public class EcurieInfo implements Infos, Serializable,  Comparable<EcurieInfo> 
 	 */
 	private static final long serialVersionUID = 3925659840033195163L;
 	private String nom;
-	private Blob logo;
+	private types.Image logo;
 	private String diminutif;
 	private HashMap<Integer,EquipeInfo> equipes;
 	private ArrayList<Titre> palmares;
 	private int id;
 	
-	public EcurieInfo(String nom, Blob logo, String diminutif, int id) {
+	public EcurieInfo(String nom, types.Image logo, String diminutif, int id) {
 		this.nom = nom;
 		this.logo = logo;
 		this.diminutif = diminutif;
@@ -40,7 +40,7 @@ public class EcurieInfo implements Infos, Serializable,  Comparable<EcurieInfo> 
 		this.palmares = palmares;
 	}
 	
-	public Blob getLogo() {
+	public types.Image getLogo() {
 		return logo;
 	}
 

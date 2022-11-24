@@ -62,27 +62,31 @@ public class Data implements Serializable, Infos {
 		return listOfVTournoiInfos;
 	}
 	
-	public ArrayList<TournoiInfo> TournoiFiltreDate(ArrayList<TournoiInfo> listOfVTournoiInfos, Date date) {
-		Collections.sort(listOfVTournoiInfos);
+	public ArrayList<TournoiInfo> TournoiFiltre(Date date, Jeu jeu) {
+		ArrayList<TournoiInfo>  listOfVTournoiInfos = listeTournoiTrie();
 		ArrayList<TournoiInfo> trieFiltre = new ArrayList<>();
-		for (TournoiInfo tournoi : listOfVTournoiInfos) {
-			if (tournoi.getDateInscription().compareTo(date)==0) {
-				trieFiltre.add(tournoi);
+		if (date!=null && jeu!=null) {
+			for (TournoiInfo tournoi : listOfVTournoiInfos) {
+				if (tournoi.getDateInscription().compareTo(date)==0 && tournoi.getJeux().compareTo(jeu)==0) {
+					trieFiltre.add(tournoi);
+				}
 			}
-		}
-		return trieFiltre;
-	}
-	
-	public ArrayList<TournoiInfo> TournoiFiltreJeu(Jeu jeu) {
-		Collection<TournoiInfo> values = this.calendrier.values();
-		ArrayList<TournoiInfo>  listOfVTournoiInfos = new ArrayList<>(values);
-		Collections.sort(listOfVTournoiInfos);
-		ArrayList<TournoiInfo> trieFiltre = new ArrayList<>();
-		for (TournoiInfo tournoi : listOfVTournoiInfos) {
-			if (tournoi.getJeux().compareTo(jeu)==0) {
-				trieFiltre.add(tournoi);
+		} else if (date!=null) {
+			for (TournoiInfo tournoi : listOfVTournoiInfos) {
+				if (tournoi.getDateInscription().compareTo(date)==0) {
+					trieFiltre.add(tournoi);
+				}
 			}
+		} else if (jeu!=null) {
+			for (TournoiInfo tournoi : listOfVTournoiInfos) {
+				if (tournoi.getJeux().compareTo(jeu)==0) {
+					trieFiltre.add(tournoi);
+				}
+			}
+		} else {
+			return listOfVTournoiInfos;
 		}
+		
 		return trieFiltre;
 	}
 	
