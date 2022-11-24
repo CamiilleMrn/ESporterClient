@@ -89,6 +89,7 @@ public class CommunicationServer implements Runnable{
 			} catch (ClassNotFoundException e2) {
 				e2.printStackTrace();
 			} catch (IOException e) {
+				e.printStackTrace();
 				try {
 					reconnect();
 				} catch (IOException e1) {
