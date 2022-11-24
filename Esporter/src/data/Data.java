@@ -71,13 +71,13 @@ public class Data implements Serializable, Infos {
 					trieFiltre.add(tournoi);
 				}
 			}
-		} else if (date!=null) {
+		} else if (date!=null && jeu == null) {
 			for (TournoiInfo tournoi : listOfVTournoiInfos) {
 				if (tournoi.getDateInscription().compareTo(date)==0) {
 					trieFiltre.add(tournoi);
 				}
 			}
-		} else if (jeu!=null) {
+		} else if (jeu!=null && date == null) {
 			for (TournoiInfo tournoi : listOfVTournoiInfos) {
 				if (tournoi.getJeux().compareTo(jeu)==0) {
 					trieFiltre.add(tournoi);

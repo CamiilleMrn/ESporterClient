@@ -2,6 +2,8 @@ package ihm.organisateur;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,6 +38,8 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -60,6 +64,7 @@ public class Calendrier extends DataJPanel{
 	private JTextField TexteDate;
 	private JTextField txtCalendrierDesTournois;
 	private JPanel pan;
+	private JLabel ifEmpty = new JLabel();
 	private Date dateChoisi =null;
 	private Jeu jeuChoisi = null;
 	
@@ -69,11 +74,20 @@ public class Calendrier extends DataJPanel{
 		dateChoisi = date;
 		jeuChoisi = jeu;
 		ArrayList<TournoiInfo> tournoisfiltreJeu = MasterFrame.getInstance().getUser().getData().TournoiFiltre(date, jeu);
-		
-		for (TournoiInfo t : tournoisfiltreJeu) {
-			pan.add(new TournoisRendererOrga(t));
+		System.out.println(tournoisfiltreJeu.isEmpty());
+		if(tournoisfiltreJeu.isEmpty() || tournoisfiltreJeu == null ) {
+			System.out.println("isEmpty");
+			ifEmpty.setText("Il n'existe aucun tournoi correspondant aux critères recherchés");
+			ifEmpty.setForeground(MasterFrame.COULEUR_TEXTE);
+			ifEmpty.setFont(new Font("Cambria", Font.PLAIN , 20));
+			pan.add(ifEmpty);
+		} else {
+			for (TournoiInfo t : tournoisfiltreJeu) {
+				pan.add(new TournoisRendererOrga(t));
+			}
+
 		}
-        
+		        
         pan.setLayout(new GridLayout(0, 1));
 
 		
@@ -93,6 +107,7 @@ public class Calendrier extends DataJPanel{
 	 */
 	private void initialize() {
 		pan = new JPanel();
+		pan.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		setLayout(new BorderLayout(0, 0));
 		JPanel root = new JPanel();
 		root.setLayout(new BorderLayout());
@@ -196,6 +211,38 @@ public class Calendrier extends DataJPanel{
 		FiltrerLesJeux.setFont(new Font("Cambria", Font.PLAIN, 15));
 		FiltrerLesJeux.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		FiltrerLesJeux.setForeground(MasterFrame.COULEUR_TEXTE);
+		
+		FiltrerLesJeux.addItemListener(new ItemListener() {
+	        @Override
+	        public void itemStateChanged(ItemEvent e) {
+	            if(e.getStateChange() == ItemEvent.SELECTED) {
+	                jeuChoisi = (Jeu) FiltrerLesJeux.getSelectedItem();
+	                createListTournament(dateChoisi,jeuChoisi);
+	            }
+	        }
+	    });
+		
+		((JTextField) FiltrerLesJeux.getEditor().getEditorComponent()).getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				createListTournament(dateChoisi,jeuChoisi);
+				revalidate();
+				validate();
+				repaint();	
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				
+			}
+			
+		});
 		
 		panel_3.add(FiltrerLesJeux);
 		

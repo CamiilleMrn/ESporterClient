@@ -8,14 +8,18 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -43,6 +47,10 @@ import types.TournoiInfo;
 
 public class Calendrier extends DataJPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField TexteDate;
 	private JTextField txtCalendrierDesTournois;
 	private Permission permission;
@@ -50,35 +58,42 @@ public class Calendrier extends DataJPanel{
 	private JPanel pan;
 	private Date dateChoisi ;
 	private Jeu jeuChoisi;
-	
-	private void switchUser (TournoiInfo t) {
-		switch(permission) {
-		case VISITEUR :
-			pan.add(new TournoisRendererVisiteurs(t));
-			break;
-		case JOUEUR :
-			pan.add(new TournoisRendererJoueur(t));
-			break;
-		case ECURIE :
-			pan.add(new TournoisRendererEcurie(t));
-			break;
-		case ARBITRE :
-			pan.add(new TournoisRendererArbitre(t));
-			break;
-		case ORGANISATEUR :
-			break;
-	}
-	}
+	private JLabel ifEmpty = new JLabel();
 	
 	private void createListTournament(Date date, Jeu jeu) {
 		pan.removeAll();
 		dateChoisi = date;
 		jeuChoisi = jeu;
 		ArrayList<TournoiInfo> tournoisfiltreJeu = MasterFrame.getInstance().getUser().getData().TournoiFiltre(date, jeu);
-		
-		for (TournoiInfo t : tournoisfiltreJeu) {
-			switchUser(t);
+		System.out.println(tournoisfiltreJeu.isEmpty());
+		if(tournoisfiltreJeu.isEmpty() || tournoisfiltreJeu == null ) {
+			System.out.println("isEmpty");
+			ifEmpty.setText("Il n'existe aucun tournoi correspondant aux critères recherchés");
+			ifEmpty.setForeground(MasterFrame.COULEUR_TEXTE);
+			ifEmpty.setFont(new Font("Cambria", Font.PLAIN , 20));
+			pan.add(ifEmpty);
+		} else {
+			for (TournoiInfo t : tournoisfiltreJeu) {
+				switch(permission) {
+					case VISITEUR :
+						pan.add(new TournoisRendererVisiteurs(t));
+						break;
+					case JOUEUR :
+						pan.add(new TournoisRendererJoueur(t));
+						break;
+					case ECURIE :
+						pan.add(new TournoisRendererEcurie(t));
+						break;
+					case ARBITRE :
+						pan.add(new TournoisRendererArbitre(t));
+						break;
+					case ORGANISATEUR :
+						break;
+				}
+			}
+
 		}
+		
         pan.setLayout(new GridLayout(0, 1));
         
 	}
@@ -113,6 +128,7 @@ public class Calendrier extends DataJPanel{
 		txtCalendrierDesTournois.setColumns(20);
 		
 		pan = new JPanel();
+		pan.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		createListTournament(null, null);
 		JScrollPane scrollPaneCenter = new JScrollPane(pan);
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
@@ -181,6 +197,7 @@ public class Calendrier extends DataJPanel{
 		panel_3.setBorder(null);
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
+		panel_3.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		
 		JComboBox<Jeu> FiltrerLesJeux = new JComboBox<>(Jeu.values());
 		FiltrerLesJeux.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(FiltrerLesJeux));
@@ -188,6 +205,16 @@ public class Calendrier extends DataJPanel{
 		FiltrerLesJeux.setFont(new Font("Cambria", Font.PLAIN, 15));
 		FiltrerLesJeux.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		FiltrerLesJeux.setForeground(MasterFrame.COULEUR_TEXTE);
+		
+		FiltrerLesJeux.addItemListener(new ItemListener() {
+	        @Override
+	        public void itemStateChanged(ItemEvent e) {
+	            if(e.getStateChange() == ItemEvent.SELECTED) {
+	                jeuChoisi = (Jeu) FiltrerLesJeux.getSelectedItem();
+	                createListTournament(dateChoisi,jeuChoisi);
+	            }
+	        }
+	    });
 		
 		((JTextField) FiltrerLesJeux.getEditor().getEditorComponent()).getDocument().addDocumentListener(new DocumentListener() {
 			@Override
@@ -206,9 +233,7 @@ public class Calendrier extends DataJPanel{
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-				createListTournament(dateChoisi,jeuChoisi);
-				revalidate();
+				
 			}
 			
 		});
