@@ -23,7 +23,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.plaf.ComboBoxUI;
+import javax.swing.text.JTextComponent;
 
 import ihm.arbitre.TournoisRendererArbitre;
 import ihm.component.DataJPanel;
@@ -31,6 +34,7 @@ import ihm.component.DatePicker;
 import ihm.component.ComboBoxRendererArrow;
 import ihm.ecurie.TournoisRendererEcurie;
 import ihm.joueur.TournoisRendererJoueur;
+import ihm.organisateur.TournoisRendererOrga;
 import ihm.visiteur.TournoisRendererVisiteurs;
 import types.Jeu;
 import types.Permission;
@@ -44,40 +48,72 @@ public class Calendrier extends DataJPanel{
 	private Permission permission;
 	private JPanel root;
 	private JPanel pan;
+	private Date dateChoisi ;
+	private Jeu jeuChoisi;
 	
-	private JPanel createListTournament() {
-		HashMap<Integer, TournoiInfo> map = MasterFrame.getInstance().getUser().getData().getCalendrier();
-        
+	private void switchUser (TournoiInfo t) {
+		switch(permission) {
+		case VISITEUR :
+			pan.add(new TournoisRendererVisiteurs(t));
+			break;
+		case JOUEUR :
+			pan.add(new TournoisRendererJoueur(t));
+			break;
+		case ECURIE :
+			pan.add(new TournoisRendererEcurie(t));
+			break;
+		case ARBITRE :
+			pan.add(new TournoisRendererArbitre(t));
+			break;
+		case ORGANISATEUR :
+			break;
+	}
+	}
+	
+	private void createListTournament(Date date, Jeu jeu) {
+		pan.removeAll();
+		if (date==null && jeu == null) {
+			HashMap<Integer, TournoiInfo> map = MasterFrame.getInstance().getUser().getData().getCalendrier();
+			dateChoisi=null;
+			jeuChoisi = null;
+			/*
+	        map.put(1,new TournoiInfo(Date.valueOf("2022-11-09"), "TestTournois 1", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
+	        map.put(2,new TournoiInfo(Date.valueOf("2022-11-10"), "TestTournois 2", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
+	        map.put(3,new TournoiInfo(Date.valueOf("2022-11-11"), "TestTournois 3", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
+	        map.put(4,new TournoiInfo(Date.valueOf("2022-11-12"), "TestTournois 4", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));
+	        map.put(5,new TournoiInfo(Date.valueOf("2022-11-13"), "TestTournois 5", Renomme.LOCAL, Jeu.LEAGUE_OF_LEGEND , 0));*/
+			Iterator<TournoiInfo> ite = map.values().iterator();
+			while (ite.hasNext()) {
+				TournoiInfo t = ite.next();
+				System.out.println(t);
+				switchUser(t);
+			}	
+		} if (date != null) {
+			dateChoisi = date;
+			if (jeu != null) {
+				jeuChoisi = jeu;
+				ArrayList<TournoiInfo> tournoisfiltreJeu = MasterFrame.getInstance().getUser().getData().TournoiFiltreJeu(jeu);
+				
+				for (TournoiInfo t : tournoisfiltreJeu) {
+					switchUser(t);
+				}
+			}else {
+				ArrayList<TournoiInfo> tournoisfiltre = MasterFrame.getInstance().getUser().getData().TournoiFiltreDate(date);
+				for (TournoiInfo t : tournoisfiltre) {
+					switchUser(t);
+				
+				}
+			}
+		} if (jeu != null ) {
+			jeuChoisi = jeu;
+			ArrayList<TournoiInfo> tournoisfiltre = MasterFrame.getInstance().getUser().getData().TournoiFiltreJeu(jeu);
+			for (TournoiInfo t : tournoisfiltre) {
+				switchUser(t);
+			}
+		}
         
         pan.setLayout(new GridLayout(0, 1));
-
-		
-		//HashMap<Integer, TournoiInfo> map = Data.getCalendrier();
-
-		Iterator<TournoiInfo> ite = map.values().iterator();
-		while (ite.hasNext()) {
-			
-			TournoiInfo t = ite.next();
-			System.out.println(t);
-			switch(permission) {
-				case VISITEUR :
-					pan.add(new TournoisRendererVisiteurs(t));
-					break;
-				case JOUEUR :
-					pan.add(new TournoisRendererJoueur(t));
-					break;
-				case ECURIE :
-					pan.add(new TournoisRendererEcurie(t));
-					break;
-				case ARBITRE :
-					pan.add(new TournoisRendererArbitre(t));
-					break;
-				case ORGANISATEUR :
-					break;
-			}
-			
-		}
-		return pan;
+        
 	}
 	
 	public Calendrier(Permission permission) {
@@ -110,7 +146,7 @@ public class Calendrier extends DataJPanel{
 		txtCalendrierDesTournois.setColumns(20);
 		
 		pan = new JPanel();
-		createListTournament();
+		createListTournament(null, null);
 		JScrollPane scrollPaneCenter = new JScrollPane(pan);
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
@@ -127,13 +163,37 @@ public class Calendrier extends DataJPanel{
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		TexteDate = new JTextField("Selectionnez une date");
-		TexteDate.setEnabled(false);
+		TexteDate.setEditable(false);
 		TexteDate.setForeground(Color.WHITE);
 		TexteDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		TexteDate.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), new EmptyBorder(0, 10, 0, 0)));
 		TexteDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		panel_2.add(TexteDate, BorderLayout.CENTER);
 		TexteDate.setColumns(10);
+		
+		TexteDate.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				createListTournament(Date.valueOf(TexteDate.getText()),jeuChoisi);
+				revalidate();
+				validate();
+				repaint();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				createListTournament(Date.valueOf(TexteDate.getText()),null);
+				revalidate();
+			}
+
+		});
 		
 		JButton BtnDate = new JButton(" ... ");
 		BtnDate.setBackground(MasterFrame.COULEUR_MASTER);
@@ -157,12 +217,36 @@ public class Calendrier extends DataJPanel{
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JComboBox<Jeu> FiltrerLesJeux = new JComboBox<>();
+		JComboBox<Jeu> FiltrerLesJeux = new JComboBox<>(Jeu.values());
 		FiltrerLesJeux.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(FiltrerLesJeux));
 		FiltrerLesJeux.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		FiltrerLesJeux.setFont(new Font("Cambria", Font.PLAIN, 15));
 		FiltrerLesJeux.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		FiltrerLesJeux.setForeground(MasterFrame.COULEUR_TEXTE);
+		
+		((JTextField) FiltrerLesJeux.getEditor().getEditorComponent()).getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				createListTournament(dateChoisi,jeuChoisi);
+				revalidate();
+				validate();
+				repaint();	
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				createListTournament(dateChoisi,jeuChoisi);
+				revalidate();
+			}
+			
+		});
 		
 		panel_3.add(FiltrerLesJeux);
 		
@@ -170,10 +254,7 @@ public class Calendrier extends DataJPanel{
 
 	@Override
 	public void dataUpdate() {
-		pan.removeAll();
-		createListTournament();
-		revalidate();
-		validate();
+		createListTournament(dateChoisi, jeuChoisi);
 	}
 
 }

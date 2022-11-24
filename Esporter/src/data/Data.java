@@ -10,6 +10,7 @@ import java.util.HashMap;
 import types.ClassementInfo;
 import types.EcurieInfo;
 import types.Infos;
+import types.Jeu;
 import types.TournoiInfo;
 
 public class Data implements Serializable, Infos {
@@ -61,13 +62,24 @@ public class Data implements Serializable, Infos {
 		return listOfVTournoiInfos;
 	}
 	
-	public ArrayList<TournoiInfo> TournoiFiltreDate(Date date) {
+	public ArrayList<TournoiInfo> TournoiFiltreDate(ArrayList<TournoiInfo> listOfVTournoiInfos, Date date) {
+		Collections.sort(listOfVTournoiInfos);
+		ArrayList<TournoiInfo> trieFiltre = new ArrayList<>();
+		for (TournoiInfo tournoi : listOfVTournoiInfos) {
+			if (tournoi.getDateInscription().compareTo(date)==0) {
+				trieFiltre.add(tournoi);
+			}
+		}
+		return trieFiltre;
+	}
+	
+	public ArrayList<TournoiInfo> TournoiFiltreJeu(Jeu jeu) {
 		Collection<TournoiInfo> values = this.calendrier.values();
 		ArrayList<TournoiInfo>  listOfVTournoiInfos = new ArrayList<>(values);
 		Collections.sort(listOfVTournoiInfos);
 		ArrayList<TournoiInfo> trieFiltre = new ArrayList<>();
 		for (TournoiInfo tournoi : listOfVTournoiInfos) {
-			if (tournoi.getDateInscription().compareTo(date)==0) {
+			if (tournoi.getJeux().compareTo(jeu)==0) {
 				trieFiltre.add(tournoi);
 			}
 		}
