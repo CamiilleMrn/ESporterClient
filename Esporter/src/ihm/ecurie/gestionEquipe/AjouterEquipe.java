@@ -30,6 +30,7 @@ import java.awt.Font;
 import ihm.MasterFrame;
 import ihm.component.ComboBoxRendererArrow;
 import ihm.component.containerJoueur;
+import socket.Response;
 import types.EcurieInfo;
 import types.Jeu;
 import types.RegisterEquipe;
@@ -169,6 +170,10 @@ public class AjouterEquipe extends JPanel{
 				}
 				RegisterEquipe equipe = new RegisterEquipe((Jeu)comboBox.getSelectedItem(), ((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId(), joueurs);
 				MasterFrame.getInstance().getUser().ajouterEquipe(equipe);
+				MasterFrame.getInstance().getUser().getWaiting().waitFor(Response.UPDATE_EQUIPE, Response.Error);
+				if (MasterFrame.getInstance().getUser().getWaiting().getActualState()==Response.UPDATE_EQUIPE) {
+					MasterFrame.getInstance().setPanel(ihm.ecurie.GestionEquipe.class, null);
+				}
 				
 			}
 		});

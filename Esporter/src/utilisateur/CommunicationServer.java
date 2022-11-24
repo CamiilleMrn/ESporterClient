@@ -26,6 +26,7 @@ import types.Login;
 import types.Permission;
 import types.RegisterEquipe;
 import types.TournoiInfo;
+import types.exception.Erreur;
 import types.exception.InvalidPermission;
 
 public class CommunicationServer implements Runnable{
@@ -191,6 +192,7 @@ public class CommunicationServer implements Runnable{
 			EquipeInfo equipe = (EquipeInfo)r.getInfoByID(InfoID.Equipe);
 			user.getData().getEcuries().get(equipe.getEcurie().getId()).getEquipes().put(equipe.getId(), equipe);
 			MasterFrame.getInstance().dataUpdate();
+			break;
 		case UPDATE_TOURNOI:
 			TournoiInfo tournoi = (TournoiInfo)r.getInfoByID(InfoID.Tournoi);
 			user.getData().getCalendrier().put(tournoi.getId(), tournoi);
@@ -203,7 +205,7 @@ public class CommunicationServer implements Runnable{
 			
 			break;
 		case Error:
-			MasterFrame.getInstance().getError().setState(new Exception("Vous etes deja inscrit"), false);
+			MasterFrame.getInstance().error(new Erreur(r.getError()));;
 			System.out.println("ERREUR");
 			break;
 			

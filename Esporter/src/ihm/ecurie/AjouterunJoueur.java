@@ -254,7 +254,7 @@ public class AjouterunJoueur extends JDialog {
 					try {
 						BufferedImage bf = ImageIO.read(is);
 						types.Image im = new types.Image(image, "png");
-						JoueurInfo joueur = new JoueurInfo(-1,nom, prenom,im,dateNaissance,dateDebutContrat,dateFinContrat,-1,-1,((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId());
+						JoueurInfo joueur = new JoueurInfo(-1,nom, prenom,im,dateNaissance,dateDebutContrat,dateFinContrat,1,-1,((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId());
 						Login l = new Login(identifianttxt.getText(), textField_1.getText());
 						container.setJoueur(new registerJoueur(joueur, l));
 						dispose();

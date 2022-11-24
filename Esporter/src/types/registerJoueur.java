@@ -1,7 +1,13 @@
 package types;
 
-public class registerJoueur {
+import java.io.Serializable;
 
+public class registerJoueur implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5974897413172620415L;
 	private JoueurInfo joueur;
 	private Login login;
 	
