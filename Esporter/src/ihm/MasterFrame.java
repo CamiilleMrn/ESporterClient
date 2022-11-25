@@ -420,6 +420,9 @@ public class MasterFrame {
 		} else {
 			setCurrentMainPanel(null);
 		}
+		header.revalidate();
+		header.validate();
+		header.repaint();
 	}
 	
 	public void dataUpdate() {

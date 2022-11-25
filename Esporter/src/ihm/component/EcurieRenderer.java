@@ -45,6 +45,7 @@ public class EcurieRenderer extends JPanel {
 	private final Component verticalGlue_1 = Box.createVerticalGlue();
 
 	public EcurieRenderer (EcurieInfo ecurie) {
+		setPreferredSize(new Dimension(getPreferredSize().width, 150));
 		this.ecurie = ecurie;
 		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
 		setBackground(MasterFrame.COULEUR_MASTER_FOND);

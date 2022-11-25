@@ -81,6 +81,7 @@ public class Ecuries extends DataJPanel {
 		scrollPaneCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panel.add(scrollPaneCenter, BorderLayout.CENTER);
+		scrollPaneCenter.getVerticalScrollBar().setUnitIncrement(16);
 
 	}
 
