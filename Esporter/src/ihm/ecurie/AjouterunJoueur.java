@@ -33,6 +33,8 @@ import java.awt.Image;
 
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -103,7 +105,8 @@ public class AjouterunJoueur extends JDialog {
 	//create constructor of class
 	public AjouterunJoueur(containerJoueur container)
 	{
-
+		super(MasterFrame.getInstance().getFrame(), "Ajouter joueur ", false);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		//set title
 		setTitle("Ajouter joueur ");
 		//set close operation on frame
@@ -221,37 +224,45 @@ public class AjouterunJoueur extends JDialog {
 		
 		BtnValider = new JButton("Valider");
 		BtnValider.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) throws IllegalArgumentException{
+			public void actionPerformed(ActionEvent e){
 				
 				String nom = TexteDuNom.getText();
 				String prenom = textPrenom.getText();
-				
-				Date dateDebutContrat= Date.valueOf(TexteDateDebContrat.getText());
-				Date dateNaissance= Date.valueOf(txtDateNaissance.getText());
-				Date dateFinContrat= Date.valueOf(TexteDateFinContrat.getText());
-				ByteArrayOutputStream blob = new ByteArrayOutputStream();
-				image = resize(image, 200, 300);
+				Date dateDebutContrat = null;
+				Date dateNaissance = null;
+				Date dateFinContrat = null;
 				try {
-					ImageIO.write(image, "png", blob);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				dateDebutContrat= Date.valueOf(TexteDateDebContrat.getText());
+				dateNaissance= Date.valueOf(txtDateNaissance.getText());
+				dateFinContrat= Date.valueOf(TexteDateFinContrat.getText());
+				} catch (IllegalArgumentException e1){
+					
 				}
-				InputStream is = new ByteArrayInputStream(blob.toByteArray());
+
 				if (nom == null) {
-					MasterFrame.getInstance().error(new IllegalArgumentException("Le champ nom n'est pas specifié"));
+					JOptionPane.showMessageDialog(null, "Le champ nom n'est pas specifié","Erreur", JOptionPane.ERROR_MESSAGE);
 				}else if(prenom==null){
-					MasterFrame.getInstance().error( new IllegalArgumentException("Le champ prenom n'est pas specifié"));
+					JOptionPane.showMessageDialog(null, "Le champ prenom n'est pas specifié","Erreur", JOptionPane.ERROR_MESSAGE);
 				}else if(dateDebutContrat==null){
-					MasterFrame.getInstance().error( new IllegalArgumentException("Le champ debut du contrat n'est pas specifié"));
+					JOptionPane.showMessageDialog(null, "Le champ debut du contrat n'est pas specifié","Erreur", JOptionPane.ERROR_MESSAGE);
 				}else if(dateNaissance==null) {
-					MasterFrame.getInstance().error( new IllegalArgumentException("Le champ date de naissance n'est pas specifié"));
+					JOptionPane.showMessageDialog(null, "Le champ date de naissance n'est pas specifié","Erreur", JOptionPane.ERROR_MESSAGE);
 				}else if(dateFinContrat== null) {
-					MasterFrame.getInstance().error( new IllegalArgumentException("Le champ date de fin du contrat n'est pas specifié"));
-				}else if(is == null) {
-					MasterFrame.getInstance().error( new IllegalArgumentException("Il y a une erreur avec la photo"));
+					JOptionPane.showMessageDialog(null, "Le champ date de fin du contrat n'est pas specifié","Erreur", JOptionPane.ERROR_MESSAGE);
+				}else if(image == null) {
+					JOptionPane.showMessageDialog(null, "Il y a une erreur avec la photo","Erreur", JOptionPane.ERROR_MESSAGE);
 				}else {
 					try {
+						ByteArrayOutputStream blob = new ByteArrayOutputStream();
+						
+						image = resize(image, 200, 300);
+						try {
+							ImageIO.write(image, "png", blob);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						InputStream is = new ByteArrayInputStream(blob.toByteArray());
 						BufferedImage bf = ImageIO.read(is);
 						types.Image im = new types.Image(image, "png");
 						JoueurInfo joueur = new JoueurInfo(-1,nom, prenom,im,dateNaissance,dateDebutContrat,dateFinContrat,1,-1,((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId());
@@ -516,7 +527,9 @@ public class AjouterunJoueur extends JDialog {
 			TexteDateDebContrat.setText(j.getDateDebutContrat().toString());
 			TexteDateFinContrat.setText(j.getDateFinContrat().toString());
 			textPrenom.setText(j.getPrenom());
-			PhotoJoueur.setIcon(new ImageIcon(j.getPhoto().getImage()));
+			BufferedImage bf = j.getPhoto().getImage();
+			bf = resize(bf, 300, 400);
+			PhotoJoueur.setIcon(new ImageIcon());
 			txtDateNaissance.setText(j.getDateNaissance().toString());
 			identifianttxt.setText(container.getJoueur().getLogin().getUsername());
 			textField_1.setText(container.getJoueur().getLogin().getPassword());
