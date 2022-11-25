@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,6 +34,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Color;
+
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 
 public class LogIn extends JPanel{
@@ -80,7 +83,12 @@ public class LogIn extends JPanel{
 		JLabel lblNewLabel_1 = new JLabel("\r\n");
 		lblNewLabel_1.setFont(new Font("Cambria", Font.PLAIN, 10));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Cam\\OneDrive\\COURS\\S3\\SAE - Saison Esport\\AvatarLogin.jpg"));
+		try {
+			lblNewLabel_1.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("images/AvatarLogin.jpg"))));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_1.ipady = containerLogin.getHeight()/2;
