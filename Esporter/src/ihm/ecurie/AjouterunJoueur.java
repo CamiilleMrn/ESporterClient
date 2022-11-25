@@ -52,6 +52,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 
 //create class and extend with JFrame
 public class AjouterunJoueur extends JDialog {
@@ -85,9 +86,6 @@ public class AjouterunJoueur extends JDialog {
 	private JTextField textPrenom;
 	private JButton TroisPoint3;
 	private JFileChooser choose = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-	public static final Color COULEUR_MASTER = new Color(0, 164, 210);
-	public static final Color COULEUR_MASTER_FOND = Color.DARK_GRAY;
-	public static final Color COULEUR_TEXTE = Color.WHITE;
 	private JPanel PanelBtnValider;
 	private JButton BtnValider;
 	private JTextField titleidentifiant;
@@ -114,7 +112,7 @@ public class AjouterunJoueur extends JDialog {
 		setBounds(100, 100, 617, 341);
 		//create new JPanel in contentPane
 		contentPane = new JPanel();
-		contentPane.setBackground(COULEUR_MASTER_FOND);
+		contentPane.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		//set border of frame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		//set contentPane 
@@ -123,6 +121,7 @@ public class AjouterunJoueur extends JDialog {
 
 		//create button and there object
 		JButton TroisPoint2 = new JButton("...");
+		TroisPoint2.setBackground(MasterFrame.COULEUR_MASTER);
 		TroisPoint2.setBorder(null);
 		TroisPoint2.setFont(new Font("Cambria", Font.PLAIN, 15));
 		TroisPoint2.setContentAreaFilled(false); 
@@ -146,6 +145,7 @@ public class AjouterunJoueur extends JDialog {
 				TexteDateFinContrat.setColumns(11);
 		
 		JButton TroisPoint= new JButton("...");
+		TroisPoint.setBackground(MasterFrame.COULEUR_MASTER);
 		TroisPoint.setFont(new Font("Cambria", Font.PLAIN, 15));
 		TroisPoint.setBorder(null);
 		TroisPoint.setContentAreaFilled(false); 
@@ -170,7 +170,7 @@ public class AjouterunJoueur extends JDialog {
 		
 		
 		panelDateContrat = new JPanel();
-		panelDateContrat.setBackground(COULEUR_MASTER_FOND);
+		panelDateContrat.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		contentPane.add(panelDateContrat, BorderLayout.SOUTH);
 		panelDateContrat.setLayout(new BorderLayout(0, 0));
 		
@@ -179,8 +179,8 @@ public class AjouterunJoueur extends JDialog {
 		PanelDebContrat.setLayout(new BorderLayout(0, 0));
 	
 		DateDebutTournoi = new JTextField();
-		DateDebutTournoi.setForeground(Color.WHITE);
-		DateDebutTournoi.setBackground(COULEUR_MASTER_FOND);
+		DateDebutTournoi.setForeground(MasterFrame.COULEUR_TEXTE);
+		DateDebutTournoi.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		DateDebutTournoi.setHorizontalAlignment(SwingConstants.CENTER);
 		DateDebutTournoi.setText("Date debut du contrat");
 		DateDebutTournoi.setFont(new Font("Cambria", Font.BOLD, 12));
@@ -199,8 +199,8 @@ public class AjouterunJoueur extends JDialog {
 		PanelFinContrat.add(TexteDateFinContrat, BorderLayout.WEST);
 		
 		DateFinDuContrat = new JTextField();
-		DateFinDuContrat.setForeground(Color.WHITE);
-		DateFinDuContrat.setBackground(COULEUR_MASTER_FOND);
+		DateFinDuContrat.setForeground(MasterFrame.COULEUR_TEXTE);
+		DateFinDuContrat.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		DateFinDuContrat.setHorizontalAlignment(SwingConstants.CENTER);
 		DateFinDuContrat.setFont(new Font("Cambria", Font.BOLD, 12));
 		DateFinDuContrat.setText("Date fin du contrat");
@@ -211,7 +211,7 @@ public class AjouterunJoueur extends JDialog {
 
 		
 		panelValider = new JPanel();
-		panelValider.setBackground(COULEUR_MASTER_FOND);
+		panelValider.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panelDateContrat.add(panelValider, BorderLayout.SOUTH);
 		panelValider.setLayout(new BorderLayout(0, 0));
 		
@@ -267,13 +267,13 @@ public class AjouterunJoueur extends JDialog {
 			}
 		});
 		
-		BtnValider.setForeground(Color.WHITE);
-		BtnValider.setBackground(COULEUR_MASTER);
+		BtnValider.setForeground(MasterFrame.COULEUR_TEXTE);
+		BtnValider.setBackground(MasterFrame.COULEUR_MASTER);
 		BtnValider.setFont(new Font("Cambria", Font.PLAIN, 15));
 		PanelBtnValider.add(BtnValider, BorderLayout.NORTH);
 		
 		panelInfo = new JPanel();
-		panelInfo.setBackground(COULEUR_MASTER_FOND);
+		panelInfo.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		contentPane.add(panelInfo, BorderLayout.EAST);
 		GridBagLayout gbl_panelInfo = new GridBagLayout();
 		gbl_panelInfo.columnWidths = new int[] {136, 136};
@@ -283,8 +283,8 @@ public class AjouterunJoueur extends JDialog {
 		panelInfo.setLayout(gbl_panelInfo);
 						
 						TexteNom = new JTextField();
-						TexteNom.setForeground(Color.WHITE);
-						TexteNom.setBackground(COULEUR_MASTER_FOND);
+						TexteNom.setForeground(MasterFrame.COULEUR_TEXTE);
+						TexteNom.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 						TexteNom.setBorder(null);
 						TexteNom.setHorizontalAlignment(SwingConstants.CENTER);
 						TexteNom.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -319,9 +319,9 @@ public class AjouterunJoueur extends JDialog {
 
 						
 						Prenom = new JTextField();
-						Prenom.setForeground(Color.WHITE);
+						Prenom.setForeground(MasterFrame.COULEUR_TEXTE);
 						Prenom.setBorder(null);
-						Prenom.setBackground(COULEUR_MASTER_FOND);
+						Prenom.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 						Prenom.setText("Prenom  :");
 						Prenom.setHorizontalAlignment(SwingConstants.CENTER);
 						Prenom.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -353,7 +353,7 @@ public class AjouterunJoueur extends JDialog {
 		FlowLayout flowLayout_1 = (FlowLayout) PanelNaisTxt.getLayout();
 		flowLayout_1.setVgap(10);
 		flowLayout_1.setHgap(3);
-		PanelNaisTxt.setBackground(COULEUR_MASTER_FOND);
+		PanelNaisTxt.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		PanelNaisTxt.setBorder(null);
 		GridBagConstraints gbc_PanelNaisTxt = new GridBagConstraints();
 		gbc_PanelNaisTxt.insets = new Insets(0, 0, 5, 0);
@@ -370,8 +370,8 @@ public class AjouterunJoueur extends JDialog {
 		
 		TroisPoint3 = new JButton("...");
 		TroisPoint3.setBorder(null);
-		TroisPoint3.setBackground(Color.WHITE);
-		TroisPoint3.setForeground(COULEUR_TEXTE);
+		TroisPoint3.setBackground(MasterFrame.COULEUR_TEXTE);
+		TroisPoint3.setForeground(MasterFrame.COULEUR_TEXTE);
 		TroisPoint3.addActionListener(new ActionListener() {
 
 	public void actionPerformed(ActionEvent e) {
@@ -387,8 +387,8 @@ public class AjouterunJoueur extends JDialog {
 						
 						DateDeNaissance = new JTextField();
 						DateDeNaissance.setBorder(null);
-						DateDeNaissance.setForeground(Color.WHITE);
-						DateDeNaissance.setBackground(COULEUR_MASTER_FOND);
+						DateDeNaissance.setForeground(MasterFrame.COULEUR_TEXTE);
+						DateDeNaissance.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 						DateDeNaissance.setHorizontalAlignment(SwingConstants.CENTER);
 						DateDeNaissance.setFont(new Font("Cambria", Font.PLAIN, 15));
 						DateDeNaissance.setText("Date de naissance");
@@ -403,8 +403,8 @@ public class AjouterunJoueur extends JDialog {
 						
 						titleidentifiant = new JTextField();
 						titleidentifiant.setHorizontalAlignment(SwingConstants.CENTER);
-						titleidentifiant.setBackground(COULEUR_MASTER_FOND);
-						titleidentifiant.setForeground(COULEUR_TEXTE);
+						titleidentifiant.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+						titleidentifiant.setForeground(MasterFrame.COULEUR_TEXTE);
 						titleidentifiant.setBorder(null);
 						titleidentifiant.setText("Identifiant :");
 						titleidentifiant.setEditable(false);
@@ -419,7 +419,7 @@ public class AjouterunJoueur extends JDialog {
 						
 						panelIdentifiant = new JPanel();
 						panelIdentifiant.setBorder(null);
-						panelIdentifiant.setBackground(COULEUR_MASTER_FOND);
+						panelIdentifiant.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 						FlowLayout fl_panelIdentifiant = (FlowLayout) panelIdentifiant.getLayout();
 						fl_panelIdentifiant.setVgap(0);
 						fl_panelIdentifiant.setHgap(3);
@@ -436,8 +436,8 @@ public class AjouterunJoueur extends JDialog {
 						identifianttxt.setColumns(15);
 						
 						txtMotDePasse = new JTextField();
-						txtMotDePasse.setBackground(COULEUR_MASTER_FOND);
-						txtMotDePasse.setForeground(COULEUR_TEXTE);
+						txtMotDePasse.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+						txtMotDePasse.setForeground(MasterFrame.COULEUR_TEXTE);
 						txtMotDePasse.setBorder(null);
 						txtMotDePasse.setFont(new Font("Cambria", Font.PLAIN, 15));
 						txtMotDePasse.setText("Mot de passe :");
@@ -454,7 +454,7 @@ public class AjouterunJoueur extends JDialog {
 						FlowLayout flowLayout_2 = (FlowLayout) panel.getLayout();
 						flowLayout_2.setHgap(3);
 						panel.setBorder(null);
-						panel.setBackground(COULEUR_MASTER_FOND);
+						panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 						GridBagConstraints gbc_panel = new GridBagConstraints();
 						gbc_panel.fill = GridBagConstraints.BOTH;
 						gbc_panel.gridx = 1;
@@ -502,7 +502,7 @@ public class AjouterunJoueur extends JDialog {
 		
 		TexteDemanderLaPhotoDuJoueur = new JTextField();
 		TexteDemanderLaPhotoDuJoueur.setForeground(Color.WHITE);
-		TexteDemanderLaPhotoDuJoueur.setBackground(COULEUR_MASTER_FOND);
+		TexteDemanderLaPhotoDuJoueur.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		TexteDemanderLaPhotoDuJoueur.setFont(new Font("Cambria", Font.PLAIN, 15));
 		TexteDemanderLaPhotoDuJoueur.setText("Ajouter la photo du joueur ci-dessous :");
 		TexteDemanderLaPhotoDuJoueur.setEditable(false);
