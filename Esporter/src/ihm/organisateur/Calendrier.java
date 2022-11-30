@@ -67,6 +67,7 @@ public class Calendrier extends DataJPanel{
 	private JLabel ifEmpty = new JLabel();
 	private Date dateChoisi =null;
 	private Jeu jeuChoisi = null;
+
 	
 	private void createListTournament(Date date, Jeu jeu) {
         // create List model
@@ -97,6 +98,7 @@ public class Calendrier extends DataJPanel{
 	}	
 	/**
 	 * Create the application.
+	 * @param tournoi 
 	 */
 	public Calendrier() {
 		initialize();
@@ -259,7 +261,9 @@ public class Calendrier extends DataJPanel{
 		CreerUnTournoi.setFont(new Font("Cambria", Font.PLAIN, 15));
 		CreerUnTournoi.setForeground(MasterFrame.COULEUR_TEXTE);
 		CreerUnTournoi.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
+				MasterFrame.getInstance().setPanel(ihm.organisateur.CreationTournoi.class,null);
 			}
 		});
 		panel_4.add(CreerUnTournoi);
