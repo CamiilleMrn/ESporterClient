@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import types.ClassementInfo;
 import types.EcurieInfo;
+import types.EquipeInfo;
 import types.Infos;
 import types.Jeu;
 import types.TournoiInfo;
@@ -34,7 +35,6 @@ public class Data implements Serializable, Infos {
 	public HashMap<Integer, EcurieInfo> getEcuries() {
 		return ecuries;
 	}
-	
 	
 	public void setCalendrier(HashMap<Integer, TournoiInfo> calendrier) {
 		this.calendrier = calendrier;

@@ -67,7 +67,6 @@ public class Calendrier extends DataJPanel{
 		ArrayList<TournoiInfo> tournoisfiltreJeu = MasterFrame.getInstance().getUser().getData().TournoiFiltre(date, jeu);
 		System.out.println(tournoisfiltreJeu.isEmpty());
 		if(tournoisfiltreJeu.isEmpty() || tournoisfiltreJeu == null ) {
-			System.out.println("isEmpty");
 			ifEmpty.setText("Il n'existe aucun tournoi correspondant aux critères recherchés");
 			ifEmpty.setForeground(MasterFrame.COULEUR_TEXTE);
 			ifEmpty.setFont(new Font("Cambria", Font.PLAIN , 20));

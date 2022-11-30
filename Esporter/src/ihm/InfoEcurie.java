@@ -20,13 +20,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 
 import ihm.component.DataJPanel;
+import ihm.component.EcurieInfoTeamRenderer;
 import ihm.component.InfoEcuriePalmaRenderer;
 import types.EcurieInfo;
+import types.EquipeInfo;
 import types.Titre;
 
 import javax.swing.JScrollPane;
@@ -53,14 +59,20 @@ public class InfoEcurie extends DataJPanel{
 	private static final long serialVersionUID = 8722294344861036522L;
 	private JPanel Center;
 	private EcurieInfo ecurie;
+	private EquipeInfo equipe;
 	private JPanel containerInfo;
 	private JPanel containerPalma;
 	private JPanel pan;
+	private JPanel panTeam;
 	private JLabel lblPalmares;
 	private JLabel lblLogoEcurie;
 	private JPanel panel;
-	private JPanel panel_1;
+	private JPanel panelContainerTeam;
 	private JLabel ifEmpty = new JLabel();
+	private JLabel ifEmptyTeam = new JLabel();
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JLabel lblTeamTitle;
 	
 	public void createListPalma() {
 		ArrayList<Titre> liste = ecurie.getPalmares();
@@ -71,9 +83,23 @@ public class InfoEcurie extends DataJPanel{
 			pan.add(ifEmpty);
 		}else {
 	        for(Titre t : liste) {
-	        	System.out.println("titre");
-				System.out.println(t);
 				pan.add(new InfoEcuriePalmaRenderer(t));
+			}
+		}
+	}
+	
+	private void createListTeam() {
+		HashMap<Integer,EquipeInfo> liste = ecurie.getEquipes();
+		if(liste.isEmpty()) {
+			ifEmptyTeam.setText("Cette écurie n'a pas d'équipe");
+			ifEmptyTeam.setForeground(MasterFrame.COULEUR_TEXTE);
+			ifEmptyTeam.setFont(new Font("Cambria", Font.PLAIN , 20));
+			panTeam.add(ifEmptyTeam);
+		}else {
+			for(HashMap.Entry<Integer, EquipeInfo> set : liste.entrySet()) {
+				if(set.getValue().getEcurie() == ecurie) {
+					panTeam.add(new EcurieInfoTeamRenderer(set.getValue()));
+				}
 			}
 		}
 	}
@@ -134,7 +160,7 @@ public class InfoEcurie extends DataJPanel{
 		
 		
 		lblPalmares = new JLabel("Palmarès");
-		lblPalmares.setForeground(Color.WHITE);
+		lblPalmares.setForeground(MasterFrame.COULEUR_TEXTE);
 		lblPalmares.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 30));
 		lblPalmares.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPalmares.setAlignmentX(0.5f);
@@ -149,12 +175,31 @@ public class InfoEcurie extends DataJPanel{
 		scrollPaneCenter.setBorder(new EmptyBorder(50, 100, 50, 100));
 		containerPalma.add(scrollPaneCenter);
 		
-		
-		
+		panelContainerTeam = new JPanel();
+		panelContainerTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		Center.add(panelContainerTeam);
+		panelContainerTeam.setLayout(new BoxLayout(panelContainerTeam, BoxLayout.Y_AXIS));
 		
 		panel_1 = new JPanel();
 		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		Center.add(panel_1);
+		panelContainerTeam.add(panel_1);
+		
+		lblTeamTitle = new JLabel("Equipes");
+		lblTeamTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTeamTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 30));
+		panel_1.add(lblTeamTitle);
+		
+		panel_2 = new JPanel();
+		panel_2.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelContainerTeam.add(panel_2);
+		
+		panTeam = new JPanel();
+		panTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		createListTeam();
+		JScrollPane scrollPaneTeam = new JScrollPane(panTeam);
+		scrollPaneTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
+		panel_2.add(scrollPaneTeam, BorderLayout.CENTER);
 		
 		
 		
