@@ -124,6 +124,13 @@ public class User {
 		com.inscriptionTournoi(id);
 	}
 	
+	public void desinscriptionTournoi(int id) throws InvalidPermission{
+		if (permission != Permission.JOUEUR) {
+			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
+		}
+		com.desincriptionTournoi(id);
+	}
+	
 	public void ajouterEquipe(RegisterEquipe equipe){
 		if (permission!=Permission.ECURIE) {
 			MasterFrame.getInstance().error(new InvalidPermission("Vous n'avez pas la permission de faire cette action"));

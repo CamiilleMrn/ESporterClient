@@ -31,15 +31,22 @@ import types.TournoiInfo;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Font;
+import javax.swing.border.LineBorder;
 
 public class TournoisRendererJoueur extends DataJPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lbTournamentName = new JLabel();
 	private JButton lbArrowIcon = new JButton();
 	private final JPanel panel = new JPanel();
-	private final Component verticalGlue = Box.createVerticalGlue();
-	private final JButton lbInscriptionButton = new JButton();
-	private final Component verticalGlue_1 = Box.createVerticalGlue();
+	private final JButton lbInscriptionButton;
 	private TournoiInfo tournoi;
 	
 	
@@ -56,29 +63,38 @@ public class TournoisRendererJoueur extends DataJPanel{
 		add(panelText, BorderLayout.WEST);
 		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panelText.add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		
-		panel.add(verticalGlue);
-		Insets i = lbInscriptionButton.getInsets();
-		i.set(10,10,10,10);
 		
 		if(tournoi.getInscris().contains(((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getId_equipe())) {
-			lbInscriptionButton.setVisible(false);
+			lbInscriptionButton = new JButton("Se désinscrire");
+		}else {
+			lbInscriptionButton = new JButton("S'inscrire");
 		}
+
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[] {0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[] {0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0};
+		panel.setLayout(gbl_panel);
 		
 		lbInscriptionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JDialog confirmation = new InscriptionTournois(tournoi.getId());
+				JDialog confirmation = new InscriptionTournois(tournoi.getId(), tournoi);
 			}
 		});
 		lbInscriptionButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		lbInscriptionButton.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255)), new EmptyBorder(3, 11, 3, 10)));
+		lbInscriptionButton.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255)), new EmptyBorder(3, 11, 3, 11)));
 		lbInscriptionButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lbInscriptionButton.setHorizontalAlignment(SwingConstants.CENTER);
 		lbInscriptionButton.setForeground(MasterFrame.COULEUR_TEXTE);
+		GridBagConstraints gbc_lbInscriptionButton = new GridBagConstraints();
+		gbc_lbInscriptionButton.fill = GridBagConstraints.BOTH;
+		gbc_lbInscriptionButton.insets = new Insets(0, 0, 5, 5);
+		gbc_lbInscriptionButton.gridx = 0;
+		gbc_lbInscriptionButton.gridy = 0;
+		panel.add(lbInscriptionButton, gbc_lbInscriptionButton);
 		
-		panel.add(lbInscriptionButton);
-		panel.add(verticalGlue_1);
+		
 		lbArrowIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -87,7 +103,6 @@ public class TournoisRendererJoueur extends DataJPanel{
 		add(lbArrowIcon, BorderLayout.EAST);
 		
 		lbTournamentName.setText(this.tournoi.getNom()+ " - " +this.tournoi.getDateInscription());
-		lbInscriptionButton.setText("S'inscrire");
 		
 		lbArrowIcon.setBorder(null);
 		lbArrowIcon.setBackground(MasterFrame.COULEUR_MASTER_FOND);

@@ -116,6 +116,14 @@ public class CommunicationServer implements Runnable{
 		send(c);
 	}
 	
+	public void desincriptionTournoi(int idTournoi) {
+		HashMap<InfoID, Infos> m = new HashMap<>();
+		m.put(InfoID.Tournoi, new Entier(idTournoi));
+		m.put(InfoID.Joueur, new Entier(((JoueurInfo)user.getInfo()).getId()));
+		Command c = new Command(CommandName.DESINSCRIPTION_TOURNOI ,m);
+		send(c);
+	}
+	
 	public void ajouterEquipe(RegisterEquipe equipe) {
 		HashMap<InfoID, Infos> m = new HashMap<>();
 		m.put(InfoID.Equipe, equipe);

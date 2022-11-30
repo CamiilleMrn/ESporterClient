@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.EmptyBorder;
 
 import ihm.MasterFrame;
+import types.JoueurInfo;
+import types.TournoiInfo;
 import types.exception.InvalidPermission;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
@@ -40,12 +42,14 @@ public class InscriptionTournois extends JDialog {
 	private static final long serialVersionUID = -5369653307234398589L;
 	private JFrame frame;
 	private int id;
+	private TournoiInfo tournoi;
 
 	/**
 	 * Create the application.
 	 */
-	public InscriptionTournois(int id) {
+	public InscriptionTournois(int id, TournoiInfo tournoi) {
 		this.id= id;
+		this.tournoi = tournoi;
 
 		initialize();
 		setModalityType(ModalityType.APPLICATION_MODAL);
@@ -76,7 +80,10 @@ public class InscriptionTournois extends JDialog {
 		getContentPane().add(TextContainer, gbc_TextContainer);
 		TextContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblNewLabel = new JLabel("Confirmer votre inscription");
+		JLabel lblNewLabel = new JLabel("Confirmer votre inscription ?");
+		if(tournoi.getInscris().contains(((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getId_equipe())){
+			lblNewLabel.setText("Confirmer votre désinscription");
+		}
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
@@ -115,12 +122,17 @@ public class InscriptionTournois extends JDialog {
 		btnNewButton.setFont(new Font("Cambria", Font.PLAIN, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					MasterFrame.getInstance().getUser().inscriptionTournoi(id);
+				if(!tournoi.getInscris().contains(((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getId_equipe())){
+					try {
+						MasterFrame.getInstance().getUser().inscriptionTournoi(id);
+						dispose();
+					} catch (InvalidPermission e1) {
+						
+						e1.printStackTrace();
+					}
+				}else {
+					//MasterFrame.getInstance().getUser().;
 					dispose();
-				} catch (InvalidPermission e1) {
-					
-					e1.printStackTrace();
 				}
 			}
 		});
