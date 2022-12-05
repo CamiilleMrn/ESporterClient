@@ -24,6 +24,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.BoxLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 
 public class VoirInfoPlayerRenderer extends JPanel{
 
@@ -59,6 +60,8 @@ public class VoirInfoPlayerRenderer extends JPanel{
 		panel_ContainerInfo.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel lblPlayerName = new JLabel(player.getPrenom() + " " + player.getNom());
+		lblPlayerName.setPreferredSize(new Dimension(100,40));
+		lblPlayerName.setToolTipText(player.getPrenom() + " " + player.getNom());
 		lblPlayerName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerName.setForeground(MasterFrame.COULEUR_TEXTE);
 		lblPlayerName.setFont(new Font("Cambria", Font.BOLD, 30));
