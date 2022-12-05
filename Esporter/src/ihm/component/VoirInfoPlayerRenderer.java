@@ -22,6 +22,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.BoxLayout;
+import java.awt.Component;
 
 public class VoirInfoPlayerRenderer extends JPanel{
 
@@ -40,12 +42,13 @@ public class VoirInfoPlayerRenderer extends JPanel{
 		JPanel panel_ContainterPicture = new JPanel();
 		panel_ContainterPicture.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		add(panel_ContainterPicture);
-		panel_ContainterPicture.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblPlayerPicture = new JLabel();
+		lblPlayerPicture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblPlayerPicture.setIcon(new ImageIcon(player.getPhoto().getImage()));
 		BufferedImage bff_playerPicture = player.getPhoto().getImage();
 		bff_playerPicture = types.Image.resize(bff_playerPicture, 250, 250);
+		panel_ContainterPicture.setLayout(new BoxLayout(panel_ContainterPicture, BoxLayout.Y_AXIS));
 		lblPlayerPicture.setIcon(new ImageIcon(bff_playerPicture));
 		panel_ContainterPicture.add(lblPlayerPicture);
 		

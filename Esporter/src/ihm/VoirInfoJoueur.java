@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.JScrollPane;
 
 public class VoirInfoJoueur extends DataJPanel {
 
@@ -120,9 +121,11 @@ public class VoirInfoJoueur extends DataJPanel {
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
 		pan = new JPanel();
-		pan.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		createListPlayer();
-		panel_1.add(pan);
+		JScrollPane scrollPane = new JScrollPane(pan);
+		scrollPane.setBorder(null);
+		pan.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_1.add(scrollPane, BorderLayout.NORTH);
 		
 		
 	}

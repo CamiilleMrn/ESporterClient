@@ -273,7 +273,7 @@ public class InfoEcurie extends DataJPanel{
 	@Override
 	public void dataUpdate() {
 		createListPalma();
-		
+		createListTeam();
 	}
 	
 	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
