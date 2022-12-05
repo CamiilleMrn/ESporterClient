@@ -1,9 +1,14 @@
 package types;
 
 public enum Renomme {
-LOCAL, NATIONAL, INTERNATIONAL;
+	LOCAL("Local"), NATIONAL("National"), INTERNATIONAL("International");
 	
+	private String nom;
 	
+	private Renomme(String nom) {
+		this.nom = nom;
+	}
+
 	public static Renomme intToRenommee(int i) {
 		switch(i) {
 		case 1:return LOCAL;
@@ -12,6 +17,15 @@ LOCAL, NATIONAL, INTERNATIONAL;
 		}
 		return null;
 
+	}
+	
+	public String getNom() {
+		return this.nom;
+	}
+
+	@Override
+	public String toString() {
+		return this.getNom();
 	}
 
 }
