@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.EmptyBorder;
 
 import ihm.MasterFrame;
+import types.Jeu;
 import types.JoueurInfo;
 import types.TournoiInfo;
 import types.exception.InvalidPermission;
@@ -131,7 +132,11 @@ public class InscriptionTournois extends JDialog {
 						e1.printStackTrace();
 					}
 				}else {
-					//MasterFrame.getInstance().getUser().;
+					try {
+						MasterFrame.getInstance().getUser().desinscriptionTournoi(id, Jeu.jeuToInt(tournoi.getJeux()));
+					} catch (InvalidPermission e1) {
+						e1.printStackTrace();
+					};
 					dispose();
 				}
 			}

@@ -116,10 +116,11 @@ public class CommunicationServer implements Runnable{
 		send(c);
 	}
 	
-	public void desincriptionTournoi(int idTournoi) {
+	public void desincriptionTournoi(int idTournoi, int idJeu) {
 		HashMap<InfoID, Infos> m = new HashMap<>();
 		m.put(InfoID.Tournoi, new Entier(idTournoi));
 		m.put(InfoID.Joueur, new Entier(((JoueurInfo)user.getInfo()).getId()));
+		m.put(InfoID.Jeu, new Entier(idJeu));
 		Command c = new Command(CommandName.DESINSCRIPTION_TOURNOI ,m);
 		send(c);
 	}
@@ -204,6 +205,7 @@ public class CommunicationServer implements Runnable{
 			break;
 		case UPDATE_TOURNOI:
 			TournoiInfo tournoi = (TournoiInfo)r.getInfoByID(InfoID.Tournoi);
+			System.out.println("ok");
 			user.getData().getCalendrier().put(tournoi.getId(), tournoi);
 			MasterFrame.getInstance().dataUpdate();
 			System.out.println("Data update...");
