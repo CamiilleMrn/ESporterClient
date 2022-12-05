@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class EquipeInfo implements Infos, Serializable  {
+public class EquipeInfo implements Infos, Serializable, Comparable<EquipeInfo>  {
 
 	/**
 	 * 
@@ -70,7 +70,10 @@ public class EquipeInfo implements Infos, Serializable  {
 	public int getId() {
 		return id;
 	}
-	
-	
+
+	@Override
+	public int compareTo(EquipeInfo o) {
+		return this.getEcurie().compareTo(o.getEcurie());
+	}
 
 }
