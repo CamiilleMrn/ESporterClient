@@ -39,7 +39,7 @@ public class containerJoueur extends JPanel {
 	 * Create the panel.
 	 */
 	public containerJoueur() {
-		setBorder(new LineBorder(SystemColor.textHighlight, 2, true));
+		setBorder(new LineBorder(MasterFrame.COULEUR_MASTER, 2, true));
 		setSize(WIDTH, HEIGHT);
 		setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -79,7 +79,7 @@ public class containerJoueur extends JPanel {
 		this.joueur = joueur;
 		nomJoueur.setText(joueur.getJoueur().getNom()+" "+joueur.getJoueur().getPrenom());
 		BufferedImage bf = joueur.getJoueur().getPhoto().getImage();
-		bf = resize(bf, WIDTH-1, HEIGHT-HEIGHT/4-1);
+		bf = types.Image.resize(bf, WIDTH-1, HEIGHT-HEIGHT/4-1);
 		photo.setIcon(new ImageIcon(bf));
 		revalidate();
 		repaint();
@@ -92,17 +92,6 @@ public class containerJoueur extends JPanel {
 		super.paintComponents(g);
 		BufferedImage bf = joueur.getJoueur().getPhoto().getImage();
 		g.drawImage(bf, 0, 0, null);
-	}
-	
-	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
-	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-	    Graphics2D g2d = dimg.createGraphics();
-	    g2d.drawImage(tmp, 0, 0, null);
-	    g2d.dispose();
-
-	    return dimg;
 	}
 	
 	public registerJoueur getJoueur() {

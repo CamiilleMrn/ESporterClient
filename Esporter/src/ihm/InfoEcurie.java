@@ -249,7 +249,7 @@ public class InfoEcurie extends DataJPanel{
 		Ecuries.setFont(new Font("Cambria", Font.PLAIN, 20));
 		BtnEcuAndInfo.add(Ecuries, BorderLayout.WEST);
 		
-		JButton VoirInfo = new JButton(" Voir Info");
+		JButton VoirInfo = new JButton(ecurie.getNom());
 		VoirInfo.setForeground(MasterFrame.COULEUR_TEXTE);
 		VoirInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

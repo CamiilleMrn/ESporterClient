@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
+import ihm.VoirInfoJoueur;
 import types.EquipeInfo;
 import types.TournoiInfo;
 
@@ -44,7 +45,7 @@ public class EcurieInfoTeamRenderer extends JPanel{
 	
 	lbArrowIcon.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			
+			MasterFrame.getInstance().setPanel(ihm.VoirInfoJoueur.class, equipe);
 		}
 	});
 	
