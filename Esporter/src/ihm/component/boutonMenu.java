@@ -41,7 +41,7 @@ public class boutonMenu extends JRadioButton{
 	private boolean exited;
 	private float alphaFadeOut;
 	private Graphics2D g2;
-	private Timer timer;
+	private Timer timer = null;
 	private Permission permission;
 	
 	public boutonMenu(boolean selected,String texte, Class panelToChange, Permission permission) {
@@ -75,6 +75,9 @@ public class boutonMenu extends JRadioButton{
 			public void mouseExited(MouseEvent e) {
 				mouseIn=false;
 				exited=true;
+				if (timer!=null) {
+					timer.stop();
+				}
 				timer = new Timer(10, new ActionListener() {
 					
 					@Override

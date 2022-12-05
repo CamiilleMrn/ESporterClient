@@ -124,11 +124,11 @@ public class User {
 		com.inscriptionTournoi(id);
 	}
 	
-	public void desinscriptionTournoi(int id) throws InvalidPermission{
+	public void desinscriptionTournoi(int idTournoi, int idJeu) throws InvalidPermission{
 		if (permission != Permission.JOUEUR) {
 			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
-		com.desincriptionTournoi(id);
+		com.desincriptionTournoi(idTournoi, idJeu);
 	}
 	
 	public void ajouterEquipe(RegisterEquipe equipe){
