@@ -139,6 +139,10 @@ public class User {
 		}
 	}
 	
+	public void supprimerTournoi(TournoiInfo tournoi) {
+		
+	}
+	
 	public void ajouterTournoi(TournoiInfo t) throws InvalidPermission {
 		if (permission!=Permission.ORGANISATEUR) {
 			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
