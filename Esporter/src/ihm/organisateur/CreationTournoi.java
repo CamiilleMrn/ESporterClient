@@ -379,31 +379,31 @@ public class CreationTournoi extends JPanel{
 		add(panel_BtnCancelValidate);
 		panel_BtnCancelValidate.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBorder(new EmptyBorder(0, 0, 0, 30));
-		panel_6.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_BtnCancelValidate.add(panel_6, BorderLayout.EAST);
+		JPanel panel_ContainerButton = new JPanel();
+		panel_ContainerButton.setBorder(new EmptyBorder(0, 0, 0, 30));
+		panel_ContainerButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_BtnCancelValidate.add(panel_ContainerButton, BorderLayout.EAST);
 		
-		JButton btnNewButton = new JButton("Annuler");
-		btnNewButton.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
-		btnNewButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		btnNewButton.setForeground(MasterFrame.COULEUR_TEXTE);
-		btnNewButton.setFont(new Font("Cambria", Font.PLAIN, 20));
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnCancel = new JButton("Annuler");
+		btnCancel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		btnCancel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		btnCancel.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 20));
+		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 			}
 		});
-		panel_6.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-		panel_6.add(btnNewButton);
+		panel_ContainerButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		panel_ContainerButton.add(btnCancel);
 		
-		JButton btnNewButton_1 = new JButton("Valider");
-		btnNewButton_1.setForeground(SystemColor.text);
-		btnNewButton_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
-		btnNewButton_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		btnNewButton_1.setFont(new Font("Cambria", Font.PLAIN, 20));
-		panel_6.add(btnNewButton_1);
+		JButton btnConfirm = new JButton("Valider");
+		btnConfirm.setForeground(SystemColor.text);
+		btnConfirm.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		btnConfirm.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		btnConfirm.setFont(new Font("Cambria", Font.PLAIN, 20));
+		panel_ContainerButton.add(btnConfirm);
 		
 
 		
