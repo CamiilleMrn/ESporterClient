@@ -412,11 +412,13 @@ public class CreationTournoi extends JPanel{
 		btnCancel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		btnCancel.setForeground(MasterFrame.COULEUR_TEXTE);
 		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 20));
-		btnCancel.addMouseListener(new MouseAdapter() {
+		btnCancel.addActionListener(new ActionListener() {
+
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				
+			public void actionPerformed(ActionEvent e) {
+				MasterFrame.getInstance().setPanel(ihm.organisateur.Calendrier.class, null);
 			}
+			
 		});
 		panelContainerButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		panelContainerButton.add(btnCancel);
