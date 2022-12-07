@@ -19,6 +19,9 @@ import ihm.component.ComboBoxRendererArrow;
 import ihm.component.DatePicker;
 import types.Jeu;
 import types.Renomme;
+import types.TournoiInfo;
+import types.exception.InvalidPermission;
+import utilisateur.User;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -27,6 +30,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
+
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.awt.Color;
@@ -202,6 +207,16 @@ public class CreationTournoi extends JPanel{
 		JButton btnOpenDatePickerDateTournament = new JButton("...");
 		btnOpenDatePickerDateTournament.setForeground(MasterFrame.COULEUR_TEXTE);
 		btnOpenDatePickerDateTournament.setBackground(new Color(0, 164, 210));
+		btnOpenDatePickerDateTournament.addActionListener(new ActionListener() {
+			//performed action
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				//create frame new object  f
+				final JFrame f = new JFrame();
+				//set text which is collected by date picker i.e. set date 
+				textField_DateTournament.setText(new DatePicker(f).setPickedDate());
+			}
+		});
 		panel_DatePicketDateTournament.add(btnOpenDatePickerDateTournament);
 		
 		JPanel panel_Column3 = new JPanel();
@@ -248,14 +263,13 @@ public class CreationTournoi extends JPanel{
 		gbc_panel_ComboBoxFame.gridy = 0;
 		panel_EntryTournamentFame.add(panel_ComboBoxFame, gbc_panel_ComboBoxFame);
 		
-		//JComboBox<Renomme> comboBox_fame = new JComboBox<Renomme>(Renomme.values());
-		JComboBox comboBox_fame = new JComboBox();
-		comboBox_fame.setBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COULEUR_MASTER_FOND));
-		comboBox_fame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBox_fame));
-		comboBox_fame.setForeground(MasterFrame.COULEUR_TEXTE);
-		comboBox_fame.setFont(new Font("Cambria", Font.PLAIN, 15));
-		comboBox_fame.setBackground(new Color(96, 96, 96));
-		panel_ComboBoxFame.add(comboBox_fame);
+		JComboBox<Renomme> comboBoxFame = new JComboBox<Renomme>(Renomme.values());
+		comboBoxFame.setBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COULEUR_MASTER_FOND));
+		comboBoxFame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBoxFame));
+		comboBoxFame.setForeground(MasterFrame.COULEUR_TEXTE);
+		comboBoxFame.setFont(new Font("Cambria", Font.PLAIN, 15));
+		comboBoxFame.setBackground(new Color(96, 96, 96));
+		panel_ComboBoxFame.add(comboBoxFame);
 		
 		JPanel panel_Column4 = new JPanel();
 		panel_Column4.setBackground(MasterFrame.COULEUR_MASTER_FOND);
@@ -311,6 +325,16 @@ public class CreationTournoi extends JPanel{
 		JButton btnDisplayDatePickerLimitDate = new JButton("...");
 		btnDisplayDatePickerLimitDate.setForeground(MasterFrame.COULEUR_TEXTE);
 		btnDisplayDatePickerLimitDate.setBackground(new Color(0, 164, 210));
+		btnDisplayDatePickerLimitDate.addActionListener(new ActionListener() {
+			//performed action
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				//create frame new object  f
+				final JFrame f = new JFrame();
+				//set text which is collected by date picker i.e. set date 
+				textField_LimitDate.setText(new DatePicker(f).setPickedDate());
+			}
+		});
 		panel_DatePicketLimitDate.add(btnDisplayDatePickerLimitDate);
 		
 		JPanel panel_Column5 = new JPanel();
@@ -357,8 +381,7 @@ public class CreationTournoi extends JPanel{
 		gbc_panel_ComboBoxGame.gridy = 0;
 		panel_EntryTournamentGame.add(panel_ComboBoxGame, gbc_panel_ComboBoxGame);
 		
-		//JComboBox<Jeu> comboBoxGame = new JComboBox<Jeu>(Jeu.values());
-		JComboBox comboBoxGame = new JComboBox();
+		JComboBox<Jeu> comboBoxGame = new JComboBox<Jeu>(Jeu.values());
 		comboBoxGame.setBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COULEUR_MASTER_FOND));
 		comboBoxGame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBoxGame));
 		comboBoxGame.setForeground(MasterFrame.COULEUR_TEXTE);
@@ -379,10 +402,10 @@ public class CreationTournoi extends JPanel{
 		add(panel_BtnCancelValidate);
 		panel_BtnCancelValidate.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_ContainerButton = new JPanel();
-		panel_ContainerButton.setBorder(new EmptyBorder(0, 0, 0, 30));
-		panel_ContainerButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_BtnCancelValidate.add(panel_ContainerButton, BorderLayout.EAST);
+		JPanel panelContainerButton = new JPanel();
+		panelContainerButton.setBorder(new EmptyBorder(0, 0, 0, 30));
+		panelContainerButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_BtnCancelValidate.add(panelContainerButton, BorderLayout.EAST);
 		
 		JButton btnCancel = new JButton("Annuler");
 		btnCancel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
@@ -395,15 +418,30 @@ public class CreationTournoi extends JPanel{
 				
 			}
 		});
-		panel_ContainerButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-		panel_ContainerButton.add(btnCancel);
+		panelContainerButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		panelContainerButton.add(btnCancel);
 		
 		JButton btnConfirm = new JButton("Valider");
 		btnConfirm.setForeground(SystemColor.text);
 		btnConfirm.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
 		btnConfirm.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		btnConfirm.setFont(new Font("Cambria", Font.PLAIN, 20));
-		panel_ContainerButton.add(btnConfirm);
+		btnConfirm.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Renomme selectedFame = (Renomme) comboBoxFame.getSelectedItem();
+					Jeu selectedGame = (Jeu) comboBoxGame.getSelectedItem();
+					System.out.println(selectedGame);
+					MasterFrame.getInstance().getUser().ajouterTournoi(new TournoiInfo(Date.valueOf(textField_LimitDate.getText()), textField_TournamentName.getText(), 
+							selectedFame, selectedGame, -1));
+				} catch (InvalidPermission e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		panelContainerButton.add(btnConfirm);
 		
 
 		

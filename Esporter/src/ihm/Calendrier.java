@@ -209,7 +209,7 @@ public class Calendrier extends DataJPanel{
 	        @Override
 	        public void itemStateChanged(ItemEvent e) {
 	            if(e.getStateChange() == ItemEvent.SELECTED) {
-	                jeuChoisi = (Jeu) FiltrerLesJeux.getSelectedItem();
+	                System.out.println(jeuChoisi);
 	                createListTournament(dateChoisi,jeuChoisi);
 	            }
 	        }
