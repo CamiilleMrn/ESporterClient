@@ -24,6 +24,10 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 public class Ecuries extends DataJPanel {
+	public class ModifyTeam {
+
+	}
+
 	/**
 	 * 
 	 */

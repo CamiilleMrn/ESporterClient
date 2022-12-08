@@ -59,7 +59,6 @@ public class InfoEcurie extends DataJPanel{
 	private static final long serialVersionUID = 8722294344861036522L;
 	private JPanel Center;
 	private EcurieInfo ecurie;
-	private EquipeInfo equipe;
 	private JPanel containerInfo;
 	private JPanel containerPalma;
 	private JPanel pan;
@@ -200,8 +199,6 @@ public class InfoEcurie extends DataJPanel{
 		scrollPaneTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panel_2.add(scrollPaneTeam, BorderLayout.CENTER);
-		
-		
 		
 		North = new JPanel();
 		all.add(North, BorderLayout.NORTH);

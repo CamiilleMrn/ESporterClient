@@ -12,7 +12,10 @@ import ihm.MasterFrame;
 import ihm.component.ComboBoxRendererArrow;
 import ihm.component.ComboBoxRendererCell;
 import ihm.component.ComboBoxRendererEditor;
+import ihm.component.EcurieInfoTeamRenderer;
 import ihm.ecurie.gestionEquipe.AjouterEquipe;
+import types.EcurieInfo;
+import types.EquipeInfo;
 import types.Jeu;
 
 import javax.swing.JList;
@@ -20,18 +23,44 @@ import javax.swing.JScrollPane;
 
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Color;
+import java.awt.Component;
 
 public class GestionEquipe extends JPanel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2160024974466737852L;
-	private JList<String> listTournoi;
 	private JTextField txtGestionDesquipes;
+	private JLabel ifEmptyTeam = new JLabel();
+	private JPanel pan;
+	
+	private void createListTeam() {
+		int self = ((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getId();
+		EcurieInfo ecurie = MasterFrame.getInstance().getUser().getData().getEcuries().get(self);
+		HashMap<Integer,EquipeInfo> liste = ecurie.getEquipes();
+		if(liste.isEmpty()) {
+			ifEmptyTeam.setText("Cette écurie n'a pas d'équipe");
+			ifEmptyTeam.setForeground(MasterFrame.COULEUR_TEXTE);
+			ifEmptyTeam.setFont(new Font("Cambria", Font.PLAIN , 20));
+			pan.add(ifEmptyTeam);
+		}else {
+			for(HashMap.Entry<Integer, EquipeInfo> set : liste.entrySet()) {
+				if(set.getValue().getEcurie() == ecurie) {
+					pan.add(new EcurieTeamRenderer(set.getValue()));
+				}
+			}
+		}
+	}
 	
 	/**
 	 * Create the application.
@@ -44,13 +73,12 @@ public class GestionEquipe extends JPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		DefaultListModel<String> model = new DefaultListModel<String>();
 		setLayout(new BorderLayout(0, 0));
 		
 
-		JPanel panel_2 = new JPanel();
-		add(panel_2, BorderLayout.NORTH);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		JPanel panelContainerHeader = new JPanel();
+		add(panelContainerHeader, BorderLayout.NORTH);
+		panelContainerHeader.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
@@ -58,7 +86,7 @@ public class GestionEquipe extends JPanel{
 		panel_1.setBorder(null);
 		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panel.add(panel_1);
-		panel_2.add(panel, BorderLayout.SOUTH);
+		panelContainerHeader.add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new GridLayout(0, 3, 200, 0));
 		
 		JPanel panel_3 = new JPanel();
@@ -91,7 +119,7 @@ public class GestionEquipe extends JPanel{
 		panel_4.add(AjouterUneEquipe);
 		
 		JPanel panel_5 = new JPanel();
-		panel_2.add(panel_5, BorderLayout.CENTER);
+		panelContainerHeader.add(panel_5, BorderLayout.CENTER);
 		panel_5.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		txtGestionDesquipes = new JTextField();
 		txtGestionDesquipes.setBorder(null);
@@ -109,16 +137,21 @@ public class GestionEquipe extends JPanel{
 		flowLayout.setVgap(15);
 		panel_6.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		panel_6.setBorder(null);
-		panel_2.add(panel_6, BorderLayout.NORTH);
+		panelContainerHeader.add(panel_6, BorderLayout.NORTH);
 		
-
-		JScrollPane scrollPaneCenter = new JScrollPane();
-		add(scrollPaneCenter);
-		listTournoi = new JList<String>();
-		listTournoi.setModel(model);
-		scrollPaneCenter.add(listTournoi);
-		listTournoi.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPaneCenter.setViewportView(listTournoi);
+		JPanel panelContainerScrollPane = new JPanel();
+		panelContainerScrollPane.setBackground(Color.PINK);
+		add(panelContainerScrollPane, BorderLayout.CENTER);
+		
+		pan = new JPanel();
+		createListTeam();
+		panelContainerScrollPane.setLayout(new BorderLayout(0, 0));
+		JScrollPane scrollPaneListTeam = new JScrollPane(pan);
+		pan.setLayout(new GridLayout(1, 0, 0, 0));
+		scrollPaneListTeam.setAlignmentY(Component.TOP_ALIGNMENT);
+		scrollPaneListTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneListTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
+		panelContainerScrollPane.add(scrollPaneListTeam);
 		
 		
 		

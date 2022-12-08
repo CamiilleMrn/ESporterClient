@@ -36,13 +36,13 @@ public class EcurieRenderer extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private EcurieInfo ecurie;
 	private JLabel lbEcurieLogo = new JLabel();
 	private JButton lbArrowIcon = new JButton();
 	private final JPanel panel = new JPanel();
 	private final Component verticalGlue = Box.createVerticalGlue();
 	private final JLabel lbEcurieName = new JLabel();
 	private final Component verticalGlue_1 = Box.createVerticalGlue();
+	private EcurieInfo ecurie;
 
 	public EcurieRenderer (EcurieInfo ecurie) {
 		setPreferredSize(new Dimension(getPreferredSize().width, 150));
