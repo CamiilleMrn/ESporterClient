@@ -9,7 +9,7 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import data.Data;
+import model.data.Data;
 import types.TypesGame;
 import types.TypesFame;
 import types.TypesTournament;

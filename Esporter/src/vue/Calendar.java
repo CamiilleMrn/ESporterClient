@@ -32,7 +32,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.plaf.ComboBoxUI;
 import javax.swing.text.JTextComponent;
 
-import data.Data;
+import model.data.Data;
 import types.TypesGame;
 import types.TypesPermission;
 import types.TypesFame;

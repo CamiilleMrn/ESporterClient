@@ -11,6 +11,8 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.plaf.ComboBoxUI;
 
+import model.socket.Response;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -27,7 +29,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import java.awt.Font;
 
-import socket.Response;
 import types.TypesStable;
 import types.TypesGame;
 import types.TypesRegisterTeam;

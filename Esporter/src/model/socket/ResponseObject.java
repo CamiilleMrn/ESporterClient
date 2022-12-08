@@ -1,32 +1,41 @@
-package socket;
+package model.socket;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import types.TypesStable;
+import types.TypesTeam;
 import types.TypesID;
+import types.TypesPlayer;
+import types.TypesTournament;
 import types.Types;
 
-public class Command implements Serializable{
+public class ResponseObject implements Serializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8562553476003862463L;
-	private CommandName name;
+	private static final long serialVersionUID = 4180943570637657256L;
+	private Response name;
 	private Map<TypesID,Types> info = new HashMap<>();
+	private String error;
 	
 	
 	
-	public Command(CommandName name, Map<TypesID,Types> info) {
+	public ResponseObject(Response name, Map<TypesID,Types> info, String error) {
 		this.name = name;
 		this.info = info;
+		this.error = error;
 	}
 	
-	public CommandName getName() {
+	public Response getName() {
 		return name;
 	}
 
+	public String getError() {
+		return error;
+	}
 	
 	public Map<TypesID, Types> getInfo() {
 		return info;

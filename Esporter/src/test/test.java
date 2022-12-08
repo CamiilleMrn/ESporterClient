@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+import model.utilisateur.User;
 import types.TypesPermission;
 import types.exception.ExceptionLogin;
-import utilisateur.User;
 
 public class test {
 

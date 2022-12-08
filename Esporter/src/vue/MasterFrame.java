@@ -37,6 +37,7 @@ import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
 
+import model.utilisateur.User;
 import types.TypesStable;
 import types.TypesPlayer;
 import types.TypesImage;
@@ -44,7 +45,6 @@ import types.TypesMenu;
 import types.TypesPermission;
 import types.exception.ExceptionLogin;
 import types.exception.ExceptionInvalidPermission;
-import utilisateur.User;
 import vue.component.DataJPanel;
 import vue.component.MenuButton;
 import vue.error.Error;
@@ -79,22 +79,7 @@ public class MasterFrame {
 	private JButton btnLogin;
 	private static volatile DataJPanel currentPanel = null;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MasterFrame window = getInstance();
-					window.initialize();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.

@@ -1,6 +1,6 @@
 package types;
 
-import socket.Response;
+import model.socket.Response;
 
 public class WaitingFor {
 	

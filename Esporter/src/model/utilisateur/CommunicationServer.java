@@ -1,4 +1,4 @@
-package utilisateur;
+package model.utilisateur;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,11 +10,11 @@ import java.util.Iterator;
 
 import javax.swing.SwingUtilities;
 
-import data.Data;
-import socket.Command;
-import socket.CommandName;
-import socket.Response;
-import socket.ResponseObject;
+import model.data.Data;
+import model.socket.Command;
+import model.socket.CommandName;
+import model.socket.Response;
+import model.socket.ResponseObject;
 import types.TypesStable;
 import types.TypesInteger;
 import types.TypesTeam;

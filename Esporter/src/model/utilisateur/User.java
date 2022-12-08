@@ -1,12 +1,12 @@
-package utilisateur;
+package model.utilisateur;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 
-import data.Data;
-import socket.Response;
+import model.data.Data;
+import model.socket.Response;
 import types.TypesTeam;
 import types.Types;
 import types.TypesMenu;
