@@ -232,9 +232,9 @@ public class AjouterunJoueur extends JDialog {
 				Date dateNaissance = null;
 				Date dateFinContrat = null;
 				try {
-				dateDebutContrat= Date.valueOf(TexteDateDebContrat.getText());
-				dateNaissance= Date.valueOf(txtDateNaissance.getText());
-				dateFinContrat= Date.valueOf(TexteDateFinContrat.getText());
+					dateDebutContrat= Date.valueOf(TexteDateDebContrat.getText());
+					dateNaissance= Date.valueOf(txtDateNaissance.getText());
+					dateFinContrat= Date.valueOf(TexteDateFinContrat.getText());
 				} catch (IllegalArgumentException e1){
 					
 				}

@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import java.awt.Component;
@@ -41,6 +43,8 @@ import javax.swing.plaf.ComboBoxUI;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -51,9 +55,8 @@ public class CreationTournoi extends JPanel{
 	private static final long serialVersionUID = 4384792209233281239L;
 	private JLabel lblPageTitle;
 	private JPanel all;
-	private JTextField textField_DateTournament;
-	private JTextField textField_LimitDate;
-	private JTextField textField_TournamentName;
+	private JTextField txtDateStartTournament;
+	private JTextField txtTournamentName;
 
 	/**
 	 * Launch the application.
@@ -144,13 +147,13 @@ public class CreationTournoi extends JPanel{
 		gbc_panel_txtFieldTournamentName.gridy = 0;
 		panel_EntryColumn1.add(panel_txtFieldTournamentName, gbc_panel_txtFieldTournamentName);
 		
-		textField_TournamentName = new JTextField();
-		textField_TournamentName.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_TournamentName.setForeground(MasterFrame.COULEUR_TEXTE);
-		textField_TournamentName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_TournamentName.setColumns(10);
-		textField_TournamentName.setBackground(new Color(96, 96, 96));
-		panel_txtFieldTournamentName.add(textField_TournamentName);
+		txtTournamentName = new JTextField();
+		txtTournamentName.setHorizontalAlignment(SwingConstants.CENTER);
+		txtTournamentName.setForeground(MasterFrame.COULEUR_TEXTE);
+		txtTournamentName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtTournamentName.setColumns(10);
+		txtTournamentName.setBackground(new Color(96, 96, 96));
+		panel_txtFieldTournamentName.add(txtTournamentName);
 		
 		JPanel panel_Column2 = new JPanel();
 		panel_Column2.setForeground(MasterFrame.COULEUR_TEXTE);
@@ -170,7 +173,7 @@ public class CreationTournoi extends JPanel{
 		panel_TitleColumn2.add(panel_lblColumn2, BorderLayout.SOUTH);
 		
 		JLabel lblColumnDateOfTournament = new JLabel();
-		lblColumnDateOfTournament.setText("Date");
+		lblColumnDateOfTournament.setText("Date début tournoi");
 		lblColumnDateOfTournament.setHorizontalAlignment(SwingConstants.CENTER);
 		lblColumnDateOfTournament.setForeground(MasterFrame.COULEUR_TEXTE);
 		lblColumnDateOfTournament.setFont(new Font("Cambria", Font.PLAIN, 20));
@@ -196,13 +199,13 @@ public class CreationTournoi extends JPanel{
 		gbc_panel_DatePicketDateTournament.gridy = 0;
 		panel_EntryTournamentDate.add(panel_DatePicketDateTournament, gbc_panel_DatePicketDateTournament);
 		
-		textField_DateTournament = new JTextField();
-		textField_DateTournament.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_DateTournament.setForeground(MasterFrame.COULEUR_TEXTE);
-		textField_DateTournament.setFont(new Font("Cambria", Font.PLAIN, 15));
-		textField_DateTournament.setColumns(10);
-		textField_DateTournament.setBackground(new Color(96, 96, 96));
-		panel_DatePicketDateTournament.add(textField_DateTournament);
+		txtDateStartTournament = new JTextField();
+		txtDateStartTournament.setHorizontalAlignment(SwingConstants.CENTER);
+		txtDateStartTournament.setForeground(MasterFrame.COULEUR_TEXTE);
+		txtDateStartTournament.setFont(new Font("Cambria", Font.PLAIN, 15));
+		txtDateStartTournament.setColumns(10);
+		txtDateStartTournament.setBackground(new Color(96, 96, 96));
+		panel_DatePicketDateTournament.add(txtDateStartTournament);
 		
 		JButton btnOpenDatePickerDateTournament = new JButton("...");
 		btnOpenDatePickerDateTournament.setForeground(MasterFrame.COULEUR_TEXTE);
@@ -214,7 +217,7 @@ public class CreationTournoi extends JPanel{
 				//create frame new object  f
 				final JFrame f = new JFrame();
 				//set text which is collected by date picker i.e. set date 
-				textField_DateTournament.setText(new DatePicker(f).setPickedDate());
+				txtDateStartTournament.setText(new DatePicker(f).setPickedDate());
 			}
 		});
 		panel_DatePicketDateTournament.add(btnOpenDatePickerDateTournament);
@@ -270,72 +273,6 @@ public class CreationTournoi extends JPanel{
 		comboBoxFame.setFont(new Font("Cambria", Font.PLAIN, 15));
 		comboBoxFame.setBackground(new Color(96, 96, 96));
 		panel_ComboBoxFame.add(comboBoxFame);
-		
-		JPanel panel_Column4 = new JPanel();
-		panel_Column4.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_Column4.setForeground(MasterFrame.COULEUR_TEXTE);
-		panel_Table.add(panel_Column4);
-		panel_Column4.setLayout(new BoxLayout(panel_Column4, BoxLayout.Y_AXIS));
-		
-		JPanel panel_TitleColumn4 = new JPanel();
-		panel_TitleColumn4.setForeground(MasterFrame.COULEUR_TEXTE);
-		panel_TitleColumn4.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_Column4.add(panel_TitleColumn4);
-		panel_TitleColumn4.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_lblColumn4 = new JPanel();
-		panel_lblColumn4.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COULEUR_MASTER));
-		panel_lblColumn4.setBackground(Color.BLACK);
-		panel_TitleColumn4.add(panel_lblColumn4, BorderLayout.SOUTH);
-		
-		JLabel lblLimitDateInscription = new JLabel();
-		lblLimitDateInscription.setText("Date limite");
-		lblLimitDateInscription.setForeground(MasterFrame.COULEUR_TEXTE);
-		lblLimitDateInscription.setFont(new Font("Cambria", Font.PLAIN, 20));
-		lblLimitDateInscription.setBackground(new Color(96, 96, 96));
-		panel_lblColumn4.add(lblLimitDateInscription);
-		
-		JPanel panel_EntryTournamentLimitDate = new JPanel();
-		panel_EntryTournamentLimitDate.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COULEUR_MASTER));
-		panel_EntryTournamentLimitDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_Column4.add(panel_EntryTournamentLimitDate);
-		GridBagLayout gbl_panel_EntryTournamentLimitDate = new GridBagLayout();
-		gbl_panel_EntryTournamentLimitDate.columnWidths = new int[] {0, 0};
-		gbl_panel_EntryTournamentLimitDate.rowHeights = new int[] {0};
-		gbl_panel_EntryTournamentLimitDate.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_EntryTournamentLimitDate.rowWeights = new double[]{0.0};
-		panel_EntryTournamentLimitDate.setLayout(gbl_panel_EntryTournamentLimitDate);
-		
-		JPanel panel_DatePicketLimitDate = new JPanel();
-		panel_DatePicketLimitDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		GridBagConstraints gbc_panel_DatePicketLimitDate = new GridBagConstraints();
-		gbc_panel_DatePicketLimitDate.anchor = GridBagConstraints.NORTHWEST;
-		gbc_panel_DatePicketLimitDate.gridx = 0;
-		gbc_panel_DatePicketLimitDate.gridy = 0;
-		panel_EntryTournamentLimitDate.add(panel_DatePicketLimitDate, gbc_panel_DatePicketLimitDate);
-		panel_DatePicketLimitDate.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		textField_LimitDate = new JTextField();
-		textField_LimitDate.setForeground(MasterFrame.COULEUR_TEXTE);
-		textField_LimitDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_LimitDate.setColumns(10);
-		textField_LimitDate.setBackground(new Color(96, 96, 96));
-		panel_DatePicketLimitDate.add(textField_LimitDate);
-		
-		JButton btnDisplayDatePickerLimitDate = new JButton("...");
-		btnDisplayDatePickerLimitDate.setForeground(MasterFrame.COULEUR_TEXTE);
-		btnDisplayDatePickerLimitDate.setBackground(new Color(0, 164, 210));
-		btnDisplayDatePickerLimitDate.addActionListener(new ActionListener() {
-			//performed action
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				//create frame new object  f
-				final JFrame f = new JFrame();
-				//set text which is collected by date picker i.e. set date 
-				textField_LimitDate.setText(new DatePicker(f).setPickedDate());
-			}
-		});
-		panel_DatePicketLimitDate.add(btnDisplayDatePickerLimitDate);
 		
 		JPanel panel_Column5 = new JPanel();
 		panel_Column5.setForeground(MasterFrame.COULEUR_TEXTE);
@@ -432,11 +369,31 @@ public class CreationTournoi extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Renomme selectedFame = (Renomme) comboBoxFame.getSelectedItem();
-					Jeu selectedGame = (Jeu) comboBoxGame.getSelectedItem();
-					System.out.println(selectedGame);
-					MasterFrame.getInstance().getUser().ajouterTournoi(new TournoiInfo(Date.valueOf(textField_LimitDate.getText()), textField_TournamentName.getText(), 
-							selectedFame, selectedGame, -1));
+					if(txtDateStartTournament.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Veuillez préciser la date de début du tournoi","Error", JOptionPane.ERROR_MESSAGE);
+					}else if(txtTournamentName.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Veuillez préciser le nom du tournoi","Error", JOptionPane.ERROR_MESSAGE);
+					}else {
+						Date tournamentStart = null;
+						try {
+							tournamentStart = Date.valueOf(txtDateStartTournament.getText());
+						} catch (IllegalArgumentException e1) {
+							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Format de date invalide","Error", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						int n = JOptionPane.showConfirmDialog(null, "Confirmez vous l'ajout du tournoi ?","Confirmation", JOptionPane.YES_NO_OPTION);
+						if (n == JOptionPane.YES_OPTION) {
+							TournoiInfo t = new TournoiInfo(tournamentStart, txtTournamentName.getText(), 
+									(Renomme) comboBoxFame.getSelectedItem(), (Jeu) comboBoxGame.getSelectedItem(), -1);
+							if (MasterFrame.getInstance().getUser().getData().listeTournoiTrie().contains(t)) { 
+								JOptionPane.showMessageDialog(null, "Un tournoi à cette date existe déjà","Error", JOptionPane.ERROR_MESSAGE);
+							}else{
+								MasterFrame.getInstance().getUser().ajouterTournoi(t);
+								MasterFrame.getInstance().setPanel(ihm.organisateur.Calendrier.class, null);
+							}
+						}
+					}
 				} catch (InvalidPermission e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -444,10 +401,6 @@ public class CreationTournoi extends JPanel{
 			}
 		});
 		panelContainerButton.add(btnConfirm);
-		
-
-		
-
 	}
 
 }

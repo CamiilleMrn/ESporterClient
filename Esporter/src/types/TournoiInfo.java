@@ -71,7 +71,7 @@ public class TournoiInfo implements Infos, Serializable, Comparable<TournoiInfo>
 		if (getClass() != obj.getClass())
 			return false;
 		TournoiInfo other = (TournoiInfo) obj;
-		return id == other.id;
+		return dateInscription.equals(other.dateInscription);
 	}
 	
 	public ArrayList<Integer> getInscris() {
