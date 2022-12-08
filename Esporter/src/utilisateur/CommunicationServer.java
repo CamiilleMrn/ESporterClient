@@ -16,18 +16,18 @@ import socket.Command;
 import socket.CommandName;
 import socket.Response;
 import socket.ResponseObject;
-import types.EcurieInfo;
-import types.Entier;
-import types.EquipeInfo;
-import types.InfoID;
-import types.Infos;
-import types.JoueurInfo;
-import types.Login;
-import types.Permission;
-import types.RegisterEquipe;
-import types.TournoiInfo;
-import types.exception.Erreur;
-import types.exception.InvalidPermission;
+import types.TypesStable;
+import types.TypesInteger;
+import types.TypesTeam;
+import types.TypesID;
+import types.Types;
+import types.TypesPlayer;
+import types.TypesLogin;
+import types.TypesPermission;
+import types.TypesRegisterTeam;
+import types.TypesTournament;
+import types.exception.ExceptionError;
+import types.exception.ExceptionInvalidPermission;
 
 public class CommunicationServer implements Runnable{
 	
@@ -35,9 +35,11 @@ public class CommunicationServer implements Runnable{
 	private Socket s;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private int reconnection = 1;
-	private int reconnectionTime = 1;
+	private int reconnect = 1;
+	private int reconnectTime = 1;
 	private boolean run=true;
+	private static final String IP = "127.0.0.1";
+	private static final int PORT = 80;
 	
 	public CommunicationServer(User user) throws UnknownHostException, IOException {
 		this.user = user;
@@ -46,10 +48,10 @@ public class CommunicationServer implements Runnable{
 	
 	private void connect() throws UnknownHostException, IOException{
 
-		System.out.println("Tentative de connexion");
+		System.out.println("Tentative de connexion au server "+IP+":"+PORT);
 		
 		try {
-			s = new Socket("127.0.0.1",80);
+			s = new Socket(IP,PORT);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
 		} catch (IOException e) {
@@ -57,25 +59,27 @@ public class CommunicationServer implements Runnable{
 		}
 		
 		System.out.println("Done");
+		reconnect=1;
+		reconnectTime=1;
 	}
 	
 	private void reconnect() throws IOException,UnknownHostException {
-		reconnection++;
-		if (reconnection>5) {
+		reconnect++;
+		if (reconnect>5) {
 			run=false;
 			throw new IOException("Impossible de joindre le serveur");
 		}
-		reconnectionTime*=2;
-		String s = "Reconnecting N�"+reconnection+" in "+reconnectionTime+"s....";
+		reconnectTime*=2;
+		String s = "Reconnecting number "+reconnect+" in "+reconnectTime+"s....";
 		System.out.println(s);
 		try {
-			Thread.sleep(reconnectionTime*1000);
+			Thread.sleep(reconnectTime*1000);
 		} catch (InterruptedException e) {
 		}
 		try {
 			connect();
-			reconnection=1;
-			reconnectionTime=1;
+			reconnect=1;
+			reconnectTime=1;
 		} catch (IOException e2) {
 			reconnect();
 			
@@ -86,7 +90,7 @@ public class CommunicationServer implements Runnable{
 	public void run() {
 		while (run) {
 			try {
-				traiterReponse((ResponseObject)in.readObject());
+				processInput((ResponseObject)in.readObject());
 			} catch (ClassNotFoundException e2) {
 				e2.printStackTrace();
 			} catch (IOException e) {
@@ -101,41 +105,41 @@ public class CommunicationServer implements Runnable{
 	}
 	
 	
-	public void sendLogin(String username, String mdp) {
-		HashMap<InfoID, Infos> m = new HashMap<>();
-		m.put(InfoID.login, new Login(username, mdp));
+	public void sendLogin(String username, String password) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.LOGIN, new TypesLogin(username, password));
 		Command c = new Command(CommandName.LOGIN, m);
 		send(c);
 	}
 	
-	public void inscriptionTournoi(int idTournoi) {
-		HashMap<InfoID, Infos> m = new HashMap<>();
-		m.put(InfoID.Tournoi, new Entier(idTournoi));
-		m.put(InfoID.Joueur, new Entier(((JoueurInfo)user.getInfo()).getId()));
-		Command c = new Command(CommandName.INSCRIPTION_TOURNOI, m);
+	public void registerTournament(int idTournament) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.TOURNAMENT, new TypesInteger(idTournament));
+		m.put(TypesID.PLAYER, new TypesInteger(((TypesPlayer)user.getInfo()).getId()));
+		Command c = new Command(CommandName.REGISTER_TOURNAMENT, m);
 		send(c);
 	}
 	
-	public void desincriptionTournoi(int idTournoi, int idJeu) {
-		HashMap<InfoID, Infos> m = new HashMap<>();
-		m.put(InfoID.Tournoi, new Entier(idTournoi));
-		m.put(InfoID.Joueur, new Entier(((JoueurInfo)user.getInfo()).getId()));
-		m.put(InfoID.Jeu, new Entier(idJeu));
-		Command c = new Command(CommandName.DESINSCRIPTION_TOURNOI ,m);
+	public void unregisterTournament(int idTournament, int idGame) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.TOURNAMENT, new TypesInteger(idTournament));
+		m.put(TypesID.PLAYER, new TypesInteger(((TypesPlayer)user.getInfo()).getId()));
+		m.put(TypesID.GAME, new TypesInteger(idGame));
+		Command c = new Command(CommandName.UNREGISTER_TOURNAMENT ,m);
 		send(c);
 	}
 	
-	public void ajouterEquipe(RegisterEquipe equipe) {
-		HashMap<InfoID, Infos> m = new HashMap<>();
-		m.put(InfoID.Equipe, equipe);
-		Command c = new Command(CommandName.AJOUTER_EQUIPE, m);
+	public void addTeam(TypesRegisterTeam team) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.TEAM, team);
+		Command c = new Command(CommandName.ADD_TEAM, m);
 		send(c);
 	}
 	
-	public void ajouterTournoi(TournoiInfo t) {
-		HashMap<InfoID, Infos> m = new HashMap<>();
-		m.put(InfoID.Tournoi, t);
-		Command c = new Command(CommandName.AJOUTER_TOURNOI, m);
+	public void addTournament(TypesTournament t) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.TOURNAMENT, t);
+		Command c = new Command(CommandName.ADD_TOURNAMENT, m);
 		send(c);
 	}
 	
@@ -145,17 +149,17 @@ public class CommunicationServer implements Runnable{
 	}
 	
 	public void receiveLogin(ResponseObject r) {
-		Permission perm = Permission.VISITEUR;
-		if (r.getInfo().containsKey(InfoID.Permission)) {
-			perm = (Permission) r.getInfoByID(InfoID.Permission);
+		TypesPermission perm = TypesPermission.VISITOR;
+		if (r.getInfo().containsKey(TypesID.PERMISSION)) {
+			perm = (TypesPermission) r.getInfoByID(TypesID.PERMISSION);
 		}
 		setPermission(perm);
-		if (r.getInfo().containsKey(InfoID.Ecurie)) {
-			user.setInfo(r.getInfoByID(InfoID.Ecurie));
+		if (r.getInfo().containsKey(TypesID.STABLE)) {
+			user.setInfo(r.getInfoByID(TypesID.STABLE));
 
 		}
-		if (r.getInfo().containsKey(InfoID.Joueur)) {
-			user.setInfo(r.getInfoByID(InfoID.Joueur));
+		if (r.getInfo().containsKey(TypesID.PLAYER)) {
+			user.setInfo(r.getInfoByID(TypesID.PLAYER));
 		}
 	}
 	
@@ -174,18 +178,18 @@ public class CommunicationServer implements Runnable{
 	}
 	
 	
-	public void setPermission(Permission perms) {
+	public void setPermission(TypesPermission perms) {
 		user.setPermission(perms);
 	}
 	
-	public void traiterReponse(ResponseObject r) {
+	public void processInput(ResponseObject r) {
 		System.out.println(r.getName());
 		switch(r.getName()) {
 		case ERROR_LOGIN:
 			user.getWaiting().setActualState(Response.ERROR_LOGIN);
 			break;
 		case ERROR_PERMISSION:
-			MasterFrame.getInstance().error(new InvalidPermission("Vous n'avez pas la permission d'effectuer ceci"));
+			MasterFrame.getInstance().fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission d'effectuer ceci"));
 			System.out.println("ERREUR PERMISSION");
 			user.getWaiting().setActualState(Response.ERROR_PERMISSION);
 			break;
@@ -193,30 +197,30 @@ public class CommunicationServer implements Runnable{
 			receiveLogin(r);
 			user.getWaiting().setActualState(r.getName());
 			break;
-		case UPDATE_CALENDRIER:
+		case UPDATE_CALENDAR:
 			//ok
 			break;
-		case UPDATE_ECURIE:
+		case UPDATE_STABLE:
 			break;
-		case UPDATE_EQUIPE:
-			EquipeInfo equipe = (EquipeInfo)r.getInfoByID(InfoID.Equipe);
-			user.getData().getEcuries().get(equipe.getEcurie().getId()).getEquipes().put(equipe.getId(), equipe);
+		case UPDATE_TEAM:
+			TypesTeam team = (TypesTeam)r.getInfoByID(TypesID.TEAM);
+			user.getData().getStables().get(team.getStable().getId()).getTeams().put(team.getId(), team);
 			MasterFrame.getInstance().dataUpdate();
 			break;
-		case UPDATE_TOURNOI:
-			TournoiInfo tournoi = (TournoiInfo)r.getInfoByID(InfoID.Tournoi);
+		case UPDATE_TOURNAMENT:
+			TypesTournament tournament = (TypesTournament)r.getInfoByID(TypesID.TOURNAMENT);
 			System.out.println("ok");
-			user.getData().getCalendrier().put(tournoi.getId(), tournoi);
+			user.getData().getCalendar().put(tournament.getId(), tournament);
 			MasterFrame.getInstance().dataUpdate();
 			System.out.println("Data update...");
 			break;
 		case UPDATE_ALL:
-			user.setData((Data)r.getInfo().get(InfoID.all));
+			user.setData((Data)r.getInfo().get(TypesID.ALL));
 			user.getWaiting().setActualState(Response.UPDATE_ALL);
 			
 			break;
-		case Error:
-			MasterFrame.getInstance().error(new Erreur(r.getError()));;
+		case ERROR:
+			MasterFrame.getInstance().fireError(new ExceptionError(r.getError()));;
 			System.out.println("ERREUR");
 			break;
 			

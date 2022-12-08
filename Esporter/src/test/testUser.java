@@ -10,8 +10,8 @@ public class testUser {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		User u = new User();
 		
-		for(int id : u.getData().getEcuries().keySet()) {
-			System.out.println("Ecurie : "+u.getData().getEcuries().get(id)+"\n");
+		for(int id : u.getData().getStables().keySet()) {
+			System.out.println("Ecurie : "+u.getData().getStables().get(id)+"\n");
 		}
 	}
 }

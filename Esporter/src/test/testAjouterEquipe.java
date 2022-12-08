@@ -14,9 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ihm.component.containerJoueur;
-import ihm.ecurie.gestionEquipe.AjouterEquipe;
-import types.Jeu;
+import ihm.component.ContainerPlayer;
+import ihm.stable.management.AddTeam;
+import types.TypesGame;
 
 public class testAjouterEquipe {
 
@@ -54,7 +54,7 @@ public class testAjouterEquipe {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 
-		frame.getContentPane().add(new AjouterEquipe(Jeu.LEAGUE_OF_LEGENDS));
+		frame.getContentPane().add(new AddTeam(TypesGame.LEAGUE_OF_LEGENDS));
 		
 		
 	}

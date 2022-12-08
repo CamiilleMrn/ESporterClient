@@ -1,21 +1,15 @@
 package ihm.component;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 import javax.swing.LookAndFeel;
-import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import ihm.MasterFrame;
-import types.Jeu;
 
 public class ComboBoxRendererArrow {
 	

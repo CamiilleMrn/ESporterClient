@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import types.EcurieInfo;
-import types.EquipeInfo;
-import types.InfoID;
-import types.JoueurInfo;
-import types.TournoiInfo;
-import types.Infos;
+import types.TypesStable;
+import types.TypesTeam;
+import types.TypesID;
+import types.TypesPlayer;
+import types.TypesTournament;
+import types.Types;
 
 public class ResponseObject implements Serializable{
 
@@ -18,12 +18,12 @@ public class ResponseObject implements Serializable{
 	 */
 	private static final long serialVersionUID = 4180943570637657256L;
 	private Response name;
-	private Map<InfoID,Infos> info = new HashMap<>();
+	private Map<TypesID,Types> info = new HashMap<>();
 	private String error;
 	
 	
 	
-	public ResponseObject(Response name, Map<InfoID,Infos> info, String error) {
+	public ResponseObject(Response name, Map<TypesID,Types> info, String error) {
 		this.name = name;
 		this.info = info;
 		this.error = error;
@@ -37,11 +37,11 @@ public class ResponseObject implements Serializable{
 		return error;
 	}
 	
-	public Map<InfoID, Infos> getInfo() {
+	public Map<TypesID, Types> getInfo() {
 		return info;
 	}
 	
-	public Infos getInfoByID(InfoID id) {
+	public Types getInfoByID(TypesID id) {
 		if (this.info.get(id)==null) {
 			return null;
 		}
@@ -50,7 +50,7 @@ public class ResponseObject implements Serializable{
 	
 	public String toString() {
 		String output = "[MAP";
-		for (InfoID key : info.keySet()) {
+		for (TypesID key : info.keySet()) {
 	        output+=(key + "=" + info.get(key) + ", ");
 	    }
 		return output;

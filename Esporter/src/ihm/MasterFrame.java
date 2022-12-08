@@ -1,4 +1,5 @@
- package ihm;
+package ihm;
+ 
 
 
 import java.awt.EventQueue;
@@ -37,14 +38,15 @@ import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
 import ihm.component.DataJPanel;
-import ihm.component.boutonMenu;
-import ihm.erreur.Error;
-import ihm.erreur.ErrorPanel;
-import types.EcurieInfo;
-import types.JoueurInfo;
-import types.Permission;
-import types.exception.ErrorLogin;
-import types.exception.InvalidPermission;
+import ihm.component.MenuButton;
+import ihm.error.Error;
+import ihm.error.ErrorPanel;
+import types.TypesStable;
+import types.TypesPlayer;
+import types.TypesMenu;
+import types.TypesPermission;
+import types.exception.ExceptionLogin;
+import types.exception.ExceptionInvalidPermission;
 import utilisateur.User;
 import javax.swing.JButton;
 import java.awt.GridLayout;
@@ -62,18 +64,18 @@ public class MasterFrame {
 	public static final Color COULEUR_MASTER_FOND = new Color(96, 96, 96);
 	public static final Color COULEUR_TEXTE = Color.WHITE;
 	public static final Color COULEUR_MENU_FOND = Color.BLACK;
-	private JPanel panelMenu;
-	private ButtonGroup boutonGroupMenu;
-	private static MasterFrame instance;
+	private JPanel panelMenuBtn;
+	private ButtonGroup btnGroupMenu;
+	private static volatile MasterFrame instance;
 	private User user;
-	private JPanel header;
-	private JPanel main;
+	private JPanel panelHeader;
+	private JPanel panelMain;
 	private ErrorPanel error;
 	private LogIn loginPage;
-	private JLabel nomCompte;
-	private JLabel logoCompte;
-	private JButton boutonConnection;
-	private static volatile DataJPanel currentMainPanel = null;
+	private JLabel lblAccountName;
+	private JLabel lblAccountLogo;
+	private JButton btnLogin;
+	private static volatile DataJPanel currentPanel = null;
 
 	/**
 	 * Launch the application.
@@ -101,7 +103,7 @@ public class MasterFrame {
 			this.user = new User();
 			
 		} catch (UnknownHostException e) {
-			error(e);
+			fireError(e);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -131,8 +133,8 @@ public class MasterFrame {
 		root.setLayout(new BorderLayout());
 		
 		frame.setContentPane(root);
-		main = new JPanel();
-		main.setLayout(new BorderLayout());
+		panelMain = new JPanel();
+		panelMain.setLayout(new BorderLayout());
 
 		
 		error = new ErrorPanel();
@@ -140,8 +142,8 @@ public class MasterFrame {
 		error.setBounds(0,0,frame.getWidth(), frame.getHeight());
 		frame.getContentPane().add(error, BorderLayout.CENTER, 1);
 		
-		frame.getContentPane().add(main,BorderLayout.CENTER, 3);
-		main.setBounds(0,0,frame.getWidth(), frame.getHeight());
+		frame.getContentPane().add(panelMain,BorderLayout.CENTER, 3);
+		panelMain.setBounds(0,0,frame.getWidth(), frame.getHeight());
 		
 		
 		
@@ -152,7 +154,7 @@ public class MasterFrame {
 		
 			@Override
 			public void componentResized(ComponentEvent e) {
-				main.setBounds(0,0,frame.getWidth(), frame.getHeight());
+				panelMain.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.resize();
 				frame.repaint();
@@ -162,7 +164,7 @@ public class MasterFrame {
 		frame.addWindowStateListener(new WindowAdapter() {
 			@Override
 			public void windowStateChanged(WindowEvent e) {
-				main.setBounds(0,0,frame.getWidth(), frame.getHeight());
+				panelMain.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.resize();
 				frame.repaint();
@@ -173,104 +175,104 @@ public class MasterFrame {
 
 		
 		
-		header = new JPanel();
-		header.setBackground(COULEUR_MENU_FOND);
-		main.add(header, BorderLayout.NORTH);
-		header.setLayout(new BorderLayout(0, 0));
+		panelHeader = new JPanel();
+		panelHeader.setBackground(COULEUR_MENU_FOND);
+		panelMain.add(panelHeader, BorderLayout.NORTH);
+		panelHeader.setLayout(new BorderLayout(0, 0));
 		
 		
 
-		JPanel connexion = new JPanel();
-		connexion.setPreferredSize(new Dimension(250,50));
-		connexion.setBackground(COULEUR_MASTER);
-		header.add(connexion, BorderLayout.EAST);
-		connexion.setLayout(new BorderLayout(0, 0));
+		JPanel panelAccount = new JPanel();
+		panelAccount.setPreferredSize(new Dimension(250,50));
+		panelAccount.setBackground(COULEUR_MASTER);
+		panelHeader.add(panelAccount, BorderLayout.EAST);
+		panelAccount.setLayout(new BorderLayout(0, 0));
 		
 		JPanel nomComptePanel = new JPanel();
 		BorderLayout bl_nomComptePanel = new BorderLayout();
 		bl_nomComptePanel.setVgap(20);
 		nomComptePanel.setLayout(bl_nomComptePanel);
 		nomComptePanel.setBackground(COULEUR_MASTER);
-		connexion.add(nomComptePanel, BorderLayout.CENTER);
+		panelAccount.add(nomComptePanel, BorderLayout.CENTER);
 		
-		nomCompte = new JLabel("compte");
-		nomCompte.setHorizontalAlignment(SwingConstants.CENTER);
-		nomCompte.setForeground(Color.WHITE);
-		nomComptePanel.add(nomCompte, BorderLayout.SOUTH);
+		lblAccountName = new JLabel("compte");
+		lblAccountName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAccountName.setForeground(Color.WHITE);
+		nomComptePanel.add(lblAccountName, BorderLayout.SOUTH);
 		
-		logoCompte = new JLabel("");
-		logoCompte.setHorizontalAlignment(SwingConstants.CENTER);
-		logoCompte.setForeground(Color.WHITE);
-		nomComptePanel.add(logoCompte, BorderLayout.CENTER);
+		lblAccountLogo = new JLabel("");
+		lblAccountLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAccountLogo.setForeground(Color.WHITE);
+		nomComptePanel.add(lblAccountLogo, BorderLayout.CENTER);
 		
-		boutonConnection = new JButton("Se Connecter");
+		btnLogin = new JButton("Se Connecter");
 		
-		connexion.add(boutonConnection, BorderLayout.SOUTH);
+		panelAccount.add(btnLogin, BorderLayout.SOUTH);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(COULEUR_MENU_FOND);
-		header.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		JPanel panelMenu = new JPanel();
+		panelMenu.setBackground(COULEUR_MENU_FOND);
+		panelHeader.add(panelMenu, BorderLayout.CENTER);
+		panelMenu.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelEsporter = new JPanel();
 		panelEsporter.setBackground(COULEUR_MENU_FOND);
-		panel.add(panelEsporter, BorderLayout.WEST);
+		panelMenu.add(panelEsporter, BorderLayout.WEST);
 		panelEsporter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		
 		
-		JLabel logo = new JLabel();
-		logo.setIcon(new ImageIcon(getClass().getResource("./images/ESporterLogo.png")));
-		panelEsporter.add(logo);
+		JLabel lblLogo = new JLabel();
+		lblLogo.setIcon(new ImageIcon(getClass().getResource("./images/ESporterLogo.png")));
+		panelEsporter.add(lblLogo);
 		
 		
-		panelMenu = new JPanel();
+		panelMenuBtn = new JPanel();
 
-		panelMenu.setBackground(COULEUR_MENU_FOND);
-		FlowLayout flowLayout_1 = (FlowLayout) panelMenu.getLayout();
-		flowLayout_1.setAlignment(FlowLayout.RIGHT);
-		flowLayout_1.setVgap(0);
-		flowLayout_1.setHgap(0);
-		panel.add(panelMenu, BorderLayout.CENTER);
+		panelMenuBtn.setBackground(COULEUR_MENU_FOND);
+		FlowLayout fl_panelMenuBtn = (FlowLayout) panelMenuBtn.getLayout();
+		fl_panelMenuBtn.setAlignment(FlowLayout.RIGHT);
+		fl_panelMenuBtn.setVgap(0);
+		fl_panelMenuBtn.setHgap(0);
+		panelMenu.add(panelMenuBtn, BorderLayout.CENTER);
 		
 		JPanel panelDummyRight = new JPanel();
 		panelDummyRight.setPreferredSize(new Dimension(35, 10));
 		panelDummyRight.setBackground(COULEUR_MENU_FOND);
-		panel.add(panelDummyRight, BorderLayout.EAST);
+		panelMenu.add(panelDummyRight, BorderLayout.EAST);
 		
 		JPanel panelDummyTop = new JPanel();
 		panelDummyTop.setPreferredSize(new Dimension(10, 35));
 		panelDummyTop.setBackground(COULEUR_MENU_FOND);
-		panel.add(panelDummyTop, BorderLayout.NORTH);
+		panelMenu.add(panelDummyTop, BorderLayout.NORTH);
 		
 		
-		boutonGroupMenu = new ButtonGroup();
-		TypeMenu m = TypeMenu.Visiteurs;
-		boutonMenu[] menu = m.getMenu();
+		btnGroupMenu = new ButtonGroup();
+		TypesMenu m = TypesMenu.VISITOR;
+		MenuButton[] menu = m.getMenu();
 		for (int i=0; i<menu.length;i++) {
-			panelMenu.add(menu[i]);
-			boutonGroupMenu.add(menu[i]);
+			panelMenuBtn.add(menu[i]);
+			btnGroupMenu.add(menu[i]);
 		}
 		
 		JPanel footer = new JPanel();
-		main.add(footer, BorderLayout.SOUTH);
+		panelMain.add(footer, BorderLayout.SOUTH);
 		
-		setCompte();
+		setAccount();
 		
-		boutonConnection.addActionListener(new ActionListener() {
+		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(user.getPermission()!=Permission.VISITEUR) {
+				if(user.getPermission()!=TypesPermission.VISITOR) {
 					//LOGGED IN
 					user.logout();
-					setMenu(TypeMenu.Visiteurs);
-					setPanel(ihm.visiteur.Accueil.class, null);
+					setMenu(TypesMenu.VISITOR);
+					setPanel(ihm.visitor.Home.class, null);
 					
 				} else {
 					//NOT LOG IN
-					main.setVisible(false);
+					panelMain.setVisible(false);
 					error.setVisible(false);
 					loginPage.setVisible(true);
-					loginPage.getTxtSaisirIdentifiant().requestFocus();
+					loginPage.getTxtUsername().requestFocus();
 				}
 			}
 		});
@@ -288,73 +290,73 @@ public class MasterFrame {
 	}
 	
 	public JPanel getMain() {
-		return main;
+		return panelMain;
 	}
 	
-	public DataJPanel getCurrentMainPanel() {
-		return currentMainPanel;
+	public DataJPanel getCurrentPanel() {
+		return currentPanel;
 	}
 	
-	public void setCurrentMainPanel(DataJPanel currentMainPanel) {
-		MasterFrame.currentMainPanel = currentMainPanel;
+	public void setCurrentPanel(DataJPanel currentPanel) {
+		MasterFrame.currentPanel = currentPanel;
 	}
 	
 	
-	public void setMenu(TypeMenu m) {
-		panelMenu.removeAll();
-		boutonGroupMenu = new ButtonGroup();
-		boutonMenu[] menu = m.getMenu();
+	public void setMenu(TypesMenu m) {
+		panelMenuBtn.removeAll();
+		btnGroupMenu = new ButtonGroup();
+		MenuButton[] menu = m.getMenu();
 		for (int i=0; i<menu.length;i++) {
 			
-			panelMenu.add(menu[i]);
-			boutonGroupMenu.add(menu[i]);
+			panelMenuBtn.add(menu[i]);
+			btnGroupMenu.add(menu[i]);
 		}
 		menu[0].setSelected(true);
-		setCompte();
+		setAccount();
 		frame.getContentPane().repaint();
 		System.out.println(menu[0].getPanelToChange());
 		
 	}
 	
-	public void setCompte() {
+	public void setAccount() {
 		switch(user.getPermission()) {
-		case ARBITRE:
-			boutonConnection.setText("Se deconnecter");
-			logoCompte.setIcon(null);
-			nomCompte.setText("Arbitre");
-			setPanel(ihm.arbitre.Accueil.class, null);
+		case REFEREE:
+			btnLogin.setText("Se deconnecter");
+			lblAccountLogo.setIcon(null);
+			lblAccountName.setText("Arbitre");
+			setPanel(ihm.referee.Home.class, null);
 			break;
-		case ECURIE:
-			boutonConnection.setText("Se deconnecter");
-			EcurieInfo e = (EcurieInfo)user.getInfo();
-			nomCompte.setText(e.getNom());
-			BufferedImage logoEcurie = ((EcurieInfo)MasterFrame.getInstance().getUser().getInfo()).getLogo().getImage();
-			logoEcurie = resize(logoEcurie, 100, 100);
-			logoCompte.setIcon(new ImageIcon(logoEcurie));
+		case STABLE:
+			btnLogin.setText("Se deconnecter");
+			TypesStable e = (TypesStable)user.getInfo();
+			lblAccountName.setText(e.getName());
+			BufferedImage logoStable = ((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getLogo().getImage();
+			logoStable = resize(logoStable, 100, 100);
+			lblAccountLogo.setIcon(new ImageIcon(logoStable));
 			//logoCompte.setIcon(e.getLogo());
-			setPanel(ihm.ecurie.Accueil.class, null);
+			setPanel(ihm.stable.Home.class, null);
 			break;
-		case JOUEUR:
-			boutonConnection.setText("Se deconnecter");
-			JoueurInfo j = (JoueurInfo)user.getInfo();
-			nomCompte.setText(j.getNom());
-			BufferedImage photo = ((JoueurInfo)MasterFrame.getInstance().getUser().getInfo()).getPhoto().getImage();
-			photo = resize(photo, 80, 100);
-			logoCompte.setIcon(new ImageIcon(photo));
+		case PLAYER:
+			btnLogin.setText("Se deconnecter");
+			TypesPlayer p = (TypesPlayer)user.getInfo();
+			lblAccountName.setText(p.getName());
+			BufferedImage picture = ( (TypesPlayer) MasterFrame.getInstance().getUser().getInfo() ).getImage().getImage();
+			picture = resize(picture, 80, 100);
+			lblAccountLogo.setIcon(new ImageIcon(picture));
 			//logoCompte.setIcon(j.getPhoto());
-			setPanel(ihm.joueur.Accueil.class, null);
+			setPanel(ihm.player.Home.class, null);
 			break;
-		case ORGANISATEUR:
-			logoCompte.setIcon(null);
-			boutonConnection.setText("Se deconnecter");
-			nomCompte.setText("Esporter");
-			setPanel(ihm.organisateur.Accueil.class, null);
+		case ORGANIZER:
+			lblAccountLogo.setIcon(null);
+			btnLogin.setText("Se deconnecter");
+			lblAccountName.setText("Esporter");
+			setPanel(ihm.organizer.Home.class, null);
 			break;
-		case VISITEUR:
-			logoCompte.setIcon(null);
-			boutonConnection.setText("Se connecter");
-			nomCompte.setText("Visiteur");
-			setPanel(ihm.visiteur.Accueil.class, null);
+		case VISITOR:
+			lblAccountLogo.setIcon(null);
+			btnLogin.setText("Se connecter");
+			lblAccountName.setText("Visiteur");
+			setPanel(ihm.visitor.Home.class, null);
 			break;
 		default:
 			break;
@@ -362,9 +364,9 @@ public class MasterFrame {
 		}
 	}
 	
-	public <T extends JPanel> void setPanel(Class<T> clazz, Object ob) {
-		BorderLayout layout = (BorderLayout)main.getLayout();
-		Constructor<T> ctor;
+	public void setPanel(Class<? extends JPanel> clazz, Object ob) {
+		BorderLayout layout = (BorderLayout)panelMain.getLayout();
+		Constructor<? extends JPanel> ctor;
 		Object o = null;
 		try {
 			if (ob != null) {
@@ -409,27 +411,27 @@ public class MasterFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		T p = (T) o;
+		JPanel p = (JPanel) o;
 		if (layout.getLayoutComponent(BorderLayout.CENTER)!=null)
-			main.remove(layout.getLayoutComponent(BorderLayout.CENTER));
-		main.add((Component) p, BorderLayout.CENTER);
-		main.revalidate();
-		main.repaint();
+			panelMain.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+		panelMain.add((Component) p, BorderLayout.CENTER);
+		panelMain.revalidate();
+		panelMain.repaint();
 		if (p instanceof DataJPanel) {
-			setCurrentMainPanel((DataJPanel)p);
+			setCurrentPanel((DataJPanel)p);
 		} else {
-			setCurrentMainPanel(null);
+			setCurrentPanel(null);
 		}
-		header.revalidate();
-		header.validate();
-		header.repaint();
+		panelHeader.revalidate();
+		panelHeader.validate();
+		panelHeader.repaint();
 	}
 	
 	public void dataUpdate() {
-		if (currentMainPanel!=null) {
+		if (currentPanel!=null) {
 			//setPanel(currentMainPanel.getClass(), user.getPermission());
 			
-			currentMainPanel.dataUpdate();
+			currentPanel.dataUpdate();
 		}
 	}
 	
@@ -441,11 +443,11 @@ public class MasterFrame {
 		return user;
 	}
 	
-	public Point getCentre() {
+	public Point getFrameCenter() {
 		return new Point(frame.getLocation().x+(frame.getWidth()/2), frame.getLocation().y+(frame.getHeight()/2));
 	}
 	
-	public void error(Exception e) {
+	public void fireError(Exception e) {
 		error.setState(e, false);
 		error.setVisible(true);
 		frame.repaint();
@@ -456,7 +458,7 @@ public class MasterFrame {
 		return loginPage;
 	}
 	
-	public Dimension getCenterDimension() {
+	public Dimension getFrameCenterDimension() {
 		return this.frame.getContentPane().getSize();
 	}
 	

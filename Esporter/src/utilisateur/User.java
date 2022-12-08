@@ -7,29 +7,29 @@ import java.sql.Connection;
 
 import data.Data;
 import ihm.MasterFrame;
-import ihm.TypeMenu;
 import socket.Response;
-import types.EquipeInfo;
-import types.Infos;
-import types.JoueurInfo;
-import types.Permission;
-import types.RegisterEquipe;
-import types.TournoiInfo;
+import types.TypesTeam;
+import types.Types;
+import types.TypesMenu;
+import types.TypesPlayer;
+import types.TypesPermission;
+import types.TypesRegisterTeam;
+import types.TypesTournament;
 import types.WaitingFor;
-import types.exception.ErrorLogin;
-import types.exception.InvalidPermission;
+import types.exception.ExceptionLogin;
+import types.exception.ExceptionInvalidPermission;
 
 public class User {
 	
-	private volatile Permission permission;
+	private volatile TypesPermission permission;
 	private CommunicationServer com;
 	private Thread t;
-	private Infos info;
+	private Types info;
 	private WaitingFor waiting;
-	private static volatile Data data;
+	private volatile static Data data;
 
 	public User() throws UnknownHostException, IOException {
-		this.permission = Permission.VISITEUR;
+		this.permission = TypesPermission.VISITOR;
 		this.com = new CommunicationServer(this);
 		this.waiting = new WaitingFor();
 		this.t = new Thread(com);
@@ -41,48 +41,53 @@ public class User {
 	}
 	
 	public Data getData() {
-		return data;
+		synchronized (data) {
+			return data;
+		}
 	}
 	
 	public void setData(Data data) {
-		User.data = data;
+		synchronized (data) {
+			User.data = data;
+		}
+		
 	}
 	
 	public CommunicationServer getCom() {
 		return com;
 	}
 	
-	public void setPermission(Permission permission) {
+	public void setPermission(TypesPermission permission) {
 		this.permission = permission;
 	}
 	
-	public Permission getPermission() {
+	public TypesPermission getPermission() {
 		return permission;
 	}
 	
-	public void login(String username, String mdp) throws ErrorLogin {
-		com.sendLogin(username, mdp);
+	public void login(String username, String password) throws ExceptionLogin {
+		com.sendLogin(username, password);
 		Response[] r = {Response.LOGIN, Response.ERROR_LOGIN};
 		waiting.waitFor(r);
 		switch (waiting.getActualState()) {
 		case ERROR_LOGIN:
-			throw new ErrorLogin("Erreur de login");
+			throw new ExceptionLogin("Erreur de login");
 		case LOGIN:
 			switch(permission) {
-			case ARBITRE:
-				MasterFrame.getInstance().setMenu(TypeMenu.Arbitres);
+			case REFEREE:
+				MasterFrame.getInstance().setMenu(TypesMenu.REFEREE);
 				break;
-			case ECURIE:
-				MasterFrame.getInstance().setMenu(TypeMenu.Ecuries);
+			case STABLE:
+				MasterFrame.getInstance().setMenu(TypesMenu.STABLE);
 				break;
-			case JOUEUR:
-				MasterFrame.getInstance().setMenu(TypeMenu.Joueurs);
+			case PLAYER:
+				MasterFrame.getInstance().setMenu(TypesMenu.PLAYER);
 				break;
-			case ORGANISATEUR:
-				MasterFrame.getInstance().setMenu(TypeMenu.Organisateurs);
+			case ORGANIZER:
+				MasterFrame.getInstance().setMenu(TypesMenu.ORGANIZER);
 				break;
-			case VISITEUR:
-				MasterFrame.getInstance().setMenu(TypeMenu.Visiteurs);
+			case VISITOR:
+				MasterFrame.getInstance().setMenu(TypesMenu.VISITOR);
 				break;
 			default:
 				break;
@@ -96,7 +101,7 @@ public class User {
 	
 	public void logout() {
 		setInfo(null);
-		setPermission(Permission.VISITEUR);
+		setPermission(TypesPermission.VISITOR);
 		com.logout();
 	}
 	
@@ -104,11 +109,11 @@ public class User {
 		return waiting;
 	}
 	
-	public Infos getInfo() {
+	public Types getInfo() {
 		return info;
 	}
 	
-	public void setInfo(Infos info) {
+	public void setInfo(Types info) {
 		this.info = info;
 	}
 	
@@ -117,37 +122,37 @@ public class User {
 		return -1;
 	}
 	
-	public void inscriptionTournoi(int id) throws InvalidPermission{
-		if (permission!=Permission.JOUEUR) {
-			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
+	public void registerTournament(int id) throws ExceptionInvalidPermission{
+		if (permission!=TypesPermission.PLAYER) {
+			throw new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
-		com.inscriptionTournoi(id);
+		com.registerTournament(id);
 	}
 	
-	public void desinscriptionTournoi(int idTournoi, int idJeu) throws InvalidPermission{
-		if (permission != Permission.JOUEUR) {
-			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
+	public void unregisterTournament(int idTournament, int idGame) throws ExceptionInvalidPermission{
+		if (permission != TypesPermission.PLAYER) {
+			throw new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
-		com.desincriptionTournoi(idTournoi, idJeu);
+		com.unregisterTournament(idTournament, idGame);
 	}
 	
-	public void ajouterEquipe(RegisterEquipe equipe){
-		if (permission!=Permission.ECURIE) {
-			MasterFrame.getInstance().error(new InvalidPermission("Vous n'avez pas la permission de faire cette action"));
+	public void addTeam(TypesRegisterTeam team){
+		if (permission!=TypesPermission.STABLE) {
+			MasterFrame.getInstance().fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"));
 		} else {
-			com.ajouterEquipe(equipe);
+			com.addTeam(team);
 		}
 	}
 	
-	public void supprimerTournoi(TournoiInfo tournoi) {
+	public void deleteTournament(TypesTournament tournament) {
 		
 	}
 	
-	public void ajouterTournoi(TournoiInfo t) throws InvalidPermission {
-		if (permission!=Permission.ORGANISATEUR) {
-			throw new InvalidPermission("Vous n'avez pas la permission de faire cette action");
+	public void addTournament(TypesTournament t) throws ExceptionInvalidPermission {
+		if (permission!=TypesPermission.ORGANIZER) {
+			throw new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
-		com.ajouterTournoi(t);
+		com.addTournament(t);
 	}
 
 }

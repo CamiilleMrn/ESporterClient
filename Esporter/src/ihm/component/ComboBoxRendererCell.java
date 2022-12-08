@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import types.Jeu;
+import types.TypesGame;
 
 public class ComboBoxRendererCell extends JLabel implements ListCellRenderer<Object>{
 
@@ -27,7 +27,7 @@ public class ComboBoxRendererCell extends JLabel implements ListCellRenderer<Obj
 	@Override
 	public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
 			boolean cellHasFocus) {
-		setText(((Jeu) value).getNom());
+		setText(((TypesGame) value).getName());
 		return this;
 	}
 

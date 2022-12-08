@@ -2,7 +2,7 @@ package data;
 
 import java.util.ArrayList;
 
-import types.TournoiInfo;
+import types.TypesTournament;
 
 public class CalendrierData extends Data{
 
@@ -10,7 +10,7 @@ public class CalendrierData extends Data{
 	 * 
 	 */
 	private static final long serialVersionUID = -191283671798116389L;
-	private ArrayList<TournoiInfo> calendrier;
+	private ArrayList<TypesTournament> calendrier;
 	
 	public CalendrierData() {
 		
