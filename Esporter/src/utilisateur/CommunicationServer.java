@@ -11,7 +11,6 @@ import java.util.Iterator;
 import javax.swing.SwingUtilities;
 
 import data.Data;
-import ihm.MasterFrame;
 import socket.Command;
 import socket.CommandName;
 import socket.Response;
@@ -28,6 +27,7 @@ import types.TypesRegisterTeam;
 import types.TypesTournament;
 import types.exception.ExceptionError;
 import types.exception.ExceptionInvalidPermission;
+import vue.MasterFrame;
 
 public class CommunicationServer implements Runnable{
 	

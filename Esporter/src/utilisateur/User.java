@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 import java.sql.Connection;
 
 import data.Data;
-import ihm.MasterFrame;
 import socket.Response;
 import types.TypesTeam;
 import types.Types;
@@ -17,6 +16,7 @@ import types.TypesRegisterTeam;
 import types.TypesTournament;
 import types.WaitingFor;
 import types.exception.ExceptionLogin;
+import vue.MasterFrame;
 import types.exception.ExceptionInvalidPermission;
 
 public class User {

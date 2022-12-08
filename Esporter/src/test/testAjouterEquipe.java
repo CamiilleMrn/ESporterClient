@@ -14,9 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ihm.component.ContainerPlayer;
-import ihm.stable.management.AddTeam;
 import types.TypesGame;
+import vue.component.ContainerPlayer;
+import vue.stable.management.AddTeam;
 
 public class testAjouterEquipe {
 
