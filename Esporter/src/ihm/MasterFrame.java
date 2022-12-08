@@ -43,6 +43,7 @@ import ihm.error.Error;
 import ihm.error.ErrorPanel;
 import types.TypesStable;
 import types.TypesPlayer;
+import types.TypesImage;
 import types.TypesMenu;
 import types.TypesPermission;
 import types.exception.ExceptionLogin;
@@ -331,7 +332,7 @@ public class MasterFrame {
 			TypesStable e = (TypesStable)user.getInfo();
 			lblAccountName.setText(e.getName());
 			BufferedImage logoStable = ((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getLogo().getImage();
-			logoStable = resize(logoStable, 100, 100);
+			logoStable = TypesImage.resize(logoStable, 100, 100);
 			lblAccountLogo.setIcon(new ImageIcon(logoStable));
 			//logoCompte.setIcon(e.getLogo());
 			setPanel(ihm.stable.Home.class, null);
@@ -341,7 +342,7 @@ public class MasterFrame {
 			TypesPlayer p = (TypesPlayer)user.getInfo();
 			lblAccountName.setText(p.getName());
 			BufferedImage picture = ( (TypesPlayer) MasterFrame.getInstance().getUser().getInfo() ).getImage().getImage();
-			picture = resize(picture, 80, 100);
+			picture = TypesImage.resize(picture, 80, 100);
 			lblAccountLogo.setIcon(new ImageIcon(picture));
 			//logoCompte.setIcon(j.getPhoto());
 			setPanel(ihm.player.Home.class, null);
@@ -462,16 +463,7 @@ public class MasterFrame {
 		return this.frame.getContentPane().getSize();
 	}
 	
-	private static BufferedImage resize(BufferedImage img, int newW, int newH) { 
-	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-	    Graphics2D g2d = dimg.createGraphics();
-	    g2d.drawImage(tmp, 0, 0, null);
-	    g2d.dispose();
-
-	    return dimg;
-	}
+	
 
 
 }

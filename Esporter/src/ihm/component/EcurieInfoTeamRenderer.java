@@ -15,21 +15,22 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
+import ihm.VoirInfoJoueur;
 import types.TypesTeam;
 
-public class RendererStableInfo extends JPanel{
+public class EcurieInfoTeamRenderer extends JPanel{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private TypesTeam team;
+	private TypesTeam equipe;
 	private JLabel lbTeamName = new JLabel();
 	private JButton lbArrowIcon = new JButton();
 
-	public RendererStableInfo(TypesTeam team) {
+	public EcurieInfoTeamRenderer(TypesTeam equipe) {
 		
-	this.team = team;
+	this.equipe = equipe;
 	setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
 	setBackground(MasterFrame.COULEUR_MASTER_FOND);
 	setLayout(new BorderLayout(5,5));
@@ -42,14 +43,14 @@ public class RendererStableInfo extends JPanel{
 	
 	lbArrowIcon.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			MasterFrame.getInstance().setPanel(ihm.VoirInfoJoueur.class, team);
+			MasterFrame.getInstance().setPanel(ihm.VoirInfoJoueur.class, equipe);
 		}
 	});
 	
 	lbArrowIcon.setBorder(null);
 	lbArrowIcon.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 	add(lbArrowIcon, BorderLayout.EAST);
-	lbTeamName.setText(this.team.getStable().getNickname() + " - " + this.team.getGame());
+	lbTeamName.setText(this.equipe.getStable().getNickname() + " - " + this.equipe.getGame());
 	try {
 		lbArrowIcon.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("../images/Chevron.png"))));
 	} catch (IOException e) {
