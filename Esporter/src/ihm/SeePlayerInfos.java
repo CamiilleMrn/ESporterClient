@@ -1,18 +1,13 @@
 package ihm;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ihm.component.DataJPanel;
-import ihm.component.EcurieInfoTeamRenderer;
-import ihm.component.VoirInfoPlayerRenderer;
+import ihm.component.SeePlayerInfosRenderer;
 import types.TypesTeam;
 import types.TypesPlayer;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -24,12 +19,9 @@ import java.util.Map.Entry;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 
-public class VoirInfoJoueur extends DataJPanel {
+public class SeePlayerInfos extends DataJPanel {
 
 	/**
 	 * 
@@ -48,11 +40,11 @@ public class VoirInfoJoueur extends DataJPanel {
 		System.out.println(liste.isEmpty());
 		for(Entry<Integer, TypesPlayer> set : liste.entrySet()) {
 			System.out.println(set.getValue());
-			pan.add(new VoirInfoPlayerRenderer(set.getValue()));
+			pan.add(new SeePlayerInfosRenderer(set.getValue()));
 		}	
 	}
 	
-	public VoirInfoJoueur(TypesTeam equipe) {
+	public SeePlayerInfos(TypesTeam equipe) {
 		this.equipe = equipe;
 		initialize();
 	}

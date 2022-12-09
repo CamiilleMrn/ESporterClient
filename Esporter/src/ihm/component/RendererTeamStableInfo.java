@@ -17,7 +17,7 @@ import javax.swing.border.MatteBorder;
 import ihm.MasterFrame;
 import types.TypesTeam;
 
-public class RendererStableInfo extends JPanel{
+public class RendererTeamStableInfo extends JPanel{
 	
 	/**
 	 * 
@@ -27,7 +27,7 @@ public class RendererStableInfo extends JPanel{
 	private JLabel lbTeamName = new JLabel();
 	private JButton lbArrowIcon = new JButton();
 
-	public RendererStableInfo(TypesTeam team) {
+	public RendererTeamStableInfo(TypesTeam team) {
 		
 	this.team = team;
 	setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
@@ -42,7 +42,7 @@ public class RendererStableInfo extends JPanel{
 	
 	lbArrowIcon.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			MasterFrame.getInstance().setPanel(ihm.VoirInfoJoueur.class, team);
+			MasterFrame.getInstance().setPanel(ihm.SeePlayerInfos.class, team);
 		}
 	});
 	

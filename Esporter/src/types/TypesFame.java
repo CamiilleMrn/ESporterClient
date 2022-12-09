@@ -1,8 +1,14 @@
 package types;
 
 public enum TypesFame {
-LOCAL, NATIONAL, INTERNATIONAL;
 	
+	LOCAL("Local"), NATIONAL("National"), INTERNATIONAL("International");
+	
+	private String name;
+	
+	TypesFame(String name) {
+		this.name = name;
+	}
 	
 	public static TypesFame intToRenommee(int i) {
 		switch(i) {
@@ -12,6 +18,15 @@ LOCAL, NATIONAL, INTERNATIONAL;
 		}
 		return null;
 
+	}
+	
+	public String getNom() {
+		return this.name;
+	}
+
+	@Override
+	public String toString() {
+		return this.getNom();
 	}
 
 }

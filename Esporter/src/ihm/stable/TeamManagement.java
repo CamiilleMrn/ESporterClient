@@ -1,8 +1,12 @@
 package ihm.stable;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 
+import javax.swing.AbstractButton;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -12,8 +16,12 @@ import ihm.MasterFrame;
 import ihm.component.ComboBoxRendererArrow;
 import ihm.component.ComboBoxRendererCell;
 import ihm.component.ComboBoxRendererEditor;
+import ihm.component.RendererStable;
+import ihm.component.RendererTeamStableInfo;
 import ihm.stable.management.AddTeam;
 import types.TypesGame;
+import types.TypesStable;
+import types.TypesTeam;
 
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -21,9 +29,11 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 public class TeamManagement extends JPanel{
@@ -33,6 +43,26 @@ public class TeamManagement extends JPanel{
 	private static final long serialVersionUID = -2160024974466737852L;
 	private JList<String> tournamentList;
 	private JLabel lblTitle;
+	private AbstractButton ifEmptyTeam;
+	private JPanel pan;
+	
+	private void createListTeam() {
+		int self = ((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId();
+		TypesStable ecurie = MasterFrame.getInstance().getUser().getData().getStables().get(self);
+		HashMap<Integer,TypesTeam> liste = ecurie.getTeams();
+		if(liste.isEmpty()) {
+			ifEmptyTeam.setText("Cette écurie n'a pas d'équipe");
+			ifEmptyTeam.setForeground(MasterFrame.COULEUR_TEXTE);
+			ifEmptyTeam.setFont(new Font("Cambria", Font.PLAIN , 20));
+			pan.add(ifEmptyTeam);
+		}else {
+			for(HashMap.Entry<Integer, TypesTeam> set : liste.entrySet()) {
+				if(set.getValue().getStable() == ecurie) {
+					pan.add(new RendererTeamStableManagement(set.getValue()));
+				}
+			}
+		}
+	}
 	
 	/**
 	 * Create the application.
@@ -45,7 +75,6 @@ public class TeamManagement extends JPanel{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		DefaultListModel<String> model = new DefaultListModel<String>();
 		setLayout(new BorderLayout(0, 0));
 		
 
@@ -111,13 +140,18 @@ public class TeamManagement extends JPanel{
 		panelHead.add(panelDummyTop, BorderLayout.NORTH);
 		
 
-		JScrollPane scrollPaneTournamentList = new JScrollPane();
-		add(scrollPaneTournamentList);
-		tournamentList = new JList<String>();
-		tournamentList.setModel(model);
-		scrollPaneTournamentList.add(tournamentList);
-		tournamentList.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPaneTournamentList.setViewportView(tournamentList);
+		JPanel panelContainerScrollPane = new JPanel();
+		add(panelContainerScrollPane, BorderLayout.CENTER);
+		
+		pan = new JPanel();
+		createListTeam();
+		panelContainerScrollPane.setLayout(new BorderLayout(0, 0));
+		JScrollPane scrollPaneListTeam = new JScrollPane(pan);
+		pan.setLayout(new GridLayout(1, 0, 0, 0));
+		scrollPaneListTeam.setAlignmentY(Component.TOP_ALIGNMENT);
+		scrollPaneListTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneListTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
+		panelContainerScrollPane.add(scrollPaneListTeam);
 		
 		
 		

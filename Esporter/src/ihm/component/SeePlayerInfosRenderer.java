@@ -25,7 +25,7 @@ import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 
-public class VoirInfoPlayerRenderer extends JPanel{
+public class SeePlayerInfosRenderer extends JPanel{
 
 	/**
 	 * 
@@ -33,7 +33,7 @@ public class VoirInfoPlayerRenderer extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private TypesPlayer player;
 
-	public VoirInfoPlayerRenderer(TypesPlayer player) {
+	public SeePlayerInfosRenderer(TypesPlayer player) {
 		setBorder(new CompoundBorder(new EmptyBorder(20, 20, 20, 20), new MatteBorder(2, 2, 2, 2, MasterFrame.COULEUR_MASTER)));
 		setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		this.player = player;

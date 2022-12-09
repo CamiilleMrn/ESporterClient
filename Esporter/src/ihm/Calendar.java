@@ -116,9 +116,7 @@ public class Calendar extends DataJPanel{
 		dummy.setBorder(null);
 		panelRoot.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		add(dummy, BorderLayout.NORTH);
-		
-		Component verticalStrut = Box.createVerticalStrut(80);
-		dummy.add(verticalStrut);
+		dummy.setLayout(new BorderLayout(0, 0));
 		
 		lblTitle = new JLabel();
 		lblTitle.setText("Calendrier des tournois");
@@ -202,7 +200,7 @@ public class Calendar extends DataJPanel{
 		panel_3.setLayout(new BorderLayout(0, 0));
 		panel_3.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		
-		JComboBox<TypesGame> comboBoxFilterGame = new JComboBox<>();
+		JComboBox<TypesGame> comboBoxFilterGame = new JComboBox<TypesGame>(TypesGame.values());
 		comboBoxFilterGame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBoxFilterGame));
 		comboBoxFilterGame.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		comboBoxFilterGame.setFont(new Font("Cambria", Font.PLAIN, 15));

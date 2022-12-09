@@ -29,7 +29,7 @@ import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 
 import ihm.component.DataJPanel;
-import ihm.component.RendererStableInfo;
+import ihm.component.RendererTeamStableInfo;
 import ihm.component.RendererStableTitle;
 import types.TypesStable;
 import types.TypesTeam;
@@ -97,7 +97,7 @@ public class StableInfo extends DataJPanel{
 		}else {
 			for(HashMap.Entry<Integer, TypesTeam> set : liste.entrySet()) {
 				if(set.getValue().getStable() == stable) {
-					panAllTeams.add(new RendererStableInfo(set.getValue()));
+					panAllTeams.add(new RendererTeamStableInfo(set.getValue()));
 				}
 			}
 		}

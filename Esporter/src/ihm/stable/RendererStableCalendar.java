@@ -1,18 +1,27 @@
 package ihm.stable;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
+import ihm.Stables;
+import types.TypesTeam;
 import types.TypesTournament;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,6 +35,7 @@ public class RendererStableCalendar extends JPanel{
 	private JLabel lblTournamentName = new JLabel();
 	private JButton lblArrowIcon = new JButton();
 	private TypesTournament tournament;
+	private AbstractButton lblTeamName;
 	
 	public RendererStableCalendar(TypesTournament tournament) {
 		this.tournament = tournament;
@@ -41,7 +51,7 @@ public class RendererStableCalendar extends JPanel{
 		
 		lblArrowIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				MasterFrame.getInstance().setPanel(ihm.SeePlayerInfos.class, tournament);
 			}
 		});
 		
