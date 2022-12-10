@@ -16,6 +16,7 @@ import ihm.MasterFrame;
 import ihm.component.ComboBoxRendererArrow;
 import ihm.component.ComboBoxRendererCell;
 import ihm.component.ComboBoxRendererEditor;
+import ihm.component.DataJPanel;
 import ihm.component.RendererStable;
 import ihm.component.RendererTeamStableInfo;
 import ihm.stable.management.AddTeam;
@@ -36,7 +37,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
-public class TeamManagement extends JPanel{
+public class TeamManagement extends DataJPanel{
 	/**
 	 * 
 	 */
@@ -155,6 +156,13 @@ public class TeamManagement extends JPanel{
 		
 		
 		
+	}
+
+	@Override
+	public void dataUpdate() {
+		// TODO Auto-generated method stub
+		createListTeam();
+		repaint();
 	}
 
 }

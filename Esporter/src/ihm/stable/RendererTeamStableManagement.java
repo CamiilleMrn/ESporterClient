@@ -29,8 +29,6 @@ public class RendererTeamStableManagement extends JPanel {
 	private TypesTeam team;
 	private JLabel lbTeamName = new JLabel();
 	private JButton lbArrowIcon = new JButton();
-	private AbstractButton lbModifyButton;
-	private Component panel_1;
 	private final JPanel panel = new JPanel();
 	private final JPanel panel_2 = new JPanel();
 	private final JButton btnNewButton = new JButton("Modifier");
@@ -72,7 +70,7 @@ public class RendererTeamStableManagement extends JPanel {
 		btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MasterFrame.getInstance().setPanel(ihm.stable.ModifyTeam.class, panelText);
+				MasterFrame.getInstance().setPanel(ihm.stable.ModifyTeam.class, team);
 			}
 		});
 		

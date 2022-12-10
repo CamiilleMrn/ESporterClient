@@ -136,6 +136,13 @@ public class CommunicationServer implements Runnable{
 		send(c);
 	}
 	
+	public void modifyTeam(TypesTeam team) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.TEAM, team);
+		Command c = new Command(CommandName.MODIFY_TEAM, m);
+		send(c);
+	}
+	
 	public void addTournament(TypesTournament t) {
 		HashMap<TypesID, Types> m = new HashMap<>();
 		m.put(TypesID.TOURNAMENT, t);

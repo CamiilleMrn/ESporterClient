@@ -144,6 +144,14 @@ public class User {
 		}
 	}
 	
+	public void modifyTeam(TypesTeam team) {
+		if (permission!=TypesPermission.STABLE) {
+			MasterFrame.getInstance().fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"));
+		} else {
+			com.modifyTeam(team);
+		}
+	}
+	
 	public void deleteTournament(TypesTournament tournament) {
 		
 	}
