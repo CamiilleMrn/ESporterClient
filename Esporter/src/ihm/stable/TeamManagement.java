@@ -36,6 +36,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.ScrollPaneConstants;
 
 public class TeamManagement extends DataJPanel{
 	/**
@@ -49,6 +50,9 @@ public class TeamManagement extends DataJPanel{
 	
 	private void createListTeam() {
 		int self = ((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId();
+		 for (TypesTeam value : MasterFrame.getInstance().getUser().getData().getStables().get(self).getTeams().values()) {
+		        System.out.println(value);
+		    }
 		TypesStable ecurie = MasterFrame.getInstance().getUser().getData().getStables().get(self);
 		HashMap<Integer,TypesTeam> liste = ecurie.getTeams();
 		if(liste.isEmpty()) {
@@ -57,10 +61,15 @@ public class TeamManagement extends DataJPanel{
 			ifEmptyTeam.setFont(new Font("Cambria", Font.PLAIN , 20));
 			pan.add(ifEmptyTeam);
 		}else {
-			for(HashMap.Entry<Integer, TypesTeam> set : liste.entrySet()) {
-				if(set.getValue().getStable() == ecurie) {
+			 for (TypesTeam value : MasterFrame.getInstance().getUser().getData().getStables().get(self).getTeams().values()) {
+			        System.out.println("else : "+value);
+			    }
+			for(HashMap.Entry<Integer, TypesTeam> set : MasterFrame.getInstance().getUser().getData().getStables().get(self).getTeams().entrySet()) {
+				if(set.getValue().getStable().equals(ecurie)) {
+					System.out.println("TeamManagment : " + set.getValue());
 					pan.add(new RendererTeamStableManagement(set.getValue()));
 				}
+				System.out.println("team "+set.getValue()+" stable : "+set.getValue().getStable()+" Expected : "+ecurie);
 			}
 		}
 	}
@@ -142,27 +151,22 @@ public class TeamManagement extends DataJPanel{
 		
 
 		JPanel panelContainerScrollPane = new JPanel();
+		panelContainerScrollPane.setLayout(new BorderLayout());
 		add(panelContainerScrollPane, BorderLayout.CENTER);
 		
 		pan = new JPanel();
+		pan.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		createListTeam();
-		panelContainerScrollPane.setLayout(new BorderLayout(0, 0));
 		JScrollPane scrollPaneListTeam = new JScrollPane(pan);
-		pan.setLayout(new GridLayout(1, 0, 0, 0));
-		scrollPaneListTeam.setAlignmentY(Component.TOP_ALIGNMENT);
+		pan.setLayout(new GridLayout(0, 1, 0, 0));
 		scrollPaneListTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
 		scrollPaneListTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelContainerScrollPane.add(scrollPaneListTeam);
-		
-		
-		
 	}
 
 	@Override
 	public void dataUpdate() {
-		// TODO Auto-generated method stub
 		createListTeam();
-		repaint();
 	}
 
 }

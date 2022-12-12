@@ -212,7 +212,17 @@ public class CommunicationServer implements Runnable{
 		case UPDATE_TEAM:
 			TypesTeam team = (TypesTeam)r.getInfoByID(TypesID.TEAM);
 			user.getData().getStables().get(team.getStable().getId()).getTeams().put(team.getId(), team);
+			if (((TypesStable)user.getInfo()).getId() == team.getStable().getId()) {
+				((TypesStable)user.getInfo()).addTeam(team);
+				 for (TypesTeam value : user.getData().getStables().get(team.getStable().getId()).getTeams().values()) {
+				        System.out.println("CommServ : "+value);
+				    }
+				
+			}
 			MasterFrame.getInstance().dataUpdate();
+			for (TypesTeam value : user.getData().getStables().get(team.getStable().getId()).getTeams().values()) {
+		        System.out.println("CommServApDataUpdate : "+value);
+		    }
 			break;
 		case UPDATE_TOURNAMENT:
 			TypesTournament tournament = (TypesTournament)r.getInfoByID(TypesID.TOURNAMENT);

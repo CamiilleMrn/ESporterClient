@@ -252,7 +252,7 @@ public class ModifyPlayer extends JDialog {
 						InputStream is = new ByteArrayInputStream(blob.toByteArray());
 						BufferedImage bf = ImageIO.read(is);
 						types.TypesImage im = new types.TypesImage(image, "png");
-						TypesPlayer joueur = new TypesPlayer(-1,name, firstname,im,birthDate,contractStartDate,contractEndDate,1,-1,((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId());
+						TypesPlayer joueur = new TypesPlayer(container.getPlayer().getId(),name, firstname,im,birthDate,contractStartDate,contractEndDate,1,container.getPlayer().getIdTeam(),((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId());
 						container.setPlayer(joueur);
 						dispose();
 					} catch (IOException e1) {

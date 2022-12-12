@@ -98,6 +98,7 @@ public class ModifyTeam extends JPanel {
 			playerList[i] = new ContainerModifyPlayer();
 			panelPlayer.add(playerList[i]);
 			playerList[i].setPlayer(compTeam[i]);
+			System.out.println(compTeam[i].getId());
 		}
 		
 		JPanel panelValidate = new JPanel();
@@ -134,6 +135,7 @@ public class ModifyTeam extends JPanel {
 				}
 				HashMap<Integer,TypesPlayer> players = new HashMap<>();
 				for (ContainerModifyPlayer c : playerList) {
+					System.out.println(c.getPlayer().getId());
 					players.put(c.getPlayer().getId(),c.getPlayer());
 				}
 				TypesTeam newTeam = new TypesTeam(team.getGame(), team.getStable(), players, team.getId());
