@@ -46,7 +46,7 @@ public class RendererPlayerCalendar extends DataJPanel{
 	private JLabel lblTournamentName = new JLabel();
 	private JButton lblArrowIcon = new JButton();
 	private final JPanel panelBtnRegister = new JPanel();
-	private final JButton lbInscriptionButton;
+	private JButton lbInscriptionButton;
 	private TypesTournament tournament;
 	
 	
@@ -115,9 +115,12 @@ public class RendererPlayerCalendar extends DataJPanel{
 		
 	}
 	
+	@Override
 	public void dataUpdate() {
 		if(tournament.getRegistered().contains(((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam())) {
-			lbInscriptionButton.setVisible(false);
+			lbInscriptionButton = new JButton("Se désinscrire");
+		} else {
+			lbInscriptionButton = new JButton("S'inscrire");
 		}
 	}
 	
