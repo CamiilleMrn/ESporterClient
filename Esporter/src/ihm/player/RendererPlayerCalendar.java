@@ -97,7 +97,7 @@ public class RendererPlayerCalendar extends DataJPanel{
 		
 		lblArrowIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				MasterFrame.getInstance().setPanel(ihm.visitor.ProgrammeMatch.class, null);
 			}
 		});
 		add(lblArrowIcon, BorderLayout.EAST);

@@ -66,7 +66,7 @@ public class RendererRefereeCalendar extends JPanel{
 		panel.add(verticalGlue_1);
 		lbArrowIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				MasterFrame.getInstance().setPanel(ihm.visitor.ProgrammeMatch.class, null);
 			}
 		});
 		add(lbArrowIcon, BorderLayout.EAST);

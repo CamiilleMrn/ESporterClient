@@ -45,7 +45,7 @@ public class RendererVisitorCalendar extends JPanel{
 		
 		lblArrowIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				MasterFrame.getInstance().setPanel(ihm.visitor.ProgrammeMatch.class, null);
 			}
 		});
 		
