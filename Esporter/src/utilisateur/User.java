@@ -153,7 +153,7 @@ public class User {
 	}
 	
 	public void deleteTournament(TypesTournament tournament) {
-		
+		com.deleteTournament(tournament.getId());
 	}
 	
 	public void addTournament(TypesTournament t) throws ExceptionInvalidPermission {
