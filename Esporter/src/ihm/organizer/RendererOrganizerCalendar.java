@@ -86,7 +86,7 @@ public class RendererOrganizerCalendar extends JPanel{
 		panelBtn.add(lblSep);
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int n = JOptionPane.showConfirmDialog (null, "Etes vous sûr de vouloir supprimer le tournoi?","WARNING", JOptionPane.YES_NO_OPTION);
+				int n = JOptionPane.showConfirmDialog (null, "Etes vous sï¿½r de vouloir supprimer le tournoi?","WARNING", JOptionPane.YES_NO_OPTION);
 				if(n== JOptionPane.YES_OPTION) {
 					MasterFrame.getInstance().getUser().deleteTournament(tournoi);
 				}
@@ -105,7 +105,7 @@ public class RendererOrganizerCalendar extends JPanel{
 
 		lblArrowIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MasterFrame.getInstance().setPanel(ihm.visitor.ProgrammeMatch.class, null);
+				MasterFrame.getInstance().setPanel(ihm.component.ProgramMatchs.class, null);
 			}
 		});
 		add(lblArrowIcon, BorderLayout.EAST);

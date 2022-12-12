@@ -1,4 +1,4 @@
-package ihm.visitor;
+package ihm.component;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -23,7 +23,7 @@ import types.TypesTournament;
 
 import java.awt.Rectangle;
 
-public class ProgrammeMatch extends JPanel {
+public class ProgramMatchs extends JPanel {
 	/**
 	 * 
 	 */
@@ -35,7 +35,7 @@ public class ProgrammeMatch extends JPanel {
 	/**
 	 * Create the panel.
 	 */	
-	public ProgrammeMatch(TypesTournament tournament) {
+	public ProgramMatchs(TypesTournament tournament) {
 		this.tournament = tournament;
 		setLayout(new BorderLayout(0, 0));
 		
