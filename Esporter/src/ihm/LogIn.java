@@ -38,6 +38,7 @@ import java.awt.Color;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
+import javax.swing.border.LineBorder;
 
 public class LogIn extends JPanel{
 
@@ -65,7 +66,7 @@ public class LogIn extends JPanel{
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelLoginAll = new JPanel();
-		panelLoginAll.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COLOR_MASTER, MasterFrame.COLOR_MASTER, MasterFrame.COLOR_TEXT, MasterFrame.COLOR_MASTER));
+		panelLoginAll.setBorder(new LineBorder(MasterFrame.COLOR_MASTER, 4, true));
 		panelLoginAll.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelLoginAll);
 		panelLoginAll.setLayout(new GridLayout(1, 0, 0, 0));
@@ -264,7 +265,7 @@ public class LogIn extends JPanel{
 		btnCancel.setForeground(MasterFrame.COLOR_TEXT);
 		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
 		btnCancel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COLOR_MASTER, null, MasterFrame.COLOR_MASTER, null));
-		btnCancel.setBackground(new Color(96, 96, 96));
+		btnCancel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		btnCancel.setAlignmentY(0.0f);
 		btnCancel.setAlignmentX(1.0f);
 		panelBtnRight.add(btnCancel);
@@ -281,7 +282,7 @@ public class LogIn extends JPanel{
 		btnProceed.setForeground(MasterFrame.COLOR_TEXT);
 		btnProceed.setFont(new Font("Cambria", Font.PLAIN, 12));
 		btnProceed.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COLOR_MASTER, null, MasterFrame.COLOR_MASTER, null));
-		btnProceed.setBackground(new Color(96, 96, 96));
+		btnProceed.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		btnProceed.setAlignmentY(1.0f);
 		panelBtnRight.add(btnProceed);
 		
