@@ -53,7 +53,7 @@ public class ProgrammeMatch extends JPanel {
 		JScrollPane scrollPaneWithGroupeStageAndFinalRanking = new JScrollPane();
 		scrollPaneWithGroupeStageAndFinalRanking.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		add(scrollPaneWithGroupeStageAndFinalRanking, BorderLayout.CENTER);
-		
+		//System.out.println("hello");
 		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
 		Object[][] dataFinalColumn = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
