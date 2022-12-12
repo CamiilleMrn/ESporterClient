@@ -104,6 +104,13 @@ public class CommunicationServer implements Runnable{
 		}
 	}
 	
+	public void deleteTournament(int t) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.TOURNAMENT, new TypesInteger(t));
+		Command c = new Command(CommandName.DELETE_TOURNAMENT, m);
+		send(c);
+	}
+	
 	
 	public void sendLogin(String username, String password) {
 		HashMap<TypesID, Types> m = new HashMap<>();
@@ -240,7 +247,9 @@ public class CommunicationServer implements Runnable{
 			MasterFrame.getInstance().fireError(new ExceptionError(r.getError()));;
 			System.out.println("ERREUR");
 			break;
-			
+		case DELETE_TOURNAMENT:
+			user.getData().getCalendar().remove(((TypesInteger)r.getInfoByID(TypesID.TOURNAMENT)).getInteger());
+			MasterFrame.getInstance().dataUpdate();
 		default:
 			break;
 		

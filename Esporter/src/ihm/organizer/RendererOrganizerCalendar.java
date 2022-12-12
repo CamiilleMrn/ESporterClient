@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 
@@ -85,8 +86,13 @@ public class RendererOrganizerCalendar extends JPanel{
 		panelBtn.add(lblSep);
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int n = JOptionPane.showConfirmDialog (null, "Etes vous sûr de vouloir supprimer le tournoi?","WARNING", JOptionPane.YES_NO_OPTION);
+				if(n== JOptionPane.YES_OPTION) {
+					MasterFrame.getInstance().getUser().deleteTournament(tournoi);
+				}
 			}
 		});
+	
 		
 		btnRemove.setHorizontalAlignment(SwingConstants.CENTER);
 		btnRemove.setForeground(MasterFrame.COLOR_TEXT);
