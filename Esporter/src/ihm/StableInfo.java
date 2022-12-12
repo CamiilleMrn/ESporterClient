@@ -77,7 +77,7 @@ public class StableInfo extends DataJPanel{
 		ArrayList<TypesTitle> liste = stable.getTitles();
 		if(liste.isEmpty() || liste == null ) {
 			lblNoTitle.setText("Cette écurie n'a pas encore obtenu de titre");
-			lblNoTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+			lblNoTitle.setForeground(MasterFrame.COLOR_TEXT);
 			lblNoTitle.setFont(new Font("Cambria", Font.PLAIN , 20));
 			panelAllTitles.add(lblNoTitle);
 		}else {
@@ -91,7 +91,7 @@ public class StableInfo extends DataJPanel{
 		HashMap<Integer,TypesTeam> liste = stable.getTeams();
 		if(liste.isEmpty()) {
 			lblNoTeam.setText("Cette écurie n'a pas d'équipe");
-			lblNoTeam.setForeground(MasterFrame.COULEUR_TEXTE);
+			lblNoTeam.setForeground(MasterFrame.COLOR_TEXT);
 			lblNoTeam.setFont(new Font("Cambria", Font.PLAIN , 20));
 			panAllTeams.add(lblNoTeam);
 		}else {
@@ -118,27 +118,27 @@ public class StableInfo extends DataJPanel{
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelAll = new JPanel();
-		panelAll.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelAll.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelAll, BorderLayout.CENTER);
 		panelAll.setLayout(new BorderLayout(0, 0));
 		
 		panelCenter = new JPanel();
-		panelCenter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelCenter.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelAll.add(panelCenter, BorderLayout.CENTER);
 		panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
 		
 		panelSeparator = new JPanel();
-		panelSeparator.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelSeparator.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelCenter.add(panelSeparator);
 		
 		panelInfo = new JPanel();
-		panelInfo.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelInfo.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelCenter.add(panelInfo);
 		panelInfo.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		lblImageStable = new JLabel();
 		lblImageStable.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblImageStable.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblImageStable.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lblImageStable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		panelInfo.add(lblImageStable);
 		
@@ -152,51 +152,51 @@ public class StableInfo extends DataJPanel{
 		
 		panelTitles = new JPanel();
 		panelTitles.setBorder(null);
-		panelTitles.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTitles.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelTitles.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panelInfo.add(panelTitles);
 		panelTitles.setLayout(new GridLayout(0, 1, 0, -30));
 		
 		
 		lblTitle = new JLabel("Palmarès");
-		lblTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 30));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setAlignmentX(0.5f);
 		panelTitles.add(lblTitle);
 		
 		panelAllTitles = new JPanel();
-		panelAllTitles.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelAllTitles.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		createListTitle();
 		JScrollPane scrollPaneTitles = new JScrollPane(panelAllTitles);
 		scrollPaneTitles.setAlignmentY(Component.TOP_ALIGNMENT);
-		scrollPaneTitles.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneTitles.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		scrollPaneTitles.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelTitles.add(scrollPaneTitles);
 		
 		panelTeamInfo = new JPanel();
-		panelTeamInfo.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTeamInfo.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelCenter.add(panelTeamInfo);
 		panelTeamInfo.setLayout(new BoxLayout(panelTeamInfo, BoxLayout.Y_AXIS));
 		
 		panelTeamTitle = new JPanel();
-		panelTeamTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTeamTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelTeamInfo.add(panelTeamTitle);
 		
 		lblTeamTitle = new JLabel("Equipes");
-		lblTeamTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTeamTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblTeamTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 30));
 		panelTeamTitle.add(lblTeamTitle);
 		
 		panelTeam = new JPanel();
-		panelTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTeam.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelTeamInfo.add(panelTeam);
 		
 		panAllTeams = new JPanel();
-		panAllTeams.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panAllTeams.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		createListTeam();
 		JScrollPane scrollPaneTeam = new JScrollPane(panAllTeams);
-		scrollPaneTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneTeam.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		scrollPaneTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelTeam.add(scrollPaneTeam, BorderLayout.CENTER);
 		
@@ -206,12 +206,13 @@ public class StableInfo extends DataJPanel{
 		panelAll.add(panelNorth, BorderLayout.NORTH);
 		panelNorth.setLayout(new BorderLayout(0, 0));
 		JPanel panelTitleEquipe = new JPanel();
+		panelTitleEquipe.setBackground(SystemColor.text);
 		
 		panelTitleEquipe.setLayout(new BorderLayout(0, 0));
 		panelNorth.add(panelTitleEquipe, BorderLayout.SOUTH);
 		lblStableName = new JLabel(stable.getName()+"  ("+stable.getNickname()+")");
-		lblStableName.setForeground(MasterFrame.COULEUR_TEXTE);
-		lblStableName.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblStableName.setForeground(MasterFrame.COLOR_TEXT);
+		lblStableName.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lblStableName.setBorder(null);
 		lblStableName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStableName.setFont(new Font("Cambria", Font.BOLD, 50));
@@ -222,18 +223,18 @@ public class StableInfo extends DataJPanel{
 		panelBtnBack.setLayout(new BorderLayout(0, 0));
 		
 		panelBtnStables = new JPanel();
-		panelBtnStables.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelBtnStables.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelBtnStables.setBorder(new EmptyBorder(0, 20, 0, 0));
 		panelBtnBack.add(panelBtnStables, BorderLayout.WEST);
 		panelBtnStables.setLayout(new BorderLayout(0, 0));
 		
 		panelDummyTop = new JPanel();
 		panelDummyTop.setBorder(null);
-		panelDummyTop.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelDummyTop.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelBtnBack.add(panelDummyTop, BorderLayout.CENTER);
 		panelDummyTop.setLayout(new BorderLayout(0, 0));
 		JButton btnStable = new JButton("Ecuries /");
-		btnStable.setForeground(MasterFrame.COULEUR_MASTER);
+		btnStable.setForeground(MasterFrame.COLOR_MASTER);
 		btnStable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MasterFrame.getInstance().setPanel(ihm.Stables.class, stable);
@@ -246,7 +247,7 @@ public class StableInfo extends DataJPanel{
 		panelBtnStables.add(btnStable, BorderLayout.WEST);
 		
 		JButton btnInfo = new JButton(" Voir Info");
-		btnInfo.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnInfo.setForeground(MasterFrame.COLOR_TEXT);
 		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -259,7 +260,7 @@ public class StableInfo extends DataJPanel{
 		
 		panelDummyRight = new JPanel();
 		panelDummyRight.setBorder(null);
-		panelDummyRight.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelDummyRight.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		FlowLayout fl_panelDummyRight = (FlowLayout) panelDummyRight.getLayout();
 		fl_panelDummyRight.setVgap(10);
 		panelBtnBack.add(panelDummyRight, BorderLayout.NORTH);

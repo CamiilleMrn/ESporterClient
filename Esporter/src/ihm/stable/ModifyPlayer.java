@@ -50,6 +50,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.awt.FlowLayout;
+import javax.swing.border.MatteBorder;
+import java.awt.SystemColor;
+import javax.swing.border.CompoundBorder;
 
 //create class and extend with JFrame
 public class ModifyPlayer extends JDialog {
@@ -105,7 +108,7 @@ public class ModifyPlayer extends JDialog {
 		setBounds(100, 100, 617, 341);
 		//create new JPanel in contentPane
 		contentPane = new JPanel();
-		contentPane.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		contentPane.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		//set border of frame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		//set contentPane 
@@ -114,8 +117,8 @@ public class ModifyPlayer extends JDialog {
 
 		//create button and there object
 		JButton btnMoreEndContract = new JButton("...");
-		btnMoreEndContract.setBackground(MasterFrame.COULEUR_MASTER);
-		btnMoreEndContract.setBorder(null);
+		btnMoreEndContract.setBackground(MasterFrame.COLOR_MASTER);
+		btnMoreEndContract.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 		btnMoreEndContract.setFont(new Font("Cambria", Font.PLAIN, 15));
 		btnMoreEndContract.setContentAreaFilled(false); 
 		btnMoreEndContract.setFocusPainted(false); 
@@ -132,15 +135,15 @@ public class ModifyPlayer extends JDialog {
 		});
 		//create text field
 				txtEndContractDate = new JTextField();
-				txtEndContractDate.setBorder(null);
+				txtEndContractDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 				txtEndContractDate.setHorizontalAlignment(SwingConstants.CENTER);
 				txtEndContractDate.setFont(new Font("Cambria", Font.PLAIN, 13));
 				txtEndContractDate.setColumns(11);
 		
 		JButton btnMoreStartContract= new JButton("...");
-		btnMoreStartContract.setBackground(MasterFrame.COULEUR_MASTER);
+		btnMoreStartContract.setBackground(MasterFrame.COLOR_MASTER);
 		btnMoreStartContract.setFont(new Font("Cambria", Font.PLAIN, 15));
-		btnMoreStartContract.setBorder(null);
+		btnMoreStartContract.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 		btnMoreStartContract.setContentAreaFilled(false); 
 		btnMoreStartContract.setFocusPainted(false); 
 		btnMoreStartContract.addActionListener(new ActionListener() 
@@ -156,25 +159,25 @@ public class ModifyPlayer extends JDialog {
 		});
 		//create text field
 				txtStartContractDate = new JTextField();
-				txtStartContractDate.setBorder(null);
+				txtStartContractDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 				txtStartContractDate.setHorizontalAlignment(SwingConstants.CENTER);
 				txtStartContractDate.setFont(new Font("Cambria", Font.PLAIN, 13));
 				txtStartContractDate.setColumns(11);
 		
 		
 		panelContractDate = new JPanel();
-		panelContractDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelContractDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		contentPane.add(panelContractDate, BorderLayout.SOUTH);
 		panelContractDate.setLayout(new BorderLayout(0, 0));
 		
 		panelStartContract = new JPanel();
-		panelStartContract.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelStartContract.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelContractDate.add(panelStartContract, BorderLayout.WEST);
 		panelStartContract.setLayout(new BorderLayout(0, 0));
 	
 		lblStartContractDate = new JLabel();
-		lblStartContractDate.setForeground(MasterFrame.COULEUR_TEXTE);
-		lblStartContractDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblStartContractDate.setForeground(MasterFrame.COLOR_TEXT);
+		lblStartContractDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lblStartContractDate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStartContractDate.setText("Date debut du contrat");
 		lblStartContractDate.setFont(new Font("Cambria", Font.BOLD, 12));
@@ -191,8 +194,8 @@ public class ModifyPlayer extends JDialog {
 		panelEndContract.add(txtEndContractDate, BorderLayout.WEST);
 		
 		lblEndContratDate = new JLabel();
-		lblEndContratDate.setForeground(MasterFrame.COULEUR_TEXTE);
-		lblEndContratDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblEndContratDate.setForeground(MasterFrame.COLOR_TEXT);
+		lblEndContratDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lblEndContratDate.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEndContratDate.setFont(new Font("Cambria", Font.BOLD, 12));
 		lblEndContratDate.setText("Date fin du contrat");
@@ -201,7 +204,7 @@ public class ModifyPlayer extends JDialog {
 
 		
 		panelBottom = new JPanel();
-		panelBottom.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelBottom.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelContractDate.add(panelBottom, BorderLayout.SOUTH);
 		panelBottom.setLayout(new BorderLayout(0, 0));
 		
@@ -210,6 +213,7 @@ public class ModifyPlayer extends JDialog {
 		panelValidate.setLayout(new BorderLayout(0, 0));
 		
 		btnValidate = new JButton("Valider");
+		btnValidate.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 120, 215)), new EmptyBorder(3, 5, 3, 5)));
 		btnValidate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				
@@ -264,13 +268,13 @@ public class ModifyPlayer extends JDialog {
 			}
 		});
 		
-		btnValidate.setForeground(MasterFrame.COULEUR_TEXTE);
-		btnValidate.setBackground(MasterFrame.COULEUR_MASTER);
+		btnValidate.setForeground(Color.WHITE);
+		btnValidate.setBackground(MasterFrame.COLOR_MASTER);
 		btnValidate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		panelValidate.add(btnValidate, BorderLayout.NORTH);
 		
 		panelInfo = new JPanel();
-		panelInfo.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelInfo.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		contentPane.add(panelInfo, BorderLayout.EAST);
 		GridBagLayout gbl_panelInfo = new GridBagLayout();
 		gbl_panelInfo.columnWidths = new int[] {136, 136};
@@ -280,8 +284,8 @@ public class ModifyPlayer extends JDialog {
 		panelInfo.setLayout(gbl_panelInfo);
 						
 						lblName = new JLabel();
-						lblName.setForeground(MasterFrame.COULEUR_TEXTE);
-						lblName.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+						lblName.setForeground(MasterFrame.COLOR_TEXT);
+						lblName.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 						lblName.setBorder(null);
 						lblName.setHorizontalAlignment(SwingConstants.CENTER);
 						lblName.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -304,7 +308,7 @@ public class ModifyPlayer extends JDialog {
 						panelInfo.add(panelName, gbc_panelName);
 						
 						txtName = new JTextField();
-						txtName.setBorder(null);
+						txtName.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 						txtName.setFont(new Font("Cambria", Font.PLAIN, 15));
 						txtName.setHorizontalAlignment(SwingConstants.CENTER);
 						txtName.setColumns(12);
@@ -313,9 +317,9 @@ public class ModifyPlayer extends JDialog {
 
 						
 						lblFirstname = new JLabel();
-						lblFirstname.setForeground(MasterFrame.COULEUR_TEXTE);
+						lblFirstname.setForeground(MasterFrame.COLOR_TEXT);
 						lblFirstname.setBorder(null);
-						lblFirstname.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+						lblFirstname.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 						lblFirstname.setText("Prenom  :");
 						lblFirstname.setHorizontalAlignment(SwingConstants.CENTER);
 						lblFirstname.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -335,7 +339,7 @@ public class ModifyPlayer extends JDialog {
 						panelFirstname.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 0));
 						
 						txtFirstname = new JTextField();
-						txtFirstname.setBorder(null);
+						txtFirstname.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 						txtFirstname.setHorizontalAlignment(SwingConstants.CENTER);
 						txtFirstname.setFont(new Font("Cambria", Font.PLAIN, 15));
 						txtFirstname.setColumns(12);
@@ -345,7 +349,7 @@ public class ModifyPlayer extends JDialog {
 		FlowLayout fl_panelBirthDate = (FlowLayout) panelBirthDate.getLayout();
 		fl_panelBirthDate.setVgap(10);
 		fl_panelBirthDate.setHgap(0);
-		panelBirthDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelBirthDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelBirthDate.setBorder(null);
 		GridBagConstraints gbc_panelBirthDate = new GridBagConstraints();
 		gbc_panelBirthDate.insets = new Insets(0, 0, 5, 0);
@@ -354,16 +358,16 @@ public class ModifyPlayer extends JDialog {
 		panelInfo.add(panelBirthDate, gbc_panelBirthDate);
 		
 		txtBirthDate = new JTextField();
-		txtBirthDate.setBorder(null);
+		txtBirthDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 		txtBirthDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		panelBirthDate.add(txtBirthDate);
 		txtBirthDate.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBirthDate.setColumns(11);
 		
 		btnMoreBirthDate = new JButton("...");
-		btnMoreBirthDate.setBorder(null);
-		btnMoreBirthDate.setBackground(MasterFrame.COULEUR_TEXTE);
-		btnMoreBirthDate.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnMoreBirthDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
+		btnMoreBirthDate.setBackground(MasterFrame.COLOR_TEXT);
+		btnMoreBirthDate.setForeground(MasterFrame.COLOR_TEXT);
 		btnMoreBirthDate.addActionListener(new ActionListener() {
 
 	public void actionPerformed(ActionEvent e) {
@@ -379,8 +383,8 @@ public class ModifyPlayer extends JDialog {
 						
 						lblBirthDate = new JLabel();
 						lblBirthDate.setBorder(null);
-						lblBirthDate.setForeground(MasterFrame.COULEUR_TEXTE);
-						lblBirthDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+						lblBirthDate.setForeground(MasterFrame.COLOR_TEXT);
+						lblBirthDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 						lblBirthDate.setHorizontalAlignment(SwingConstants.CENTER);
 						lblBirthDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 						lblBirthDate.setText("Date de naissance");
@@ -394,10 +398,11 @@ public class ModifyPlayer extends JDialog {
 						
 		panelImage = new JPanel();
 		contentPane.add(panelImage, BorderLayout.CENTER);
-		panelImage.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelImage.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelImage.setLayout(new BorderLayout(0, 0));
 		
 		lblPlayerImageIcon = new JLabel("");
+		lblPlayerImageIcon.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 		lblPlayerImageIcon.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -428,8 +433,8 @@ public class ModifyPlayer extends JDialog {
 		panelImage.add(lblPlayerImageIcon);
 		
 		txtPlayerImage = new JLabel();
-		txtPlayerImage.setForeground(Color.WHITE);
-		txtPlayerImage.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		txtPlayerImage.setForeground(MasterFrame.COLOR_TEXT);
+		txtPlayerImage.setBackground(Color.GRAY);
 		txtPlayerImage.setFont(new Font("Cambria", Font.PLAIN, 15));
 		txtPlayerImage.setText("Ajouter la photo du joueur ci-dessous :");
 		panelImage.add(txtPlayerImage, BorderLayout.NORTH);

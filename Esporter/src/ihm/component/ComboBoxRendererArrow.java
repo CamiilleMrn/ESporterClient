@@ -23,7 +23,7 @@ public class ComboBoxRendererArrow {
         @Override
         protected JButton createArrowButton() {
             //Feel free to play with the colors:
-            final Color background = MasterFrame.COULEUR_MASTER;     //Default is UIManager.getColor("ComboBox.buttonBackground").
+            final Color background = MasterFrame.COLOR_MASTER;     //Default is UIManager.getColor("ComboBox.buttonBackground").
             final Color pressedButtonBorderColor = null; //Default is UIManager.getColor("ComboBox.buttonShadow"). The color of the border of the button, while it is pressed.
             final Color triangle = Color.WHITE;               //Default is UIManager.getColor("ComboBox.buttonDarkShadow"). The color of the triangle.
             final Color highlight = background;               //Default is UIManager.getColor("ComboBox.buttonHighlight"). Another color to show the button as highlighted.

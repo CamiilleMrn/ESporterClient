@@ -113,14 +113,14 @@ public class ErrorPanel extends JPanel{
 		setPreferredSize(new Dimension(1920,1080));
 		setLayout(new BorderLayout(0, 0));
 		//setBounds(0, 0, frame.getWidth(), frame.getHeight());
-		Color dark = MasterFrame.COULEUR_MASTER_FOND.darker();
+		Color dark = MasterFrame.COLOR_MASTER_BACKGROUND.darker();
 		Color c = new Color(dark.getRed(),dark.getGreen(), dark.getBlue(),150);
 		setOpaque(true);
 		JPanel panel = new JPanel();
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel.setForeground(MasterFrame.COULEUR_TEXTE);
+		panel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panel.setForeground(MasterFrame.COLOR_TEXT);
 		panel.setOpaque(false);
 		
 		panelDummy1 = new JPanel();
@@ -148,8 +148,8 @@ public class ErrorPanel extends JPanel{
 		
 		Titre = new JLabel("Erreur");
 		
-		Titre.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		Titre.setForeground(MasterFrame.COULEUR_TEXTE);
+		Titre.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		Titre.setForeground(MasterFrame.COLOR_TEXT);
 		Titre.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		Titre.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(Titre, BorderLayout.NORTH);
@@ -161,7 +161,7 @@ public class ErrorPanel extends JPanel{
 		texte = new JLabel();
 		panelTexte.add(texte);
 		panelTexte.add(progressBar);
-		texte.setForeground(MasterFrame.COULEUR_TEXTE);
+		texte.setForeground(MasterFrame.COLOR_TEXT);
 		panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.SOUTH);
 		
@@ -176,11 +176,11 @@ public class ErrorPanel extends JPanel{
 		btnContinuer.setText("Continuer");
 		panel_1.add(btnContinuer);
 		
-		panelTexte.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panelTexte.setForeground(MasterFrame.COULEUR_TEXTE);
+		panelTexte.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panelTexte.setForeground(MasterFrame.COLOR_TEXT);
 		
-		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_1.setForeground(MasterFrame.COULEUR_TEXTE);
+		panel_1.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panel_1.setForeground(MasterFrame.COLOR_TEXT);
 		
 		
 		

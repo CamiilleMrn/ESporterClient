@@ -114,10 +114,10 @@ public class MenuButton extends JRadioButton{
 			int width = getBounds().width;
 			int height = getBounds().height;
 			
-			setForeground(MasterFrame.COULEUR_TEXTE);
+			setForeground(MasterFrame.COLOR_TEXT_MENU);
 			if (isSelected()) {	
 				g2.setClip(0, 0, width, height+16);
-				g2.setColor(MasterFrame.COULEUR_MASTER);
+				g2.setColor(MasterFrame.COLOR_MASTER);
 				Polygon p = new Polygon();
 				p.addPoint(0, 0);
 				p.addPoint(0, height-1);
@@ -134,7 +134,7 @@ public class MenuButton extends JRadioButton{
 			} else {
 				
 				g2.setClip(0, 0, width, height);
-				g2.setColor(MasterFrame.COULEUR_MENU_FOND);
+				g2.setColor(MasterFrame.COLOR_MENU_BACKGROUND);
 				Polygon p = new Polygon();
 				p.addPoint(0, 0);
 				p.addPoint(0, height-1);
@@ -150,7 +150,7 @@ public class MenuButton extends JRadioButton{
 				g2 = (Graphics2D)g.create();
 				//int brightness = (255 - (Math.abs(width/2-mouseX)*3));
 				g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-				GradientPaint gp = new GradientPaint(0, height, new Color(0,164,210,100), 0, height/4, MasterFrame.COULEUR_MENU_FOND);
+				GradientPaint gp = new GradientPaint(0, height, new Color(0,164,210,100), 0, height/4, MasterFrame.COLOR_MENU_BACKGROUND);
 				g2.setPaint(gp);
 				g2.fillRect(0, height/4, width, height*3/4);
 				
@@ -178,7 +178,7 @@ public class MenuButton extends JRadioButton{
 					g2 = (Graphics2D)g.create();
 	
 					g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-					GradientPaint gp = new GradientPaint(0, height, new Color(0,164,210,(int)(100*alphaFadeOut)), 0, height/4, MasterFrame.COULEUR_MENU_FOND);
+					GradientPaint gp = new GradientPaint(0, height, new Color(0,164,210,(int)(100*alphaFadeOut)), 0, height/4, MasterFrame.COLOR_MENU_BACKGROUND);
 					g2.setPaint(gp);
 					
 					g2.fillRect(0, height/4, width, height*3/4);

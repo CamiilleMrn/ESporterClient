@@ -60,13 +60,13 @@ public class Stables extends DataJPanel {
 		
 		
 		JPanel panelTitle = new JPanel();
-		panelTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelTitle, BorderLayout.NORTH);
 		panelTitle.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
 		
 		lblTitle = new JLabel();
-		lblTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		lblTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblTitle.setText("Liste des écuries");
 		lblTitle.setFont(new Font("Cambria", Font.BOLD, 40));
 		lblTitle.setBorder(null);
@@ -75,7 +75,7 @@ public class Stables extends DataJPanel {
 		panelAllStables = new JPanel();
 		createStableInfo();
 		JScrollPane scrollPaneStableList = new JScrollPane(panelAllStables);
-		scrollPaneStableList.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneStableList.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		scrollPaneStableList.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelContent.add(scrollPaneStableList, BorderLayout.CENTER);
 		scrollPaneStableList.getVerticalScrollBar().setUnitIncrement(16);

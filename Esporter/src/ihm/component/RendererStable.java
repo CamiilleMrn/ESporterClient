@@ -41,11 +41,11 @@ public class RendererStable extends JPanel {
 
 	public RendererStable (TypesStable stable) {
 		setPreferredSize(new Dimension(getPreferredSize().width, 150));
-		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
-		setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COLOR_TEXT));
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setLayout(new BorderLayout(5,5));
 		JPanel panelText = new JPanel(new GridLayout(1,0));
-		panelText.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelText.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelText.setPreferredSize(new Dimension(500,100));
 		panelText.add(lbStableLogo);
 
@@ -54,7 +54,7 @@ public class RendererStable extends JPanel {
 			lbStableLogo.setIcon(new ImageIcon(logoEcurie));
 			
 		add(panelText, BorderLayout.WEST);
-		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelText.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
@@ -62,10 +62,10 @@ public class RendererStable extends JPanel {
 		Insets i = lbStableName.getInsets();
 		i.set(10,10,10,10);
 		lbStableName.setFont(new Font("Cambria", Font.PLAIN, 15));
-		lbStableName.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lbStableName.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lbStableName.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lbStableName.setHorizontalAlignment(SwingConstants.CENTER);
-		lbStableName.setForeground(MasterFrame.COULEUR_TEXTE);
+		lbStableName.setForeground(MasterFrame.COLOR_TEXT);
 		lbStableName.setText(stable.getName());
 		
 		panel.add(lbStableName);
@@ -77,7 +77,7 @@ public class RendererStable extends JPanel {
 		});
 		add(lbArrowIcon, BorderLayout.EAST);
 		lbArrowIcon.setBorder(null);
-		lbArrowIcon.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lbArrowIcon.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		try {
 			lbArrowIcon.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("../images/Chevron.png"))));
 		} catch (IOException e) {

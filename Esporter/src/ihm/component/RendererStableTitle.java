@@ -31,12 +31,12 @@ public class RendererStableTitle extends JPanel {
 
 	public RendererStableTitle(TypesTitle title) {
 		
-		setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setPreferredSize(new Dimension(500,100));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JPanel containerNameTitle = new JPanel();
-		containerNameTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND );
+		containerNameTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND );
 		add(containerNameTitle);
 		GridBagLayout gbl_containerNameTitle = new GridBagLayout();
 		gbl_containerNameTitle.columnWidths = new int[] {0};
@@ -53,7 +53,7 @@ public class RendererStableTitle extends JPanel {
 		containerNameTitle.add(verticalGlue, gbc_verticalGlue);
 		
 		JLabel lblTitle = new JLabel();
-		lblTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblTitle.setText(title.getName());
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.insets = new Insets(0, 0, 5, 0);
@@ -68,7 +68,7 @@ public class RendererStableTitle extends JPanel {
 		containerNameTitle.add(verticalGlue_1, gbc_verticalGlue_1);
 		
 		JPanel containerYearTitle = new JPanel();
-		containerYearTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		containerYearTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(containerYearTitle);
 		GridBagLayout gbl_containerYearTitle = new GridBagLayout();
 		gbl_containerYearTitle.columnWidths = new int[] {0};
@@ -86,7 +86,7 @@ public class RendererStableTitle extends JPanel {
 		containerYearTitle.add(verticalGlue_2, gbc_verticalGlue_2);
 		
 		JLabel lblTitleDate = new JLabel();
-		lblTitleDate.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTitleDate.setForeground(MasterFrame.COLOR_TEXT);
 		lblTitleDate.setText(title.getObtentionDate().toString());
 		GridBagConstraints gbc_lblTitleDate = new GridBagConstraints();
 		gbc_lblTitleDate.anchor = GridBagConstraints.NORTHWEST;

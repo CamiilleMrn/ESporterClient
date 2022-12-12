@@ -71,7 +71,7 @@ public class Calendar extends DataJPanel{
 		System.out.println(tournoisfiltreJeu.isEmpty());
 		if(tournoisfiltreJeu.isEmpty() || tournoisfiltreJeu == null ) {
 			ifEmpty.setText("Il n'existe aucun tournoi correspondant aux critères recherchés");
-			ifEmpty.setForeground(MasterFrame.COULEUR_TEXTE);
+			ifEmpty.setForeground(MasterFrame.COLOR_TEXT);
 			ifEmpty.setFont(new Font("Cambria", Font.PLAIN , 20));
 			panelContent.add(ifEmpty);
 		} else {
@@ -112,9 +112,9 @@ public class Calendar extends DataJPanel{
 		add(panelRoot, BorderLayout.CENTER);
 		JPanel dummy = new JPanel();
 		dummy.setPreferredSize(new Dimension(5, 70));
-		dummy.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		dummy.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		dummy.setBorder(null);
-		panelRoot.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelRoot.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(dummy, BorderLayout.NORTH);
 		dummy.setLayout(new BorderLayout(0, 0));
 		
@@ -122,23 +122,23 @@ public class Calendar extends DataJPanel{
 		lblTitle.setText("Calendrier des tournois");
 		lblTitle.setPreferredSize(new Dimension(5, 50));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setForeground(Color.WHITE);
+		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblTitle.setFont(new Font("Cambria", Font.BOLD, 40));
 		lblTitle.setBorder(null);
 		lblTitle.setBackground(new Color(96, 96, 96));
 		dummy.add(lblTitle);
 		
 		panelContent = new JPanel();
-		panelContent.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelContent.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		createListTournament(null, null);
 		JScrollPane scrollPaneCalendar = new JScrollPane(panelContent);
-		scrollPaneCalendar.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneCalendar.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		scrollPaneCalendar.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelRoot.add(scrollPaneCalendar, BorderLayout.CENTER);
 			
 		JPanel panelFilter = new JPanel();
 		panelFilter.setBorder(new EmptyBorder(100, 100, 0, 100));
-		panelFilter.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelFilter.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelRoot.add(panelFilter, BorderLayout.NORTH);
 		panelFilter.setLayout(new GridLayout(0, 3, 200, 0));
 		
@@ -148,8 +148,8 @@ public class Calendar extends DataJPanel{
 		
 		txtDate = new JTextField("Selectionnez une date");
 		txtDate.setEditable(false);
-		txtDate.setForeground(Color.WHITE);
-		txtDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		txtDate.setForeground(MasterFrame.COLOR_TEXT);
+		txtDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		txtDate.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), new EmptyBorder(0, 10, 0, 0)));
 		txtDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		panelFilterDate.add(txtDate, BorderLayout.CENTER);
@@ -178,8 +178,8 @@ public class Calendar extends DataJPanel{
 		});
 		
 		JButton btnDate = new JButton(" ... ");
-		btnDate.setBackground(MasterFrame.COULEUR_MASTER);
-		btnDate.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnDate.setBackground(MasterFrame.COLOR_MASTER);
+		btnDate.setForeground(MasterFrame.COLOR_TEXT);
 		btnDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		btnDate.setBorder(null);
 		btnDate.addActionListener(new ActionListener() {
@@ -198,14 +198,14 @@ public class Calendar extends DataJPanel{
 		panel_3.setBorder(null);
 		panelFilter.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
-		panel_3.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_3.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		
 		JComboBox<TypesGame> comboBoxFilterGame = new JComboBox<TypesGame>(TypesGame.values());
 		comboBoxFilterGame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBoxFilterGame));
 		comboBoxFilterGame.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		comboBoxFilterGame.setFont(new Font("Cambria", Font.PLAIN, 15));
-		comboBoxFilterGame.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		comboBoxFilterGame.setForeground(MasterFrame.COULEUR_TEXTE);
+		comboBoxFilterGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		comboBoxFilterGame.setForeground(MasterFrame.COLOR_TEXT);
 		
 		comboBoxFilterGame.addItemListener(new ItemListener() {
 	        @Override

@@ -19,11 +19,11 @@ public class ComboBoxRendererEditor extends BasicComboBoxEditor {
         
         label.setOpaque(false);
         label.setFont(new Font("Cambria", Font.BOLD, 12));
-        label.setForeground(MasterFrame.COULEUR_TEXTE);
+        label.setForeground(MasterFrame.COLOR_TEXT);
          
         panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 2));
         panel.add(label);
-        panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+        panel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
     }
     
     public Component getEditorComponent() {

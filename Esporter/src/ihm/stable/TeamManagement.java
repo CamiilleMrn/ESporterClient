@@ -57,7 +57,7 @@ public class TeamManagement extends DataJPanel{
 		HashMap<Integer,TypesTeam> liste = ecurie.getTeams();
 		if(liste.isEmpty()) {
 			ifEmptyTeam.setText("Cette écurie n'a pas d'équipe");
-			ifEmptyTeam.setForeground(MasterFrame.COULEUR_TEXTE);
+			ifEmptyTeam.setForeground(MasterFrame.COLOR_TEXT);
 			ifEmptyTeam.setFont(new Font("Cambria", Font.PLAIN , 20));
 			pan.add(ifEmptyTeam);
 		}else {
@@ -93,10 +93,10 @@ public class TeamManagement extends DataJPanel{
 		panelHead.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelButton = new JPanel();
-		panelButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelButton.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		JPanel panelDummy = new JPanel();
 		panelDummy.setBorder(null);
-		panelDummy.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelDummy.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelButton.add(panelDummy);
 		panelHead.add(panelButton, BorderLayout.SOUTH);
 		panelButton.setLayout(new GridLayout(0, 3, 200, 0));
@@ -111,13 +111,13 @@ public class TeamManagement extends DataJPanel{
 		panelFilter.add(comboBoxFilterGame);
 	
 		JPanel panelAddTeam = new JPanel();
-		panelAddTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelAddTeam.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelButton.add(panelAddTeam);
 
 		
 		JButton btnAddTeam = new JButton("Ajouter une \u00E9quipe");
-		btnAddTeam.setBackground(MasterFrame.COULEUR_MASTER);
-		btnAddTeam.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnAddTeam.setBackground(MasterFrame.COLOR_MASTER);
+		btnAddTeam.setForeground(MasterFrame.COLOR_TEXT_MENU);
 
 		btnAddTeam.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnAddTeam.addActionListener(new ActionListener() {
@@ -132,11 +132,11 @@ public class TeamManagement extends DataJPanel{
 		
 		JPanel panelTitle = new JPanel();
 		panelHead.add(panelTitle, BorderLayout.CENTER);
-		panelTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lblTitle = new JLabel();
 		lblTitle.setBorder(null);
-		lblTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		lblTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblTitle.setText("GESTION DES ÉQUIPES");
@@ -145,7 +145,7 @@ public class TeamManagement extends DataJPanel{
 		JPanel panelDummyTop = new JPanel();
 		FlowLayout fl_panelDummyTop = (FlowLayout) panelDummyTop.getLayout();
 		fl_panelDummyTop.setVgap(15);
-		panelDummyTop.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelDummyTop.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyTop.setBorder(null);
 		panelHead.add(panelDummyTop, BorderLayout.NORTH);
 		
@@ -155,11 +155,11 @@ public class TeamManagement extends DataJPanel{
 		add(panelContainerScrollPane, BorderLayout.CENTER);
 		
 		pan = new JPanel();
-		pan.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		pan.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		createListTeam();
 		JScrollPane scrollPaneListTeam = new JScrollPane(pan);
 		pan.setLayout(new GridLayout(0, 1, 0, 0));
-		scrollPaneListTeam.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneListTeam.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		scrollPaneListTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelContainerScrollPane.add(scrollPaneListTeam);
 	}

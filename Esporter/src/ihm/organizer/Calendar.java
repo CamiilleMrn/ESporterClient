@@ -79,7 +79,7 @@ public class Calendar extends DataJPanel{
 		if(tournamentFiltered.isEmpty() || tournamentFiltered == null ) {
 			System.out.println("isEmpty");
 			lblNoTournament.setText("Il n'existe aucun tournoi correspondant aux critères recherchés");
-			lblNoTournament.setForeground(MasterFrame.COULEUR_TEXTE);
+			lblNoTournament.setForeground(MasterFrame.COLOR_TEXT);
 			lblNoTournament.setFont(new Font("Cambria", Font.PLAIN , 20));
 			panelTournaments.add(lblNoTournament);
 		} else {
@@ -109,25 +109,25 @@ public class Calendar extends DataJPanel{
 	 */
 	private void initialize() {
 		panelTournaments = new JPanel();
-		panelTournaments.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTournaments.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setLayout(new BorderLayout(0, 0));
 		JPanel panelRoot = new JPanel();
 		panelRoot.setLayout(new BorderLayout());
 		add(panelRoot, BorderLayout.CENTER);
 		JPanel panelTitle = new JPanel();
 		panelTitle.setPreferredSize(new Dimension(5, 70));
-		panelTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelTitle.setBorder(null);
-		panelRoot.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelRoot.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelTitle, BorderLayout.NORTH);
 		
 		txtCalendar = new JTextField();
 		txtCalendar.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCalendar.setPreferredSize(new Dimension(5, 50));
 		txtCalendar.setEditable(false);
-		txtCalendar.setForeground(MasterFrame.COULEUR_TEXTE);
+		txtCalendar.setForeground(MasterFrame.COLOR_TEXT);
 		txtCalendar.setBorder(new EmptyBorder(20, 0, 0, 0));
-		txtCalendar.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		txtCalendar.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		txtCalendar.setText("Calendrier des tournois");
 		txtCalendar.setFont(new Font("Cambria", Font.BOLD, 40));
 		panelTitle.add(txtCalendar);
@@ -135,14 +135,14 @@ public class Calendar extends DataJPanel{
 		
 		createListTournament(null, null);
 		JScrollPane scrollPaneCalendar = new JScrollPane(panelTournaments);
-		scrollPaneCalendar.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		scrollPaneCalendar.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		scrollPaneCalendar.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelRoot.add(scrollPaneCalendar, BorderLayout.CENTER);
 		
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(100, 100, 0, 100));
-		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelRoot.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 3, 200, 0));
 		
@@ -152,8 +152,8 @@ public class Calendar extends DataJPanel{
 		
 		txtDate = new JTextField("Selectionnez une date");
 		txtDate.setEditable(false);
-		txtDate.setForeground(Color.WHITE);
-		txtDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		txtDate.setForeground(MasterFrame.COLOR_TEXT);
+		txtDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		txtDate.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), new EmptyBorder(0, 10, 0, 0)));
 		txtDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		
@@ -185,8 +185,8 @@ public class Calendar extends DataJPanel{
 		panelDateFilter.add(txtDate, BorderLayout.CENTER);
 		
 		JButton btnMoreDate = new JButton(" ... ");
-		btnMoreDate.setBackground(MasterFrame.COULEUR_MASTER);
-		btnMoreDate.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnMoreDate.setBackground(MasterFrame.COLOR_MASTER);
+		btnMoreDate.setForeground(MasterFrame.COLOR_TEXT);
 		btnMoreDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		btnMoreDate.setBorder(null);
 		btnMoreDate.addActionListener(new ActionListener() {
@@ -211,8 +211,8 @@ public class Calendar extends DataJPanel{
 		comboBoxFilterGame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBoxFilterGame));
 		comboBoxFilterGame.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		comboBoxFilterGame.setFont(new Font("Cambria", Font.PLAIN, 15));
-		comboBoxFilterGame.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		comboBoxFilterGame.setForeground(MasterFrame.COULEUR_TEXTE);
+		comboBoxFilterGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		comboBoxFilterGame.setForeground(MasterFrame.COLOR_TEXT);
 		
 		comboBoxFilterGame.addItemListener(new ItemListener() {
 	        @Override
@@ -253,17 +253,17 @@ public class Calendar extends DataJPanel{
 		panelAddTournament.setBorder(null);
 		panel.add(panelAddTournament);
 		panelAddTournament.setLayout(new BorderLayout(0, 0));
-		panelAddTournament.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelAddTournament.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 
 		
 		JButton btnAddTournament = new JButton("Creer un tournois");
-		btnAddTournament.setBackground(MasterFrame.COULEUR_MASTER);
+		btnAddTournament.setBackground(MasterFrame.COLOR_MASTER);
 		btnAddTournament.setFont(new Font("Cambria", Font.PLAIN, 15));
-		btnAddTournament.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnAddTournament.setForeground(MasterFrame.COLOR_TEXT_MENU);
 		btnAddTournament.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				MasterFrame.getInstance().setPanel(ihm.organizer.CreationTournoi.class,null);
+				MasterFrame.getInstance().setPanel(ihm.organizer.CreateTournament.class,null);
 			}
 		});
 		panelAddTournament.add(btnAddTournament);

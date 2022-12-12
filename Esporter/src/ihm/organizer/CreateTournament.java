@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -34,6 +35,8 @@ import types.exception.ExceptionInvalidPermission;
 import types.TypesFame;
 
 import java.awt.GridLayout;
+import java.awt.Insets;
+
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -47,7 +50,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class CreationTournoi extends JPanel{
+public class CreateTournament extends JPanel{
 
 	private static final long serialVersionUID = 4384792209233281239L;
 	private JLabel lblPageTitle;
@@ -62,7 +65,7 @@ public class CreationTournoi extends JPanel{
 	/**
 	 * Create the application.
 	 */
-	public CreationTournoi() {
+	public CreateTournament() {
 
 		initialize();
 	}
@@ -76,15 +79,15 @@ public class CreationTournoi extends JPanel{
 		all.setLayout(new BorderLayout(0, 0));
 		setLayout(new GridLayout(0, 1, 0, 0));
 		JPanel panel_PageTitle = new JPanel();
-		panel_PageTitle.setForeground(MasterFrame.COULEUR_TEXTE);
-		panel_PageTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_PageTitle.setForeground(MasterFrame.COLOR_TEXT);
+		panel_PageTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panel_PageTitle);
 		panel_PageTitle.setLayout(new BorderLayout(0, 0));
 		
 		lblPageTitle = new JLabel();
 		lblPageTitle.setBorder(null);
-		lblPageTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		lblPageTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblPageTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		lblPageTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblPageTitle.setFont(new Font("Cambria", Font.BOLD, 40));
 		lblPageTitle.setText("Création d'un tournoi");
 		lblPageTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,22 +98,22 @@ public class CreationTournoi extends JPanel{
 		panel_Table.setLayout(new GridLayout(1, 7, 0, 0));
 		
 		JPanel panel_BorderLeft = new JPanel();
-		panel_BorderLeft.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_BorderLeft.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Table.add(panel_BorderLeft);
 		
 		JPanel panel_Column1 = new JPanel();
-		panel_Column1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_Column1.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Table.add(panel_Column1);
 		panel_Column1.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel_TitleColumn1 = new JPanel();
 		panel_TitleColumn1.setBorder(null);
-		panel_TitleColumn1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_TitleColumn1.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Column1.add(panel_TitleColumn1);
 		panel_TitleColumn1.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_lblColumn1 = new JPanel();
-		panel_lblColumn1.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COULEUR_MASTER));
+		panel_lblColumn1.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COLOR_MASTER));
 		FlowLayout fl_panel_lblColumn1 = (FlowLayout) panel_lblColumn1.getLayout();
 		panel_lblColumn1.setBackground(Color.BLACK);
 		panel_TitleColumn1.add(panel_lblColumn1, BorderLayout.SOUTH);
@@ -119,16 +122,16 @@ public class CreationTournoi extends JPanel{
 		lblColumnNameOfTournoi.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblColumnNameOfTournoi.setText("Nom du tournois");
 		lblColumnNameOfTournoi.setHorizontalAlignment(SwingConstants.CENTER);
-		lblColumnNameOfTournoi.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblColumnNameOfTournoi.setForeground(MasterFrame.COLOR_TEXT_MENU);
 		lblColumnNameOfTournoi.setFont(new Font("Cambria", Font.PLAIN, 20));
 		lblColumnNameOfTournoi.setBorder(null);
-		lblColumnNameOfTournoi.setBackground(new Color(96, 96, 96));
+		lblColumnNameOfTournoi.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lblColumnNameOfTournoi.setAlignmentY(1.0f);
 		panel_lblColumn1.add(lblColumnNameOfTournoi);
 		
 		JPanel panel_EntryColumn1 = new JPanel();
-		panel_EntryColumn1.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COULEUR_MASTER));
-		panel_EntryColumn1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_EntryColumn1.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COLOR_MASTER));
+		panel_EntryColumn1.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Column1.add(panel_EntryColumn1);
 		GridBagLayout gbl_panel_EntryColumn1 = new GridBagLayout();
 		gbl_panel_EntryColumn1.columnWidths = new int[] {0};
@@ -138,7 +141,7 @@ public class CreationTournoi extends JPanel{
 		panel_EntryColumn1.setLayout(gbl_panel_EntryColumn1);
 		
 		JPanel panel_txtFieldTournamentName = new JPanel();
-		panel_txtFieldTournamentName.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_txtFieldTournamentName.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panel_txtFieldTournamentName = new GridBagConstraints();
 		gbc_panel_txtFieldTournamentName.gridx = 0;
 		gbc_panel_txtFieldTournamentName.gridy = 0;
@@ -146,40 +149,40 @@ public class CreationTournoi extends JPanel{
 		
 		txtTournamentName = new JTextField();
 		txtTournamentName.setHorizontalAlignment(SwingConstants.CENTER);
-		txtTournamentName.setForeground(MasterFrame.COULEUR_TEXTE);
+		txtTournamentName.setForeground(MasterFrame.COLOR_TEXT);
 		txtTournamentName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtTournamentName.setColumns(10);
-		txtTournamentName.setBackground(new Color(96, 96, 96));
+		txtTournamentName.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_txtFieldTournamentName.add(txtTournamentName);
 		
 		JPanel panel_Column2 = new JPanel();
-		panel_Column2.setForeground(MasterFrame.COULEUR_TEXTE);
-		panel_Column2.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_Column2.setForeground(MasterFrame.COLOR_TEXT);
+		panel_Column2.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Table.add(panel_Column2);
 		panel_Column2.setLayout(new BoxLayout(panel_Column2, BoxLayout.Y_AXIS));
 		
 		JPanel panel_TitleColumn2 = new JPanel();
-		panel_TitleColumn2.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_TitleColumn2.setForeground(MasterFrame.COULEUR_TEXTE);
+		panel_TitleColumn2.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panel_TitleColumn2.setForeground(MasterFrame.COLOR_TEXT);
 		panel_Column2.add(panel_TitleColumn2);
 		panel_TitleColumn2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_lblColumn2 = new JPanel();
-		panel_lblColumn2.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COULEUR_MASTER));
+		panel_lblColumn2.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COLOR_MASTER));
 		panel_lblColumn2.setBackground(Color.BLACK);
 		panel_TitleColumn2.add(panel_lblColumn2, BorderLayout.SOUTH);
 		
 		JLabel lblColumnDateOfTournament = new JLabel();
 		lblColumnDateOfTournament.setText("Date début tournoi");
 		lblColumnDateOfTournament.setHorizontalAlignment(SwingConstants.CENTER);
-		lblColumnDateOfTournament.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblColumnDateOfTournament.setForeground(MasterFrame.COLOR_TEXT_MENU);
 		lblColumnDateOfTournament.setFont(new Font("Cambria", Font.PLAIN, 20));
-		lblColumnDateOfTournament.setBackground(new Color(96, 96, 96));
+		lblColumnDateOfTournament.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_lblColumn2.add(lblColumnDateOfTournament);
 		
 		JPanel panel_EntryTournamentDate = new JPanel();
-		panel_EntryTournamentDate.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COULEUR_MASTER));
-		panel_EntryTournamentDate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_EntryTournamentDate.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COLOR_MASTER));
+		panel_EntryTournamentDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Column2.add(panel_EntryTournamentDate);
 		GridBagLayout gbl_panel_EntryTournamentDate = new GridBagLayout();
 		gbl_panel_EntryTournamentDate.columnWidths = new int[] {0, 0};
@@ -189,7 +192,7 @@ public class CreationTournoi extends JPanel{
 		panel_EntryTournamentDate.setLayout(gbl_panel_EntryTournamentDate);
 		
 		JPanel panel_DatePicketDateTournament = new JPanel();
-		panel_DatePicketDateTournament.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_DatePicketDateTournament.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panel_DatePicketDateTournament = new GridBagConstraints();
 		gbc_panel_DatePicketDateTournament.anchor = GridBagConstraints.NORTHWEST;
 		gbc_panel_DatePicketDateTournament.gridx = 0;
@@ -198,14 +201,14 @@ public class CreationTournoi extends JPanel{
 		
 		txtDateStartTournament = new JTextField();
 		txtDateStartTournament.setHorizontalAlignment(SwingConstants.CENTER);
-		txtDateStartTournament.setForeground(MasterFrame.COULEUR_TEXTE);
+		txtDateStartTournament.setForeground(MasterFrame.COLOR_TEXT);
 		txtDateStartTournament.setFont(new Font("Cambria", Font.PLAIN, 15));
 		txtDateStartTournament.setColumns(10);
-		txtDateStartTournament.setBackground(new Color(96, 96, 96));
+		txtDateStartTournament.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_DatePicketDateTournament.add(txtDateStartTournament);
 		
 		JButton btnOpenDatePickerDateTournament = new JButton("...");
-		btnOpenDatePickerDateTournament.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnOpenDatePickerDateTournament.setForeground(MasterFrame.COLOR_TEXT);
 		btnOpenDatePickerDateTournament.setBackground(new Color(0, 164, 210));
 		btnOpenDatePickerDateTournament.addActionListener(new ActionListener() {
 			//performed action
@@ -220,33 +223,33 @@ public class CreationTournoi extends JPanel{
 		panel_DatePicketDateTournament.add(btnOpenDatePickerDateTournament);
 		
 		JPanel panel_Column3 = new JPanel();
-		panel_Column3.setForeground(MasterFrame.COULEUR_TEXTE);
-		panel_Column3.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_Column3.setForeground(MasterFrame.COLOR_TEXT);
+		panel_Column3.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Table.add(panel_Column3);
 		panel_Column3.setLayout(new BoxLayout(panel_Column3, BoxLayout.Y_AXIS));
 		
 		JPanel panel_TitleColumn3 = new JPanel();
-		panel_TitleColumn3.setForeground(MasterFrame.COULEUR_TEXTE);
-		panel_TitleColumn3.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_TitleColumn3.setForeground(MasterFrame.COLOR_TEXT);
+		panel_TitleColumn3.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Column3.add(panel_TitleColumn3);
 		panel_TitleColumn3.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_lblColumn3 = new JPanel();
-		panel_lblColumn3.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COULEUR_MASTER));
+		panel_lblColumn3.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COLOR_MASTER));
 		panel_lblColumn3.setBackground(Color.BLACK);
 		panel_TitleColumn3.add(panel_lblColumn3, BorderLayout.SOUTH);
 		
 		JLabel lblFame = new JLabel();
 		lblFame.setText("Renommée");
 		lblFame.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFame.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblFame.setForeground(MasterFrame.COLOR_TEXT_MENU);
 		lblFame.setFont(new Font("Cambria", Font.PLAIN, 20));
-		lblFame.setBackground(new Color(96, 96, 96));
+		lblFame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_lblColumn3.add(lblFame);
 		
 		JPanel panel_EntryTournamentFame = new JPanel();
-		panel_EntryTournamentFame.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COULEUR_MASTER));
-		panel_EntryTournamentFame.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_EntryTournamentFame.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COLOR_MASTER));
+		panel_EntryTournamentFame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Column3.add(panel_EntryTournamentFame);
 		GridBagLayout gbl_panel_EntryTournamentFame = new GridBagLayout();
 		gbl_panel_EntryTournamentFame.columnWidths = new int[] {0};
@@ -256,7 +259,7 @@ public class CreationTournoi extends JPanel{
 		panel_EntryTournamentFame.setLayout(gbl_panel_EntryTournamentFame);
 		
 		JPanel panel_ComboBoxFame = new JPanel();
-		panel_ComboBoxFame.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_ComboBoxFame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panel_ComboBoxFame = new GridBagConstraints();
 		gbc_panel_ComboBoxFame.anchor = GridBagConstraints.NORTHWEST;
 		gbc_panel_ComboBoxFame.gridx = 1;
@@ -264,41 +267,41 @@ public class CreationTournoi extends JPanel{
 		panel_EntryTournamentFame.add(panel_ComboBoxFame, gbc_panel_ComboBoxFame);
 		
 		JComboBox<TypesFame> comboBoxFame = new JComboBox<TypesFame>(TypesFame.values());
-		comboBoxFame.setBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COULEUR_MASTER_FOND));
+		comboBoxFame.setBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COLOR_MASTER_BACKGROUND));
 		comboBoxFame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBoxFame));
-		comboBoxFame.setForeground(MasterFrame.COULEUR_TEXTE);
+		comboBoxFame.setForeground(MasterFrame.COLOR_TEXT);
 		comboBoxFame.setFont(new Font("Cambria", Font.PLAIN, 15));
-		comboBoxFame.setBackground(new Color(96, 96, 96));
+		comboBoxFame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_ComboBoxFame.add(comboBoxFame);
 		
 		JPanel panel_Column5 = new JPanel();
-		panel_Column5.setForeground(MasterFrame.COULEUR_TEXTE);
-		panel_Column5.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_Column5.setForeground(MasterFrame.COLOR_TEXT);
+		panel_Column5.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Table.add(panel_Column5);
 		panel_Column5.setLayout(new BoxLayout(panel_Column5, BoxLayout.Y_AXIS));
 		
 		JPanel panel_TitleColumn5 = new JPanel();
-		panel_TitleColumn5.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		panel_TitleColumn5.setForeground(MasterFrame.COULEUR_TEXTE);
+		panel_TitleColumn5.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panel_TitleColumn5.setForeground(MasterFrame.COLOR_TEXT);
 		panel_Column5.add(panel_TitleColumn5);
 		panel_TitleColumn5.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_lblColumn5 = new JPanel();
-		panel_lblColumn5.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COULEUR_MASTER));
+		panel_lblColumn5.setBorder(new MatteBorder(0, 2, 2, 2, MasterFrame.COLOR_MASTER));
 		panel_lblColumn5.setBackground(Color.BLACK);
 		panel_TitleColumn5.add(panel_lblColumn5, BorderLayout.SOUTH);
 		
 		JLabel lblGame = new JLabel();
 		lblGame.setText("Jeu(x)");
 		lblGame.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGame.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblGame.setForeground(MasterFrame.COLOR_TEXT_MENU);
 		lblGame.setFont(new Font("Cambria", Font.PLAIN, 20));
-		lblGame.setBackground(new Color(96, 96, 96));
+		lblGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_lblColumn5.add(lblGame);
 		
 		JPanel panel_EntryTournamentGame = new JPanel();
-		panel_EntryTournamentGame.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COULEUR_MASTER));
-		panel_EntryTournamentGame.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_EntryTournamentGame.setBorder(new MatteBorder(0, 2, 0, 2, MasterFrame.COLOR_MASTER));
+		panel_EntryTournamentGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Column5.add(panel_EntryTournamentGame);
 		GridBagLayout gbl_panel_EntryTournamentGame = new GridBagLayout();
 		gbl_panel_EntryTournamentGame.columnWidths = new int[] {0};
@@ -308,7 +311,7 @@ public class CreationTournoi extends JPanel{
 		panel_EntryTournamentGame.setLayout(gbl_panel_EntryTournamentGame);
 		
 		JPanel panel_ComboBoxGame = new JPanel();
-		panel_ComboBoxGame.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_ComboBoxGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panel_ComboBoxGame = new GridBagConstraints();
 		gbc_panel_ComboBoxGame.anchor = GridBagConstraints.NORTHWEST;
 		gbc_panel_ComboBoxGame.gridx = 1;
@@ -316,21 +319,21 @@ public class CreationTournoi extends JPanel{
 		panel_EntryTournamentGame.add(panel_ComboBoxGame, gbc_panel_ComboBoxGame);
 		
 		JComboBox<TypesGame> comboBoxGame = new JComboBox<TypesGame>(TypesGame.values());
-		comboBoxGame.setBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COULEUR_MASTER_FOND));
+		comboBoxGame.setBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COLOR_MASTER_BACKGROUND));
 		comboBoxGame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBoxGame));
-		comboBoxGame.setForeground(MasterFrame.COULEUR_TEXTE);
+		comboBoxGame.setForeground(MasterFrame.COLOR_TEXT);
 		comboBoxGame.setFont(new Font("Cambria", Font.PLAIN, 15));
-		comboBoxGame.setBackground(new Color(96, 96, 96));
+		comboBoxGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_ComboBoxGame.add(comboBoxGame);
 		
 		JPanel panel_BorderRight = new JPanel();
-		panel_BorderRight.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_BorderRight.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_Table.add(panel_BorderRight);
 		
 		
 		JPanel panel_BtnCancelValidate = new JPanel();
 		panel_BtnCancelValidate.setBorder(null);
-		panel_BtnCancelValidate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_BtnCancelValidate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_BtnCancelValidate.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panel_BtnCancelValidate.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		add(panel_BtnCancelValidate);
@@ -338,14 +341,21 @@ public class CreationTournoi extends JPanel{
 		
 		JPanel panelContainerButton = new JPanel();
 		panelContainerButton.setBorder(new EmptyBorder(0, 0, 0, 30));
-		panelContainerButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelContainerButton.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_BtnCancelValidate.add(panelContainerButton, BorderLayout.EAST);
 		
 		JButton btnCancel = new JButton("Annuler");
-		btnCancel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
-		btnCancel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		btnCancel.setForeground(MasterFrame.COULEUR_TEXTE);
-		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 20));
+		btnCancel.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnCancel.setVerticalAlignment(SwingConstants.BOTTOM);
+		btnCancel.setMargin(new Insets(14, 0, 14, 14));
+		btnCancel.setIconTextGap(10);
+		btnCancel.setHorizontalTextPosition(SwingConstants.LEFT);
+		btnCancel.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCancel.setForeground(MasterFrame.COLOR_TEXT_MENU);
+		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 22));
+		btnCancel.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 120, 215)), new EmptyBorder(3, 5, 3, 5)));
+		btnCancel.setBackground(MasterFrame.COLOR_MASTER);
+		btnCancel.setAlignmentY(1.0f);
 		btnCancel.addActionListener(new ActionListener() {
 
 			@Override
@@ -358,10 +368,17 @@ public class CreationTournoi extends JPanel{
 		panelContainerButton.add(btnCancel);
 		
 		JButton btnConfirm = new JButton("Valider");
-		btnConfirm.setForeground(MasterFrame.COULEUR_TEXTE);
-		btnConfirm.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
-		btnConfirm.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		btnConfirm.setFont(new Font("Cambria", Font.PLAIN, 20));
+		btnConfirm.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnConfirm.setVerticalAlignment(SwingConstants.BOTTOM);
+		btnConfirm.setMargin(new Insets(14, 0, 14, 14));
+		btnConfirm.setIconTextGap(10);
+		btnConfirm.setHorizontalTextPosition(SwingConstants.LEFT);
+		btnConfirm.setHorizontalAlignment(SwingConstants.LEFT);
+		btnConfirm.setForeground(MasterFrame.COLOR_TEXT_MENU);
+		btnConfirm.setFont(new Font("Cambria", Font.PLAIN, 22));
+		btnConfirm.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 120, 215)), new EmptyBorder(3, 5, 3, 5)));
+		btnConfirm.setBackground(MasterFrame.COLOR_MASTER);
+		btnConfirm.setAlignmentY(1.0f);
 		btnConfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

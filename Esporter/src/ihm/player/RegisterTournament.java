@@ -63,7 +63,7 @@ public class RegisterTournament extends JDialog {
 	 * Initialize the contents of the 
 	 */
 	private void initialize() {
-		getContentPane().setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		getContentPane().setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -74,7 +74,7 @@ public class RegisterTournament extends JDialog {
 		getContentPane().setLayout(gridBagLayout);
 		
 		JPanel panelTitle = new JPanel();
-		panelTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panelTitle = new GridBagConstraints();
 		gbc_panelTitle.insets = new Insets(0, 0, 5, 0);
 		gbc_panelTitle.gridx = 0;
@@ -90,12 +90,12 @@ public class RegisterTournament extends JDialog {
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setForeground(Color.WHITE);
 		lblTitle.setFont(new Font("Cambria", Font.PLAIN, 16));
-		lblTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lblTitle.setAlignmentX(0.5f);
 		panelTitle.add(lblTitle);
 		
 		JPanel panelBtn = new JPanel();
-		panelBtn.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelBtn.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panelBtn = new GridBagConstraints();
 		gbc_panelBtn.gridx = 0;
 		gbc_panelBtn.gridy = 1;
@@ -109,7 +109,7 @@ public class RegisterTournament extends JDialog {
 		
 		JPanel panelCentered = new JPanel();
 		panelCentered.setBorder(new EmptyBorder(0, 0, 20, 0));
-		panelCentered.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelCentered.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panelCentered = new GridBagConstraints();
 		gbc_panelCentered.anchor = GridBagConstraints.SOUTH;
 		gbc_panelCentered.insets = new Insets(0, 0, 0, 5);
@@ -118,8 +118,8 @@ public class RegisterTournament extends JDialog {
 		panelBtn.add(panelCentered, gbc_panelCentered);
 		
 		JButton btnYes = new JButton("Oui");
-		btnYes.setForeground(MasterFrame.COULEUR_TEXTE);
-		btnYes.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		btnYes.setForeground(MasterFrame.COLOR_TEXT);
+		btnYes.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		btnYes.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 164, 210), null, new Color(0, 164, 210), null), new EmptyBorder(5, 15, 5, 15)));
 		btnYes.setFont(new Font("Cambria", Font.PLAIN, 12));
 		btnYes.addActionListener(new ActionListener() {
@@ -146,8 +146,8 @@ public class RegisterTournament extends JDialog {
 		panelCentered.add(btnYes);
 		
 		JButton btnNo = new JButton("Non");
-		btnNo.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		btnNo.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnNo.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		btnNo.setForeground(MasterFrame.COLOR_TEXT);
 		btnNo.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 164, 210), null, new Color(0, 164, 210), null), new EmptyBorder(5, 15, 5, 15)));
 		btnNo.setFont(new Font("Cambria", Font.PLAIN, 12));
 		btnNo.addActionListener(new ActionListener() {

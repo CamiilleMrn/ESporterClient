@@ -52,16 +52,16 @@ public class RendererPlayerCalendar extends DataJPanel{
 	
 	public RendererPlayerCalendar (TypesTournament tournament) {
 		this.tournament = tournament;
-		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
-		setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COLOR_TEXT));
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setLayout(new BorderLayout(5,5));
 		JPanel panelContent = new JPanel(new GridLayout(1,0));
-		panelContent.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelContent.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelContent.setPreferredSize(new Dimension(500,100));
-		lblTournamentName.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTournamentName.setForeground(MasterFrame.COLOR_TEXT);
 		panelContent.add(lblTournamentName);
 		add(panelContent, BorderLayout.WEST);
-		panelBtnRegister.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelBtnRegister.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelContent.add(panelBtnRegister);
 		
 		if(this.tournament.getRegistered().contains(((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam())) {
@@ -82,11 +82,11 @@ public class RendererPlayerCalendar extends DataJPanel{
 				JDialog confirmation = new RegisterTournament(tournament.getId(), tournament);
 			}
 		});
-		lbInscriptionButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		lbInscriptionButton.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255)), new EmptyBorder(3, 11, 3, 11)));
+		lbInscriptionButton.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		lbInscriptionButton.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COLOR_TEXT), new EmptyBorder(3, 11, 3, 11)));
 		lbInscriptionButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lbInscriptionButton.setHorizontalAlignment(SwingConstants.CENTER);
-		lbInscriptionButton.setForeground(MasterFrame.COULEUR_TEXTE);
+		lbInscriptionButton.setForeground(MasterFrame.COLOR_TEXT);
 		GridBagConstraints gbc_lbInscriptionButton = new GridBagConstraints();
 		gbc_lbInscriptionButton.fill = GridBagConstraints.BOTH;
 		gbc_lbInscriptionButton.insets = new Insets(0, 0, 5, 5);
@@ -105,7 +105,7 @@ public class RendererPlayerCalendar extends DataJPanel{
 		lblTournamentName.setText(this.tournament.getName()+ " - " +this.tournament.getRegisterDate());
 		
 		lblArrowIcon.setBorder(null);
-		lblArrowIcon.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblArrowIcon.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		try {
 			lblArrowIcon.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("../images/Chevron.png"))));
 		} catch (IOException e) {

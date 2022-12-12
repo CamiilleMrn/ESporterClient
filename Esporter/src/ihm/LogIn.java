@@ -65,13 +65,13 @@ public class LogIn extends JPanel{
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelLoginAll = new JPanel();
-		panelLoginAll.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, MasterFrame.COULEUR_MASTER, MasterFrame.COULEUR_TEXTE, MasterFrame.COULEUR_MASTER));
-		panelLoginAll.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelLoginAll.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COLOR_MASTER, MasterFrame.COLOR_MASTER, MasterFrame.COLOR_TEXT, MasterFrame.COLOR_MASTER));
+		panelLoginAll.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelLoginAll);
 		panelLoginAll.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panelPicture = new JPanel();
-		panelPicture.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelPicture.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelLoginAll.add(panelPicture);
 		GridBagLayout gbl_panelPicture = new GridBagLayout();
 		gbl_panelPicture.columnWidths = new int[] {0};
@@ -97,7 +97,7 @@ public class LogIn extends JPanel{
 		panelPicture.add(lblPicture, gbc_lblPicture);
 		
 		JPanel panelLogin = new JPanel();
-		panelLogin.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelLogin.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelLoginAll.add(panelLogin);
 		GridBagLayout gbl_panelLogin = new GridBagLayout();
 		gbl_panelLogin.columnWidths = new int[] {0};
@@ -107,7 +107,7 @@ public class LogIn extends JPanel{
 		panelLogin.setLayout(gbl_panelLogin);
 		
 		JPanel panelCredential = new JPanel();
-		panelCredential.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelCredential.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panelCredential = new GridBagConstraints();
 		gbc_panelCredential.fill = GridBagConstraints.VERTICAL;
 		gbc_panelCredential.anchor = GridBagConstraints.WEST;
@@ -126,7 +126,7 @@ public class LogIn extends JPanel{
 		
 		JLabel lblUsername = new JLabel("Identifiant\r\n");
 		lblUsername.setFont(new Font("Cambria", Font.PLAIN, 14));
-		lblUsername.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblUsername.setForeground(MasterFrame.COLOR_TEXT);
 		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.anchor = GridBagConstraints.NORTHWEST;
@@ -137,9 +137,9 @@ public class LogIn extends JPanel{
 		
 		txtUsername = new JTextField();
 		txtUsername.setFont(new Font("Cambria", Font.PLAIN, 12));
-		txtUsername.setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_MASTER));
-		txtUsername.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		txtUsername.setForeground(MasterFrame.COULEUR_TEXTE);
+		txtUsername.setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COLOR_MASTER));
+		txtUsername.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		txtUsername.setForeground(MasterFrame.COLOR_TEXT);
 		GridBagConstraints gbc_txtUsername = new GridBagConstraints();
 		gbc_txtUsername.anchor = GridBagConstraints.WEST;
 		gbc_txtUsername.insets = new Insets(0, 0, 5, 5);
@@ -151,7 +151,7 @@ public class LogIn extends JPanel{
 		
 		JLabel lblPassword = new JLabel("Mot de passe\r\n");
 		lblPassword.setFont(new Font("Cambria", Font.PLAIN, 14));
-		lblPassword.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblPassword.setForeground(MasterFrame.COLOR_TEXT);
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -161,10 +161,10 @@ public class LogIn extends JPanel{
 		panelCredential.add(lblPassword, gbc_lblPassword);
 		
 		txtPassword = new JPasswordField();
-		txtPassword.setForeground(MasterFrame.COULEUR_TEXTE);
+		txtPassword.setForeground(MasterFrame.COLOR_TEXT);
 		txtPassword.setFont(new Font("Cambria", Font.PLAIN, 12));
-		txtPassword.setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_MASTER));
-		txtPassword.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		txtPassword.setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COLOR_MASTER));
+		txtPassword.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_txtPassword = new GridBagConstraints();
 		gbc_txtPassword.insets = new Insets(0, 0, 0, 5);
 		gbc_txtPassword.anchor = GridBagConstraints.WEST;
@@ -174,7 +174,7 @@ public class LogIn extends JPanel{
 		txtPassword.setColumns(10);
 		
 		JPanel panelBtnForgot = new JPanel();
-		panelBtnForgot.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelBtnForgot.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panelBtnForgot = new GridBagConstraints();
 		gbc_panelBtnForgot.ipadx = 20;
 		gbc_panelBtnForgot.anchor = GridBagConstraints.SOUTH;
@@ -193,14 +193,14 @@ public class LogIn extends JPanel{
 		btnForgotPassword.setMargin(new Insets(2, 14, 20, 16));
 		btnForgotPassword.setBorder(null);
 		btnForgotPassword.setFont(new Font("Cambria", Font.ITALIC, 10));
-		btnForgotPassword.setForeground(MasterFrame.COULEUR_MASTER);
-		btnForgotPassword.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		btnForgotPassword.setForeground(MasterFrame.COLOR_MASTER);
+		btnForgotPassword.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelBtnForgot.add(btnForgotPassword);
 		
 		JLabel lblTitle = new JLabel("Connexion\r\n");
-		lblTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblTitle.setFont(new Font("Cambria", Font.PLAIN, 20));
-		lblTitle.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.gridx = 0;
 		gbc_lblTitle.gridy = 0;
@@ -210,29 +210,29 @@ public class LogIn extends JPanel{
 		panelBtnLogin.setPreferredSize(new Dimension(5, 10));
 		panelBtnLogin.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		panelBtnLogin.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panelBtnLogin.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelBtnLogin.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelLoginAll.add(panelBtnLogin);
 		
 		JPanel panelDummyTop = new JPanel();
-		panelDummyTop.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelDummyTop.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyTop.setPreferredSize(new Dimension(80, 230));
 		add(panelDummyTop, BorderLayout.NORTH);
 		panelDummyTop.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panelDummyBot = new JPanel();
-		panelDummyBot.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelDummyBot.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyBot.setPreferredSize(new Dimension(100, 230));
 		add(panelDummyBot, BorderLayout.SOUTH);
 		
 		JPanel panelDummyLeft = new JPanel();
-		panelDummyLeft.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelDummyLeft.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyLeft.setPreferredSize(new Dimension(500, 100));
 		panelDummyLeft.setSize(new Dimension(100, 100));
 		panelDummyLeft.setMinimumSize(new Dimension(100, 100));
 		add(panelDummyLeft, BorderLayout.WEST);
 		
 		JPanel panelDummyRight = new JPanel();
-		panelDummyRight.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelDummyRight.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyRight.setPreferredSize(new Dimension(500, 100));
 		add(panelDummyRight, BorderLayout.EAST);
 		GridBagLayout gbl_panelBtnLogin = new GridBagLayout();
@@ -243,7 +243,7 @@ public class LogIn extends JPanel{
 		panelBtnLogin.setLayout(gbl_panelBtnLogin);
 		
 		JPanel panelBtnRight = new JPanel();
-		panelBtnRight.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelBtnRight.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panelBtnRight = new GridBagConstraints();
 		gbc_panelBtnRight.anchor = GridBagConstraints.SOUTH;
 		gbc_panelBtnRight.insets = new Insets(0, 0, 0, 5);
@@ -261,9 +261,9 @@ public class LogIn extends JPanel{
 		btnCancel.setMargin(new Insets(10, 0, 14, 14));
 		btnCancel.setIconTextGap(10);
 		btnCancel.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnCancel.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnCancel.setForeground(MasterFrame.COLOR_TEXT);
 		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
-		btnCancel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		btnCancel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COLOR_MASTER, null, MasterFrame.COLOR_MASTER, null));
 		btnCancel.setBackground(new Color(96, 96, 96));
 		btnCancel.setAlignmentY(0.0f);
 		btnCancel.setAlignmentX(1.0f);
@@ -278,9 +278,9 @@ public class LogIn extends JPanel{
 		btnProceed.setIconTextGap(10);
 		btnProceed.setHorizontalTextPosition(SwingConstants.LEFT);
 		btnProceed.setHorizontalAlignment(SwingConstants.LEFT);
-		btnProceed.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnProceed.setForeground(MasterFrame.COLOR_TEXT);
 		btnProceed.setFont(new Font("Cambria", Font.PLAIN, 12));
-		btnProceed.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
+		btnProceed.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COLOR_MASTER, null, MasterFrame.COLOR_MASTER, null));
 		btnProceed.setBackground(new Color(96, 96, 96));
 		btnProceed.setAlignmentY(1.0f);
 		panelBtnRight.add(btnProceed);

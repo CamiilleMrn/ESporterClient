@@ -40,27 +40,27 @@ public class RendererRefereeCalendar extends JPanel{
 	
 	public RendererRefereeCalendar (TypesTournament tournament) {
 		this.tournament = tournament;
-		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
-		setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COLOR_TEXT));
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setLayout(new BorderLayout(5,5));
 		JPanel panelText = new JPanel(new GridLayout(1,0));
-		panelText.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelText.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelText.setPreferredSize(new Dimension(500,100));
-		lbTournamentName.setForeground(MasterFrame.COULEUR_TEXTE);
+		lbTournamentName.setForeground(MasterFrame.COLOR_TEXT);
 		panelText.add(lbTournamentName);
 		add(panelText, BorderLayout.WEST);
-		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelText.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		panel.add(verticalGlue);
 		Insets i = lbInscriptionButton.getInsets();
 		i.set(10,10,10,10);
-		lbInscriptionButton.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lbInscriptionButton.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lbInscriptionButton.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255)), new EmptyBorder(3, 11, 3, 10)));
 		lbInscriptionButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lbInscriptionButton.setHorizontalAlignment(SwingConstants.CENTER);
-		lbInscriptionButton.setForeground(MasterFrame.COULEUR_TEXTE);
+		lbInscriptionButton.setForeground(MasterFrame.COLOR_TEXT);
 		
 		panel.add(lbInscriptionButton);
 		panel.add(verticalGlue_1);
@@ -75,7 +75,7 @@ public class RendererRefereeCalendar extends JPanel{
 		lbInscriptionButton.setText("Entrer le score");
 		
 		lbArrowIcon.setBorder(null);
-		lbArrowIcon.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lbArrowIcon.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		try {
 			lbArrowIcon.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("../images/Chevron.png"))));
 		} catch (IOException e) {

@@ -38,7 +38,7 @@ public class ContainerPlayer extends JPanel {
 	public ContainerPlayer() {
 		setBorder(new LineBorder(SystemColor.textHighlight, 2, true));
 		setSize(WIDTH, HEIGHT);
-		setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {WIDTH};
 		gridBagLayout.rowHeights = new int[] {HEIGHT-HEIGHT/4, HEIGHT/4};

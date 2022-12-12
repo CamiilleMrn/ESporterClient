@@ -61,10 +61,11 @@ import java.awt.event.ActionEvent;
 public class MasterFrame {
 
 	private JFrame frame;
-	public static final Color COULEUR_MASTER = new Color(0,164,210);
-	public static final Color COULEUR_MASTER_FOND = new Color(96, 96, 96);
-	public static final Color COULEUR_TEXTE = Color.WHITE;
-	public static final Color COULEUR_MENU_FOND = Color.BLACK;
+	public static final Color COLOR_MASTER = new Color(0,164,210);
+	public static final Color COLOR_MASTER_BACKGROUND = Color.WHITE;
+	public static final Color COLOR_TEXT = Color.BLACK;
+	public static final Color COLOR_TEXT_MENU = Color.WHITE;
+	public static final Color COLOR_MENU_BACKGROUND = Color.BLACK;
 	private JPanel panelMenuBtn;
 	private ButtonGroup btnGroupMenu;
 	private static volatile MasterFrame instance;
@@ -177,7 +178,7 @@ public class MasterFrame {
 		
 		
 		panelHeader = new JPanel();
-		panelHeader.setBackground(COULEUR_MENU_FOND);
+		panelHeader.setBackground(COLOR_MENU_BACKGROUND);
 		panelMain.add(panelHeader, BorderLayout.NORTH);
 		panelHeader.setLayout(new BorderLayout(0, 0));
 		
@@ -185,7 +186,7 @@ public class MasterFrame {
 
 		JPanel panelAccount = new JPanel();
 		panelAccount.setPreferredSize(new Dimension(250,50));
-		panelAccount.setBackground(COULEUR_MASTER);
+		panelAccount.setBackground(COLOR_MASTER);
 		panelHeader.add(panelAccount, BorderLayout.EAST);
 		panelAccount.setLayout(new BorderLayout(0, 0));
 		
@@ -193,7 +194,7 @@ public class MasterFrame {
 		BorderLayout bl_nomComptePanel = new BorderLayout();
 		bl_nomComptePanel.setVgap(20);
 		nomComptePanel.setLayout(bl_nomComptePanel);
-		nomComptePanel.setBackground(COULEUR_MASTER);
+		nomComptePanel.setBackground(COLOR_MASTER);
 		panelAccount.add(nomComptePanel, BorderLayout.CENTER);
 		
 		lblAccountName = new JLabel("compte");
@@ -211,12 +212,12 @@ public class MasterFrame {
 		panelAccount.add(btnLogin, BorderLayout.SOUTH);
 		
 		JPanel panelMenu = new JPanel();
-		panelMenu.setBackground(COULEUR_MENU_FOND);
+		panelMenu.setBackground(COLOR_MENU_BACKGROUND);
 		panelHeader.add(panelMenu, BorderLayout.CENTER);
 		panelMenu.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelEsporter = new JPanel();
-		panelEsporter.setBackground(COULEUR_MENU_FOND);
+		panelEsporter.setBackground(COLOR_MENU_BACKGROUND);
 		panelMenu.add(panelEsporter, BorderLayout.WEST);
 		panelEsporter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -229,7 +230,7 @@ public class MasterFrame {
 		
 		panelMenuBtn = new JPanel();
 
-		panelMenuBtn.setBackground(COULEUR_MENU_FOND);
+		panelMenuBtn.setBackground(COLOR_MENU_BACKGROUND);
 		FlowLayout fl_panelMenuBtn = (FlowLayout) panelMenuBtn.getLayout();
 		fl_panelMenuBtn.setAlignment(FlowLayout.RIGHT);
 		fl_panelMenuBtn.setVgap(0);
@@ -238,12 +239,12 @@ public class MasterFrame {
 		
 		JPanel panelDummyRight = new JPanel();
 		panelDummyRight.setPreferredSize(new Dimension(35, 10));
-		panelDummyRight.setBackground(COULEUR_MENU_FOND);
+		panelDummyRight.setBackground(COLOR_MENU_BACKGROUND);
 		panelMenu.add(panelDummyRight, BorderLayout.EAST);
 		
 		JPanel panelDummyTop = new JPanel();
 		panelDummyTop.setPreferredSize(new Dimension(10, 35));
-		panelDummyTop.setBackground(COULEUR_MENU_FOND);
+		panelDummyTop.setBackground(COLOR_MENU_BACKGROUND);
 		panelMenu.add(panelDummyTop, BorderLayout.NORTH);
 		
 		

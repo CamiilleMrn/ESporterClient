@@ -33,13 +33,13 @@ public class RendererVisitorCalendar extends JPanel{
 	
 	public RendererVisitorCalendar(TypesTournament tournament) {
 		this.tournament = tournament;
-		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COULEUR_TEXTE));
-		setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COLOR_TEXT));
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setLayout(new BorderLayout(5,5));
 		JPanel panelText = new JPanel(new GridLayout(1,0));
-		panelText.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelText.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelText.setPreferredSize(new Dimension(500,100));
-		lblTournamentName.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTournamentName.setForeground(MasterFrame.COLOR_TEXT);
 		panelText.add(lblTournamentName);
 		add(panelText, BorderLayout.WEST);
 		
@@ -50,7 +50,7 @@ public class RendererVisitorCalendar extends JPanel{
 		});
 		
 		lblArrowIcon.setBorder(null);
-		lblArrowIcon.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblArrowIcon.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(lblArrowIcon, BorderLayout.EAST);
 		lblTournamentName.setText(this.tournament.getName()+" - "+this.tournament.getRegisterDate());
 		try {

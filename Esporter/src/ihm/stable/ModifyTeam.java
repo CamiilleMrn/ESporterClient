@@ -27,6 +27,11 @@ import types.TypesPlayer;
 import types.TypesStable;
 import types.TypesTeam;
 import types.exception.ExceptionTeamNotFull;
+import java.awt.SystemColor;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.MatteBorder;
+import java.awt.Color;
+import javax.swing.border.EmptyBorder;
 
 public class ModifyTeam extends JPanel {
 	
@@ -45,11 +50,11 @@ public class ModifyTeam extends JPanel {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setPreferredSize(MasterFrame.getInstance().getFrameCenterDimension());
 		JFrame frame = MasterFrame.getInstance().getFrame(); 
 		JPanel panelMain = new JPanel();
-		panelMain.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelMain.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelMain, BorderLayout.CENTER);
 		GridBagLayout gbl_panelMain = new GridBagLayout();
 		int side = (int) (frame.getWidth()*0.15);
@@ -64,7 +69,7 @@ public class ModifyTeam extends JPanel {
 		
 		JLabel lblTitle = new JLabel("Ajouter une \u00E9quipe");
 		lblTitle.setFont(new Font("Cambria", Font.PLAIN, 27));
-		lblTitle.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.anchor = GridBagConstraints.SOUTH;
 		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
@@ -73,7 +78,7 @@ public class ModifyTeam extends JPanel {
 		panelMain.add(lblTitle, gbc_lblTitle);
 		
 		JPanel lblGame = new JPanel();
-		lblGame.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		lblGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_lblGame = new GridBagConstraints();
 		gbc_lblGame.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_lblGame.insets = new Insets(0, 0, 5, 5);
@@ -83,7 +88,7 @@ public class ModifyTeam extends JPanel {
 		
 		JPanel panelPlayer = new JPanel();
 		panelPlayer.setBorder(null);
-		panelPlayer.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelPlayer.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panelPlayer = new GridBagConstraints();
 		gbc_panelPlayer.fill = GridBagConstraints.HORIZONTAL;
 		gbc_panelPlayer.insets = new Insets(0, 0, 5, 5);
@@ -102,7 +107,7 @@ public class ModifyTeam extends JPanel {
 		}
 		
 		JPanel panelValidate = new JPanel();
-		panelValidate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panelValidate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		GridBagConstraints gbc_panelValidate = new GridBagConstraints();
 		gbc_panelValidate.insets = new Insets(0, 0, 0, 5);
 		gbc_panelValidate.anchor = GridBagConstraints.NORTHEAST;
@@ -117,10 +122,10 @@ public class ModifyTeam extends JPanel {
 		btnValidate.setIconTextGap(10);
 		btnValidate.setHorizontalTextPosition(SwingConstants.LEFT);
 		btnValidate.setHorizontalAlignment(SwingConstants.LEFT);
-		btnValidate.setForeground(MasterFrame.COULEUR_TEXTE);
+		btnValidate.setForeground(SystemColor.text);
 		btnValidate.setFont(new Font("Cambria", Font.PLAIN, 22));
-		btnValidate.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, MasterFrame.COULEUR_MASTER, null, MasterFrame.COULEUR_MASTER, null));
-		btnValidate.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		btnValidate.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 120, 215)), new EmptyBorder(3, 5, 3, 5)));
+		btnValidate.setBackground(MasterFrame.COLOR_MASTER);
 		btnValidate.setAlignmentY(1.0f);
 		panelValidate.add(btnValidate);
 		btnValidate.addActionListener(new ActionListener() {

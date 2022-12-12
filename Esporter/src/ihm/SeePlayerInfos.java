@@ -57,25 +57,25 @@ public class SeePlayerInfos extends DataJPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel panel_ContainerTree = new JPanel();
-		panel_ContainerTree.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_ContainerTree.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panel_ContainerTree);
 		
 		JPanel panel = new JPanel();
-		panel.setForeground(MasterFrame.COULEUR_TEXTE);
-		panel.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel.setForeground(MasterFrame.COLOR_TEXT);
+		panel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panel);
 		panel_ContainerTree.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel_Tree = new JPanel();
-		panel_Tree.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_Tree.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		FlowLayout fl_panel_Tree = (FlowLayout) panel_Tree.getLayout();
 		fl_panel_Tree.setAlignment(FlowLayout.LEFT);
 		panel_ContainerTree.add(panel_Tree);
 		
 		JButton btn_ecurieTree = new JButton("Ecuries /");
 		btn_ecurieTree.setBorder(null);
-		btn_ecurieTree.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		btn_ecurieTree.setForeground(MasterFrame.COULEUR_MASTER);
+		btn_ecurieTree.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		btn_ecurieTree.setForeground(MasterFrame.COLOR_MASTER);
 		btn_ecurieTree.setFont(new Font("Cambria", Font.PLAIN, 20));
 		btn_ecurieTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,9 +85,9 @@ public class SeePlayerInfos extends DataJPanel {
 		panel_Tree.add(btn_ecurieTree);
 		JButton btn_voirInfoTree = new JButton(equipe.getStable().getName() +"/");
 		btn_voirInfoTree.setBorder(null);
-		btn_voirInfoTree.setForeground(MasterFrame.COULEUR_MASTER);
-		btn_voirInfoTree.setBackground(MasterFrame.COULEUR_MASTER_FOND);
-		btn_voirInfoTree.setForeground(MasterFrame.COULEUR_MASTER);
+		btn_voirInfoTree.setForeground(MasterFrame.COLOR_MASTER);
+		btn_voirInfoTree.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		btn_voirInfoTree.setForeground(MasterFrame.COLOR_MASTER);
 		btn_voirInfoTree.setFont(new Font("Cambria", Font.PLAIN, 20));
 		btn_voirInfoTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,17 +97,17 @@ public class SeePlayerInfos extends DataJPanel {
 		panel_Tree.add(btn_voirInfoTree);
 		
 		JLabel lbl_equipeTree = new JLabel("Composition Equipe");
-		lbl_equipeTree.setForeground(MasterFrame.COULEUR_TEXTE);
+		lbl_equipeTree.setForeground(MasterFrame.COLOR_TEXT);
 		lbl_equipeTree.setFont(new Font("Cambria", Font.PLAIN, 20));
 		panel_Tree.add(lbl_equipeTree);
 		
 		JLabel lblNewLabel = new JLabel(equipe.getStable().getNickname() +" " + equipe.getGame() + " joueurs");
-		lblNewLabel.setForeground(MasterFrame.COULEUR_TEXTE);
+		lblNewLabel.setForeground(MasterFrame.COLOR_TEXT);
 		lblNewLabel.setFont(new Font("Cambria", Font.BOLD, 40));
 		panel.add(lblNewLabel);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		panel_1.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
@@ -115,7 +115,7 @@ public class SeePlayerInfos extends DataJPanel {
 		createListPlayer();
 		JScrollPane scrollPane = new JScrollPane(pan);
 		scrollPane.setBorder(null);
-		pan.setBackground(MasterFrame.COULEUR_MASTER_FOND);
+		pan.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_1.add(scrollPane, BorderLayout.NORTH);
 		
 		
