@@ -19,6 +19,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import types.TypesTournament;
+
 import java.awt.Rectangle;
 
 public class ProgrammeMatch extends JPanel {
@@ -28,12 +30,13 @@ public class ProgrammeMatch extends JPanel {
 	private static final long serialVersionUID = 749816653732061373L;
 	private JLabel lblTournament;
 	private JTable tableFinalRanking;
+	private TypesTournament tournament;
 
 	/**
 	 * Create the panel.
 	 */	
-	public ProgrammeMatch() {
-		
+	public ProgrammeMatch(TypesTournament tournament) {
+		this.tournament = tournament;
 		setLayout(new BorderLayout(0, 0));
 		
 
@@ -51,22 +54,21 @@ public class ProgrammeMatch extends JPanel {
 		panelEmpty.add(verticalStrutAboveTitle, BorderLayout.NORTH);
 
 		JScrollPane scrollPaneWithGroupeStageAndFinalRanking = new JScrollPane();
-		scrollPaneWithGroupeStageAndFinalRanking.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		add(scrollPaneWithGroupeStageAndFinalRanking, BorderLayout.CENTER);
 		//System.out.println("hello");
-		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
+		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
 		Object[][] dataFinalColumn = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
-		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
+		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
 		Object[][] dataGroupStageA = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
-		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
+		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
 		Object[][] dataGroupStageB = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
-		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
+		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
 		Object[][] dataGroupStageC = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
-		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
+		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
 		Object[][] dataGroupStageD = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
 		JPanel panelAllOfTable = new JPanel();
@@ -108,8 +110,7 @@ public class ProgrammeMatch extends JPanel {
 		scrollPaneFinalRanking.setBorder(new EmptyBorder(0, 600, 0, 600));
 		panelFinalRanking.add(scrollPaneFinalRanking);
 		scrollPaneFinalRanking.setPreferredSize(new Dimension(400, 166));
-		scrollPaneFinalRanking.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		scrollPaneFinalRanking.add(tableFinalRanking, BorderLayout.NORTH);
+		scrollPaneFinalRanking.add(tableFinalRanking);
 		scrollPaneFinalRanking.setViewportView(tableFinalRanking);
 		
 		Component verticalStrutBetweenGroupStageAndFinalRanking = Box.createVerticalStrut(0);
@@ -133,11 +134,9 @@ public class ProgrammeMatch extends JPanel {
 		
 		JScrollPane scrollPaneGroupStageA = new JScrollPane();
 		panelOfGroupeA.add(scrollPaneGroupStageA);
-		scrollPaneGroupStageA.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		scrollPaneGroupStageA.add(tableGroupStageA);
 		scrollPaneGroupStageA.setPreferredSize(new Dimension(400, 166));
 		scrollPaneGroupStageA.setViewportView(tableGroupStageA);
-		scrollPaneGroupStageA.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblOfGroupATitle = new JLabel("Groupe A");
 		lblOfGroupATitle.setFont(new Font("Cambria", Font.PLAIN, 30));
@@ -158,11 +157,9 @@ public class ProgrammeMatch extends JPanel {
 		
 		JScrollPane scrollPaneGroupStageB = new JScrollPane();
 		panelOfGroupB.add(scrollPaneGroupStageB, BorderLayout.CENTER);
-		scrollPaneGroupStageB.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		scrollPaneGroupStageB.add(tableGroupStageB);
 		scrollPaneGroupStageB.setPreferredSize(new Dimension(400, 166));
 		scrollPaneGroupStageB.setViewportView(tableGroupStageB);
-		scrollPaneGroupStageB.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblOfGroupBTitle = new JLabel("Groupe B");
 		lblOfGroupBTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -183,12 +180,10 @@ public class ProgrammeMatch extends JPanel {
 		
 		JScrollPane scrollPaneGroupStageC = new JScrollPane();
 		panelOfGroupC.add(scrollPaneGroupStageC);
-		scrollPaneGroupStageC.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		scrollPaneGroupStageC.add(tableGroupStageC);
 		scrollPaneGroupStageC.setPreferredSize(new Dimension(400, 166));
 		scrollPaneGroupStageC.setViewportView(tableGroupStageC);
-		scrollPaneGroupStageC.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+	
 		JLabel lblOfGroupCTitle = new JLabel("Groupe C");
 		lblOfGroupCTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOfGroupCTitle.setFont(new Font("Cambria", Font.PLAIN, 30));
@@ -208,11 +203,9 @@ public class ProgrammeMatch extends JPanel {
 		
 		JScrollPane scrollPaneGroupStageD = new JScrollPane();
 		panelofGroupD.add(scrollPaneGroupStageD);
-		scrollPaneGroupStageD.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		scrollPaneGroupStageD.add(tableGroupStageD);
 		scrollPaneGroupStageD.setPreferredSize(new Dimension(400, 166));
 		scrollPaneGroupStageD.setViewportView(tableGroupStageD);
-		scrollPaneGroupStageD.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblOfGroupDTitle = new JLabel("Groupe D");
 		lblOfGroupDTitle.setFont(new Font("Cambria", Font.PLAIN, 30));
