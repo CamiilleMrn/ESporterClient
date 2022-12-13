@@ -56,19 +56,19 @@ public class ProgramMatchs extends JPanel {
 		JScrollPane scrollPaneWithGroupeStageAndFinalRanking = new JScrollPane();
 		add(scrollPaneWithGroupeStageAndFinalRanking, BorderLayout.CENTER);
 		//System.out.println("hello");
-		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
+		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
 		Object[][] dataFinalColumn = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
-		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
+		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
 		Object[][] dataGroupStageA = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
-		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
+		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
 		Object[][] dataGroupStageB = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
-		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
+		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
 		Object[][] dataGroupStageC = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
-		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l'Ã©quipe", "Point de classement" };
+		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
 		Object[][] dataGroupStageD = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
 		
 		JPanel panelAllOfTable = new JPanel();
