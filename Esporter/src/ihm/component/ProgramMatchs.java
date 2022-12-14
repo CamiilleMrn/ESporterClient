@@ -19,9 +19,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import types.TypesPool;
+import types.TypesTeam;
 import types.TypesTournament;
 
 import java.awt.Rectangle;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
 public class ProgramMatchs extends JPanel {
 	/**
@@ -55,21 +62,64 @@ public class ProgramMatchs extends JPanel {
 
 		JScrollPane scrollPaneWithGroupeStageAndFinalRanking = new JScrollPane();
 		add(scrollPaneWithGroupeStageAndFinalRanking, BorderLayout.CENTER);
-		//System.out.println("hello");
+		
+		ArrayList<TypesPool> pools = tournament.getPool();
+		pools.get(0).getPoint();
+		
+		
+
 		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		Object[][] dataFinalColumn = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
+		HashMap<TypesTeam,Integer> p = pools.get(4).getPoint();
+		Object[][] dataFinalColumn = new Object[4][3];
+		int i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			if (p.entrySet().size()!=4) {
+				dataFinalColumn[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			}
+			i++;
+		}
+		for (int j=0; j<4-p.entrySet().size(); j++) {
+			dataFinalColumn[i] = new Object[] {null, "A determiner", null};
+			i++;
+		}
+		
+		
 		
 		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		Object[][] dataGroupStageA = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
+		p = pools.get(0).getPoint();
+		Object[][] dataGroupStageA = new Object[4][3];
+		i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			dataGroupStageA[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			i++;
+		}
 		
 		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		Object[][] dataGroupStageB = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
+		p = pools.get(1).getPoint();
+		Object[][] dataGroupStageB = new Object[4][3];
+		i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			dataGroupStageB[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			i++;
+		}
 		
 		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		Object[][] dataGroupStageC = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
+		p = pools.get(2).getPoint();
+		Object[][] dataGroupStageC = new Object[4][3];
+		i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			dataGroupStageC[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			i++;
+		}
 		
 		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		Object[][] dataGroupStageD = new Object[][] { { "", "", "" }, { "", "", "" }, { "", "", "" }, { "", "", "" }, };
+		p = pools.get(3).getPoint();
+		Object[][] dataGroupStageD = new Object[4][3];
+		i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			dataGroupStageD[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			i++;
+		}
 		
 		JPanel panelAllOfTable = new JPanel();
 		scrollPaneWithGroupeStageAndFinalRanking.add(panelAllOfTable);
