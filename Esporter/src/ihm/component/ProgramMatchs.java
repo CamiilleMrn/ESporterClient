@@ -65,10 +65,11 @@ public class ProgramMatchs extends JPanel {
 		panelEmpty.add(verticalStrutAboveTitle, BorderLayout.NORTH);
 
 		JScrollPane scrollPaneWithGroupeStageAndFinalRanking = new JScrollPane();
+		scrollPaneWithGroupeStageAndFinalRanking.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+
 		add(scrollPaneWithGroupeStageAndFinalRanking, BorderLayout.CENTER);
 		
 		ArrayList<TypesPool> pools = tournament.getPool();
-		pools.get(0).getPoint();
 		
 		
 
