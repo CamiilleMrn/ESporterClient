@@ -66,6 +66,11 @@ public class RendererStableCalendar extends JPanel{
 			e.printStackTrace();
 		}
 		
+		lblArrowIcon.setVisible(false);
+		if (this.tournament.isFull()) {
+			lblArrowIcon.setVisible(true);
+		}
+		
 	}
 
 

@@ -113,6 +113,11 @@ public class RendererPlayerCalendar extends DataJPanel{
 			e.printStackTrace();
 		}
 		
+		lblArrowIcon.setVisible(false);
+		if (this.tournament.isFull()) {
+			lblArrowIcon.setVisible(true);
+		}
+		
 	}
 	
 	@Override

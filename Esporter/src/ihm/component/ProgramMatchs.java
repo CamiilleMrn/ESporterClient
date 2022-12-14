@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
@@ -17,8 +18,11 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
+import types.TypesImage;
 import types.TypesPool;
 import types.TypesTeam;
 import types.TypesTournament;
@@ -68,58 +72,18 @@ public class ProgramMatchs extends JPanel {
 		
 		
 
-		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		HashMap<TypesTeam,Integer> p = pools.get(4).getPoint();
-		Object[][] dataFinalColumn = new Object[4][3];
-		int i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
-			if (p.entrySet().size()!=4) {
-				dataFinalColumn[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
-			}
-			i++;
-		}
-		for (int j=0; j<4-p.entrySet().size(); j++) {
-			dataFinalColumn[i] = new Object[] {null, "A determiner", null};
-			i++;
-		}
+		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'ï¿½quipe", "Point de classement" };
+		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l'ï¿½quipe", "Point de classement" };
 		
 		
+		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l'ï¿½quipe", "Point de classement" };
 		
-		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		p = pools.get(0).getPoint();
-		Object[][] dataGroupStageA = new Object[4][3];
-		i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
-			dataGroupStageA[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
-			i++;
-		}
 		
-		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		p = pools.get(1).getPoint();
-		Object[][] dataGroupStageB = new Object[4][3];
-		i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
-			dataGroupStageB[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
-			i++;
-		}
+		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l'ï¿½quipe", "Point de classement" };
 		
-		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		p = pools.get(2).getPoint();
-		Object[][] dataGroupStageC = new Object[4][3];
-		i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
-			dataGroupStageC[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
-			i++;
-		}
 		
-		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l'équipe", "Point de classement" };
-		p = pools.get(3).getPoint();
-		Object[][] dataGroupStageD = new Object[4][3];
-		i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
-			dataGroupStageD[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
-			i++;
-		}
+		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l'ï¿½quipe", "Point de classement" };
+		
 		
 		JPanel panelAllOfTable = new JPanel();
 		scrollPaneWithGroupeStageAndFinalRanking.add(panelAllOfTable);
@@ -150,7 +114,22 @@ public class ProgramMatchs extends JPanel {
 		gbc_lblOfFinalRankingTitle.gridy = 0;
 		panelOfFinalRankingTitle.add(lblOfFinalRankingTitle, gbc_lblOfFinalRankingTitle);
 		
-		tableFinalRanking = new JTable(dataFinalColumn, HeaderFinalColumn);
+		
+		DefaultTableModel defaultablemodel = new DefaultTableModel(HeaderFinalColumn, 0) {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -5126366483507988L;
+
+			public java.lang.Class<?> getColumnClass(int column) {
+				return getValueAt(0, column).getClass();
+			};
+		};
+		
+		
+
+		tableFinalRanking = new JTable(defaultablemodel);
 		tableFinalRanking.setEnabled(false);
 		tableFinalRanking.setRowHeight(35);
 		tableFinalRanking.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -176,7 +155,22 @@ public class ProgramMatchs extends JPanel {
 		panelGroupStage.add(panelOfGroupeA);
 		panelOfGroupeA.setLayout(new BorderLayout(0, 0));
 
-		JTable tableGroupStageA = new JTable( dataGroupStageA,HeaderGroupStageA);
+		
+		
+		defaultablemodel = new DefaultTableModel(HeaderGroupStageA, 0) {
+					
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = -5126366483507988L;
+		
+					public java.lang.Class<?> getColumnClass(int column) {
+						return getValueAt(0, column).getClass();
+					};
+		};
+		
+		
+		JTable tableGroupStageA = new JTable(defaultablemodel);
 		tableGroupStageA.setFont(new Font("Cambria", Font.PLAIN, 10));
 		tableGroupStageA.setEnabled(false);
 		tableGroupStageA.setRowHeight(35);
@@ -200,7 +194,22 @@ public class ProgramMatchs extends JPanel {
 		panelGroupStage.add(panelOfGroupB);
 		panelOfGroupB.setLayout(new BorderLayout(0, 0));
 
-		JTable tableGroupStageB = new JTable(dataGroupStageB,HeaderGroupStageB);
+		
+		defaultablemodel = new DefaultTableModel(HeaderGroupStageB, 0) {
+					
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = -5126366483507988L;
+		
+					public java.lang.Class<?> getColumnClass(int column) {
+						return getValueAt(0, column).getClass();
+					};
+		};
+		
+		
+		
+		JTable tableGroupStageB = new JTable(defaultablemodel);
 		tableGroupStageB.setEnabled(false);
 		tableGroupStageB.setRowHeight(35);
 		tableGroupStageB.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -223,7 +232,20 @@ public class ProgramMatchs extends JPanel {
 		panelGroupStage.add(panelOfGroupC);
 		panelOfGroupC.setLayout(new BorderLayout(0, 0));
 		
-		JTable tableGroupStageC = new JTable(dataGroupStageC,HeaderGroupStageC);
+		defaultablemodel = new DefaultTableModel(HeaderGroupStageC, 0) {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -5126366483507988L;
+
+			public java.lang.Class<?> getColumnClass(int column) {
+				return getValueAt(0, column).getClass();
+			};
+		};
+		
+
+		JTable tableGroupStageC = new JTable(defaultablemodel);
 		tableGroupStageC.setEnabled(false);
 		tableGroupStageC.setRowHeight(35);
 		tableGroupStageC.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -246,7 +268,20 @@ public class ProgramMatchs extends JPanel {
 		panelGroupStage.add(panelofGroupD);
 		panelofGroupD.setLayout(new BorderLayout(0, 0));
 		
-		JTable tableGroupStageD = new JTable(dataGroupStageD,HeaderGroupStageD);
+		defaultablemodel = new DefaultTableModel(HeaderGroupStageD, 0) {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -5126366483507988L;
+
+			public java.lang.Class<?> getColumnClass(int column) {
+				return getValueAt(0, column).getClass();
+			};
+		};
+		
+		
+		JTable tableGroupStageD = new JTable(defaultablemodel);
 		tableGroupStageD.setEnabled(false);
 		tableGroupStageD.setRowHeight(35);
 		tableGroupStageD.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -264,6 +299,74 @@ public class ProgramMatchs extends JPanel {
 		
 		Component horizontalStrutAfterGroupStageD = Box.createHorizontalStrut(20);
 		panelGroupStage.add(horizontalStrutAfterGroupStageD);
+		
+		HashMap<TypesTeam,Integer> p = pools.get(4).getPoint();
+		Object[][] dataFinalColumn = new Object[4][3];
+		DefaultTableModel model = (DefaultTableModel)tableFinalRanking.getModel();
+		int i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			if (p.entrySet().size()!=4) {
+				model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
+				model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
+				//dataFinalColumn[i] = new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()};
+			}
+			i++;
+		}
+		for (int j=0; j<4-p.entrySet().size(); j++) {
+			model.addRow(new Object[] {"", "A determiner", ""});
+			i++;
+		}
+
+		
+		
+		
+		
+		p = pools.get(0).getPoint();
+		Object[][] dataGroupStageA = new Object[4][3];
+		model = (DefaultTableModel)tableGroupStageA.getModel();
+		i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
+			model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
+			//dataGroupStageA[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			i++;
+		}
+		
+		
+		
+		p = pools.get(1).getPoint();
+		Object[][] dataGroupStageB = new Object[4][3];
+		model = (DefaultTableModel)tableGroupStageB.getModel();
+		i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
+			model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
+			//dataGroupStageB[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			i++;
+		}
+		
+		
+		p = pools.get(2).getPoint();
+		Object[][] dataGroupStageC = new Object[4][3];
+		model = (DefaultTableModel)tableGroupStageC.getModel();
+		i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
+			model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
+			//dataGroupStageC[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			i++;
+		}
+		
+		p = pools.get(3).getPoint();
+		Object[][] dataGroupStageD = new Object[4][3];
+		model = (DefaultTableModel)tableGroupStageD.getModel();
+		i=0;
+		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+			model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
+			model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
+			//dataGroupStageD[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
+			i++;
+		}
 			
 	}
 }

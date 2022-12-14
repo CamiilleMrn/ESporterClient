@@ -83,6 +83,11 @@ public class RendererRefereeCalendar extends JPanel{
 			e.printStackTrace();
 		}
 		
+		lbArrowIcon.setVisible(false);
+		if (this.tournament.isFull()) {
+			lbArrowIcon.setVisible(true);
+		}
+		
 	}
 
 

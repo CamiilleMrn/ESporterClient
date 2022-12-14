@@ -31,6 +31,10 @@ public class TypesTournament implements Types, Serializable, Comparable<TypesTou
 		this.pool = new ArrayList<>();
 	}
 	
+	public boolean isFull() {
+		return this.registered.size()==16;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
