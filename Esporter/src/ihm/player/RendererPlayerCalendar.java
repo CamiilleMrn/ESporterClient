@@ -26,6 +26,7 @@ import javax.swing.border.MatteBorder;
 
 import ihm.MasterFrame;
 import ihm.component.DataJPanel;
+import types.TypesGame;
 import types.TypesPlayer;
 import types.TypesTournament;
 import java.awt.Color;
@@ -64,10 +65,22 @@ public class RendererPlayerCalendar extends DataJPanel{
 		panelBtnRegister.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelContent.add(panelBtnRegister);
 		
-		if(this.tournament.getRegistered().contains(((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam())) {
-			lbInscriptionButton = new JButton("Se désinscrire");
-		}else {
-			lbInscriptionButton = new JButton("S'inscrire");
+		
+		int idStable = ((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdStable();
+		int idTeam = ((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam();
+		TypesGame game = MasterFrame.getInstance().getUser().getData().getStables().get(idStable).getTeams().get(idTeam).getGame();
+		lbInscriptionButton = new JButton("");
+		lbInscriptionButton.setVisible(false);
+		if (!tournament.isFull() && tournament.getGame()== game) {
+			if(tournament.getRegistered().contains(((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam())) {
+				lbInscriptionButton = new JButton("Se désinscrire");
+			} else {
+				lbInscriptionButton = new JButton("S'inscrire");
+			}
+		}
+		if (tournament.isFull() && tournament.getRegistered().contains(((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam())) {
+			lbInscriptionButton = new JButton("Vous etes inscrit");
+			lbInscriptionButton.setEnabled(false);
 		}
 
 		GridBagLayout gbl_panelBtnRegister = new GridBagLayout();
@@ -97,7 +110,7 @@ public class RendererPlayerCalendar extends DataJPanel{
 		
 		lblArrowIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MasterFrame.getInstance().setPanel(ihm.component.ProgramMatchs.class, null);
+				MasterFrame.getInstance().setPanel(ihm.component.ProgramMatchs.class, tournament);
 			}
 		});
 		add(lblArrowIcon, BorderLayout.EAST);
@@ -122,10 +135,19 @@ public class RendererPlayerCalendar extends DataJPanel{
 	
 	@Override
 	public void dataUpdate() {
-		if(tournament.getRegistered().contains(((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam())) {
-			lbInscriptionButton = new JButton("Se désinscrire");
-		} else {
-			lbInscriptionButton = new JButton("S'inscrire");
+		int idStable = ((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdStable();
+		int idTeam = ((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam();
+		TypesGame game = MasterFrame.getInstance().getUser().getData().getStables().get(idStable).getTeams().get(idTeam).getGame();
+		if (!tournament.isFull() && tournament.getGame()!= game) {
+			if(tournament.getRegistered().contains(((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam())) {
+				lbInscriptionButton = new JButton("Se désinscrire");
+			} else {
+				lbInscriptionButton = new JButton("S'inscrire");
+			}
+		}
+		if (tournament.isFull() && tournament.getRegistered().contains(((TypesPlayer)MasterFrame.getInstance().getUser().getInfo()).getIdTeam())) {
+			lbInscriptionButton = new JButton("Vous etes deja inscrit");
+			lbInscriptionButton.setEnabled(false);
 		}
 	}
 	

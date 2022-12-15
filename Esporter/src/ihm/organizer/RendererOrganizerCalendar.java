@@ -48,6 +48,9 @@ public class RendererOrganizerCalendar extends JPanel{
 	
 	
 	public RendererOrganizerCalendar (TypesTournament tournoi) {
+		if (tournoi.isFull()) {
+			lblSep.setVisible(false);
+		}
 		this.tournoi = tournoi;
 		setBorder(new MatteBorder(0, 0, 1, 0, MasterFrame.COLOR_TEXT));
 		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
@@ -73,7 +76,12 @@ public class RendererOrganizerCalendar extends JPanel{
 			}
 		});
 		
-		btnModify.setText("Modifier");
+		if (tournoi.isFull()) {
+			btnModify.setText("Le tournoi a commencé");
+			btnModify.setEnabled(false);
+		}else {
+			btnModify.setText("Modifier");
+		}
 		btnModify.setHorizontalAlignment(SwingConstants.CENTER);
 		btnModify.setForeground(MasterFrame.COLOR_TEXT);
 		btnModify.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COLOR_TEXT), new EmptyBorder(3, 11, 3, 10)));
@@ -93,7 +101,9 @@ public class RendererOrganizerCalendar extends JPanel{
 			}
 		});
 	
-		
+		if (tournoi.isFull()) {
+			btnRemove.setVisible(false);
+		}
 		btnRemove.setHorizontalAlignment(SwingConstants.CENTER);
 		btnRemove.setForeground(MasterFrame.COLOR_TEXT);
 		btnRemove.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, MasterFrame.COLOR_TEXT), new EmptyBorder(3, 11, 3, 10)));
@@ -105,7 +115,7 @@ public class RendererOrganizerCalendar extends JPanel{
 
 		lblArrowIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MasterFrame.getInstance().setPanel(ihm.component.ProgramMatchs.class, null);
+				MasterFrame.getInstance().setPanel(ihm.component.ProgramMatchs.class, tournoi);
 			}
 		});
 		add(lblArrowIcon, BorderLayout.EAST);
@@ -119,6 +129,12 @@ public class RendererOrganizerCalendar extends JPanel{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		
+		lblArrowIcon.setVisible(false);
+		if (this.tournoi.isFull()) {
+			lblArrowIcon.setVisible(true);
 		}
 		
 	}

@@ -127,13 +127,14 @@ public class ProgramMatchs extends JPanel {
 				return getValueAt(0, column).getClass();
 			};
 		};
-		
-		
+
+
 
 		tableFinalRanking = new JTable(defaultablemodel);
 		tableFinalRanking.setEnabled(false);
 		tableFinalRanking.setRowHeight(35);
 		tableFinalRanking.setFont(new Font("Cambria", Font.PLAIN, 15));
+
 		
 		
 		JScrollPane scrollPaneFinalRanking = new JScrollPane();
