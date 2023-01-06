@@ -1,10 +1,10 @@
 package backend;
 
-import ihm.MasterFrame;
 import types.TypesTeam;
 import types.TypesTournament;
 import types.exception.ExceptionInvalidPermission;
 import types.exception.ExceptionTournamentFull;
+import vue.MasterFrame;
 
 public class Tournoi {
 

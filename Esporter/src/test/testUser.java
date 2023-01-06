@@ -3,7 +3,7 @@ package test;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import utilisateur.User;
+import model.user.User;
 
 public class testUser {
 

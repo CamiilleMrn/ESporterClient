@@ -1,39 +1,36 @@
 package types;
 
 
-import ihm.Calendar;
-import ihm.Ranking;
-import ihm.Stables;
-import ihm.component.MenuButton;
+import vue.component.MenuButton;
 
 public enum TypesMenu {
 	
 	
-	VISITOR(new MenuButton[] {new MenuButton(true, "Accueil",  ihm.visitor.Home.class, null),
-								new MenuButton(false, "Calendrier", ihm.Calendar.class, TypesPermission.VISITOR),
-								new MenuButton(false, "Classement",  ihm.Ranking.class, null),
-								new MenuButton(false, "Ecuries",  ihm.Stables.class, null)}),
+	VISITOR(new MenuButton[] {new MenuButton(true, "Accueil",  vue.visitor.Home.class, null, "menuVisiteurHome"),
+								new MenuButton(false, "Calendrier", vue.Calendar.class, TypesPermission.VISITOR, "menuCalendar"),
+								new MenuButton(false, "Classement",  vue.Ranking.class, null, "menuRanking"),
+								new MenuButton(false, "Ecuries",  vue.Stables.class, null, "menuStable")}),
 	
-	STABLE(new MenuButton[] {	new MenuButton(true, "Accueil",  ihm.stable.Home.class, null),
-								new MenuButton(false, "Calendrier",  ihm.Calendar.class, TypesPermission.STABLE),
-								new MenuButton(false, "Classement",  ihm.Ranking.class, null),
-								new MenuButton(false, "Ecuries",  ihm.Stables.class, null),
-								new MenuButton(false, "Gestion des equipes",  ihm.stable.TeamManagement.class, null)}),
+	STABLE(new MenuButton[] {	new MenuButton(true, "Accueil",  vue.stable.Home.class, null, "menuStableHome"),
+								new MenuButton(false, "Calendrier",  vue.Calendar.class, TypesPermission.STABLE, "menuCalendar"),
+								new MenuButton(false, "Classement",  vue.Ranking.class, null, "menuRanking"),
+								new MenuButton(false, "Ecuries",  vue.Stables.class, null, "menuStable"),
+								new MenuButton(false, "Gestion des equipes",  vue.stable.TeamManagement.class, null, "menuStableManagement")}),
 	
-	PLAYER(new MenuButton[] {	new MenuButton(true, "Accueil",  ihm.player.Home.class, null),
-								new MenuButton(false, "Calendrier",  ihm.Calendar.class, TypesPermission.PLAYER),
-								new MenuButton(false, "Classement",  ihm.Ranking.class, null),
-								new MenuButton(false, "Ecuries",  ihm.Stables.class, null)}),
+	PLAYER(new MenuButton[] {	new MenuButton(true, "Accueil",  vue.player.Home.class, null, "menuPlayerHome"),
+								new MenuButton(false, "Calendrier",  vue.Calendar.class, TypesPermission.PLAYER, "menuCalendar"),
+								new MenuButton(false, "Classement",  vue.Ranking.class, null, "menuRanking"),
+								new MenuButton(false, "Ecuries",  vue.Stables.class, null, "menuStable")}),
 	
-	ORGANIZER(new MenuButton[] {new MenuButton(true, "Accueil",  ihm.organizer.Home.class, null),
-									new MenuButton(false, "Calendrier",  ihm.organizer.Calendar.class, null),
-									new MenuButton(false, "Classement",   ihm.Ranking.class, null),
-									new MenuButton(false, "Ecuries",   ihm.Stables.class, null)}),
+	ORGANIZER(new MenuButton[] {new MenuButton(true, "Accueil",  vue.organizer.Home.class, null, "menuOrganizerHome"),
+									new MenuButton(false, "Calendrier",  vue.organizer.Calendar.class, null, "menuCalendar"),
+									new MenuButton(false, "Classement",   vue.Ranking.class, null, "menuRanking"),
+									new MenuButton(false, "Ecuries",   vue.Stables.class, null, "menuStable")}),
 	
-	REFEREE(new MenuButton[] {	new MenuButton(true, "Accueil",   ihm.visitor.Home.class, null),
-								new MenuButton(false, "Calendrier",   ihm.Calendar.class, TypesPermission.REFEREE),
-								new MenuButton(false, "Classement",   ihm.Ranking.class, null),
-								new MenuButton(false, "Ecuries",   ihm.Stables.class, null)});	
+	REFEREE(new MenuButton[] {	new MenuButton(true, "Accueil",   vue.visitor.Home.class, null, "menuRefereeHome"),
+								new MenuButton(false, "Calendrier",   vue.Calendar.class, TypesPermission.REFEREE, "menuCalendar"),
+								new MenuButton(false, "Classement",   vue.Ranking.class, null, "menuRanking"),
+								new MenuButton(false, "Ecuries",   vue.Stables.class, null, "menuStable")});	
 	
 	private MenuButton[] menu;
 	
