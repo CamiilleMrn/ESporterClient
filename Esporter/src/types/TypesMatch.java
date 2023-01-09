@@ -10,53 +10,63 @@ public class TypesMatch implements Types, Serializable {
 	 */
 	private static final long serialVersionUID = 587283429050587122L;
 	private Date date;
-	private int pointTeam1;
-	private int pointTeam2;
-	private TypesTeam winner;
-	private TypesTeam team1;
-	private TypesTeam team2;
+	private int team1Score;
+	private int team2Score;
+	private int winner;
+	private int team1;
+	private int team2;
 	
-	public TypesMatch(Date date, TypesTeam equipe1, TypesTeam equipe2) {
+	public TypesMatch(Date date, int team1, int team2, int winner, int team1Score, int team2Score ) {
 		this.date = date;
-		this.team1 = equipe1;
-		this.team2 = equipe2;
+		this.team1 = team1;
+		this.team2 = team2;
+		this.winner = winner;
+		this.team1Score = team1Score;
+		this.team2Score = team2Score;
 	}
 	
-	public void setWinner(TypesTeam winner) {
+	private void setWinner(int winner) {
 		this.winner = winner;
 	}
 	
-	public void setPoint(int pointEquipe1, int pointEquipe2) {
-		this.pointTeam1 = pointEquipe1;
-		this.pointTeam2 = pointEquipe2;
+	public void setPoint(int team1Score, int team2Score) {
+		if(team1Score>team2Score) {
+			setWinner(team1Score);
+		} else if (team1Score<team2Score) {
+			setWinner(team2Score);
+		} else {
+			return;
+		}
+		this.team1Score = team1Score;
+		this.team2Score = team2Score;
 	}
 
 	public Date getDate() {
 		return date;
 	}
 
-	public int getPointTeam1() {
-		return pointTeam1;
+	public int getTeam1Score() {
+		return team1Score;
 	}
 
-	public int getPointTeam2() {
-		return pointTeam2;
+	public int getTeam2Score() {
+		return team2Score;
 	}
 
-	public TypesTeam getWinner() {
+	public int getWinner() {
 		return winner;
 	}
 
-	public TypesTeam getTeam1() {
+	public int getTeam1() {
 		return team1;
 	}
 
-	public TypesTeam getTeam2() {
+	public int getTeam2() {
 		return team2;
 	}
 	
 	public boolean isPlayed() {
-		if (winner==null)
+		if (winner!= team1 && winner!=team2)
 			return false;
 		return true;
 		

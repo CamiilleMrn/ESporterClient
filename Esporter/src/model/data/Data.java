@@ -23,7 +23,7 @@ public class Data implements Serializable, Types {
 	private volatile HashMap<Integer, TypesStable> stables = new HashMap<>();
 	private volatile HashMap<Integer, TypesTournament> calendar = new HashMap<>();
 	private volatile HashMap<Integer, TypesRanking> ranking = new HashMap<>();
-	
+	private volatile HashMap<Integer, TypesTeam> teams = new HashMap<>();
 	
 	public HashMap<Integer, TypesTournament> getCalendar() {
 		return calendar;
@@ -36,6 +36,12 @@ public class Data implements Serializable, Types {
 	public HashMap<Integer, TypesStable> getStables() {
 		return stables;
 	}
+	
+	public HashMap<Integer, TypesTeam> getTeams() {
+		return teams;
+	}
+	
+	
 	
 	public void setCalendar(HashMap<Integer, TypesTournament> calendar) {
 		this.calendar = calendar;

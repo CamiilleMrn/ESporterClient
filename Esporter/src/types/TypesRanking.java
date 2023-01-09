@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import controleur.Controler;
+
 public class TypesRanking implements Types, Serializable{
 	
 	/**
@@ -14,15 +16,21 @@ public class TypesRanking implements Types, Serializable{
 	 */
 	private static final long serialVersionUID = -1122216096852324306L;
 	private TypesGame game;
-	private HashMap<TypesStable, Integer> stables;
+	private HashMap<Integer, Integer> stables;
+	private int id;
 	
-	
-	public TypesRanking(TypesGame game) {
-		this.game = game;
-		this.stables = new HashMap<>();
+	public int getId() {
+		return id;
 	}
 	
-	public void setEcuries(HashMap<TypesStable, Integer> stables) {
+	
+	public TypesRanking(TypesGame game, int id) {
+		this.game = game;
+		this.stables = new HashMap<>();
+		this.id = id;
+	}
+	
+	public void setStables(HashMap<Integer, Integer> stables) {
 		this.stables = stables;
 	}
 	
@@ -31,7 +39,11 @@ public class TypesRanking implements Types, Serializable{
 	}
 	
 	public HashMap<TypesStable, Integer> getStables() {
-		return stables;
+		HashMap<TypesStable, Integer> stableFormate = new HashMap<>();
+		for(Integer it : stables.keySet()) {
+			stableFormate.put(Controler.getInstance().getData().getStables().get(it), stables.get(it));
+		}
+		return stableFormate;
 	}
 	
 	public TypesGame getGame() {
@@ -39,7 +51,7 @@ public class TypesRanking implements Types, Serializable{
 	}
 	
 	public HashMap<Integer, ArrayList<TypesStable>> getRanking() {
-		LinkedList<TypesStable> list = new LinkedList<>(stables.keySet());
+		LinkedList<TypesStable> list = new LinkedList<>(getStables().keySet());
 		Comparator<TypesStable> compareFromScore = new Comparator<TypesStable>() {
 
 			@Override
