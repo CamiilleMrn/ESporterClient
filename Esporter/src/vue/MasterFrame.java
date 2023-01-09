@@ -38,6 +38,7 @@ import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
 import controleur.Controler;
+import controleur.State;
 import model.user.User;
 import types.TypesStable;
 import types.TypesPlayer;
@@ -49,6 +50,7 @@ import vue.component.DataJPanel;
 import vue.component.MenuButton;
 import vue.error.Error;
 import vue.error.ErrorPanel;
+import vue.organizer.Calendar;
 import types.exception.ExceptionInvalidPermission;
 
 import javax.swing.JButton;
@@ -96,7 +98,9 @@ public class MasterFrame {
 	
 	private MasterFrame() {
 		this.controler = Controler.getInstance();
+		this.instance = this;
 		initialize();
+		
 		frame.pack();
 		
 	}
@@ -107,11 +111,12 @@ public class MasterFrame {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frame.setMinimumSize(new Dimension(1450,700));
-		frame.setPreferredSize(new Dimension(1920,1080));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		frame.setMinimumSize(new Dimension(1450,700));
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setPreferredSize(new Dimension(1920,1080));
 		JLayeredPane root = new JLayeredPane();
 		root.setLayout(new BorderLayout());
 		
@@ -268,7 +273,7 @@ public class MasterFrame {
 		/*Maintenant que le JLayeredPane a �t� fait on va pouvoir y superposer le main et le panel de gestion des erreurs
 		 * Nous aurons ainsi le panel qui se mettra en visible quand il en aura besoin.
 		 * */
-		
+		panelMain.add(new vue.Calendar(TypesPermission.VISITOR));
 		
 	}
 	
@@ -302,7 +307,6 @@ public class MasterFrame {
 		menu[0].setSelected(true);
 		setAccount();
 		frame.getContentPane().repaint();
-		System.out.println(menu[0].getPanelToChange());
 		
 	}
 	
@@ -312,7 +316,7 @@ public class MasterFrame {
 			btnLogin.setText("Se deconnecter");
 			lblAccountLogo.setIcon(null);
 			lblAccountName.setText("Arbitre");
-			setPanel(vue.referee.Home.class, null);
+			
 			break;
 		case STABLE:
 			btnLogin.setText("Se deconnecter");
@@ -321,8 +325,7 @@ public class MasterFrame {
 			BufferedImage logoStable = ((TypesStable)controler.getUser().getInfo()).getLogo().getImage();
 			logoStable = TypesImage.resize(logoStable, 100, 100);
 			lblAccountLogo.setIcon(new ImageIcon(logoStable));
-			//logoCompte.setIcon(e.getLogo());
-			setPanel(vue.stable.Home.class, null);
+
 			break;
 		case PLAYER:
 			btnLogin.setText("Se deconnecter");
@@ -331,25 +334,26 @@ public class MasterFrame {
 			BufferedImage picture = ( (TypesPlayer)controler.getUser().getInfo() ).getImage().getImage();
 			picture = TypesImage.resize(picture, 80, 100);
 			lblAccountLogo.setIcon(new ImageIcon(picture));
-			//logoCompte.setIcon(j.getPhoto());
-			setPanel(vue.player.Home.class, null);
+
 			break;
 		case ORGANIZER:
 			lblAccountLogo.setIcon(null);
 			btnLogin.setText("Se deconnecter");
 			lblAccountName.setText("Esporter");
-			setPanel(vue.organizer.Home.class, null);
+
 			break;
 		case VISITOR:
 			lblAccountLogo.setIcon(null);
 			btnLogin.setText("Se connecter");
 			lblAccountName.setText("Visiteur");
-			setPanel(vue.visitor.Home.class, null);
+
 			break;
 		default:
 			break;
 		
 		}
+		Controler.getInstance().setState(State.CALENDAR);
+		setPanel(vue.Calendar.class, controler.getUser().getPermission());
 	}
 	
 	public void setPanel(Class<? extends JPanel> clazz, Object ob) {

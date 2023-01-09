@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -63,14 +64,14 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 	private TypesPermission permission;
 	private JPanel panelRoot;
 	private JPanel panelContent;
-	private Date chosenDate ;
+	private Timestamp chosenDate ;
 	private TypesGame game;
 	private JLabel ifEmpty = new JLabel();
 	private JLabel lblTitle;
 	private JComboBox<TypesGame> comboBoxFilterGame;
 	private List<RendererCalendar> renderer;
 	
-	public void createListTournament(Date date, TypesGame jeu) {
+	public void createListTournament(Timestamp date, TypesGame jeu) {
 		panelContent.removeAll();
 		chosenDate = date;
 		game = jeu;
@@ -171,28 +172,6 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 		txtDate.setFont(new Font("Cambria", Font.PLAIN, 15));
 		panelFilterDate.add(txtDate, BorderLayout.CENTER);
 		txtDate.setColumns(10);
-		/*
-		txtDate.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-				createListTournament(Date.valueOf(txtDate.getText()),game);
-				revalidate();
-				validate();
-				repaint();
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-
-			}
-
-		});*/
 		
 		
 		JButton btnDate = new JButton(" ... ");
@@ -217,38 +196,6 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 		comboBoxFilterGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		comboBoxFilterGame.setForeground(MasterFrame.COLOR_TEXT);
 		
-		/*
-		comboBoxFilterGame.addItemListener(new ItemListener() {
-	        @Override
-	        public void itemStateChanged(ItemEvent e) {
-	            if(e.getStateChange() == ItemEvent.SELECTED) {
-	                game = (TypesGame) comboBoxFilterGame.getSelectedItem();
-	                createListTournament(chosenDate,game);
-	            }
-	        }
-	    });
-		
-		((JTextField) comboBoxFilterGame.getEditor().getEditorComponent()).getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				createListTournament(chosenDate,game);
-				revalidate();
-				validate();
-				repaint();	
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				
-			}
-			
-		});*/
 		comboBoxFilterGame.addActionListener(Controler.getInstance());
 		comboBoxFilterGame.setActionCommand("CALENDAR_GAMECOMBO");
 		
@@ -269,7 +216,7 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 		return game;
 	}
 	
-	public Date getChosenDate() {
+	public Timestamp getChosenDate() {
 		return chosenDate;
 	}
 	
@@ -281,7 +228,7 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 		this.game = game;
 	}
 	
-	public void setChosenDate(Date chosenDate) {
+	public void setChosenDate(Timestamp chosenDate) {
 		this.chosenDate = chosenDate;
 	}
 	

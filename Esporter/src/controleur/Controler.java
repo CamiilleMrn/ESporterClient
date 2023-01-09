@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.UnknownHostException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -54,6 +55,7 @@ import vue.Stables;
 import vue.component.ContainerModifyPlayer;
 import vue.component.ContainerPlayer;
 import vue.component.DatePicker;
+import vue.component.ProgramMatchs;
 import vue.organizer.CreateTournament;
 import vue.organizer.EditTournament;
 import vue.player.RegisterTournament;
@@ -122,6 +124,10 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 		return user;
 	}
 	
+	public void setState(State state) {
+		this.state = state;
+	}
+	
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////		 ACTION LISTENER PART 		/////////////////////////
@@ -153,8 +159,8 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					//LOGGED IN
 					getUser().logout();
 					setMenu(TypesMenu.VISITOR);
-					MasterFrame.getInstance().setPanel(vue.visitor.Home.class, null);
-					state = State.HOME_VISITOR;
+					MasterFrame.getInstance().setPanel(vue.Calendar.class, getUser().getPermission());
+					state = State.CALENDAR;
 				} else {
 					//NOT LOG IN
 					MasterFrame.getInstance().getMain().setVisible(false);
@@ -173,14 +179,14 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				case "ADD_PLAYER_VALIDATE":
 					String name = jd.getTxtName().getText();
 					String firstname = jd.getTxtFirstname().getText();
-					Date contractStartDate = null;
-					Date birthDate = null;
-					Date contractEndDate = null;
+					Timestamp contractStartDate = null;
+					Timestamp birthDate = null;
+					Timestamp contractEndDate = null;
 					BufferedImage image = jd.getImage();
 					try {
-					contractStartDate= Date.valueOf(jd.getTxtStartContractDate().getText());
-					birthDate= Date.valueOf(jd.getTxtBirthDate().getText());
-					contractEndDate= Date.valueOf(jd.getTxtEndContractDate().getText());
+					contractStartDate= Timestamp.valueOf(jd.getTxtStartContractDate().getText() + "00:00:00");
+					birthDate= Timestamp.valueOf(jd.getTxtBirthDate().getText() + "00:00:00");
+					contractEndDate= Timestamp.valueOf(jd.getTxtEndContractDate().getText() + "00:00:00");
 					} catch (IllegalArgumentException e1){
 						
 					}
@@ -278,9 +284,9 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						}else if(create.getTxtTournamentName().getText().isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Veuillez préciser le nom du tournoi","Error", JOptionPane.ERROR_MESSAGE);
 						}else {
-							Date tournamentStart = null;
+							Timestamp tournamentStart = null;
 							try {
-								tournamentStart = Date.valueOf(create.getTxtDateStartTournament().getText());
+								tournamentStart = Timestamp.valueOf(create.getTxtDateStartTournament().getText() + "00:00:00");
 							} catch (IllegalArgumentException e1) {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(null, "Format de date invalide","Error", JOptionPane.ERROR_MESSAGE);
@@ -332,9 +338,9 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						}else if(editPage.getTxtTournamentName().getText().isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Veuillez préciser le nom du tournoi","Error", JOptionPane.ERROR_MESSAGE);
 						}else {
-							Date tournamentStart = null;
+							Timestamp tournamentStart = null;
 							try {
-								tournamentStart = Date.valueOf(editPage.getTxtDateStartTournament().getText());
+								tournamentStart = Timestamp.valueOf(editPage.getTxtDateStartTournament().getText() + "00:00:00");
 							} catch (IllegalArgumentException e1) {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(null, "Format de date invalide","Error", JOptionPane.ERROR_MESSAGE);
@@ -379,7 +385,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					final JFrame f = new JFrame();
 					//set text which is collected by date picker i.e. set date 
 					cal.getTxtDate().setText(new DatePicker(f).setPickedDate());
-					cal.createListTournament(Date.valueOf(cal.getTxtDate().getText()),cal.getGame());
+					cal.createListTournament(Timestamp.valueOf(cal.getTxtDate().getText() + "00:00:00"),cal.getGame() );
 	                ((JPanel)cal).repaint();
 	                ((JPanel)cal).revalidate();
 					break;
@@ -513,14 +519,14 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				case "MODIFY_PLAYER_VALIDATE":
 					String name = mp.getTxtName().getText();
 					String firstname = mp.getTxtFirstname().getText();
-					Date contractStartDate = null;
-					Date birthDate = null;
-					Date contractEndDate = null;
+					Timestamp contractStartDate = null;
+					Timestamp birthDate = null;
+					Timestamp contractEndDate = null;
 					BufferedImage image = mp.getImage();
 					try {
-					contractStartDate= Date.valueOf(mp.getTxtStartContractDate().getText());
-					birthDate= Date.valueOf(mp.getTxtBirthDate().getText());
-					contractEndDate= Date.valueOf(mp.getTxtEndContractDate().getText());
+					contractStartDate= Timestamp.valueOf(mp.getTxtStartContractDate().getText() + "00:00:00");
+					birthDate= Timestamp.valueOf(mp.getTxtBirthDate().getText() + "00:00:00");
+					contractEndDate= Timestamp.valueOf(mp.getTxtEndContractDate().getText() + "00:00:00");
 					} catch (IllegalArgumentException e1){
 						
 					}
@@ -668,6 +674,15 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						}
 					}
 					break;
+				}
+				break;
+			case POOL:
+				switch(e.getActionCommand()) {
+				case "PROGRAM_MATCH_MATCH":
+					MasterFrame.getInstance().setPanel(vue.CalendarAndScoreMatch.class, ((ProgramMatchs)MasterFrame.getCurrentPanel()).getTournament());
+					state = State.MATCHES;
+					break;
+					
 				}
 				break;
 			default:

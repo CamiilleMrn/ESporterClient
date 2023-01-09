@@ -1,6 +1,7 @@
 package vue.component;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -14,14 +15,14 @@ public interface Calendar {
 	
 	public TypesGame getGame();
 	
-	public Date getChosenDate();
+	public Timestamp getChosenDate();
 	
 	public JComboBox<TypesGame> getComboBoxFilterGame();
 	
 	public void setGame(TypesGame game);
 	
-	public void setChosenDate(Date chosenDate);
+	public void setChosenDate(Timestamp chosenDate);
 	
 	public RendererCalendar getRenderer(int id); 
-	public void createListTournament(Date date, TypesGame jeu);
+	public void createListTournament(Timestamp date, TypesGame jeu);
 }

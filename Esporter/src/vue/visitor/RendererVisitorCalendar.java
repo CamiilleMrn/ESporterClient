@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -52,7 +53,7 @@ public class RendererVisitorCalendar extends JPanel implements RendererCalendar{
 		lblArrowIcon.setBorder(null);
 		lblArrowIcon.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(lblArrowIcon, BorderLayout.EAST);
-		lblTournamentName.setText(this.tournament.getName()+" - "+this.tournament.getRegisterDate());
+		lblTournamentName.setText(this.tournament.getName()+" - "+new SimpleDateFormat("MM/dd/yyyy").format(this.tournament.getRegisterDate()));
 		try {
 			lblArrowIcon.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("../images/Chevron.png"))));
 		} catch (IOException e) {

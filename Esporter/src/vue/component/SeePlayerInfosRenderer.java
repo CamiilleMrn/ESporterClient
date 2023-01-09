@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
+import java.text.SimpleDateFormat;
 
 import javax.swing.border.EmptyBorder;
 
@@ -66,19 +67,19 @@ public class SeePlayerInfosRenderer extends JPanel{
 		lblPlayerName.setFont(new Font("Cambria", Font.BOLD, 30));
 		panel_ContainerInfo.add(lblPlayerName);
 		
-		JLabel lblDateOfBith = new JLabel("Date de naissance : "+player.getBirthDate());
+		JLabel lblDateOfBith = new JLabel("Date de naissance : "+new SimpleDateFormat("MM/dd/yyyy").format(player.getBirthDate()));
 		lblDateOfBith.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDateOfBith.setForeground(MasterFrame.COLOR_TEXT);
 		lblDateOfBith.setFont(new Font("Cambria",Font.PLAIN, 20));
 		panel_ContainerInfo.add(lblDateOfBith);
 		
-		JLabel lblStartContractDate = new JLabel("Début contrat : " + player.getContractStartDate());
+		JLabel lblStartContractDate = new JLabel("Début contrat : " + new SimpleDateFormat("MM/dd/yyyy").format(player.getContractStartDate()));
 		lblStartContractDate.setHorizontalAlignment(SwingConstants.LEFT);
 		lblStartContractDate.setForeground(MasterFrame.COLOR_TEXT);
 		lblStartContractDate.setFont(new Font("Cambria", Font.PLAIN, 20));
 		panel_ContainerInfo.add(lblStartContractDate);
 		
-		JLabel lblEndContractDate = new JLabel("Date fin contrat : "+player.getContractEndDate());
+		JLabel lblEndContractDate = new JLabel("Date fin contrat : "+ new SimpleDateFormat("MM/dd/yyyy").format(player.getContractEndDate()));
 		lblEndContractDate.setHorizontalAlignment(SwingConstants.LEFT);
 		lblEndContractDate.setForeground(MasterFrame.COLOR_TEXT);
 		lblEndContractDate.setFont(new Font("Cambria", Font.PLAIN, 20));

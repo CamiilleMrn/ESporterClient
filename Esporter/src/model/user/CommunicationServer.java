@@ -215,6 +215,7 @@ public class CommunicationServer implements Runnable{
 			//ok
 			break;
 		case UPDATE_STABLE:
+			
 			break;
 		case UPDATE_TEAM:
 			TypesTeam team = (TypesTeam)r.getInfoByID(TypesID.TEAM);

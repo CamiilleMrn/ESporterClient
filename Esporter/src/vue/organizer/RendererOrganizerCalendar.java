@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -112,7 +113,7 @@ public class RendererOrganizerCalendar extends JPanel implements RendererCalenda
 		lblArrowIcon.setActionCommand("CALENDAR RENDERER POOL "+id);
 		add(lblArrowIcon, BorderLayout.EAST);
 		
-		lblTournamentName.setText(this.tournoi.getName()+ " - " +this.tournoi.getRegisterDate());
+		lblTournamentName.setText(this.tournoi.getName()+ " - " +new SimpleDateFormat("MM/dd/yyyy").format(this.tournoi.getRegisterDate()));
 		
 		lblArrowIcon.setBorder(null);
 		lblArrowIcon.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);

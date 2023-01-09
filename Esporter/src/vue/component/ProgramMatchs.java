@@ -11,6 +11,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
@@ -22,12 +23,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+import controleur.Controler;
 import types.TypesImage;
 import types.TypesPool;
 import types.TypesTeam;
 import types.TypesTournament;
 
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +60,7 @@ public class ProgramMatchs extends JPanel {
 		panelEmpty.setLayout(new BorderLayout(0, 0));
 
 		lblTournament = new JLabel();
-		lblTournament.setText("Tournoi X");
+		lblTournament.setText(tournament.getName());
 		lblTournament.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTournament.setFont(new Font("Cambria", Font.BOLD, 25));
 		panelEmpty.add(lblTournament, BorderLayout.SOUTH);
@@ -73,17 +77,17 @@ public class ProgramMatchs extends JPanel {
 		
 		
 
-		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l'�quipe", "Point de classement" };
-		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l'�quipe", "Point de classement" };
+		String[] HeaderFinalColumn = new String[] { "Logo", "Nom de l' quipe", "Point de classement" };
+		String[] HeaderGroupStageA = new String[] { "Logo", "Nom de l' quipe", "Point de classement" };
 		
 		
-		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l'�quipe", "Point de classement" };
+		String[] HeaderGroupStageB = new String[] { "Logo", "Nom de l' quipe", "Point de classement" };
 		
 		
-		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l'�quipe", "Point de classement" };
+		String[] HeaderGroupStageC = new String[] { "Logo", "Nom de l' quipe", "Point de classement" };
 		
 		
-		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l'�quipe", "Point de classement" };
+		String[] HeaderGroupStageD = new String[] { "Logo", "Nom de l' quipe", "Point de classement" };
 		
 		
 		JPanel panelAllOfTable = new JPanel();
@@ -115,6 +119,16 @@ public class ProgramMatchs extends JPanel {
 		gbc_lblOfFinalRankingTitle.gridy = 0;
 		panelOfFinalRankingTitle.add(lblOfFinalRankingTitle, gbc_lblOfFinalRankingTitle);
 		
+		JPanel panel_2 = new JPanel();
+		panelOfFinalRankingTitle.add(panel_2);
+		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JButton btnNewButton = new JButton("Voir Programme");
+		
+		btnNewButton.addActionListener(Controler.getInstance());
+		btnNewButton.setActionCommand("PROGRAM_MATCH_MATCH");
+		
+		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		panel_2.add(btnNewButton);
 		
 		DefaultTableModel defaultablemodel = new DefaultTableModel(HeaderFinalColumn, 0) {
 			
@@ -370,5 +384,10 @@ public class ProgramMatchs extends JPanel {
 			i++;
 		}
 			
+	}
+
+	
+	public TypesTournament getTournament() {
+		return tournament;
 	}
 }

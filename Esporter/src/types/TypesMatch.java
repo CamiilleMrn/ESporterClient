@@ -2,21 +2,22 @@ package types;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
-public class TypesMatch implements Types, Serializable {
+public class TypesMatch implements Types, Serializable, Comparable<TypesMatch> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 587283429050587122L;
-	private Date date;
+	private Timestamp date;
 	private int team1Score;
 	private int team2Score;
 	private int winner;
 	private int team1;
 	private int team2;
 	
-	public TypesMatch(Date date, int team1, int team2, int winner, int team1Score, int team2Score ) {
+	public TypesMatch(Timestamp date, int team1, int team2, int winner, int team1Score, int team2Score ) {
 		this.date = date;
 		this.team1 = team1;
 		this.team2 = team2;
@@ -41,7 +42,7 @@ public class TypesMatch implements Types, Serializable {
 		this.team2Score = team2Score;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
@@ -70,6 +71,11 @@ public class TypesMatch implements Types, Serializable {
 			return false;
 		return true;
 		
+	}
+
+	@Override
+	public int compareTo(TypesMatch o) {
+		return getDate().compareTo(o.getDate());
 	}
 	
 	

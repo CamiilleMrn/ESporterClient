@@ -49,6 +49,7 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -69,13 +70,13 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 	private JTextField txtCalendar;
 	private JPanel panelTournaments;
 	private JLabel lblNoTournament = new JLabel();
-	private Date dateFilter =null;
+	private Timestamp dateFilter =null;
 	private TypesGame gameFilter = null;
 	private List<RendererCalendar> renderer;
 	private JComboBox comboBoxFilterGame;
 
 	
-	public void createListTournament(Date date, TypesGame game) {
+	public void createListTournament(Timestamp date, TypesGame game) {
         // create List model
 		panelTournaments.removeAll();
 		dateFilter = date;
@@ -291,7 +292,7 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 		return gameFilter;
 	}
 	
-	public Date getChosenDate() {
+	public Timestamp getChosenDate() {
 		return dateFilter;
 	}
 	
@@ -305,7 +306,7 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 		
 	}
 	@Override
-	public void setChosenDate(Date chosenDate) {
+	public void setChosenDate(Timestamp chosenDate) {
 		// TODO Auto-generated method stub
 		
 	}

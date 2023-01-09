@@ -4,6 +4,7 @@ package types;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class TypesPlayer implements Types, Serializable {
@@ -15,17 +16,17 @@ public class TypesPlayer implements Types, Serializable {
 	private String name;
 	private String firstName;
 	private TypesImage image;
-	private Date birthDate;
-	private Date contractStartDate;
-	private Date contractEndDate;
+	private Timestamp birthDate;
+	private Timestamp contractStartDate;
+	private Timestamp contractEndDate;
 	private int nationality;
 	private int idTeam;
 	private int idStable;
 	
 	
 
-	public TypesPlayer(int id, String name, String firstName, TypesImage image, Date birthDate, Date contractStartDate,
-			Date contractEndDate, int nationality, int idTeam, int idStable) {
+	public TypesPlayer(int id, String name, String firstName, TypesImage image, Timestamp birthDate, Timestamp contractStartDate,
+			Timestamp contractEndDate, int nationality, int idTeam, int idStable) {
 		this.id = id;
 		this.name = name;
 		this.firstName = firstName;
@@ -75,16 +76,16 @@ public class TypesPlayer implements Types, Serializable {
 	}
 
 	
-	public Date getBirthDate() {
+	public Timestamp getBirthDate() {
 		return birthDate;
 	}
 
 
 
-	public Date getContractEndDate() {
+	public Timestamp getContractEndDate() {
 		return contractEndDate;
 	}
-	public Date getContractStartDate() {
+	public Timestamp getContractStartDate() {
 		return contractStartDate;
 	}
 

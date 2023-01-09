@@ -2,6 +2,7 @@ package model.data;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -75,7 +76,7 @@ public class Data implements Serializable, Types {
 		return listOfTournamentInfo;
 	}
 	
-	public ArrayList<TypesTournament> listFilteredTournament(Date date, TypesGame game) {
+	public ArrayList<TypesTournament> listFilteredTournament(Timestamp date, TypesGame game) {
 		ArrayList<TypesTournament>  listOfTournamentInfo = listSortedTournaments();
 		ArrayList<TypesTournament> sortedFiltered = new ArrayList<>();
 		if (date!=null && game!=null) {

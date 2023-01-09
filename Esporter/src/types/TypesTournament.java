@@ -2,6 +2,7 @@ package types;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -12,7 +13,7 @@ public class TypesTournament implements Types, Serializable, Comparable<TypesTou
 	 * 
 	 */
 	private static final long serialVersionUID = -2465967083363947302L;
-	private Date registerDate;
+	private Timestamp registerDate;
 	private String name;
 	private TypesFame fame;
 	// private List<Jeu> jeux;
@@ -21,7 +22,7 @@ public class TypesTournament implements Types, Serializable, Comparable<TypesTou
 	private ArrayList<TypesPool> pool;
 	private ArrayList<Integer> registered;
 	
-	public TypesTournament(Date registerDate, String name, TypesFame fame, TypesGame game, int id) {
+	public TypesTournament(Timestamp registerDate, String name, TypesFame fame, TypesGame game, int id) {
 		this.registerDate = registerDate;
 		this.name = name;
 		this.fame = fame;
@@ -40,7 +41,7 @@ public class TypesTournament implements Types, Serializable, Comparable<TypesTou
 	}
 	
 
-	public Date getRegisterDate() {
+	public Timestamp getRegisterDate() {
 		return registerDate;
 	}
 
