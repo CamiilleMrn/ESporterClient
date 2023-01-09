@@ -74,7 +74,7 @@ public class TypesTournament implements Types, Serializable, Comparable<TypesTou
 		if (getClass() != obj.getClass())
 			return false;
 		TypesTournament other = (TypesTournament) obj;
-		return id == other.id;
+		return registerDate.equals(other.getRegisterDate());
 	}
 	
 	public ArrayList<Integer> getRegistered() {

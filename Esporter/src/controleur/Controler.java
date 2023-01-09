@@ -55,6 +55,7 @@ import vue.component.ContainerModifyPlayer;
 import vue.component.ContainerPlayer;
 import vue.component.DatePicker;
 import vue.organizer.CreateTournament;
+import vue.organizer.EditTournament;
 import vue.player.RegisterTournament;
 import vue.stable.AddPlayer;
 import vue.stable.ModifyPlayer;
@@ -316,6 +317,53 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				}
 				break;
 			case MODIFY_TOURNAMENT:
+				switch(e.getActionCommand()) {
+				case "MODIFY_TOURNAMENT_DATE":
+					//create frame new object  f
+					final JFrame f = new JFrame();
+					//set text which is collected by date picker i.e. set date 
+					((EditTournament)MasterFrame.getCurrentPanel()).getTxtDateStartTournament().setText(new DatePicker(f).setPickedDate());
+					break;
+				case "MODIFY_TOURNAMENT_VALIDATE":
+					try {
+						EditTournament editPage = ((EditTournament)MasterFrame.getCurrentPanel());
+						if(editPage.getTxtDateStartTournament().getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Veuillez préciser la date de début du tournoi","Error", JOptionPane.ERROR_MESSAGE);
+						}else if(editPage.getTxtTournamentName().getText().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Veuillez préciser le nom du tournoi","Error", JOptionPane.ERROR_MESSAGE);
+						}else {
+							Date tournamentStart = null;
+							try {
+								tournamentStart = Date.valueOf(editPage.getTxtDateStartTournament().getText());
+							} catch (IllegalArgumentException e1) {
+								e1.printStackTrace();
+								JOptionPane.showMessageDialog(null, "Format de date invalide","Error", JOptionPane.ERROR_MESSAGE);
+								return;
+							}
+							int n = JOptionPane.showConfirmDialog(null, "Confirmez vous la modification du tournoi ?","Confirmation", JOptionPane.YES_NO_OPTION);
+							if (n == JOptionPane.YES_OPTION) {
+								TypesTournament t = new TypesTournament(tournamentStart, editPage.getTxtTournamentName().getText(), 
+										(TypesFame) editPage.getComboBoxFame().getSelectedItem(), (TypesGame) editPage.getComboBoxGame().getSelectedItem(),editPage.getTournament().getId());
+								TypesTournament dummyDate = new TypesTournament(tournamentStart, null, null,null, -1);
+								if (MasterFrame.getInstance().getUser().getData().listSortedTournaments().contains(t) && !(MasterFrame.getInstance().getUser().getData().listSortedTournaments().get(MasterFrame.getInstance().getUser().getData().listSortedTournaments().indexOf(dummyDate)).getId() == t.getId())) { 
+									JOptionPane.showMessageDialog(null, "Un tournoi à cette date existe déjà","Error", JOptionPane.ERROR_MESSAGE);
+								}else{
+									MasterFrame.getInstance().getUser().modifyTournament(t);
+									MasterFrame.getInstance().setPanel(vue.organizer.Calendar.class, null);
+									state = State.CALENDAR;
+								}
+							}
+						}
+					} catch (ExceptionInvalidPermission e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case "MODIFY_TOURNAMENT_CANCEL":
+					MasterFrame.getInstance().setPanel(vue.organizer.Calendar.class, null);
+					state = State.CALENDAR;
+					break;
+				}
 				break;
 			case CALENDAR:
 				vue.component.Calendar cal;
@@ -371,7 +419,8 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						//MasterFrame.getInstance().setPanel(vue.SeePlayerInfos.class, team);
 						
 						if(e.getActionCommand().contains("MODIFY")) {
-							System.out.println("NOT YET IMPLEMENTED");
+							MasterFrame.getInstance().setPanel(vue.organizer.EditTournament.class, tournament);
+							state = State.MODIFY_TOURNAMENT;
 						}else if(e.getActionCommand().contains("REMOVE")) {
 							int n = JOptionPane.showConfirmDialog (null, "Etes vous sur de vouloir supprimer le tournoi?","WARNING", JOptionPane.YES_NO_OPTION);
 							if(n== JOptionPane.YES_OPTION) {

@@ -20,7 +20,7 @@ import types.exception.ExceptionLogin;
 import types.exception.ExceptionInvalidPermission;
 
 public class User {
-	
+
 	private volatile TypesPermission permission;
 	private CommunicationServer com;
 	private Thread t;
@@ -37,43 +37,43 @@ public class User {
 		t.start();
 		com.initializeApp();
 		waiting.waitFor(Response.UPDATE_ALL);
-		
+
 	}
-	
+
 	public Data getData() {
 		synchronized (data) {
 			return data;
 		}
 	}
-	
+
 	public void setData(Data data) {
 		synchronized (data) {
 			User.data = data;
 		}
-		
+
 	}
-	
+
 	public CommunicationServer getCom() {
 		return com;
 	}
-	
+
 	public void setPermission(TypesPermission permission) {
 		this.permission = permission;
 	}
-	
+
 	public TypesPermission getPermission() {
 		return permission;
 	}
-	
+
 	public void login(String username, String password) throws ExceptionLogin {
 		com.sendLogin(username, password);
-		Response[] r = {Response.LOGIN, Response.ERROR_LOGIN};
+		Response[] r = { Response.LOGIN, Response.ERROR_LOGIN };
 		waiting.waitFor(r);
 		switch (waiting.getActualState()) {
 		case ERROR_LOGIN:
 			throw new ExceptionLogin("Erreur de login");
 		case LOGIN:
-			switch(permission) {
+			switch (permission) {
 			case REFEREE:
 				Controler.getInstance().setMenu(TypesMenu.REFEREE);
 				break;
@@ -91,76 +91,85 @@ public class User {
 				break;
 			default:
 				break;
-			
+
 			}
 			break;
 		default:
 			break;
 		}
 	}
-	
+
 	public void logout() {
 		setInfo(null);
 		setPermission(TypesPermission.VISITOR);
 		com.logout();
 	}
-	
+
 	public WaitingFor getWaiting() {
 		return waiting;
 	}
-	
+
 	public Types getInfo() {
 		return info;
 	}
-	
+
 	public void setInfo(Types info) {
 		this.info = info;
 	}
-	
-	
+
 	public int voirInfosEcurie() {
 		return -1;
 	}
-	
-	public void registerTournament(int id) throws ExceptionInvalidPermission{
-		if (permission!=TypesPermission.PLAYER) {
+
+	public void registerTournament(int id) throws ExceptionInvalidPermission {
+		if (permission != TypesPermission.PLAYER) {
 			throw new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
 		com.registerTournament(id);
 	}
-	
-	public void unregisterTournament(int idTournament, int idGame) throws ExceptionInvalidPermission{
+
+	public void unregisterTournament(int idTournament, int idGame) throws ExceptionInvalidPermission {
 		if (permission != TypesPermission.PLAYER) {
 			throw new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
 		com.unregisterTournament(idTournament, idGame);
 	}
-	
-	public void addTeam(TypesRegisterTeam team){
-		if (permission!=TypesPermission.STABLE) {
-			Controler.getInstance().fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"));
+
+	public void addTeam(TypesRegisterTeam team) {
+		if (permission != TypesPermission.STABLE) {
+			Controler.getInstance()
+					.fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"));
 		} else {
 			com.addTeam(team);
 		}
 	}
-	
+
 	public void modifyTeam(TypesTeam team) {
-		if (permission!=TypesPermission.STABLE) {
-			Controler.getInstance().fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"));
+		if (permission != TypesPermission.STABLE) {
+			Controler.getInstance()
+					.fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"));
 		} else {
 			com.modifyTeam(team);
 		}
 	}
-	
+
 	public void deleteTournament(TypesTournament tournament) {
 		com.deleteTournament(tournament.getId());
 	}
-	
+
 	public void addTournament(TypesTournament t) throws ExceptionInvalidPermission {
-		if (permission!=TypesPermission.ORGANIZER) {
+		if (permission != TypesPermission.ORGANIZER) {
 			throw new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
 		com.addTournament(t);
+	}
+
+	public void modifyTournament(TypesTournament t) throws ExceptionInvalidPermission {
+		if (permission != TypesPermission.ORGANIZER) {
+			throw new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action");
+
+		}
+		com.modifyTournament(t);
 	}
 
 }

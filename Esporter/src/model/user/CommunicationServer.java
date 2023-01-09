@@ -233,10 +233,8 @@ public class CommunicationServer implements Runnable{
 			break;
 		case UPDATE_TOURNAMENT:
 			TypesTournament tournament = (TypesTournament)r.getInfoByID(TypesID.TOURNAMENT);
-			System.out.println("ok");
 			user.getData().getCalendar().put(tournament.getId(), tournament);
 			MasterFrame.getInstance().dataUpdate();
-			System.out.println("Data update...");
 			break;
 		case UPDATE_ALL:
 			user.setData((Data)r.getInfo().get(TypesID.ALL));
@@ -256,6 +254,13 @@ public class CommunicationServer implements Runnable{
 		
 		}
 		user.getWaiting().setActualState(r.getName());
+	}
+
+	public void modifyTournament(TypesTournament t) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.TOURNAMENT, t);
+		Command c = new Command(CommandName.MODIFY_TOURNAMENT, m);
+		send(c);
 	}
 
 
