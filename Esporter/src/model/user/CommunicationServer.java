@@ -39,7 +39,7 @@ public class CommunicationServer implements Runnable{
 	private int reconnect = 1;
 	private int reconnectTime = 1;
 	private boolean run=true;
-	private static final String IP = "127.0.0.1";
+	private static final String IP = "144.24.206.118";
 	private static final int PORT = 4000;
 	
 	public CommunicationServer(User user) throws UnknownHostException, IOException {

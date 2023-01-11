@@ -354,7 +354,11 @@ public class MasterFrame {
 		
 		}
 		Controler.getInstance().setState(State.CALENDAR);
-		setPanel(vue.Calendar.class, controler.getUser().getPermission());
+		if(controler.getUser().getPermission() == TypesPermission.ORGANIZER) {
+			setPanel(vue.organizer.Calendar.class, null);
+		} else {
+			setPanel(vue.Calendar.class, controler.getUser().getPermission());
+		}
 	}
 	
 	public void setPanel(Class<? extends JPanel> clazz, Object ob) {
