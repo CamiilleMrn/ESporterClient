@@ -56,8 +56,8 @@ public class TypesRanking implements Types, Serializable{
 
 			@Override
 			public int compare(TypesStable o1, TypesStable o2) {
-				if (stables.get(o1)-stables.get(o2)!=0) {
-					if (stables.get(o1)>stables.get(o2)) {
+				if (stables.get(o1.getId())-stables.get(o2.getId())!=0) {
+					if (stables.get(o1.getId())>stables.get(o2.getId())) {
 						return -1;
 					}
 					return 1;

@@ -49,6 +49,7 @@ import types.exception.ExceptionTeamNotFull;
 import vue.Calendar;
 import vue.LogIn;
 import vue.MasterFrame;
+import vue.Ranking;
 import vue.SeePlayerInfos;
 import vue.StableInfo;
 import vue.Stables;
@@ -629,6 +630,11 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				}
 				break;
 			case RANKING:
+				switch(e.getActionCommand()) {
+				case "RANKING_COMBOGAME":
+					((Ranking)MasterFrame.getCurrentPanel()).createListRenderer((TypesGame)((Ranking)MasterFrame.getCurrentPanel()).getComboBoxGame().getSelectedItem());
+					break;
+				}
 				break;
 			case STABLE_INFO:
 				if(e.getActionCommand().contains("RENDERER")) {

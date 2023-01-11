@@ -115,8 +115,9 @@ public class MasterFrame {
 		frame.setMinimumSize(new Dimension(1450,700));
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setPreferredSize(new Dimension(1920,1080));
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frame.setPreferredSize(new Dimension(1920,1080));
+		
 		JLayeredPane root = new JLayeredPane();
 		root.setLayout(new BorderLayout());
 		
