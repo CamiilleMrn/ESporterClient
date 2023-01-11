@@ -22,6 +22,7 @@ import types.TypesID;
 import types.Types;
 import types.TypesPlayer;
 import types.TypesLogin;
+import types.TypesMatch;
 import types.TypesPermission;
 import types.TypesRegisterTeam;
 import types.TypesTournament;
@@ -39,7 +40,7 @@ public class CommunicationServer implements Runnable{
 	private int reconnectTime = 1;
 	private boolean run=true;
 	private static final String IP = "127.0.0.1";
-	private static final int PORT = 80;
+	private static final int PORT = 4000;
 	
 	public CommunicationServer(User user) throws UnknownHostException, IOException {
 		this.user = user;
@@ -243,6 +244,17 @@ public class CommunicationServer implements Runnable{
 		case DELETE_TOURNAMENT:
 			user.getData().getCalendar().remove(((TypesInteger)r.getInfoByID(TypesID.TOURNAMENT)).getInteger());
 			MasterFrame.getInstance().dataUpdate();
+		case UPDATE_MATCH:
+			int idTournoi = ((TypesInteger)r.getInfoByID(TypesID.TOURNAMENT)).getInteger();
+			int Pool = ((TypesInteger)r.getInfoByID(TypesID.POOL)).getInteger();
+			TypesMatch match = ((TypesMatch)r.getInfoByID(TypesID.MATCH));
+			
+			for(TypesMatch m : user.getData().getCalendar().get(idTournoi).getPool().get(Pool).getMatchs()) {
+				if(m.equals(match)) {
+					m.setPoint(match.getTeam1Score(), match.getTeam2Score());
+					break;
+				}
+			}
 		default:
 			break;
 		
@@ -255,6 +267,16 @@ public class CommunicationServer implements Runnable{
 		HashMap<TypesID, Types> m = new HashMap<>();
 		m.put(TypesID.TOURNAMENT, t);
 		Command c = new Command(CommandName.MODIFY_TOURNAMENT, m);
+		send(c);
+	}
+	
+	
+	public void changeScore(TypesMatch match, int idTournament, int idPool) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.MATCH, match);
+		m.put(TypesID.TOURNAMENT, new TypesInteger(idTournament));
+		m.put(TypesID.POOL, new TypesInteger(idPool));
+		Command c = new Command(CommandName.SCORE, m);
 		send(c);
 	}
 

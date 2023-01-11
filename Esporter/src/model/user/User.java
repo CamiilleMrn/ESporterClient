@@ -10,6 +10,7 @@ import model.data.Data;
 import model.socket.Response;
 import types.TypesTeam;
 import types.Types;
+import types.TypesMatch;
 import types.TypesMenu;
 import types.TypesPlayer;
 import types.TypesPermission;
@@ -151,6 +152,10 @@ public class User {
 		} else {
 			com.modifyTeam(team);
 		}
+	}
+	
+	public void changeScore(TypesMatch match, int idTournament, int idPool) {
+		com.changeScore(match,idTournament,idPool);
 	}
 
 	public void deleteTournament(TypesTournament tournament) {

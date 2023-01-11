@@ -107,11 +107,15 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 		stateBefore = state;
 		
 		state = State.ERROR;
-		System.out.println("Passage de "+stateBefore+" à "+state);
 	}
 	
-	public void closeError() {
-		System.out.println("Passage de "+state+" à "+stateBefore);
+	public void openLogin() {
+		stateBefore = state;
+		
+		state = State.LOGIN;
+	}
+	
+	public void closeParallel() {
 		state = stateBefore;
 		
 	}
@@ -167,7 +171,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					MasterFrame.getInstance().getError().setVisible(false);
 					MasterFrame.getInstance().getLoginPage().setVisible(true);
 					MasterFrame.getInstance().getLoginPage().getTxtUsername().requestFocus();
-					state = State.LOGIN;
+					openLogin();
 				}
 			}
 		} else {
@@ -475,7 +479,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				if(e.getActionCommand().equals("ERROR_CONTINUE")) {
 					MasterFrame.getInstance().getError().setVisible(false);
 					MasterFrame.getInstance().getError().setException(null);
-					closeError();
+					closeParallel();
 				}
 				break;
 			case HOME_ORGANIZER:
@@ -509,6 +513,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				case "LOGIN_CANCEL":
 					MasterFrame.getInstance().getLoginPage().setVisible(false);
 					MasterFrame.getInstance().getMain().setVisible(true);
+					closeParallel();
 					break;
 				}
 				
@@ -856,7 +861,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 			if (e.getKeyCode()==KeyEvent.VK_ENTER){
 				MasterFrame.getInstance().getError().setVisible(false);
 				MasterFrame.getInstance().getError().setException(null);
-				closeError();
+				closeParallel();
 			}
 			break;
 		default:
