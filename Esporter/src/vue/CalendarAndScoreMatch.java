@@ -22,6 +22,8 @@ import types.TypesTournament;
 import vue.component.RendererProgramMatch;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
+import javax.swing.border.EmptyBorder;
 
 public class CalendarAndScoreMatch extends JPanel {
 
@@ -43,32 +45,46 @@ public class CalendarAndScoreMatch extends JPanel {
             }
         }
         matchList = matchList.stream().sorted().collect(Collectors.toList());
+        int id=0;
         for (TypesMatch match: matchList){
-            panelContainerRenderers.add(new RendererProgramMatch(match));
+            panelContainerRenderers.add(new RendererProgramMatch(match,id));
+            id ++;
         }
-        panelContainerRenderers.setLayout(new GridLayout(0, 1, 0, 10));
     }
 
     public CalendarAndScoreMatch(TypesTournament tournament) {
         this.tournament = tournament;
         setLayout(new BorderLayout(0, 0));
 
-
-        JLabel lblTournament = new JLabel(tournament.getName());
-        lblTournament.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTournament.setPreferredSize(new Dimension(lblTournament.getPreferredSize().width, 100));
-        lblTournament.setFont(new Font("Cambria", Font.BOLD, 25));
-        add(lblTournament, BorderLayout.NORTH);
-
         //JPanel panel_1 = new JPanel();
         //add(panel_1);
         //panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 
+       
+        
+        JPanel panelContainerHeader = new JPanel();
+        add(panelContainerHeader, BorderLayout.NORTH);
+        panelContainerHeader.setLayout(new BorderLayout(0, 0));
+        
+        JLabel lblTournament = new JLabel("Calendrier des matchs");
+        lblTournament.setPreferredSize(new Dimension(55, 100));
+        lblTournament.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTournament.setFont(new Font("Cambria", Font.BOLD, 35));
+        panelContainerHeader.add(lblTournament);
+        
+        JPanel panelContainerJScroll = new JPanel();
+        panelContainerJScroll.setBorder(new EmptyBorder(50, 100, 50, 100));
+        add(panelContainerJScroll, BorderLayout.CENTER);
+        
+      
         panelContainerRenderers = new JPanel();
         createProgramMatchList();
         JScrollPane scrollPane = new JScrollPane(panelContainerRenderers);
+        scrollPane.setBorder(null);
+        panelContainerRenderers.setLayout(new GridLayout(0, 1, 0, 0));
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
-        add(scrollPane, BorderLayout.CENTER);
+        panelContainerJScroll.setLayout(new BorderLayout(0, 0));
+        panelContainerJScroll.add(scrollPane);
     }
 
 }

@@ -208,6 +208,7 @@ public class StableInfo extends DataJPanel{
 		panAllTeams.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		createListTeam();
 		JScrollPane scrollPaneTeam = new JScrollPane(panAllTeams);
+		panAllTeams.setLayout(new GridLayout(2, 0, 0, 0));
 		scrollPaneTeam.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		scrollPaneTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelTeam.add(scrollPaneTeam, BorderLayout.CENTER);

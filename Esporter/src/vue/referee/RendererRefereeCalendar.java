@@ -73,9 +73,6 @@ public class RendererRefereeCalendar extends JPanel implements RendererCalendar{
 		add(lbArrowIcon, BorderLayout.EAST);
 		
 		lbTournamentName.setText(this.tournament.getName()+ " - " +new SimpleDateFormat("MM/dd/yyyy").format(this.tournament.getRegisterDate()));
-		btnScore.setText("Entrer le score");
-		btnScore.addActionListener(Controler.getInstance());
-		btnScore.setActionCommand("CALENDAR RENDERER SCORE "+id);
 		
 		lbArrowIcon.setBorder(null);
 		lbArrowIcon.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
