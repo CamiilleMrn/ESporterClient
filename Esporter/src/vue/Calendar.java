@@ -150,6 +150,7 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 		panelContent.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		createListTournament(null, null);
 		JScrollPane scrollPaneCalendar = new JScrollPane(panelContent);
+		scrollPaneCalendar.getVerticalScrollBar().setUnitIncrement(20);
 		scrollPaneCalendar.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		scrollPaneCalendar.setBorder(new EmptyBorder(50, 100, 50, 100));
 		panelRoot.add(scrollPaneCalendar, BorderLayout.CENTER);
