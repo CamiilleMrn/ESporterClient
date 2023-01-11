@@ -18,15 +18,16 @@ import vue.component.RendererRanking;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import javax.swing.JScrollPane;
 
 public class Ranking extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2582357904692590601L;
 	private JPanel panelContent;
-	private TypesGame gameFilter;
 	private JComboBox<TypesGame> comboBoxGame;
 	
 	public void createListRenderer(TypesGame game) {
