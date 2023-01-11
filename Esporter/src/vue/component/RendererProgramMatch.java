@@ -103,7 +103,12 @@ public class RendererProgramMatch extends JPanel {
 		lblTeam1Logo.setFont(new Font("Cambria", Font.PLAIN, 16));
 		panelContainerTeamsInfo.add(lblTeam1Logo);
 		
-		JLabel lblScoreOrVs = new JLabel("VS");
+		JLabel lblScoreOrVs = new JLabel();
+		if(match.getWinner() != -1) {
+			lblScoreOrVs.setText("VS");
+		}else {
+			lblScoreOrVs.setText(match.getTeam1Score() + " - " +match.getTeam2Score());
+		}
 		lblScoreOrVs.setFont(new Font("Cambria", Font.PLAIN, 16));
 		lblScoreOrVs.setHorizontalAlignment(SwingConstants.CENTER);
 		panelContainerTeamsInfo.add(lblScoreOrVs);
