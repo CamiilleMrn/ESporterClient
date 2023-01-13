@@ -200,7 +200,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					Timestamp contractEndDate = null;
 					BufferedImage image = jd.getImage();
 					try {
-					contractStartDate= Timestamp.valueOf(jd.getTxtStartContractDate().getText() + "00:00:00");
+					contractStartDate= Timestamp.valueOf(jd.getTxtStartContractDate().getText() + " 00:00:00");
 					birthDate= Timestamp.valueOf(jd.getTxtBirthDate().getText() + " 00:00:00");
 					contractEndDate= Timestamp.valueOf(jd.getTxtEndContractDate().getText() + " 00:00:00");
 					} catch (IllegalArgumentException e1){
