@@ -13,6 +13,7 @@ import controleur.Controler;
 import types.TypesGame;
 import types.TypesRanking;
 import types.TypesStable;
+import vue.component.DataJPanel;
 import vue.component.RendererRanking;
 
 import java.awt.Font;
@@ -21,7 +22,7 @@ import java.awt.GridLayout;
 import java.util.HashMap;
 import javax.swing.JScrollPane;
 
-public class Ranking extends JPanel {
+public class Ranking extends DataJPanel {
 
 	/**
 	 * 
@@ -126,6 +127,14 @@ public class Ranking extends JPanel {
 	
 	public JComboBox<TypesGame> getComboBoxGame() {
 		return comboBoxGame;
+	}
+
+
+
+	@Override
+	public void dataUpdate() {
+		createListRenderer((TypesGame)comboBoxGame.getSelectedItem());
+		
 	}
 	
 	

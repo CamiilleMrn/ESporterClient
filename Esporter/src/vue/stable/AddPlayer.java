@@ -167,7 +167,6 @@ public class AddPlayer extends JDialog {
 		//set title
 		setTitle("Ajouter joueur ");
 		//set close operation on frame
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		//set bounds of frame
 		setBounds(100, 100, 617, 341);
 		//create new JPanel in contentPane

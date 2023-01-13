@@ -19,13 +19,14 @@ import javax.swing.JScrollPane;
 import types.TypesMatch;
 import types.TypesPool;
 import types.TypesTournament;
+import vue.component.DataJPanel;
 import vue.component.RendererProgramMatch;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 
-public class CalendarAndScoreMatch extends JPanel {
+public class CalendarAndScoreMatch extends DataJPanel {
 
     /**
      * 
@@ -33,23 +34,29 @@ public class CalendarAndScoreMatch extends JPanel {
     private static final long serialVersionUID = 1L;
     private TypesTournament tournament;
     private JPanel panelContainerRenderers;
+    private ArrayList<RendererProgramMatch> renderers;
 
     public void createProgramMatchList() {
+    	panelContainerRenderers.removeAll();
+    	renderers = new ArrayList<>();
         ArrayList<TypesPool> poolList = tournament.getPool();
         List<TypesMatch> matchList = new ArrayList<>();
+        
         for(TypesPool pool : poolList) {
-            System.out.println("poule : "+pool);
             for(TypesMatch match: pool.getMatchs()) {
-                System.out.println("match : "+match);
                 matchList.add(match);
             }
         }
         matchList = matchList.stream().sorted().collect(Collectors.toList());
         int id=0;
         for (TypesMatch match: matchList){
-            panelContainerRenderers.add(new RendererProgramMatch(match,id));
+        	System.out.println(match.getTeam1()+" VS "+match.getTeam2());
+        	RendererProgramMatch rpm = new RendererProgramMatch(match,id);
+            panelContainerRenderers.add(rpm);
+            renderers.add(rpm);
             id ++;
         }
+        this.revalidate();
     }
 
     public CalendarAndScoreMatch(TypesTournament tournament) {
@@ -86,5 +93,15 @@ public class CalendarAndScoreMatch extends JPanel {
         panelContainerJScroll.setLayout(new BorderLayout(0, 0));
         panelContainerJScroll.add(scrollPane);
     }
+    
+    public RendererProgramMatch getRenderer(int id) {
+    	return this.renderers.get(id);
+    }
+
+	@Override
+	public void dataUpdate() {
+		createProgramMatchList();
+		
+	}
 
 }

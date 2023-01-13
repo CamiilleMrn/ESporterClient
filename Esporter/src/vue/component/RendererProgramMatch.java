@@ -104,7 +104,7 @@ public class RendererProgramMatch extends JPanel {
 		panelContainerTeamsInfo.add(lblTeam1Logo);
 		
 		JLabel lblScoreOrVs = new JLabel();
-		if(match.getWinner() != -1) {
+		if(!match.isPlayed()) {
 			lblScoreOrVs.setText("VS");
 		}else {
 			lblScoreOrVs.setText(match.getTeam1Score() + " - " +match.getTeam2Score());
@@ -153,9 +153,9 @@ public class RendererProgramMatch extends JPanel {
 		JButton btnSetScore = new JButton("Ajouter le score");
 		panelButton.add(btnSetScore);
 		btnSetScore.addActionListener(Controler.getInstance());
-		btnSetScore.setActionCommand("CALENDAR RENDERER SCORE "+id);
+		btnSetScore.setActionCommand("MATCHES RENDERER SCORE "+id);
 		
-		if(Controler.getInstance().getUser().getPermission() != TypesPermission.REFEREE) {
+		if(Controler.getInstance().getUser().getPermission() != TypesPermission.REFEREE || match.getTeam1()==0 && match.getTeam2()==0) {
 			btnSetScore.setVisible(false);
 		}
 		

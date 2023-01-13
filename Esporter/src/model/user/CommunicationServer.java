@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import javax.swing.SwingUtilities;
 
+import controleur.Controler;
 import model.data.Data;
 import model.socket.Command;
 import model.socket.CommandName;
@@ -21,6 +22,7 @@ import types.TypesTeam;
 import types.TypesID;
 import types.Types;
 import types.TypesPlayer;
+import types.TypesRanking;
 import types.TypesLogin;
 import types.TypesMatch;
 import types.TypesPermission;
@@ -39,7 +41,7 @@ public class CommunicationServer implements Runnable{
 	private int reconnect = 1;
 	private int reconnectTime = 1;
 	private boolean run=true;
-	private static final String IP = "144.24.206.118";
+	private static final String IP = "127.0.0.1"; //144.24.206.118
 	private static final int PORT = 4000;
 	
 	public CommunicationServer(User user) throws UnknownHostException, IOException {
@@ -216,7 +218,9 @@ public class CommunicationServer implements Runnable{
 			//ok
 			break;
 		case UPDATE_STABLE:
-			
+			TypesStable stable = (TypesStable)r.getInfoByID(TypesID.STABLE);
+			user.getData().getStables().put(stable.getId(), stable);
+			MasterFrame.getInstance().dataUpdate();
 			break;
 		case UPDATE_TEAM:
 			TypesTeam team = (TypesTeam)r.getInfoByID(TypesID.TEAM);
@@ -255,6 +259,11 @@ public class CommunicationServer implements Runnable{
 					break;
 				}
 			}
+			MasterFrame.getInstance().dataUpdate();
+		case UPDATE_RANKING:
+			TypesRanking ranking = ((TypesRanking)r.getInfoByID(TypesID.RANKING));
+			Controler.getInstance().getData().getRanking().put(ranking.getId(), ranking);
+			MasterFrame.getInstance().dataUpdate();
 		default:
 			break;
 		

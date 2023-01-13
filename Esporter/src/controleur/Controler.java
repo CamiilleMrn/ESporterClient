@@ -36,6 +36,7 @@ import types.TypesFame;
 import types.TypesGame;
 import types.TypesImage;
 import types.TypesLogin;
+import types.TypesMatch;
 import types.TypesMenu;
 import types.TypesPermission;
 import types.TypesPlayer;
@@ -47,6 +48,7 @@ import types.TypesTournament;
 import types.exception.ExceptionInvalidPermission;
 import types.exception.ExceptionTeamNotFull;
 import vue.Calendar;
+import vue.CalendarAndScoreMatch;
 import vue.LogIn;
 import vue.MasterFrame;
 import vue.Ranking;
@@ -57,9 +59,11 @@ import vue.component.ContainerModifyPlayer;
 import vue.component.ContainerPlayer;
 import vue.component.DatePicker;
 import vue.component.ProgramMatchs;
+import vue.component.RendererProgramMatch;
 import vue.organizer.CreateTournament;
 import vue.organizer.EditTournament;
 import vue.player.RegisterTournament;
+import vue.referee.SetScore;
 import vue.stable.AddPlayer;
 import vue.stable.ModifyPlayer;
 import vue.stable.ModifyTeam;
@@ -72,6 +76,8 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 	private User user;
 	private State state = null;
 	private JDialog lastDialog = null;
+	private State stateBeforeLogin;
+	private State stateBeforeError;
 	private State stateBefore;
 	
 	
@@ -105,19 +111,24 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 	}
 	
 	public void openError() {
-		stateBefore = state;
+		stateBeforeError = state;
 		
 		state = State.ERROR;
 	}
 	
 	public void openLogin() {
-		stateBefore = state;
+		stateBeforeLogin = state;
 		
 		state = State.LOGIN;
 	}
 	
-	public void closeParallel() {
-		state = stateBefore;
+	public void closeError() {
+		state = stateBeforeError;
+		
+	}
+	
+	public void closeLogin() {
+		state = stateBeforeLogin;
 		
 	}
 	
@@ -480,7 +491,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				if(e.getActionCommand().equals("ERROR_CONTINUE")) {
 					MasterFrame.getInstance().getError().setVisible(false);
 					MasterFrame.getInstance().getError().setException(null);
-					closeParallel();
+					closeError();
 				}
 				break;
 			case HOME_ORGANIZER:
@@ -514,7 +525,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				case "LOGIN_CANCEL":
 					MasterFrame.getInstance().getLoginPage().setVisible(false);
 					MasterFrame.getInstance().getMain().setVisible(true);
-					closeParallel();
+					closeLogin();
 					break;
 				}
 				
@@ -696,6 +707,40 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					
 				}
 				break;
+			case MATCHES:
+				if(e.getActionCommand().contains("RENDERER")) {
+					String model = "MATCHES RENDERER SCORE ";
+					int id = Integer.parseInt(e.getActionCommand().substring(model.length()));
+					RendererProgramMatch rpm = ((CalendarAndScoreMatch)MasterFrame.getCurrentPanel()).getRenderer(id);
+					//Appel du JDialog pour choisir le gagant
+					SetScore scorePage = new SetScore(rpm.getMatch());
+					scorePage.setVisible(true);
+					scorePage.setAlwaysOnTop(true);
+				}
+				break;
+			case ADD_SCORE:
+				SetScore s = (SetScore)lastDialog;
+				if(e.getActionCommand() == "ADD_SCORE_VALIDATE") {
+					TypesMatch match = s.getMatch();
+					if(s.getRdbTeam1().isSelected()) {
+						match.setPoint(1, 0);
+						JOptionPane.showMessageDialog(null, "Choix enregistré","", JOptionPane.INFORMATION_MESSAGE);
+						s.dispose();
+						closeDialog();
+						Controler.getInstance().getUser().changeScore(match, match.getIdTournament(), match.getIdPool());
+					} else if (s.getRdbTeam2().isSelected()) {
+						match.setPoint(0, 1);
+						JOptionPane.showMessageDialog(null, "Choix enregistré","", JOptionPane.INFORMATION_MESSAGE);
+						s.dispose();
+						closeDialog();
+						Controler.getInstance().getUser().changeScore(match, match.getIdTournament(), match.getIdPool());
+					} else {
+						JOptionPane.showMessageDialog(null, "Aucun choix selectionné","Erreur", JOptionPane.ERROR_MESSAGE);
+					}
+				} else if (e.getActionCommand() == "ADD_SCORE_CANCEL") {
+					s.dispose();
+				}
+				break;
 			default:
 				break;
 			
@@ -819,13 +864,11 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 	
 	
 	public void closeDialog() {
-		System.out.println("CLOSE");
 		this.lastDialog=null;
 		this.state = stateBefore;
 	}
 	
 	public void openDialog(JDialog jdiag, State name) {
-		System.out.println("OPEN");
 		this.lastDialog=jdiag;
 		this.stateBefore = this.state;
 		this.state=name;
@@ -867,7 +910,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 			if (e.getKeyCode()==KeyEvent.VK_ENTER){
 				MasterFrame.getInstance().getError().setVisible(false);
 				MasterFrame.getInstance().getError().setException(null);
-				closeParallel();
+				closeError();
 			}
 			break;
 		default:

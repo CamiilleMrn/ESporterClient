@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-public class ProgramMatchs extends JPanel {
+public class ProgramMatchs extends DataJPanel {
 	/**
 	 * 
 	 */
@@ -46,11 +46,16 @@ public class ProgramMatchs extends JPanel {
 	private JLabel lblTournament;
 	private JTable tableFinalRanking;
 	private TypesTournament tournament;
+	private JTable tableGroupStageA;
+	private JTable tableGroupStageB;
+	private JTable tableGroupStageC;
+	private JTable tableGroupStageD;
 
 	/**
 	 * Create the panel.
 	 */	
 	public ProgramMatchs(TypesTournament tournament) {
+		System.out.println(tournament);
 		this.tournament = tournament;
 		setLayout(new BorderLayout(0, 0));
 		
@@ -73,7 +78,7 @@ public class ProgramMatchs extends JPanel {
 
 		add(scrollPaneWithGroupeStageAndFinalRanking, BorderLayout.CENTER);
 		
-		ArrayList<TypesPool> pools = tournament.getPool();
+		
 		
 		
 
@@ -186,7 +191,7 @@ public class ProgramMatchs extends JPanel {
 		};
 		
 		
-		JTable tableGroupStageA = new JTable(defaultablemodel);
+		tableGroupStageA = new JTable(defaultablemodel);
 		tableGroupStageA.setFont(new Font("Cambria", Font.PLAIN, 10));
 		tableGroupStageA.setEnabled(false);
 		tableGroupStageA.setRowHeight(35);
@@ -225,7 +230,7 @@ public class ProgramMatchs extends JPanel {
 		
 		
 		
-		JTable tableGroupStageB = new JTable(defaultablemodel);
+		tableGroupStageB = new JTable(defaultablemodel);
 		tableGroupStageB.setEnabled(false);
 		tableGroupStageB.setRowHeight(35);
 		tableGroupStageB.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -261,7 +266,7 @@ public class ProgramMatchs extends JPanel {
 		};
 		
 
-		JTable tableGroupStageC = new JTable(defaultablemodel);
+		tableGroupStageC = new JTable(defaultablemodel);
 		tableGroupStageC.setEnabled(false);
 		tableGroupStageC.setRowHeight(35);
 		tableGroupStageC.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -297,7 +302,7 @@ public class ProgramMatchs extends JPanel {
 		};
 		
 		
-		JTable tableGroupStageD = new JTable(defaultablemodel);
+		tableGroupStageD = new JTable(defaultablemodel);
 		tableGroupStageD.setEnabled(false);
 		tableGroupStageD.setRowHeight(35);
 		tableGroupStageD.setFont(new Font("Cambria", Font.PLAIN, 15));
@@ -316,16 +321,30 @@ public class ProgramMatchs extends JPanel {
 		Component horizontalStrutAfterGroupStageD = Box.createHorizontalStrut(20);
 		panelGroupStage.add(horizontalStrutAfterGroupStageD);
 		
+		createPool();
+			
+	}
+	
+	public void createPool() {
+		((DefaultTableModel)tableFinalRanking.getModel()).getDataVector().removeAllElements();
+		((DefaultTableModel)tableGroupStageA.getModel()).getDataVector().removeAllElements();
+		((DefaultTableModel)tableGroupStageB.getModel()).getDataVector().removeAllElements();
+		((DefaultTableModel)tableGroupStageC.getModel()).getDataVector().removeAllElements();
+		((DefaultTableModel)tableGroupStageD.getModel()).getDataVector().removeAllElements();
+		
+		
+		ArrayList<TypesPool> pools = Controler.getInstance().getData().getCalendar().get(tournament.getId()).getPool();
+		
 		HashMap<TypesTeam,Integer> p = pools.get(4).getPoint();
 		Object[][] dataFinalColumn = new Object[4][3];
 		DefaultTableModel model = (DefaultTableModel)tableFinalRanking.getModel();
 		int i=0;
 		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
-			if (p.entrySet().size()!=4) {
+			//if (p.entrySet().size()!=4) {
 				model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
 				model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
 				//dataFinalColumn[i] = new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()};
-			}
+			//}
 			i++;
 		}
 		for (int j=0; j<4-p.entrySet().size(); j++) {
@@ -333,10 +352,6 @@ public class ProgramMatchs extends JPanel {
 			i++;
 		}
 
-		
-		
-		
-		
 		p = pools.get(0).getPoint();
 		Object[][] dataGroupStageA = new Object[4][3];
 		model = (DefaultTableModel)tableGroupStageA.getModel();
@@ -347,9 +362,7 @@ public class ProgramMatchs extends JPanel {
 			//dataGroupStageA[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
 			i++;
 		}
-		
-		
-		
+
 		p = pools.get(1).getPoint();
 		Object[][] dataGroupStageB = new Object[4][3];
 		model = (DefaultTableModel)tableGroupStageB.getModel();
@@ -360,7 +373,6 @@ public class ProgramMatchs extends JPanel {
 			//dataGroupStageB[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
 			i++;
 		}
-		
 		
 		p = pools.get(2).getPoint();
 		Object[][] dataGroupStageC = new Object[4][3];
@@ -383,11 +395,26 @@ public class ProgramMatchs extends JPanel {
 			//dataGroupStageD[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
 			i++;
 		}
-			
+		
+		((DefaultTableModel)tableFinalRanking.getModel()).fireTableDataChanged();
+		((DefaultTableModel)tableGroupStageA.getModel()).fireTableDataChanged();
+		((DefaultTableModel)tableGroupStageB.getModel()).fireTableDataChanged();
+		((DefaultTableModel)tableGroupStageC.getModel()).fireTableDataChanged();
+		((DefaultTableModel)tableGroupStageD.getModel()).fireTableDataChanged();
+		
 	}
 
 	
 	public TypesTournament getTournament() {
 		return tournament;
+	}
+
+
+	@Override
+	public void dataUpdate() {
+		createPool();
+		this.revalidate();
+		this.repaint();
+		
 	}
 }

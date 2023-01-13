@@ -25,7 +25,6 @@ import java.awt.GridBagLayout;
 import javax.swing.JTable;
 
 
-import backend.Tournoi;
 import controleur.Controler;
 import types.TypesGame;
 import types.TypesTournament;
