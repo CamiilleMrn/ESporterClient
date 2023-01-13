@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Blob;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -25,6 +26,7 @@ import vue.MasterFrame;
 import vue.component.ContainerPlayer;
 import vue.component.DatePicker;
 import types.TypesPlayer;
+import types.TypesImage;
 import types.TypesLogin;
 import types.TypesRegisterPlayer;
 
@@ -482,30 +484,20 @@ public class AddPlayer extends JDialog {
 		if (container.getPlayer() != null) {
 			TypesPlayer j = container.getPlayer().getPlayer();
 			txtName.setText(j.getName());
-			txtStartContractDate.setText(j.getContractStartDate().toString());
-			txtEndContractDate.setText(j.getContractEndDate().toString());
+			txtStartContractDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(j.getContractStartDate()));
+			txtEndContractDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(j.getContractEndDate()));
 			txtFirstname.setText(j.getFirstName());
 			BufferedImage bf = j.getImage().getImage();
-			bf = resize(bf, 300, 400);
-			lblPlayerImageIcon.setIcon(new ImageIcon());
-			txtBirthDate.setText(j.getBirthDate().toString());
+			this.pack();
+			bf = TypesImage.resize(bf, lblPlayerImageIcon.getWidth(), lblPlayerImageIcon.getHeight());
+			lblPlayerImageIcon.setIcon(new ImageIcon(bf));
+			txtBirthDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(j.getBirthDate()));
 			txtUsername.setText(container.getPlayer().getLogin().getUsername());
 			txtPassword.setText(container.getPlayer().getLogin().getPassword());
 			image = j.getImage().getImage();
 		}
 	
 		
-	}
-	
-	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
-	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-	    Graphics2D g2d = dimg.createGraphics();
-	    g2d.drawImage(tmp, 0, 0, null);
-	    g2d.dispose();
-
-	    return dimg;
 	}
 	
 	public void setFile(File selFile) {

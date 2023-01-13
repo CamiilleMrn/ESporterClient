@@ -201,8 +201,8 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					BufferedImage image = jd.getImage();
 					try {
 					contractStartDate= Timestamp.valueOf(jd.getTxtStartContractDate().getText() + "00:00:00");
-					birthDate= Timestamp.valueOf(jd.getTxtBirthDate().getText() + "00:00:00");
-					contractEndDate= Timestamp.valueOf(jd.getTxtEndContractDate().getText() + "00:00:00");
+					birthDate= Timestamp.valueOf(jd.getTxtBirthDate().getText() + " 00:00:00");
+					contractEndDate= Timestamp.valueOf(jd.getTxtEndContractDate().getText() + " 00:00:00");
 					} catch (IllegalArgumentException e1){
 						
 					}
@@ -302,7 +302,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						}else {
 							Timestamp tournamentStart = null;
 							try {
-								tournamentStart = Timestamp.valueOf(create.getTxtDateStartTournament().getText() + "00:00:00");
+								tournamentStart = Timestamp.valueOf(create.getTxtDateStartTournament().getText() + " 00:00:00");
 							} catch (IllegalArgumentException e1) {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(null, "Format de date invalide","Error", JOptionPane.ERROR_MESSAGE);
@@ -356,7 +356,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						}else {
 							Timestamp tournamentStart = null;
 							try {
-								tournamentStart = Timestamp.valueOf(editPage.getTxtDateStartTournament().getText() + "00:00:00");
+								tournamentStart = Timestamp.valueOf(editPage.getTxtDateStartTournament().getText() + " 00:00:00");
 							} catch (IllegalArgumentException e1) {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(null, "Format de date invalide","Error", JOptionPane.ERROR_MESSAGE);
@@ -401,7 +401,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					final JFrame f = new JFrame();
 					//set text which is collected by date picker i.e. set date 
 					cal.getTxtDate().setText(new DatePicker(f).setPickedDate());
-					cal.createListTournament(Timestamp.valueOf(cal.getTxtDate().getText() + "00:00:00"),cal.getGame() );
+					cal.createListTournament(Timestamp.valueOf(cal.getTxtDate().getText() + " 00:00:00"),cal.getGame() );
 	                ((JPanel)cal).repaint();
 	                ((JPanel)cal).revalidate();
 					break;
@@ -541,11 +541,11 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					Timestamp contractEndDate = null;
 					BufferedImage image = mp.getImage();
 					try {
-					contractStartDate= Timestamp.valueOf(mp.getTxtStartContractDate().getText() + "00:00:00");
-					birthDate= Timestamp.valueOf(mp.getTxtBirthDate().getText() + "00:00:00");
-					contractEndDate= Timestamp.valueOf(mp.getTxtEndContractDate().getText() + "00:00:00");
+					contractStartDate = Timestamp.valueOf(mp.getTxtStartContractDate().getText() + " 00:00:00");
+					birthDate = Timestamp.valueOf(mp.getTxtBirthDate().getText() + " 00:00:00");
+					contractEndDate = Timestamp.valueOf(mp.getTxtEndContractDate().getText() + " 00:00:00");
 					} catch (IllegalArgumentException e1){
-						
+						e1.printStackTrace();
 					}
 					
 

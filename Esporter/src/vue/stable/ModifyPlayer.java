@@ -3,6 +3,7 @@ package vue.stable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -406,16 +407,19 @@ public class ModifyPlayer extends JDialog {
 		panelImage.add(txtPlayerImage, BorderLayout.NORTH);
 		txtPlayerImage.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
+		this.revalidate();
+		
 		if (container.getPlayer() != null) {
 			TypesPlayer j = container.getPlayer();
 			txtName.setText(j.getName());
-			txtStartContractDate.setText(j.getContractStartDate().toString());
-			txtEndContractDate.setText(j.getContractEndDate().toString());
+			txtStartContractDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(j.getContractStartDate()));
+			txtEndContractDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(j.getContractEndDate()));
 			txtFirstname.setText(j.getFirstName());
 			BufferedImage bf = j.getImage().getImage();
-			bf = TypesImage.resize(bf, 300, 400);
-			lblPlayerImageIcon.setIcon(new ImageIcon());
-			txtBirthDate.setText(j.getBirthDate().toString());
+			this.pack();
+			bf = TypesImage.resize(bf, lblPlayerImageIcon.getWidth(), lblPlayerImageIcon.getHeight());
+			lblPlayerImageIcon.setIcon(new ImageIcon(bf));
+			txtBirthDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(j.getBirthDate()));
 			image = j.getImage().getImage();
 		}
 	
