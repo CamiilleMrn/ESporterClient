@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import types.TypesStable;
+import vue.MasterFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,19 +29,23 @@ public class RendererRanking extends JPanel {
 	 * Create the panel.
 	 */
 	public RendererRanking(int rank, TypesStable stable, int score) {
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setLayout(new BorderLayout(0, 0));
 		this.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, Color.BLACK));
 		this.setPreferredSize(new Dimension(560, 80));
 
 		JPanel panelRanking = new JPanel();
+		panelRanking.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelRanking, BorderLayout.CENTER);
 		panelRanking.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelNumNameOfStable = new JPanel();
+		panelNumNameOfStable.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelRanking.add(panelNumNameOfStable, BorderLayout.WEST);
 		panelNumNameOfStable.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panelPosition = new JPanel();
+		panelPosition.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelNumNameOfStable.add(panelPosition);
 
 		JLabel lblRanking = new JLabel(String.valueOf(rank));
@@ -58,17 +63,21 @@ public class RendererRanking extends JPanel {
 		panelPosition.add(lblNameStable);
 
 		JPanel panelOfEmpty = new JPanel();
+		panelOfEmpty.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelRanking.add(panelOfEmpty, BorderLayout.CENTER);
 		panelOfEmpty.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panelEmpty = new JPanel();
+		panelEmpty.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelOfEmpty.add(panelEmpty);
 
 		JPanel panelNumPoint = new JPanel();
+		panelNumPoint.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelNumPoint, BorderLayout.EAST);
 		panelNumPoint.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelNumPoint.add(panel_1_1);
 
 		JLabel lblNewLabel_2 = new JLabel(String.valueOf(score)+" Points");

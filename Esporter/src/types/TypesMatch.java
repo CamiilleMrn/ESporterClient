@@ -98,9 +98,9 @@ public class TypesMatch implements Types, Serializable, Comparable<TypesMatch> {
 	}
 	
 	public boolean isPlayed() {
-		if (winner!= team1 && winner!=team2 && team1==team2)
-			return false;
-		return true;
+		if ((winner== team1 || winner==team2) && team1!=team2)
+			return true;
+		return false;
 		
 	}
 

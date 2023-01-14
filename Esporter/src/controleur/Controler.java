@@ -51,6 +51,7 @@ import vue.Calendar;
 import vue.CalendarAndScoreMatch;
 import vue.LogIn;
 import vue.MasterFrame;
+import vue.ProgramMatchs;
 import vue.Ranking;
 import vue.SeePlayerInfos;
 import vue.StableInfo;
@@ -58,7 +59,6 @@ import vue.Stables;
 import vue.component.ContainerModifyPlayer;
 import vue.component.ContainerPlayer;
 import vue.component.DatePicker;
-import vue.component.ProgramMatchs;
 import vue.component.RendererProgramMatch;
 import vue.organizer.CreateTournament;
 import vue.organizer.EditTournament;
@@ -233,7 +233,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 							InputStream is = new ByteArrayInputStream(blob.toByteArray());
 							BufferedImage bf = ImageIO.read(is);
 							types.TypesImage im = new types.TypesImage(image, "png");
-							TypesPlayer joueur = new TypesPlayer(-1,name, firstname,im,birthDate,contractStartDate,contractEndDate,1,-1,((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId());
+							TypesPlayer joueur = new TypesPlayer(-1,name, firstname,im,birthDate,contractStartDate,contractEndDate,1,-1,((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId(), jd.getTxtUsername().getText());
 							TypesLogin l = new TypesLogin(jd.getTxtUsername().getText(), jd.getTxtPassword().getText());
 							jd.getContainer().setPlayer(new TypesRegisterPlayer(joueur, l));
 							jd.dispose();
@@ -401,7 +401,9 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					final JFrame f = new JFrame();
 					//set text which is collected by date picker i.e. set date 
 					cal.getTxtDate().setText(new DatePicker(f).setPickedDate());
-					cal.createListTournament(Timestamp.valueOf(cal.getTxtDate().getText() + " 00:00:00"),cal.getGame() );
+					Timestamp t = Timestamp.valueOf(cal.getTxtDate().getText() + " 00:00:00");
+					cal.setChosenDate(t);
+					cal.createListTournament(t,cal.getGame() );
 	                ((JPanel)cal).repaint();
 	                ((JPanel)cal).revalidate();
 					break;
@@ -454,7 +456,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						} else if(e.getActionCommand().contains("SCORE")) {
 							System.out.println("NOT YET IMPLEMENTED");
 						} else if(e.getActionCommand().contains("POOL")) {
-							MasterFrame.getInstance().setPanel(vue.component.ProgramMatchs.class, tournament);
+							MasterFrame.getInstance().setPanel(vue.ProgramMatchs.class, tournament);
 							state = State.POOL;
 						}
 					}
@@ -575,7 +577,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 							InputStream is = new ByteArrayInputStream(blob.toByteArray());
 							BufferedImage bf = ImageIO.read(is);
 							types.TypesImage im = new types.TypesImage(image, "png");
-							TypesPlayer joueur = new TypesPlayer(mp.getContainer().getPlayer().getId(),name, firstname,im,birthDate,contractStartDate,contractEndDate,1,mp.getContainer().getPlayer().getIdTeam(),((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId());
+							TypesPlayer joueur = new TypesPlayer(mp.getContainer().getPlayer().getId(),name, firstname,im,birthDate,contractStartDate,contractEndDate,1,mp.getContainer().getPlayer().getIdTeam(),((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId(), mp.getContainer().getPlayer().getUsername());
 							mp.getContainer().setPlayer(joueur);
 							mp.dispose();
 						} catch (IOException e1) {

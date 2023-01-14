@@ -146,7 +146,9 @@ public class MasterFrame {
 				panelMain.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.resize();
+
 				frame.repaint();
+				frame.revalidate();
 			}
 		});
 		
@@ -156,6 +158,7 @@ public class MasterFrame {
 				panelMain.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.resize();
+				frame.revalidate();
 				frame.repaint();
 			}
 		});

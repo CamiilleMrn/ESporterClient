@@ -1,4 +1,4 @@
-package vue.component;
+package vue;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -28,14 +28,19 @@ import types.TypesImage;
 import types.TypesPool;
 import types.TypesTeam;
 import types.TypesTournament;
+import vue.component.DataJPanel;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class ProgramMatchs extends DataJPanel {
@@ -55,6 +60,10 @@ public class ProgramMatchs extends DataJPanel {
 	 * Create the panel.
 	 */	
 	public ProgramMatchs(TypesTournament tournament) {
+		
+
+		
+		
 		System.out.println(tournament);
 		this.tournament = tournament;
 		setLayout(new BorderLayout(0, 0));
@@ -73,10 +82,7 @@ public class ProgramMatchs extends DataJPanel {
 		Component verticalStrutAboveTitle = Box.createVerticalStrut(20);
 		panelEmpty.add(verticalStrutAboveTitle, BorderLayout.NORTH);
 
-		JScrollPane scrollPaneWithGroupeStageAndFinalRanking = new JScrollPane();
-		scrollPaneWithGroupeStageAndFinalRanking.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
-		add(scrollPaneWithGroupeStageAndFinalRanking, BorderLayout.CENTER);
 		
 		
 		
@@ -96,44 +102,44 @@ public class ProgramMatchs extends DataJPanel {
 		
 		
 		JPanel panelAllOfTable = new JPanel();
-		scrollPaneWithGroupeStageAndFinalRanking.add(panelAllOfTable);
-		scrollPaneWithGroupeStageAndFinalRanking.setViewportView(panelAllOfTable);
-		panelAllOfTable.setLayout(new GridLayout(0, 1, 0, -100));
+		
+		JScrollPane scrollPaneWithGroupeStageAndFinalRanking = new JScrollPane(panelAllOfTable);
+		//scrollPaneWithGroupeStageAndFinalRanking.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		//scrollPaneWithGroupeStageAndFinalRanking.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+		add(scrollPaneWithGroupeStageAndFinalRanking, BorderLayout.CENTER);
+		
+		//scrollPaneWithGroupeStageAndFinalRanking.add(panelAllOfTable);
+		//scrollPaneWithGroupeStageAndFinalRanking.setViewportView(panelAllOfTable);
+		//////add(panelAllOfTable, BorderLayout.CENTER);
 		JPanel panelFinalRanking = new JPanel();
-		panelFinalRanking.setVisible(getFocusTraversalKeysEnabled());
-		panelAllOfTable.add(panelFinalRanking);
-		panelFinalRanking.setLayout(new GridLayout(2, 3, 0, 5));
+		//panelFinalRanking.setVisible(getFocusTraversalKeysEnabled());
+		panelAllOfTable.setLayout(new BorderLayout(0, 0));
+		panelAllOfTable.add(panelFinalRanking, BorderLayout.NORTH);
+		
+		panelFinalRanking.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelOfFinalRankingTitle = new JPanel();
 		panelOfFinalRankingTitle.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		panelFinalRanking.add(panelOfFinalRankingTitle);
-		GridBagLayout gbl_panelOfFinalRankingTitle = new GridBagLayout();
-		gbl_panelOfFinalRankingTitle.columnWidths = new int[] {0};
-		gbl_panelOfFinalRankingTitle.rowHeights = new int[] {0};
-		gbl_panelOfFinalRankingTitle.columnWeights = new double[]{0.0};
-		gbl_panelOfFinalRankingTitle.rowWeights = new double[]{0.0};
-		panelOfFinalRankingTitle.setLayout(gbl_panelOfFinalRankingTitle);
-		
-		JLabel lblOfFinalRankingTitle = new JLabel("Playoffs");
-		lblOfFinalRankingTitle.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		lblOfFinalRankingTitle.setFont(new Font("Cambria", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblOfFinalRankingTitle = new GridBagConstraints();
-		gbc_lblOfFinalRankingTitle.insets = new Insets(125, 0, 0, 0);
-		gbc_lblOfFinalRankingTitle.fill = GridBagConstraints.BOTH;
-		gbc_lblOfFinalRankingTitle.gridx = 0;
-		gbc_lblOfFinalRankingTitle.gridy = 0;
-		panelOfFinalRankingTitle.add(lblOfFinalRankingTitle, gbc_lblOfFinalRankingTitle);
+		panelFinalRanking.add(panelOfFinalRankingTitle, BorderLayout.NORTH);
+		panelOfFinalRankingTitle.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel_2 = new JPanel();
 		panelOfFinalRankingTitle.add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		JButton btnNewButton = new JButton("Voir Programme");
+		JButton btnProgram = new JButton("Voir Programme");
 		
-		btnNewButton.addActionListener(Controler.getInstance());
-		btnNewButton.setActionCommand("PROGRAM_MATCH_MATCH");
+		btnProgram.addActionListener(Controler.getInstance());
+		btnProgram.setActionCommand("PROGRAM_MATCH_MATCH");
 		
-		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		panel_2.add(btnNewButton);
+		btnProgram.setHorizontalTextPosition(SwingConstants.CENTER);
+		panel_2.add(btnProgram);
+		
+		JLabel lblOfFinalRankingTitle = new JLabel("Playoffs");
+		lblOfFinalRankingTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOfFinalRankingTitle.setFont(new Font("Cambria", Font.PLAIN, 30));
+		lblOfFinalRankingTitle.setAlignmentY(1.0f);
+		panelOfFinalRankingTitle.add(lblOfFinalRankingTitle);
 		
 		DefaultTableModel defaultablemodel = new DefaultTableModel(HeaderFinalColumn, 0) {
 			
@@ -157,22 +163,23 @@ public class ProgramMatchs extends DataJPanel {
 		
 		
 		JScrollPane scrollPaneFinalRanking = new JScrollPane();
-		scrollPaneFinalRanking.setBorder(new EmptyBorder(0, 600, 0, 600));
+		scrollPaneFinalRanking.setBorder(new EmptyBorder(0, (int)(getWidthMain()/4), 0, (int)(getWidthMain()/4)));
 		panelFinalRanking.add(scrollPaneFinalRanking);
-		scrollPaneFinalRanking.setPreferredSize(new Dimension(400, 166));
+		scrollPaneFinalRanking.setPreferredSize(new Dimension(200, 166));
 		scrollPaneFinalRanking.add(tableFinalRanking);
 		scrollPaneFinalRanking.setViewportView(tableFinalRanking);
 		
-		Component verticalStrutBetweenGroupStageAndFinalRanking = Box.createVerticalStrut(0);
-		panelAllOfTable.add(verticalStrutBetweenGroupStageAndFinalRanking);
-
+		Component verticalStrutBetweenGroupStageAndFinalRanking = Box.createVerticalStrut(40);
+		//panelAllOfTable.add(verticalStrutBetweenGroupStageAndFinalRanking);
+		panelFinalRanking.add(verticalStrutBetweenGroupStageAndFinalRanking, BorderLayout.SOUTH);
+		
+		
 		JPanel panelGroupStage = new JPanel();
-		panelAllOfTable.add(panelGroupStage);
-		panelGroupStage.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
-		Component horizontalStrutBeforeGroupStageA = Box.createHorizontalStrut(20);
-		panelGroupStage.add(horizontalStrutBeforeGroupStageA);
+		panelAllOfTable.add(panelGroupStage, BorderLayout.SOUTH);
+		panelGroupStage.setLayout(new GridLayout(0, 4, 10, 0));
 		
 		JPanel panelOfGroupeA = new JPanel();
+
 		panelGroupStage.add(panelOfGroupeA);
 		panelOfGroupeA.setLayout(new BorderLayout(0, 0));
 
@@ -200,16 +207,16 @@ public class ProgramMatchs extends DataJPanel {
 		JScrollPane scrollPaneGroupStageA = new JScrollPane();
 		panelOfGroupeA.add(scrollPaneGroupStageA);
 		scrollPaneGroupStageA.add(tableGroupStageA);
-		scrollPaneGroupStageA.setPreferredSize(new Dimension(400, 166));
+		scrollPaneGroupStageA.setPreferredSize(new Dimension(300, 166));
 		scrollPaneGroupStageA.setViewportView(tableGroupStageA);
 		
 		JLabel lblOfGroupATitle = new JLabel("Groupe A");
 		lblOfGroupATitle.setFont(new Font("Cambria", Font.PLAIN, 30));
 		lblOfGroupATitle.setHorizontalAlignment(SwingConstants.CENTER);
 		panelOfGroupeA.add(lblOfGroupATitle, BorderLayout.NORTH);
-	
-		Component horizontalStrutBetweenAB = Box.createHorizontalStrut(20);
-		panelGroupStage.add(horizontalStrutBetweenAB);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		panelOfGroupeA.add(horizontalStrut, BorderLayout.WEST);
 		
 		JPanel panelOfGroupB = new JPanel();
 		panelGroupStage.add(panelOfGroupB);
@@ -238,16 +245,13 @@ public class ProgramMatchs extends DataJPanel {
 		JScrollPane scrollPaneGroupStageB = new JScrollPane();
 		panelOfGroupB.add(scrollPaneGroupStageB, BorderLayout.CENTER);
 		scrollPaneGroupStageB.add(tableGroupStageB);
-		scrollPaneGroupStageB.setPreferredSize(new Dimension(400, 166));
+		scrollPaneGroupStageB.setPreferredSize(new Dimension(300, 166));
 		scrollPaneGroupStageB.setViewportView(tableGroupStageB);
 		
 		JLabel lblOfGroupBTitle = new JLabel("Groupe B");
 		lblOfGroupBTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOfGroupBTitle.setFont(new Font("Cambria", Font.PLAIN, 30));
 		panelOfGroupB.add(lblOfGroupBTitle, BorderLayout.NORTH);
-		
-		Component horizontalStrutBetweenBC = Box.createHorizontalStrut(20);
-		panelGroupStage.add(horizontalStrutBetweenBC);
 		
 		JPanel panelOfGroupC = new JPanel();
 		panelGroupStage.add(panelOfGroupC);
@@ -274,16 +278,13 @@ public class ProgramMatchs extends DataJPanel {
 		JScrollPane scrollPaneGroupStageC = new JScrollPane();
 		panelOfGroupC.add(scrollPaneGroupStageC);
 		scrollPaneGroupStageC.add(tableGroupStageC);
-		scrollPaneGroupStageC.setPreferredSize(new Dimension(400, 166));
+		scrollPaneGroupStageC.setPreferredSize(new Dimension(300, 166));
 		scrollPaneGroupStageC.setViewportView(tableGroupStageC);
 	
 		JLabel lblOfGroupCTitle = new JLabel("Groupe C");
 		lblOfGroupCTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOfGroupCTitle.setFont(new Font("Cambria", Font.PLAIN, 30));
 		panelOfGroupC.add(lblOfGroupCTitle, BorderLayout.NORTH);
-		
-		Component horizontalStrutBetweenCD = Box.createHorizontalStrut(20);
-		panelGroupStage.add(horizontalStrutBetweenCD);
 		
 		JPanel panelofGroupD = new JPanel();
 		panelGroupStage.add(panelofGroupD);
@@ -310,7 +311,7 @@ public class ProgramMatchs extends DataJPanel {
 		JScrollPane scrollPaneGroupStageD = new JScrollPane();
 		panelofGroupD.add(scrollPaneGroupStageD);
 		scrollPaneGroupStageD.add(tableGroupStageD);
-		scrollPaneGroupStageD.setPreferredSize(new Dimension(400, 166));
+		scrollPaneGroupStageD.setPreferredSize(new Dimension(300, 166));
 		scrollPaneGroupStageD.setViewportView(tableGroupStageD);
 		
 		JLabel lblOfGroupDTitle = new JLabel("Groupe D");
@@ -318,8 +319,11 @@ public class ProgramMatchs extends DataJPanel {
 		lblOfGroupDTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		panelofGroupD.add(lblOfGroupDTitle, BorderLayout.NORTH);
 		
-		Component horizontalStrutAfterGroupStageD = Box.createHorizontalStrut(20);
-		panelGroupStage.add(horizontalStrutAfterGroupStageD);
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		panelofGroupD.add(horizontalStrut_1, BorderLayout.EAST);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		panelGroupStage.add(verticalStrut);
 		
 		createPool();
 			
@@ -336,10 +340,23 @@ public class ProgramMatchs extends DataJPanel {
 		ArrayList<TypesPool> pools = Controler.getInstance().getData().getCalendar().get(tournament.getId()).getPool();
 		
 		HashMap<TypesTeam,Integer> p = pools.get(4).getPoint();
+		List<Entry<TypesTeam, Integer>> listSorted = new LinkedList<>(p.entrySet());
+		
+		Comparator<Entry<TypesTeam, Integer>> comp = new Comparator<Map.Entry<TypesTeam,Integer>>() {
+			
+			@Override
+			public int compare(Entry<TypesTeam, Integer> o1, Entry<TypesTeam, Integer> o2) {
+				return o1.getValue().compareTo(o2.getValue());
+			}
+		}; 
+		
+		Collections.sort(listSorted, comp.reversed());
+		
+		
 		Object[][] dataFinalColumn = new Object[4][3];
 		DefaultTableModel model = (DefaultTableModel)tableFinalRanking.getModel();
 		int i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+		for (Entry<TypesTeam, Integer> e : listSorted) {
 			//if (p.entrySet().size()!=4) {
 				model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
 				model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
@@ -353,10 +370,13 @@ public class ProgramMatchs extends DataJPanel {
 		}
 
 		p = pools.get(0).getPoint();
+		listSorted = new LinkedList<>(p.entrySet());
+		
+		Collections.sort(listSorted, comp.reversed());
 		Object[][] dataGroupStageA = new Object[4][3];
 		model = (DefaultTableModel)tableGroupStageA.getModel();
 		i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+		for (Entry<TypesTeam, Integer> e : listSorted) {
 			model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
 			model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
 			//dataGroupStageA[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
@@ -364,10 +384,13 @@ public class ProgramMatchs extends DataJPanel {
 		}
 
 		p = pools.get(1).getPoint();
+		listSorted = new LinkedList<>(p.entrySet());
+		
+		Collections.sort(listSorted, comp.reversed());
 		Object[][] dataGroupStageB = new Object[4][3];
 		model = (DefaultTableModel)tableGroupStageB.getModel();
 		i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+		for (Entry<TypesTeam, Integer> e : listSorted) {
 			model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
 			model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
 			//dataGroupStageB[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
@@ -376,9 +399,12 @@ public class ProgramMatchs extends DataJPanel {
 		
 		p = pools.get(2).getPoint();
 		Object[][] dataGroupStageC = new Object[4][3];
+		listSorted = new LinkedList<>(p.entrySet());
+		
+		Collections.sort(listSorted, comp.reversed());
 		model = (DefaultTableModel)tableGroupStageC.getModel();
 		i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+		for (Entry<TypesTeam, Integer> e : listSorted) {
 			model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
 			model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
 			//dataGroupStageC[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
@@ -387,9 +413,12 @@ public class ProgramMatchs extends DataJPanel {
 		
 		p = pools.get(3).getPoint();
 		Object[][] dataGroupStageD = new Object[4][3];
+		listSorted = new LinkedList<>(p.entrySet());
+		
+		Collections.sort(listSorted, comp.reversed());
 		model = (DefaultTableModel)tableGroupStageD.getModel();
 		i=0;
-		for (Entry<TypesTeam, Integer> e : p.entrySet()) {
+		for (Entry<TypesTeam, Integer> e : listSorted) {
 			model.addRow(new Object[] {"", e.getKey().getStable().getNickname(), e.getValue()});
 			model.setValueAt(new ImageIcon(TypesImage.resize(e.getKey().getStable().getLogo().getImage(),35,35)), i, 0);
 			//dataGroupStageD[i] = new Object[] {e.getKey().getStable().getLogo().getImage(), e.getKey().getStable().getNickname(), e.getValue()};
@@ -402,11 +431,25 @@ public class ProgramMatchs extends DataJPanel {
 		((DefaultTableModel)tableGroupStageC.getModel()).fireTableDataChanged();
 		((DefaultTableModel)tableGroupStageD.getModel()).fireTableDataChanged();
 		
+		this.revalidate();
+		this.repaint();
+		
+		
 	}
 
 	
 	public TypesTournament getTournament() {
 		return tournament;
+	}
+	
+	
+	private double getWidthMain() {
+		return MasterFrame.getInstance().getFrameCenterDimension().getWidth();
+		
+	}
+	
+	private double getHeightMain() {
+		return MasterFrame.getInstance().getFrameCenterDimension().getHeight();
 	}
 
 

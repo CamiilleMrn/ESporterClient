@@ -22,11 +22,12 @@ public class TypesPlayer implements Types, Serializable {
 	private int nationality;
 	private int idTeam;
 	private int idStable;
+	private String username;
 	
 	
 
 	public TypesPlayer(int id, String name, String firstName, TypesImage image, Timestamp birthDate, Timestamp contractStartDate,
-			Timestamp contractEndDate, int nationality, int idTeam, int idStable) {
+			Timestamp contractEndDate, int nationality, int idTeam, int idStable, String username) {
 		this.id = id;
 		this.name = name;
 		this.firstName = firstName;
@@ -37,6 +38,7 @@ public class TypesPlayer implements Types, Serializable {
 		this.nationality = nationality;
 		this.idTeam = idTeam;
 		this.idStable = idStable;
+		this.username = username;
 		
 
 	}
@@ -47,6 +49,10 @@ public class TypesPlayer implements Types, Serializable {
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getUsername() {
+		return username;
 	}
 	
 	public int getIdStable() {

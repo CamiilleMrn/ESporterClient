@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import controleur.Controler;
 import vue.MasterFrame;
@@ -28,21 +29,42 @@ public class ErrorPanel extends JPanel{
 	private JCircleProgressBar progressBar;
 	private Thread t;
 	private boolean persistent;
-	private JPanel panelDummy1;
-	private JPanel panelDummy2;
-	private JPanel panelDummy3;
-	private JPanel panelDummy4;
 	private ErrorPanel instance;
 	private JPanel panel_1;
 	private JButton btnContinuer;
 	private JPanel panel;
 	private JLabel Titre;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JPanel panel_4;
+	private JPanel panel_5;
 	
 	public ErrorPanel() {
+		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		this.setVisible(false);
 		initalize();
 		e = null;
 		this.instance = this;
+		
+		panel_2 = new JPanel();
+		panel_2.setPreferredSize(new Dimension(200,200));
+		add(panel_2, BorderLayout.NORTH);
+		panel_2.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		
+		panel_3 = new JPanel();
+		add(panel_3, BorderLayout.SOUTH);
+		panel_3.setPreferredSize(new Dimension(200,200));
+		panel_3.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		
+		panel_4 = new JPanel();
+		add(panel_4, BorderLayout.WEST);
+		panel_4.setPreferredSize(new Dimension(200,200));
+		panel_4.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		
+		panel_5 = new JPanel();
+		add(panel_5, BorderLayout.EAST);
+		panel_5.setPreferredSize(new Dimension(200,200));
+		panel_5.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		t = new Thread(new Runnable() {
 			
 			
@@ -119,34 +141,17 @@ public class ErrorPanel extends JPanel{
 		Color c = new Color(dark.getRed(),dark.getGreen(), dark.getBlue(),150);
 		setOpaque(true);
 		JPanel panel = new JPanel();
+		
+		panel.setBorder(new EmptyBorder(PROPERTIES, ALLBITS, ABORT, HEIGHT));
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-		panel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		
 		panel.setForeground(MasterFrame.COLOR_TEXT);
 		panel.setOpaque(false);
 		
-		panelDummy1 = new JPanel();
-		panelDummy1.setPreferredSize(new Dimension(1920, 400));
-		add(panelDummy1, BorderLayout.NORTH);
+		
 		
 		setBackground(c);
-		
-		panelDummy2 = new JPanel();
-		panelDummy2.setPreferredSize(new Dimension(1920, 400));
-		add(panelDummy2, BorderLayout.SOUTH);
-		
-		panelDummy3 = new JPanel();
-		panelDummy3.setPreferredSize(new Dimension(400, 1080));
-		add(panelDummy3, BorderLayout.WEST);
-		
-		panelDummy4 = new JPanel();
-		panelDummy4.setPreferredSize(new Dimension(400, 1080));
-		add(panelDummy4, BorderLayout.EAST);
-		
-		panelDummy1.setBackground(c);
-		panelDummy2.setBackground(c);
-		panelDummy3.setBackground(c);
-		panelDummy4.setBackground(c);
 		
 		Titre = new JLabel("Erreur");
 		
@@ -187,10 +192,10 @@ public class ErrorPanel extends JPanel{
 	}
 	
 	public void resize() {
-		panelDummy1.setPreferredSize(new Dimension(getWidth(), 400));
-		panelDummy2.setPreferredSize(new Dimension(getWidth(), 400));
-		panelDummy3.setPreferredSize(new Dimension(400, getHeight()));
-		panelDummy4.setPreferredSize(new Dimension(400, getHeight()));
+		//panelDummy1.setPreferredSize(new Dimension(getWidth(), 400));
+		//panelDummy2.setPreferredSize(new Dimension(getWidth(), 400));
+		//panelDummy3.setPreferredSize(new Dimension(400, getHeight()));
+		//panelDummy4.setPreferredSize(new Dimension(400, getHeight()));
 	}
 	
 	

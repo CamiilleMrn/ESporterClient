@@ -59,12 +59,18 @@ public class SeePlayerInfosRenderer extends JPanel{
 		add(panel_ContainerInfo);
 		panel_ContainerInfo.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		JLabel lblUsername = new JLabel(player.getUsername());
+		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_ContainerInfo.add(lblUsername);
+		lblUsername.setFont(new Font("Cambria", Font.BOLD, 30));
+		lblUsername.setPreferredSize(new Dimension(100,40));
+		lblUsername.setForeground(MasterFrame.COLOR_TEXT);
+		
 		JLabel lblPlayerName = new JLabel(player.getFirstName() + " " + player.getName());
-		lblPlayerName.setPreferredSize(new Dimension(100,40));
 		lblPlayerName.setToolTipText(player.getFirstName() + " " + player.getName());
 		lblPlayerName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayerName.setForeground(MasterFrame.COLOR_TEXT);
-		lblPlayerName.setFont(new Font("Cambria", Font.BOLD, 30));
+		lblPlayerName.setFont(new Font("Cambria", Font.PLAIN, 20));
 		panel_ContainerInfo.add(lblPlayerName);
 		
 		JLabel lblDateOfBith = new JLabel("Date de naissance : "+new SimpleDateFormat("MM/dd/yyyy").format(player.getBirthDate()));
@@ -84,6 +90,8 @@ public class SeePlayerInfosRenderer extends JPanel{
 		lblEndContractDate.setForeground(MasterFrame.COLOR_TEXT);
 		lblEndContractDate.setFont(new Font("Cambria", Font.PLAIN, 20));
 		panel_ContainerInfo.add(lblEndContractDate);
+		
+		
 		
 	}
 

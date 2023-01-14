@@ -41,6 +41,9 @@ import types.exception.ExceptionTeamNotFull;
 import vue.MasterFrame;
 import vue.component.ComboBoxRendererArrow;
 import vue.component.ContainerPlayer;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import javax.swing.Box;
 
 
 public class AddTeam extends JPanel{
@@ -51,7 +54,7 @@ public class AddTeam extends JPanel{
 	private static final long serialVersionUID = -5531842744073477854L;
 	private TypesGame game;
 	private ContainerPlayer[] playerList;
-	private JComboBox<TypesGame>  comboBox;
+	private JComboBox<TypesGame> comboBox;
 	/**
 	 * Create the application.
 	 */
@@ -67,61 +70,49 @@ public class AddTeam extends JPanel{
 		setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		setPreferredSize(MasterFrame.getInstance().getFrameCenterDimension());
 		JFrame frame = MasterFrame.getInstance().getFrame(); 
+		setLayout(new BorderLayout(0, 0));
 		JPanel panelMain = new JPanel();
 		panelMain.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
-		add(panelMain, BorderLayout.CENTER);
-		GridBagLayout gbl_panelMain = new GridBagLayout();
+		add(panelMain);
 		int side = (int) (frame.getWidth()*0.15);
 		int center = (int) (frame.getWidth()*0.7);
+		panelMain.setLayout(new GridLayout(0, 1, 0, 0));
 		
-
-		gbl_panelMain.columnWidths = new int[] {side+1, center, side};
-		gbl_panelMain.rowHeights = new int[] {(int) (frame.getHeight()*0.06), (int) (frame.getHeight()*0.22), (int) (frame.getHeight()*0.28), (int) (frame.getHeight()*0.3), (int) (frame.getHeight()*0.14)};
-		gbl_panelMain.columnWeights = new double[]{0.0, 0.0, 0.0};
-		gbl_panelMain.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panelMain.setLayout(gbl_panelMain);
+		JPanel panel = new JPanel();
+		panel.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panelMain.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblTitle = new JLabel("Ajouter une \u00E9quipe");
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panel.add(panel_1, BorderLayout.NORTH);
+		
+		JLabel lblTitle = new JLabel("Ajouter une équipe");
+		lblTitle.setForeground(Color.BLACK);
 		lblTitle.setFont(new Font("Cambria", Font.PLAIN, 27));
-		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
-		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.anchor = GridBagConstraints.SOUTH;
-		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTitle.gridx = 1;
-		gbc_lblTitle.gridy = 0;
-		panelMain.add(lblTitle, gbc_lblTitle);
+		panel_1.add(lblTitle);
 		
-		JPanel lblGame = new JPanel();
-		lblGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
-		GridBagConstraints gbc_lblGame = new GridBagConstraints();
-		gbc_lblGame.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_lblGame.insets = new Insets(0, 0, 5, 5);
-		gbc_lblGame.gridx = 1;
-		gbc_lblGame.gridy = 1;
-		panelMain.add(lblGame, gbc_lblGame);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panel.add(panel_2, BorderLayout.SOUTH);
 		
 		comboBox = new JComboBox<>(TypesGame.values());
-	
 		comboBox.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBox));
 		comboBox.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 		comboBox.setFont(new Font("Cambria", Font.PLAIN, 15));
 		comboBox.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		comboBox.setForeground(MasterFrame.COLOR_TEXT);
 		comboBox.setSelectedItem(game);
-		lblGame.add(comboBox);
 		comboBox.setActionCommand("ADD_TEAM_COMBOGAME");
 		comboBox.addActionListener(Controler.getInstance());
+		
+		panel_2.add(comboBox);
 		
 		
 		JPanel panelPlayer = new JPanel();
 		panelPlayer.setBorder(null);
 		panelPlayer.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
-		GridBagConstraints gbc_panelPlayer = new GridBagConstraints();
-		gbc_panelPlayer.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panelPlayer.insets = new Insets(0, 0, 5, 5);
-		gbc_panelPlayer.gridx = 1;
-		gbc_panelPlayer.gridy = 2;
-		panelMain.add(panelPlayer, gbc_panelPlayer);
+		panelMain.add(panelPlayer);
 		
 		int teamSize = game.getMaxPlayer();
 		playerList = new ContainerPlayer[teamSize];
@@ -132,12 +123,7 @@ public class AddTeam extends JPanel{
 		
 		JPanel panelValidate = new JPanel();
 		panelValidate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
-		GridBagConstraints gbc_panelValidate = new GridBagConstraints();
-		gbc_panelValidate.insets = new Insets(0, 0, 0, 5);
-		gbc_panelValidate.anchor = GridBagConstraints.NORTHEAST;
-		gbc_panelValidate.gridx = 1;
-		gbc_panelValidate.gridy = 3;
-		panelMain.add(panelValidate, gbc_panelValidate);
+		panelMain.add(panelValidate);
 		
 		JButton btnValidate = new JButton("Valider");
 		btnValidate.setVerticalTextPosition(SwingConstants.BOTTOM);

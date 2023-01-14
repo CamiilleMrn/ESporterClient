@@ -155,7 +155,7 @@ public class RendererProgramMatch extends JPanel {
 		btnSetScore.addActionListener(Controler.getInstance());
 		btnSetScore.setActionCommand("MATCHES RENDERER SCORE "+id);
 		
-		if(Controler.getInstance().getUser().getPermission() != TypesPermission.REFEREE || match.getTeam1()==0 && match.getTeam2()==0) {
+		if(Controler.getInstance().getUser().getPermission() != TypesPermission.REFEREE || match.isPlayed()) {
 			btnSetScore.setVisible(false);
 		}
 		
