@@ -689,7 +689,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				case "STABLE_MANAGEMENT_ADDTEAM":
 					TypesGame game = (TypesGame)((TeamManagement)MasterFrame.getCurrentPanel()).getComboBoxFilterGame().getSelectedItem();
 					if (game == null) {
-						game = TypesGame.intToGame(1);
+						game = TypesGame.intToGame(1); 
 					}
 					MasterFrame.getInstance().setPanel(AddTeam.class, game);
 					state = State.ADD_TEAM;
