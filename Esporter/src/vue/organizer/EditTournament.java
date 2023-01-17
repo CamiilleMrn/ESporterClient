@@ -45,6 +45,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BoxLayout;
 import java.awt.Component;
@@ -209,7 +210,7 @@ public class EditTournament extends JPanel{
 		panel_EntryTournamentDate.add(panel_DatePicketDateTournament, gbc_panel_DatePicketDateTournament);
 		
 		txtDateStartTournament = new JTextField();
-		txtDateStartTournament.setText(tournament.getRegisterDate().toString());
+		txtDateStartTournament.setText(new SimpleDateFormat("yyyy-MM-dd").format(tournament.getRegisterDate()));
 		txtDateStartTournament.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDateStartTournament.setForeground(MasterFrame.COLOR_TEXT);
 		txtDateStartTournament.setFont(new Font("Cambria", Font.PLAIN, 15));

@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import controleur.Controler;
@@ -40,7 +41,7 @@ public class CommunicationServer implements Runnable{
 	private ObjectInputStream in;
 	private int reconnect = 1;
 	private int reconnectTime = 1;
-	private boolean run=true;
+	private volatile boolean run=true;
 	private static final String IP = "127.0.0.1"; //144.24.206.118
 	private static final int PORT = 4000;
 	
@@ -57,22 +58,27 @@ public class CommunicationServer implements Runnable{
 			s = new Socket(IP,PORT);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
+			System.out.println("Done");
+			reconnect=1;
+			reconnectTime=1;
 		} catch (IOException e) {
 			reconnect();
 		}
 		
-		System.out.println("Done");
-		reconnect=1;
-		reconnectTime=1;
+		
 	}
 	
 	private void reconnect() throws IOException,UnknownHostException {
 		reconnect++;
 		if (reconnect>5) {
 			run=false;
-			throw new IOException("Impossible de joindre le serveur");
+			MasterFrame.getInstance().fireError(new Exception("Impossible de se connecter au serveur, veuillez relancer l'application"), false, true);
+			JOptionPane.showMessageDialog(null, "L'application va maintenant fermer","Erreur", JOptionPane.ERROR_MESSAGE);
+			System.exit(-2);
+		
 		}
 		reconnectTime*=2;
+		MasterFrame.getInstance().fireError(new Exception("Erreur de connexion au serveur \n Tentative de reconnexion n°"+reconnect+" dans "+reconnectTime+"s...."), true, false);
 		String s = "Reconnecting number "+reconnect+" in "+reconnectTime+"s....";
 		System.out.println(s);
 		try {
@@ -83,6 +89,9 @@ public class CommunicationServer implements Runnable{
 			connect();
 			reconnect=1;
 			reconnectTime=1;
+			MasterFrame.getInstance().getError().setVisible(false);
+			MasterFrame.getInstance().getError().setException(null);
+			Controler.getInstance().closeError();
 		} catch (IOException e2) {
 			reconnect();
 			
@@ -206,7 +215,7 @@ public class CommunicationServer implements Runnable{
 			user.getWaiting().setActualState(Response.ERROR_LOGIN);
 			break;
 		case ERROR_PERMISSION:
-			MasterFrame.getInstance().fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission d'effectuer ceci"));
+			MasterFrame.getInstance().fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission d'effectuer ceci"), false, false);
 			System.out.println("ERREUR PERMISSION");
 			user.getWaiting().setActualState(Response.ERROR_PERMISSION);
 			break;
@@ -242,7 +251,7 @@ public class CommunicationServer implements Runnable{
 			
 			break;
 		case ERROR:
-			MasterFrame.getInstance().fireError(new ExceptionError(r.getError()));;
+			MasterFrame.getInstance().fireError(new ExceptionError(r.getError()), false, false);
 			System.out.println("ERREUR");
 			break;
 		case DELETE_TOURNAMENT:

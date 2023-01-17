@@ -48,6 +48,10 @@ public class User {
 			return data;
 		}
 	}
+	
+	public Thread getThread() {
+		return t;
+	}
 
 	public void setData(Data data) {
 		synchronized (data) {
@@ -141,7 +145,7 @@ public class User {
 	public void addTeam(TypesRegisterTeam team) {
 		if (permission != TypesPermission.STABLE) {
 			Controler.getInstance()
-					.fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"));
+					.fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"), false);
 		} else {
 			com.addTeam(team);
 		}
@@ -150,7 +154,7 @@ public class User {
 	public void modifyTeam(TypesTeam team) {
 		if (permission != TypesPermission.STABLE) {
 			Controler.getInstance()
-					.fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"));
+					.fireError(new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action"), false);
 		} else {
 			com.modifyTeam(team);
 		}
@@ -166,6 +170,7 @@ public class User {
 
 	public void deleteTournament(TypesTournament tournament) {
 		com.deleteTournament(tournament.getId());
+		this.waiting.waitFor(Response.ERROR, Response.ERROR_PERMISSION, Response.DELETE_TOURNAMENT);
 	}
 
 	public void addTournament(TypesTournament t) throws ExceptionInvalidPermission {
@@ -173,6 +178,7 @@ public class User {
 			throw new ExceptionInvalidPermission("Vous n'avez pas la permission de faire cette action");
 		}
 		com.addTournament(t);
+		this.waiting.waitFor(Response.ERROR, Response.ERROR_PERMISSION, Response.UPDATE_TOURNAMENT);
 	}
 
 	public void modifyTournament(TypesTournament t) throws ExceptionInvalidPermission {
@@ -181,6 +187,7 @@ public class User {
 
 		}
 		com.modifyTournament(t);
+		this.waiting.waitFor(Response.ERROR, Response.ERROR_PERMISSION, Response.UPDATE_TOURNAMENT);
 	}
 
 }

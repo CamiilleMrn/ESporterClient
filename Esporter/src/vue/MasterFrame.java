@@ -452,8 +452,8 @@ public class MasterFrame {
 		return new Point(frame.getLocation().x+(frame.getWidth()/2), frame.getLocation().y+(frame.getHeight()/2));
 	}
 	
-	public void fireError(Exception e) {
-		error.setState(e, false);
+	public void fireError(Exception e,boolean persistant, boolean critical ) {
+		error.setState(e, false, critical);
 		error.setVisible(true);
 		frame.repaint();
 		

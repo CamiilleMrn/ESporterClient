@@ -107,8 +107,8 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 		MasterFrame.getInstance().setMenu(type);
 	}
 	
-	public void fireError(Exception e ) {
-		MasterFrame.getInstance().fireError(e);
+	public void fireError(Exception e, boolean critical) {
+		MasterFrame.getInstance().fireError(e, false, critical);
 	}
 	
 	public void openError() {
@@ -240,7 +240,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 							jd.dispose();
 							closeDialog();
 						} catch (IOException e1) {
-							fireError( new IllegalArgumentException("Il y a une erreur avec la photo"));
+							fireError( new IllegalArgumentException("Il y a une erreur avec la photo"), false);
 						} 
 						
 					}
@@ -274,7 +274,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					JComboBox<TypesGame> jcombo = ((AddTeam)MasterFrame.getCurrentPanel()).getComboBox();
 					for (ContainerPlayer c : ((AddTeam)MasterFrame.getCurrentPanel()).getPlayerList()) {
 						if (c.getPlayer()==null) {
-							fireError(new ExceptionTeamNotFull("Erreur de creation de l'équipe"));
+							fireError(new ExceptionTeamNotFull("Erreur de creation de l'équipe"), false);
 							return;
 						}
 					}
@@ -372,8 +372,8 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 								if (MasterFrame.getInstance().getUser().getData().listSortedTournaments().contains(t) && !(MasterFrame.getInstance().getUser().getData().listSortedTournaments().get(MasterFrame.getInstance().getUser().getData().listSortedTournaments().indexOf(dummyDate)).getId() == t.getId())) { 
 									JOptionPane.showMessageDialog(null, "Un tournoi à cette date existe déjà","Error", JOptionPane.ERROR_MESSAGE);
 								}else{
-									MasterFrame.getInstance().getUser().modifyTournament(t);
 									MasterFrame.getInstance().setPanel(vue.organizer.Calendar.class, null);
+									MasterFrame.getInstance().getUser().modifyTournament(t);
 									state = State.CALENDAR;
 								}
 							}
@@ -498,6 +498,10 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				break;
 			case ERROR:
 				if(e.getActionCommand().equals("ERROR_CONTINUE")) {
+					if(MasterFrame.getInstance().getError().isCritical()) {
+						MasterFrame.getInstance().getFrame().dispose();
+						System.exit(-2);
+					}
 					MasterFrame.getInstance().getError().setVisible(false);
 					MasterFrame.getInstance().getError().setException(null);
 					closeError();
@@ -527,7 +531,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 			            logPage.setVisible(false);
 			            master.getMain().setVisible(true);
 			        } catch (Exception e1) {
-			            master.fireError(e1);
+			            master.fireError(e1, false, false);
 			        }
 			        logPage.getTxtPassword().setText(null);
 					break;
@@ -595,7 +599,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 							mp.getContainer().setPlayer(joueur);
 							mp.dispose();
 						} catch (IOException e1) {
-							fireError( new IllegalArgumentException("Il y a une erreur avec la photo"));
+							fireError( new IllegalArgumentException("Il y a une erreur avec la photo"), false);
 						} 
 					}
 					break;
@@ -624,7 +628,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 				case "MODIFY_TEAM_VALIDATE":
 					for (ContainerModifyPlayer c : ((ModifyTeam)MasterFrame.getCurrentPanel()).getPlayerList()) {
 						if (c.getPlayer()==null) {
-							fireError(new ExceptionTeamNotFull("Erreur de modification de l'équipe"));
+							fireError(new ExceptionTeamNotFull("Erreur de modification de l'équipe"), false);
 							return;
 						}
 					}
@@ -806,7 +810,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 							getUser().getWaiting().waitFor(Response.ERROR, Response.UPDATE_STABLE);
 							MasterFrame.getInstance().setPanel(vue.Calendar.class, user.getPermission());
 						} catch (IOException e1) {
-							fireError( new IllegalArgumentException("Il y a une erreur avec la photo"));
+							fireError( new IllegalArgumentException("Il y a une erreur avec la photo"), false);
 						} 
 					}
 					break;
@@ -981,16 +985,21 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 		            logPage.setVisible(false);
 		            master.getMain().setVisible(true);
 		        } catch (Exception e1) {
-		            master.fireError(e1);
+		            master.fireError(e1, false, false);
 		        }
 		        logPage.getTxtPassword().setText(null);
 			}
 			break;
 		case ERROR:
 			if (e.getKeyCode()==KeyEvent.VK_ENTER){
+				if(MasterFrame.getInstance().getError().isCritical()) {
+					MasterFrame.getInstance().getFrame().dispose();
+					System.exit(-2);
+				}
 				MasterFrame.getInstance().getError().setVisible(false);
 				MasterFrame.getInstance().getError().setException(null);
 				closeError();
+				
 			}
 			break;
 		default:

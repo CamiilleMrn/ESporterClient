@@ -33,6 +33,7 @@ public class ErrorPanel extends JPanel{
 	private JPanel panel_1;
 	private JButton btnContinuer;
 	private JPanel panel;
+	private boolean critical;
 	private JLabel Titre;
 	private JPanel panel_2;
 	private JPanel panel_3;
@@ -119,8 +120,9 @@ public class ErrorPanel extends JPanel{
 		texte.setText(s);
 	}
 	
-	public void setState(Exception e, Boolean persistent) {
+	public void setState(Exception e, Boolean persistent, boolean critical) {
 		this.persistent = persistent;
+		this.critical = critical;
 		if(persistent) {
 			progressBar.setVisible(true);
 			btnContinuer.setVisible(false);
@@ -130,6 +132,8 @@ public class ErrorPanel extends JPanel{
 		}
 		setTexte(e.getMessage());
 		setException(e);
+		this.revalidate();
+		this.repaint();
 	}
 	
 	private void initalize() {
@@ -191,6 +195,12 @@ public class ErrorPanel extends JPanel{
 		
 	}
 	
+	
+	
+	public boolean isCritical() {
+		return critical;
+	}
+
 	public void resize() {
 		//panelDummy1.setPreferredSize(new Dimension(getWidth(), 400));
 		//panelDummy2.setPreferredSize(new Dimension(getWidth(), 400));

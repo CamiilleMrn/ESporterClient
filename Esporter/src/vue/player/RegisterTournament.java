@@ -140,7 +140,7 @@ public class RegisterTournament extends JDialog {
 		}
 		lblTitle.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setForeground(Color.WHITE);
+		lblTitle.setForeground(MasterFrame.COLOR_TEXT);
 		lblTitle.setFont(new Font("Cambria", Font.PLAIN, 16));
 		lblTitle.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		lblTitle.setAlignmentX(0.5f);
