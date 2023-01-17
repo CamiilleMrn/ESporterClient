@@ -12,6 +12,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -196,7 +197,8 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 		comboBoxFilterGame.setFont(new Font("Cambria", Font.PLAIN, 15));
 		comboBoxFilterGame.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		comboBoxFilterGame.setForeground(MasterFrame.COLOR_TEXT);
-		
+		comboBoxFilterGame.insertItemAt(null, 0);
+		comboBoxFilterGame.setSelectedIndex(0);
 		comboBoxFilterGame.addActionListener(Controler.getInstance());
 		comboBoxFilterGame.setActionCommand("CALENDAR_GAMECOMBO");
 		

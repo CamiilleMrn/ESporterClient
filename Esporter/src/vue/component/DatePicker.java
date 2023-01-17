@@ -94,10 +94,21 @@ public class DatePicker
                           displayDate();
                       }
               });
+              
+              JButton reset = new JButton("Reset");
+              reset.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					day = null;
+					d.dispose();
+				}
+			});
+              p2.add(reset);
               p2.add(next);// add next button
               //set border alignment
-              d.add(p1, BorderLayout.CENTER);
-              d.add(p2, BorderLayout.SOUTH);
+              d.getContentPane().add(p1, BorderLayout.CENTER);
+              d.getContentPane().add(p2, BorderLayout.SOUTH);
               d.pack();
               //set location
               d.setLocationRelativeTo(parent);
@@ -131,8 +142,10 @@ public class DatePicker
       public String setPickedDate() 
       {
       	//if condition
-      	if (day.equals(""))
-      		return day;
+    	  if(day == null)
+    		  return null;
+	      if (day.equals(""))
+	      		return day;
           java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
           java.util.Calendar cal = java.util.Calendar.getInstance();
           cal.set(year, month, Integer.parseInt(day));

@@ -120,6 +120,8 @@ public class TeamManagement extends DataJPanel{
 		comboBoxFilterGame.setUI((ComboBoxUI) ComboBoxRendererArrow.createUI(comboBoxFilterGame));
 		comboBoxFilterGame.addActionListener(Controler.getInstance());
 		comboBoxFilterGame.setActionCommand("STABLE_MANAGEMENT_COMBO");
+		comboBoxFilterGame.insertItemAt(null, 0);
+		comboBoxFilterGame.setSelectedIndex(0);
 		panelFilter.add(comboBoxFilterGame);
 	
 		JPanel panelAddTeam = new JPanel();

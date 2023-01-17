@@ -73,7 +73,7 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 	private Timestamp dateFilter =null;
 	private TypesGame gameFilter = null;
 	private List<RendererCalendar> renderer;
-	private JComboBox comboBoxFilterGame;
+	private JComboBox<TypesGame> comboBoxFilterGame;
 
 	
 	public void createListTournament(Timestamp date, TypesGame game) {
@@ -250,6 +250,8 @@ public class Calendar extends DataJPanel implements vue.component.Calendar{
 			}
 			
 		});*/
+		comboBoxFilterGame.insertItemAt(null, 0);
+		comboBoxFilterGame.setSelectedIndex(0);
 		comboBoxFilterGame.addActionListener(Controler.getInstance());
 		comboBoxFilterGame.setActionCommand("CALENDAR_GAMECOMBO");
 		

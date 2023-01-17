@@ -279,6 +279,8 @@ public class MasterFrame {
 		 * */
 		panelMain.add(new vue.Calendar(TypesPermission.VISITOR));
 		
+		menu[0].doClick();
+		
 	}
 	
 	public ErrorPanel getError() {

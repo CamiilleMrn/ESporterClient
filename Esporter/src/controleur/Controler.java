@@ -271,6 +271,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					MasterFrame.getInstance().setPanel(AddTeam.class, ((AddTeam)MasterFrame.getCurrentPanel()).getComboBox().getSelectedItem());
 					break;
 				case "ADD_TEAM_VALIDATE":
+					JComboBox<TypesGame> jcombo = ((AddTeam)MasterFrame.getCurrentPanel()).getComboBox();
 					for (ContainerPlayer c : ((AddTeam)MasterFrame.getCurrentPanel()).getPlayerList()) {
 						if (c.getPlayer()==null) {
 							fireError(new ExceptionTeamNotFull("Erreur de creation de l'équipe"));
@@ -281,7 +282,7 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					for (ContainerPlayer c : ((AddTeam)MasterFrame.getCurrentPanel()).getPlayerList()) {
 						players.add(c.getPlayer());
 					}
-					JComboBox<TypesGame> jcombo = ((AddTeam)MasterFrame.getCurrentPanel()).getComboBox();
+					
 					TypesRegisterTeam team = new TypesRegisterTeam((TypesGame)jcombo.getSelectedItem(), ((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId(), players);
 					MasterFrame.getInstance().getUser().addTeam(team);
 					MasterFrame.getInstance().getUser().getWaiting().waitFor(Response.UPDATE_TEAM, Response.ERROR);
@@ -402,18 +403,23 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					final JFrame f = new JFrame();
 					//set text which is collected by date picker i.e. set date 
 					cal.getTxtDate().setText(new DatePicker(f).setPickedDate());
-					Timestamp t = Timestamp.valueOf(cal.getTxtDate().getText() + " 00:00:00");
-					cal.setChosenDate(t);
-					cal.createListTournament(t,cal.getGame() );
-	                ((JPanel)cal).repaint();
-	                ((JPanel)cal).revalidate();
+					MasterFrame.getInstance().getMain().repaint();
+	                MasterFrame.getInstance().getMain().revalidate();
+	                if(!cal.getTxtDate().getText().equals("")) {
+						Timestamp t = Timestamp.valueOf(cal.getTxtDate().getText() + " 00:00:00");
+						System.out.println(t.toString());
+						cal.setChosenDate(t);
+						cal.createListTournament(t,cal.getGame() );
+	                } else {
+	                	cal.createListTournament(null,cal.getGame() );
+	                }
+	                MasterFrame.getInstance().getMain().repaint();
+	                MasterFrame.getInstance().getMain().revalidate();
 					break;
 				case "CALENDAR_GAMECOMBO":
-					if(((TypesGame)cal.getComboBoxFilterGame().getSelectedItem()) != cal.getGame()) {
-		                cal.createListTournament(cal.getChosenDate(),(TypesGame)cal.getComboBoxFilterGame().getSelectedItem());
-		                ((JPanel)cal).repaint();
-		                ((JPanel)cal).revalidate();
-					}
+	                cal.createListTournament(cal.getChosenDate(),(TypesGame)cal.getComboBoxFilterGame().getSelectedItem());
+	                ((JPanel)cal).repaint();
+	                ((JPanel)cal).revalidate();
 					break;
 				case "CALENDAR_ADD":
 					MasterFrame.getInstance().setPanel(vue.organizer.CreateTournament.class,null);
@@ -681,7 +687,11 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 			case STABLE_MANAGEMENT:
 				switch(e.getActionCommand()) {
 				case "STABLE_MANAGEMENT_ADDTEAM":
-					MasterFrame.getInstance().setPanel(AddTeam.class, ((TeamManagement)MasterFrame.getCurrentPanel()).getComboBoxFilterGame().getSelectedItem());
+					TypesGame game = (TypesGame)((TeamManagement)MasterFrame.getCurrentPanel()).getComboBoxFilterGame().getSelectedItem();
+					if (game == null) {
+						game = TypesGame.intToGame(1);
+					}
+					MasterFrame.getInstance().setPanel(AddTeam.class, game);
 					state = State.ADD_TEAM;
 					break;
 				case "STABLE_MANAGEMENT_COMBO":
