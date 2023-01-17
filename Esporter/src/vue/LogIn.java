@@ -187,18 +187,20 @@ public class LogIn extends JPanel{
 		gbc_panelBtnForgot.gridy = 2;
 		panelLogin.add(panelBtnForgot, gbc_panelBtnForgot);
 		
-		JButton btnForgotPassword = new JButton("<html><body><u>Mot de passe oublié ? </u></body></html>");
-		btnForgotPassword.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnForgotPassword.setAlignmentY(Component.TOP_ALIGNMENT);
-		btnForgotPassword.setVerticalTextPosition(SwingConstants.TOP);
-		btnForgotPassword.setVerticalAlignment(SwingConstants.TOP);
-		btnForgotPassword.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		btnForgotPassword.setMargin(new Insets(2, 14, 20, 16));
-		btnForgotPassword.setBorder(null);
-		btnForgotPassword.setFont(new Font("Cambria", Font.ITALIC, 10));
-		btnForgotPassword.setForeground(MasterFrame.COLOR_MASTER);
-		btnForgotPassword.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
-		panelBtnForgot.add(btnForgotPassword);
+		JButton btnRegisterStable = new JButton("<html><body><u>S'inscire en tant qu'écurie</u></body></html>");
+		btnRegisterStable.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnRegisterStable.setAlignmentY(Component.TOP_ALIGNMENT);
+		btnRegisterStable.setVerticalTextPosition(SwingConstants.TOP);
+		btnRegisterStable.setVerticalAlignment(SwingConstants.TOP);
+		btnRegisterStable.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		btnRegisterStable.setMargin(new Insets(2, 14, 20, 16));
+		btnRegisterStable.setBorder(null);
+		btnRegisterStable.setFont(new Font("Cambria", Font.ITALIC, 10));
+		btnRegisterStable.setForeground(MasterFrame.COLOR_MASTER);
+		btnRegisterStable.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		panelBtnForgot.add(btnRegisterStable);
+		btnRegisterStable.setActionCommand("LOGIN_REGISTER_STABLE");
+		btnRegisterStable.addActionListener(Controler.getInstance());
 		
 		JLabel lblTitle = new JLabel("Connexion\r\n");
 		lblTitle.setForeground(MasterFrame.COLOR_TEXT);

@@ -67,6 +67,7 @@ import vue.referee.SetScore;
 import vue.stable.AddPlayer;
 import vue.stable.ModifyPlayer;
 import vue.stable.ModifyTeam;
+import vue.stable.RegisterStable;
 import vue.stable.TeamManagement;
 import vue.stable.management.AddTeam;
 
@@ -529,6 +530,13 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					MasterFrame.getInstance().getMain().setVisible(true);
 					closeLogin();
 					break;
+				case "LOGIN_REGISTER_STABLE":
+					MasterFrame.getInstance().getLoginPage().setVisible(false);
+					MasterFrame.getInstance().getMain().setVisible(true);
+					closeLogin();
+					MasterFrame.getInstance().setPanel(vue.stable.RegisterStable.class, null);
+					state = State.REGISTER_STABLE;
+					break;
 				}
 				
 				break;
@@ -743,6 +751,57 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					s.dispose();
 				}
 				break;
+			case REGISTER_STABLE:
+				switch(e.getActionCommand()) {
+				case "REGISTER_STABLE_CANCEL":
+					MasterFrame.getInstance().setPanel(vue.Calendar.class, this.getUser().getPermission());
+					break;
+				case "REGISTER_STABLE_VALIDATE":
+					RegisterStable regSt = (RegisterStable) MasterFrame.getCurrentPanel();
+					
+					
+					String name = regSt.getTxtStableName().getText();
+					String nickname = regSt.getTxtNickname().getText();
+					BufferedImage image = regSt.getImage() ;
+					String username = regSt.getTxtUsername().getText();
+					String password = new String(regSt.getTxtPassword().getPassword());
+					
+
+					if (name.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Le champ nom n'est pas specifié","Erreur", JOptionPane.ERROR_MESSAGE);
+					}else if(nickname.isEmpty()){
+						JOptionPane.showMessageDialog(null, "Le champ diminutif n'est pas specifié","Erreur", JOptionPane.ERROR_MESSAGE);
+					}else if(image == null){
+						JOptionPane.showMessageDialog(null, "L'image n'est pas choisie","Erreur", JOptionPane.ERROR_MESSAGE);
+					}else if(username.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Le nom d'utilisateur n'est pas choisi","Erreur", JOptionPane.ERROR_MESSAGE);
+					}else if(password.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Le mot de passe n'est pas choisi","Erreur", JOptionPane.ERROR_MESSAGE);
+					}else {
+						try {
+							ByteArrayOutputStream blob = new ByteArrayOutputStream();
+							
+							image = TypesImage.resize(image, 200, 300);
+							try {
+								ImageIO.write(image, "png", blob);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							InputStream is = new ByteArrayInputStream(blob.toByteArray());
+							BufferedImage bf = ImageIO.read(is);
+							TypesStable st = new TypesStable(name, new TypesImage(bf, "png"), nickname, -1);
+							TypesLogin l = new TypesLogin(username, password);
+							getUser().registerStable(st, l);
+							getUser().getWaiting().waitFor(Response.ERROR, Response.UPDATE_STABLE);
+							MasterFrame.getInstance().setPanel(vue.Calendar.class, user.getPermission());
+						} catch (IOException e1) {
+							fireError( new IllegalArgumentException("Il y a une erreur avec la photo"));
+						} 
+					}
+					break;
+				}
+				break;
 			default:
 				break;
 			
@@ -828,6 +887,15 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 			break;
 		case STABLE_MANAGEMENT:
 			break;
+		case REGISTER_STABLE:
+			RegisterStable rs = (RegisterStable) MasterFrame.getCurrentPanel();
+			JFileChooser fileE = rs.getFileExplorer();
+			int resultFile = fileE.showOpenDialog(null);
+	        //si l'utilisateur clique sur enregistrer dans Jfilechooser
+	        if(resultFile == JFileChooser.APPROVE_OPTION){
+	        	File selFile = fileE.getSelectedFile();
+	        	rs.setFile(selFile);
+	        }
 		default:
 			break;
 		

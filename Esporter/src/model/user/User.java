@@ -10,11 +10,13 @@ import model.data.Data;
 import model.socket.Response;
 import types.TypesTeam;
 import types.Types;
+import types.TypesLogin;
 import types.TypesMatch;
 import types.TypesMenu;
 import types.TypesPlayer;
 import types.TypesPermission;
 import types.TypesRegisterTeam;
+import types.TypesStable;
 import types.TypesTournament;
 import types.WaitingFor;
 import types.exception.ExceptionLogin;
@@ -152,6 +154,10 @@ public class User {
 		} else {
 			com.modifyTeam(team);
 		}
+	}
+	
+	public void registerStable(TypesStable s, TypesLogin l) {
+		com.registerStable(s, l);
 	}
 	
 	public void changeScore(TypesMatch match, int idTournament, int idPool) {

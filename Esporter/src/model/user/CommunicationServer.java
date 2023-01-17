@@ -41,7 +41,7 @@ public class CommunicationServer implements Runnable{
 	private int reconnect = 1;
 	private int reconnectTime = 1;
 	private boolean run=true;
-	private static final String IP = "144.24.206.118"; //144.24.206.118
+	private static final String IP = "127.0.0.1"; //144.24.206.118
 	private static final int PORT = 4000;
 	
 	public CommunicationServer(User user) throws UnknownHostException, IOException {
@@ -286,6 +286,14 @@ public class CommunicationServer implements Runnable{
 		m.put(TypesID.TOURNAMENT, new TypesInteger(idTournament));
 		m.put(TypesID.POOL, new TypesInteger(idPool));
 		Command c = new Command(CommandName.SCORE, m);
+		send(c);
+	}
+	
+	public void registerStable(TypesStable s, TypesLogin l) {
+		HashMap<TypesID, Types> m = new HashMap<>();
+		m.put(TypesID.STABLE, s);
+		m.put(TypesID.LOGIN, l);
+		Command c = new Command(CommandName.STABLE,m);
 		send(c);
 	}
 

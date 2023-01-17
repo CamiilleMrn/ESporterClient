@@ -7,12 +7,16 @@ import java.awt.FlowLayout;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Panel;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -32,9 +36,11 @@ import javax.swing.SwingConstants;
 public class RegisterStable extends JPanel {
 	private JTextField txtStableName;
 	private JTextField txtNickname;
-	private JPasswordField textPswd;
+	private JPasswordField txtPassword;
 	private JFileChooser fileExplorer;
-	private JTextField textField;
+	private JTextField txtUsername;
+	private JLabel lblPictureChooser;
+	private BufferedImage image = null;
 
 	/**
 	 * Create the panel.
@@ -68,7 +74,7 @@ public class RegisterStable extends JPanel {
         FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
         fileExplorer.setFileFilter(imageFilter);
 		
-		JLabel lblPictureChooser = new JLabel("");
+		lblPictureChooser = new JLabel("");
 		lblPictureChooser.setPreferredSize(new Dimension(100, 100));
 		lblPictureChooser.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 		lblPictureChooser.addMouseListener(Controler.getInstance());
@@ -141,14 +147,14 @@ public class RegisterStable extends JPanel {
 		gbc_lblNewLabel.gridy = 2;
 		panelContainerForm.add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField = new JTextField();
+		txtUsername = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 2;
 		gbc_textField.gridy = 2;
-		panelContainerForm.add(textField, gbc_textField);
-		textField.setColumns(10);
+		panelContainerForm.add(txtUsername, gbc_textField);
+		txtUsername.setColumns(10);
 		
 		Label lblPassw = new Label("Mot de passe :");
 		GridBagConstraints gbc_lblPassw = new GridBagConstraints();
@@ -158,14 +164,14 @@ public class RegisterStable extends JPanel {
 		gbc_lblPassw.gridy = 3;
 		panelContainerForm.add(lblPassw, gbc_lblPassw);
 		
-		textPswd = new JPasswordField();
-		textPswd.setMaximumSize(new Dimension(7, 20));
+		txtPassword = new JPasswordField();
+		txtPassword.setMaximumSize(new Dimension(7, 20));
 		GridBagConstraints gbc_textPswd = new GridBagConstraints();
 		gbc_textPswd.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textPswd.gridx = 2;
 		gbc_textPswd.gridy = 3;
-		panelContainerForm.add(textPswd, gbc_textPswd);
-		textPswd.setColumns(10);
+		panelContainerForm.add(txtPassword, gbc_textPswd);
+		txtPassword.setColumns(10);
 		
 		JPanel panel_4 = new JPanel();
 		panelContainerContent.add(panel_4);
@@ -176,12 +182,54 @@ public class RegisterStable extends JPanel {
 		panel_4.add(panel_5, BorderLayout.SOUTH);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton = new JButton("Valider");
-		btnNewButton.setPreferredSize(new Dimension(50, 23));
-		btnNewButton.setMinimumSize(new Dimension(70, 23));
-		btnNewButton.setMaximumSize(new Dimension(70, 23));
-		panel_5.add(btnNewButton);
+		JButton btnValidate = new JButton("Valider");
+		btnValidate.setPreferredSize(new Dimension(50, 23));
+		btnValidate.setMinimumSize(new Dimension(70, 23));
+		btnValidate.setMaximumSize(new Dimension(70, 23));
+		panel_5.add(btnValidate);
+		
+		btnValidate.setActionCommand("REGISTER_STABLE_VALIDATE");
+		btnValidate.addActionListener(Controler.getInstance());
+		
+		JButton btnCancel = new JButton("Annuler");
+		panel_5.add(btnCancel, BorderLayout.NORTH);
+		btnCancel.setActionCommand("REGISTER_STABLE_CANCEL");
+		btnCancel.addActionListener(Controler.getInstance());
 
+	}
+	
+	public void setFile(File selFile) {
+		try {
+			String path = selFile.getCanonicalPath();
+			lblPictureChooser.setIcon(new ImageIcon(path));
+			image = ImageIO.read(selFile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public JTextField getTxtStableName() {
+		return txtStableName;
+	}
+
+	public JTextField getTxtNickname() {
+		return txtNickname;
+	}
+
+	public JPasswordField getTxtPassword() {
+		return txtPassword;
+	}
+
+	public JFileChooser getFileExplorer() {
+		return fileExplorer;
+	}
+
+	public JTextField getTxtUsername() {
+		return txtUsername;
 	}
 
 }
