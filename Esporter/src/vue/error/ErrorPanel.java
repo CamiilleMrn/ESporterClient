@@ -146,7 +146,7 @@ public class ErrorPanel extends JPanel{
 		setOpaque(true);
 		JPanel panel = new JPanel();
 		
-		panel.setBorder(new EmptyBorder(PROPERTIES, ALLBITS, ABORT, HEIGHT));
+		panel.setBorder(new EmptyBorder(2,2,2,2));
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
@@ -201,11 +201,13 @@ public class ErrorPanel extends JPanel{
 		return critical;
 	}
 
-	public void resize() {
-		//panelDummy1.setPreferredSize(new Dimension(getWidth(), 400));
-		//panelDummy2.setPreferredSize(new Dimension(getWidth(), 400));
-		//panelDummy3.setPreferredSize(new Dimension(400, getHeight()));
-		//panelDummy4.setPreferredSize(new Dimension(400, getHeight()));
+	public void resize(int width, int height) {
+		/*panel_2.setPreferredSize(new Dimension(width/4,height));
+		panel_3.setPreferredSize(new Dimension(width/4,height));
+		panel_4.setPreferredSize(new Dimension(width,height/5));
+		panel_5.setPreferredSize(new Dimension(width,height/5));
+		this.revalidate();
+		this.repaint();*/
 	}
 	
 	
