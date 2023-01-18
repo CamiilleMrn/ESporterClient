@@ -47,6 +47,10 @@ public class LogIn extends JPanel{
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
 	private JButton btnProceed;
+	private JPanel panelDummyTop;
+	private JPanel panelDummyBot;
+	private JPanel panelDummyLeft;
+	private JPanel panelDummyRight;
 
 	
 	public JTextField getTxtUsername() {
@@ -218,25 +222,25 @@ public class LogIn extends JPanel{
 		panelBtnLogin.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelLoginAll.add(panelBtnLogin);
 		
-		JPanel panelDummyTop = new JPanel();
+		panelDummyTop = new JPanel();
 		panelDummyTop.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyTop.setPreferredSize(new Dimension(80, 230));
 		add(panelDummyTop, BorderLayout.NORTH);
 		panelDummyTop.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JPanel panelDummyBot = new JPanel();
+		panelDummyBot = new JPanel();
 		panelDummyBot.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyBot.setPreferredSize(new Dimension(100, 230));
 		add(panelDummyBot, BorderLayout.SOUTH);
 		
-		JPanel panelDummyLeft = new JPanel();
+		panelDummyLeft = new JPanel();
 		panelDummyLeft.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyLeft.setPreferredSize(new Dimension(500, 100));
 		panelDummyLeft.setSize(new Dimension(100, 100));
 		panelDummyLeft.setMinimumSize(new Dimension(100, 100));
 		add(panelDummyLeft, BorderLayout.WEST);
 		
-		JPanel panelDummyRight = new JPanel();
+		panelDummyRight = new JPanel();
 		panelDummyRight.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelDummyRight.setPreferredSize(new Dimension(500, 100));
 		add(panelDummyRight, BorderLayout.EAST);
@@ -299,6 +303,15 @@ public class LogIn extends JPanel{
 	
 	public JPasswordField getTxtPassword() {
 		return txtPassword;
+	}
+	
+	public void resize(int width, int height) {
+		panelDummyRight.setPreferredSize(new Dimension(width/4,height));
+		panelDummyLeft.setPreferredSize(new Dimension(width/4,height));
+		panelDummyTop.setPreferredSize(new Dimension(width,height/5));
+		panelDummyBot.setPreferredSize(new Dimension(width,height/5));
+		this.revalidate();
+		this.repaint();
 	}
 	
 	

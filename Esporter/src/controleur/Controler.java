@@ -283,9 +283,8 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						players.add(c.getPlayer());
 					}
 					
-					TypesRegisterTeam team = new TypesRegisterTeam((TypesGame)jcombo.getSelectedItem(), ((TypesStable)MasterFrame.getInstance().getUser().getInfo()).getId(), players);
+					TypesRegisterTeam team = new TypesRegisterTeam((TypesGame)jcombo.getSelectedItem(), ((TypesStable)Controler.getInstance().getUser().getInfo()).getId(), players);
 					MasterFrame.getInstance().getUser().addTeam(team);
-					MasterFrame.getInstance().getUser().getWaiting().waitFor(Response.UPDATE_TEAM, Response.ERROR);
 					if (MasterFrame.getInstance().getUser().getWaiting().getActualState()==Response.UPDATE_TEAM) {
 						MasterFrame.getInstance().setPanel(vue.stable.TeamManagement.class, null);
 					}
@@ -640,7 +639,6 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 					TypesTeam previousTeam = ((ModifyTeam)MasterFrame.getCurrentPanel()).getTeam();
 					TypesTeam newTeam = new TypesTeam(previousTeam.getGame(), previousTeam.getStable(), players, previousTeam.getId());
 					MasterFrame.getInstance().getUser().modifyTeam(newTeam);
-					MasterFrame.getInstance().getUser().getWaiting().waitFor(Response.UPDATE_TEAM, Response.ERROR);
 					if (MasterFrame.getInstance().getUser().getWaiting().getActualState()==Response.UPDATE_TEAM) {
 						MasterFrame.getInstance().setPanel(vue.stable.TeamManagement.class, null);
 						state = State.STABLE_MANAGEMENT;

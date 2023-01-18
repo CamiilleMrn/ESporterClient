@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -42,6 +43,7 @@ import vue.component.RendererTeamStableInfo;
 import javax.swing.JScrollPane;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.imageio.ImageIO;
@@ -95,6 +97,7 @@ public class StableInfo extends DataJPanel{
 	
 	private void createListTeam() {
 		panAllTeams.removeAll();
+		
 		renderer = new LinkedList<>();
 		HashMap<Integer,TypesTeam> liste = stable.getTeams();
 		if(liste.isEmpty()) {
@@ -105,14 +108,14 @@ public class StableInfo extends DataJPanel{
 		}else {
 			int id=0;
 			for(HashMap.Entry<Integer, TypesTeam> set : liste.entrySet()) {
-				if(set.getValue().getStable() == stable) {
-					RendererTeamStableInfo rend = new RendererTeamStableInfo(set.getValue(),id);
-					panAllTeams.add(rend);
-					renderer.add(rend);
-					id++;
-				}
+				RendererTeamStableInfo rend = new RendererTeamStableInfo(set.getValue(),id);
+				panAllTeams.add(rend);
+				renderer.add(rend);
+				id++;
 			}
 		}
+		panAllTeams.setLayout(new GridLayout(0,1));
+		
 	}
 	
 	/**
@@ -208,9 +211,12 @@ public class StableInfo extends DataJPanel{
 		panAllTeams.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		createListTeam();
 		JScrollPane scrollPaneTeam = new JScrollPane(panAllTeams);
-		panAllTeams.setLayout(new GridLayout(2, 0, 0, 0));
 		scrollPaneTeam.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
-		scrollPaneTeam.setBorder(new EmptyBorder(50, 100, 50, 100));
+		scrollPaneTeam.setBorder(new EmptyBorder(10, 100, 100, 100));
+		scrollPaneTeam.getVerticalScrollBar().setUnitIncrement(20);
+		scrollPaneTeam.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneTeam.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneTeam.setPreferredSize(new Dimension(scrollPaneTeam.getPreferredSize().width, 500));
 		panelTeam.add(scrollPaneTeam, BorderLayout.CENTER);
 		
 		
@@ -278,6 +284,8 @@ public class StableInfo extends DataJPanel{
 	public void dataUpdate() {
 		createListTitle();
 		createListTeam();
+		revalidate();
+		repaint();
 	}
 	
 	public TypesStable getStable() {

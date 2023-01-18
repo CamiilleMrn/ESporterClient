@@ -146,7 +146,7 @@ public class MasterFrame {
 				panelMain.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.resize();
-
+				loginPage.resize(frame.getWidth(), frame.getHeight());
 				frame.repaint();
 				frame.revalidate();
 			}
@@ -157,6 +157,7 @@ public class MasterFrame {
 			public void windowStateChanged(WindowEvent e) {
 				panelMain.setBounds(0,0,frame.getWidth(), frame.getHeight());
 				error.setBounds(0,0,frame.getWidth(), frame.getHeight());
+				loginPage.resize(frame.getWidth(), frame.getHeight());
 				error.resize();
 				frame.revalidate();
 				frame.repaint();
