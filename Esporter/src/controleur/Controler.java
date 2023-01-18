@@ -750,12 +750,14 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 						s.dispose();
 						closeDialog();
 						Controler.getInstance().getUser().changeScore(match, match.getIdTournament(), match.getIdPool());
+						Controler.getInstance().getUser().getWaiting().waitFor(Response.ERROR, Response.ERROR_PERMISSION, Response.UPDATE_TOURNAMENT);
 					} else if (s.getRdbTeam2().isSelected()) {
 						match.setPoint(0, 1);
 						JOptionPane.showMessageDialog(null, "Choix enregistré","", JOptionPane.INFORMATION_MESSAGE);
 						s.dispose();
 						closeDialog();
 						Controler.getInstance().getUser().changeScore(match, match.getIdTournament(), match.getIdPool());
+						Controler.getInstance().getUser().getWaiting().waitFor(Response.ERROR, Response.ERROR_PERMISSION, Response.UPDATE_TOURNAMENT);
 					} else {
 						JOptionPane.showMessageDialog(null, "Aucun choix selectionné","Erreur", JOptionPane.ERROR_MESSAGE);
 					}

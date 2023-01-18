@@ -42,7 +42,7 @@ public class CommunicationServer implements Runnable{
 	private int reconnect = 1;
 	private int reconnectTime = 1;
 	private volatile boolean run=true;
-	private static final String IP = "127.0.0.1"; //144.24.206.118
+	private static final String IP = "144.24.206.118"; //144.24.206.118
 	private static final int PORT = 4000;
 	
 	public CommunicationServer(User user) throws UnknownHostException, IOException {
@@ -234,8 +234,10 @@ public class CommunicationServer implements Runnable{
 		case UPDATE_TEAM:
 			TypesTeam team = (TypesTeam)r.getInfoByID(TypesID.TEAM);
 			user.getData().getStables().get(team.getStable().getId()).getTeams().put(team.getId(), team);
-			if (((TypesStable)user.getInfo()).getId() == team.getStable().getId()) {
-				((TypesStable)user.getInfo()).addTeam(team);
+			if(Controler.getInstance().getUser().getPermission() != TypesPermission.VISITOR) {
+				if (((TypesStable)user.getInfo()).getId() == team.getStable().getId()) {
+					((TypesStable)user.getInfo()).addTeam(team);
+				}
 			}
 			user.getData().getTeams().put(team.getId(), team);
 			MasterFrame.getInstance().dataUpdate();

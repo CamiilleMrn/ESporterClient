@@ -38,7 +38,8 @@ public class SeePlayerInfos extends DataJPanel {
 	 */
 	
 	private void createListPlayer() {
-		HashMap<Integer,TypesPlayer> liste = team.getPlayers();
+		pan.removeAll();
+		HashMap<Integer,TypesPlayer> liste = Controler.getInstance().getData().getStables().get(team.getStable().getId()).getTeams().get(team.getId()).getPlayers();
 		for(Entry<Integer, TypesPlayer> set : liste.entrySet()) {
 			pan.add(new SeePlayerInfosRenderer(set.getValue()));
 		}	
@@ -118,6 +119,8 @@ public class SeePlayerInfos extends DataJPanel {
 	@Override
 	public void dataUpdate() {
 		createListPlayer();
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public TypesTeam getTeam() {
