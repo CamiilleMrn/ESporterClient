@@ -172,7 +172,6 @@ public class User {
 	
 	public void changeScore(TypesMatch match, int idTournament, int idPool) {
 		com.changeScore(match,idTournament,idPool);
-		this.waiting.waitFor(Response.ERROR, Response.ERROR_PERMISSION, Response.UPDATE_MATCH, Response.UPDATE_TOURNAMENT);
 	}
 
 	public void deleteTournament(TypesTournament tournament) {

@@ -101,6 +101,8 @@ public class CalendarAndScoreMatch extends DataJPanel {
 	@Override
 	public void dataUpdate() {
 		createProgramMatchList();
+		revalidate();
+		repaint();
 		
 	}
 
