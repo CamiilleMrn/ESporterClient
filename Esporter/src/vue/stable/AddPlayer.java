@@ -191,6 +191,7 @@ public class AddPlayer extends JDialog {
 		btnMoreEndContract.setActionCommand("ADD_PLAYER_MORE2");
 		//create text field
 				txtEndContractDate = new JTextField();
+				txtEndContractDate.setEditable(false);
 				txtEndContractDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 				txtEndContractDate.setHorizontalAlignment(SwingConstants.CENTER);
 				txtEndContractDate.setFont(new Font("Cambria", Font.PLAIN, 13));
@@ -206,6 +207,7 @@ public class AddPlayer extends JDialog {
 		btnMoreStartContract.setActionCommand("ADD_PLAYER_MORE3");
 		//create text field
 				txtStartContractDate = new JTextField();
+				txtStartContractDate.setEditable(false);
 				txtStartContractDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 				txtStartContractDate.setHorizontalAlignment(SwingConstants.CENTER);
 				txtStartContractDate.setFont(new Font("Cambria", Font.PLAIN, 13));
@@ -342,9 +344,6 @@ public class AddPlayer extends JDialog {
 						panelFirstname.add(txtFirstname);
 		
 		panelBirthDate = new JPanel();
-		FlowLayout fl_panelBirthDate = (FlowLayout) panelBirthDate.getLayout();
-		fl_panelBirthDate.setVgap(10);
-		fl_panelBirthDate.setHgap(0);
 		panelBirthDate.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelBirthDate.setBorder(null);
 		GridBagConstraints gbc_panelBirthDate = new GridBagConstraints();
@@ -352,11 +351,13 @@ public class AddPlayer extends JDialog {
 		gbc_panelBirthDate.gridx = 1;
 		gbc_panelBirthDate.gridy = 2;
 		panelInfo.add(panelBirthDate, gbc_panelBirthDate);
+		panelBirthDate.setLayout(new BorderLayout(0, 0));
 		
 		txtBirthDate = new JTextField();
+		txtBirthDate.setEditable(false);
 		txtBirthDate.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.BLACK));
 		txtBirthDate.setFont(new Font("Cambria", Font.PLAIN, 15));
-		panelBirthDate.add(txtBirthDate);
+		panelBirthDate.add(txtBirthDate, BorderLayout.WEST);
 		txtBirthDate.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBirthDate.setColumns(11);
 		
