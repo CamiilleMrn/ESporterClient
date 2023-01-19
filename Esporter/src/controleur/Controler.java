@@ -807,7 +807,6 @@ public class Controler implements ActionListener, MouseListener, KeyListener{
 							TypesStable st = new TypesStable(name, new TypesImage(bf, "png"), nickname, -1);
 							TypesLogin l = new TypesLogin(username, password);
 							getUser().registerStable(st, l);
-							getUser().getWaiting().waitFor(Response.ERROR, Response.UPDATE_STABLE);
 							MasterFrame.getInstance().setPanel(vue.Calendar.class, user.getPermission());
 						} catch (IOException e1) {
 							fireError( new IllegalArgumentException("Il y a une erreur avec la photo"), false);
