@@ -31,6 +31,8 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controleur.Controler;
+import vue.MasterFrame;
+
 import javax.swing.SwingConstants;
 
 public class RegisterStable extends JPanel {
@@ -49,14 +51,17 @@ public class RegisterStable extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel panelContainerHeader = new JPanel();
+		panelContainerHeader.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		add(panelContainerHeader);
 		panelContainerHeader.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblRegister = new JLabel("Inscription");
-		lblRegister.setFont(new Font("Cambria", Font.BOLD, 24));
+		lblRegister.setBorder(new EmptyBorder(20, 0, 0, 0));
+		lblRegister.setFont(new Font("Cambria", Font.BOLD, 40));
 		panelContainerHeader.add(lblRegister);
 		
 		JPanel panelContainerContent = new JPanel();
+		panelContainerContent.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelContainerContent.setBorder(new EmptyBorder(0, 100, 100, 100));
 		add(panelContainerContent);
 		panelContainerContent.setLayout(new BoxLayout(panelContainerContent, BoxLayout.X_AXIS));
@@ -66,6 +71,7 @@ public class RegisterStable extends JPanel {
 		panelContainerPicture.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelContainerPictureInside = new JPanel();
+		panelContainerPictureInside.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelContainerPictureInside.setBorder(new EmptyBorder(0, 20, 0, 0));
 		panelContainerPicture.add(panelContainerPictureInside);
 		
@@ -91,6 +97,7 @@ public class RegisterStable extends JPanel {
 		panelContainerPictureInside.add(lblStableLogo, BorderLayout.NORTH);
 		
 		JPanel panelBottom = new JPanel();
+		panelBottom.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelBottom.setBorder(new EmptyBorder(50, 0, 0, 0));
 		panelContainerPictureInside.add(panelBottom, BorderLayout.SOUTH);
 		
@@ -175,10 +182,12 @@ public class RegisterStable extends JPanel {
 		txtPassword.setColumns(10);
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panelContainerContent.add(panel_4);
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
 		panel_5.setBorder(new EmptyBorder(0, 0, 20, 10));
 		panel_4.add(panel_5, BorderLayout.SOUTH);
 		panel_5.setLayout(new BorderLayout(0, 0));
