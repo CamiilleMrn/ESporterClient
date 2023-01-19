@@ -259,6 +259,7 @@ public class CommunicationServer implements Runnable{
 		case DELETE_TOURNAMENT:
 			user.getData().getCalendar().remove(((TypesInteger)r.getInfoByID(TypesID.TOURNAMENT)).getInteger());
 			MasterFrame.getInstance().dataUpdate();
+			break;
 		case UPDATE_MATCH:
 			int idTournoi = ((TypesInteger)r.getInfoByID(TypesID.TOURNAMENT)).getInteger();
 			int Pool = ((TypesInteger)r.getInfoByID(TypesID.POOL)).getInteger();
@@ -271,10 +272,12 @@ public class CommunicationServer implements Runnable{
 				}
 			}
 			MasterFrame.getInstance().dataUpdate();
+			break;
 		case UPDATE_RANKING:
 			TypesRanking ranking = ((TypesRanking)r.getInfoByID(TypesID.RANKING));
 			Controler.getInstance().getData().getRanking().put(ranking.getId(), ranking);
 			MasterFrame.getInstance().dataUpdate();
+			break;
 		default:
 			break;
 		
