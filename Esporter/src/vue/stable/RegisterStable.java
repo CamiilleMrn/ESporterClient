@@ -57,6 +57,7 @@ public class RegisterStable extends JPanel {
 		panelContainerHeader.add(lblRegister);
 		
 		JPanel panelContainerContent = new JPanel();
+		panelContainerContent.setBorder(new EmptyBorder(0, 100, 100, 100));
 		add(panelContainerContent);
 		panelContainerContent.setLayout(new BoxLayout(panelContainerContent, BoxLayout.X_AXIS));
 		

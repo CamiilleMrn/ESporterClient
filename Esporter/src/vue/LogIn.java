@@ -199,9 +199,10 @@ public class LogIn extends JPanel{
 		btnRegisterStable.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		btnRegisterStable.setMargin(new Insets(2, 14, 20, 16));
 		btnRegisterStable.setBorder(null);
-		btnRegisterStable.setFont(new Font("Cambria", Font.ITALIC, 10));
+		btnRegisterStable.setFont(new Font("Cambria", Font.ITALIC, 20));
 		btnRegisterStable.setForeground(MasterFrame.COLOR_MASTER);
 		btnRegisterStable.setBackground(MasterFrame.COLOR_MASTER_BACKGROUND);
+		
 		panelBtnForgot.add(btnRegisterStable);
 		btnRegisterStable.setActionCommand("LOGIN_REGISTER_STABLE");
 		btnRegisterStable.addActionListener(Controler.getInstance());
